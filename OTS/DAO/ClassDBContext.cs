@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace OTS.DAO
 {
-    internal class ClassDBContext:DBContext
+    internal class ClassDBContext : DBContext
     {
         public List<Class> getClasses()
         {
@@ -35,10 +35,12 @@ namespace OTS.DAO
                     classes.Add(cls);
 
                 }
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
-            } finally
+            }
+            finally
             {
                 connection.Close();
             }
