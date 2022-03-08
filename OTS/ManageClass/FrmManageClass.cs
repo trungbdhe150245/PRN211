@@ -1,4 +1,5 @@
 ﻿using OTS.DAO;
+using OTS.ManageClass;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,9 +19,10 @@ namespace OTS
             InitializeComponent();
         }
 
-        private void FrmManageClass_Load(object sender, EventArgs e)
+        public void LoadClassData()
         {
-            try { 
+            try
+            {
                 ClassDBContext classDBContext = new ClassDBContext();
                 dgvClasses.DataSource = classDBContext.getClasses();
             }
@@ -28,6 +30,17 @@ namespace OTS
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void FrmManageClass_Load(object sender, EventArgs e)
+        {
+            LoadClassData();
+        }
+
+        private void btnAddClass_Click(object sender, EventArgs e)
+        {
+            FrmCreateClass frmCreate = new FrmCreateClass(this);
+            frmCreate.Show();
         }
     }
 }

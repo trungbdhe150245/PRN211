@@ -12,6 +12,34 @@ namespace OTS.DAO
 {
     internal class ClassDBContext : DBContext
     {
+        public bool IsClassExist(string className)
+        {
+            bool isExist = false;
+
+            string sql_select_class = @"";
+
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(sql_select_class, connection);
+                
+                connection.Open();
+                reader = command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    isExist = true;
+                }
+            } catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            } finally
+            {
+                connection.Close();
+            }
+
+            return isExist;
+        }
+
         public List<Class> getClasses()
         {
             List<Class> classes = new List<Class>();
@@ -46,6 +74,29 @@ namespace OTS.DAO
             }
 
             return classes;
+        }
+
+        public int AddClass(Class newClass)
+        {
+            int rowAffects = 0;
+            string sql_insert_class = @"INSERT INTO [Class]
+                                           ([Name])
+                                     VALUES (@className)";
+            try
+            {
+                connection=new SqlConnection(GetConnectionString());
+                command = new SqlCommand(@sql_insert_class, connection);
+                command.Parameters.AddWithValue("@className", newClass.Name);
+                connection.Open();
+                rowAffects = command.ExecuteNonQuery();
+            } catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            } finally
+            {
+                connection.Close();
+            }
+            return rowAffects;
         }
     }
 

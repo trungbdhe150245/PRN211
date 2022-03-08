@@ -42,3 +42,6 @@ D:\SourceCodes\Github\PRN211\OTS\obj\Debug\net5.0-windows\OTS.pdb
 D:\SourceCodes\Github\PRN211\OTS\obj\Debug\net5.0-windows\OTS.genruntimeconfig.cache
 D:\SourceCodes\Github\PRN211\OTS\obj\Debug\net5.0-windows\ref\OTS.dll
 D:\SourceCodes\Github\PRN211\OTS\obj\Debug\net5.0-windows\OTS.FrmManageClass.resources
+D:\SourceCodes\Github\PRN211\OTS\bin\Debug\net5.0-windows\appsettings.json
+D:\SourceCodes\Github\PRN211\OTS\obj\Debug\net5.0-windows\OTS.ManageClass.FrmEditClass.resources
+D:\SourceCodes\Github\PRN211\OTS\obj\Debug\net5.0-windows\OTS.ManageClass.FrmCreateClass.resources
