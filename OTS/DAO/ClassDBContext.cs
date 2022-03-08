@@ -15,13 +15,25 @@ namespace OTS.DAO
         public int UpdateClass(Class targetClass)
         {
             int rowAffects = 0;
-            string sql_update_class = "";
-            connection = new SqlConnection(GetConnectionString());
-            command = new SqlCommand(sql_update_class, connection);
+            string sql_update_class = @"UPDATE [Class]
+                                   SET[Name] = @name
+                                 WHERE Id = @id ";
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(sql_update_class, connection);
+                command.Parameters.AddWithValue("@name", targetClass.Name);
+                command.Parameters.AddWithValue("@id", targetClass.Id);
 
-            connection.Open();
-            rowAffects = command.ExecuteNonQuery();
-            
+                connection.Open();
+                rowAffects = command.ExecuteNonQuery();
+            } catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            } finally
+            {
+                connection.Close();
+            }
             return rowAffects;
         }
         public bool IsClassExist(string className)

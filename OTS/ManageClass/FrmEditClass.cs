@@ -1,4 +1,5 @@
-﻿using OTS.Models;
+﻿using OTS.DAO;
+using OTS.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,7 +31,35 @@ namespace OTS.ManageClass
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            try
+            {
+                ClassDBContext classDBC = new ClassDBContext();
+                if (editClass != null && editClass.Name.Length != 0)
+                {
+                    if (classDBC.IsClassExist(editClass.Name))
+                    {
+                        if (classDBC.UpdateClass(editClass) > 0)
+                        {
+                            MessageBox.Show("Update Successful");
+                            this.Close();
+                            parentFormMangageClass.LoadClassData();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Duplicate class!", "Warring");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Fields are not empty!", "Warring");
 
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+            }
         }
 
         private void FrmEditClass_Load(object sender, EventArgs e)

@@ -46,15 +46,18 @@ namespace OTS
 
         private void btnEditClass_Click(object sender, EventArgs e)
         {
-            string className = dgvClasses.SelectedRows[0].Cells["Name"].Value.ToString();
-            string raw_classId = dgvClasses.SelectedRows[0].Cells["Id"].Value.ToString();
-            Class targetEditClass = new Class()
+            if (dgvClasses.SelectedRows.Count > 0)
             {
-                Name = className,
-                Id = Int32.Parse(raw_classId)
-            };
-            FrmEditClass frmEdit = new FrmEditClass(this, targetEditClass);
-            frmEdit.Show();
+                string className = dgvClasses.SelectedRows[0].Cells["Name"].Value.ToString();
+                string raw_classId = dgvClasses.SelectedRows[0].Cells["Id"].Value.ToString();
+                Class targetEditClass = new Class()
+                {
+                    Name = className,
+                    Id = Int32.Parse(raw_classId)
+                };
+                FrmEditClass frmEdit = new FrmEditClass(this, targetEditClass);
+                frmEdit.Show();
+            }
         }
     }
 }
