@@ -28,11 +28,17 @@ namespace OTS.ManageClass
                 try
                 {
                     ClassDBContext classDBC = new ClassDBContext();
-                    if (classDBC.AddClass(new Class() { Name = newClassName }) > 0)
+                    if (!classDBC.IsClassExist(newClassName))
                     {
-                        MessageBox.Show("Added Class Succesful!");
-                        this.Close();
-                        parentFormManageClass.LoadClassData();
+                        if (classDBC.AddClass(new Class() { Name = newClassName }) > 0)
+                        {
+                            MessageBox.Show("Added Class Succesful!");
+                            this.Close();
+                            parentFormManageClass.LoadClassData();
+                        }
+                    }else
+                    {
+                        MessageBox.Show("Class Name is duplicate!", "Warning");
                     }
             } catch (Exception ex)
                 {

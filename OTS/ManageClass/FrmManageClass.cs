@@ -1,5 +1,6 @@
 ﻿using OTS.DAO;
 using OTS.ManageClass;
+using OTS.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -41,6 +42,19 @@ namespace OTS
         {
             FrmCreateClass frmCreate = new FrmCreateClass(this);
             frmCreate.Show();
+        }
+
+        private void btnEditClass_Click(object sender, EventArgs e)
+        {
+            string className = dgvClasses.SelectedRows[0].Cells["Name"].Value.ToString();
+            string raw_classId = dgvClasses.SelectedRows[0].Cells["Id"].Value.ToString();
+            Class targetEditClass = new Class()
+            {
+                Name = className,
+                Id = Int32.Parse(raw_classId)
+            };
+            FrmEditClass frmEdit = new FrmEditClass(this, targetEditClass);
+            frmEdit.Show();
         }
     }
 }

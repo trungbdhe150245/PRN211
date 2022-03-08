@@ -30,11 +30,11 @@
         {
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtClassID = new System.Windows.Forms.TextBox();
             this.lbEditClass = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtClassName = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnCancel
@@ -45,6 +45,7 @@
             this.btnCancel.TabIndex = 0;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnSave
             // 
@@ -54,15 +55,15 @@
             this.btnSave.TabIndex = 1;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.button1_Click);
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // textBox1
+            // txtClassID
             // 
-            this.textBox1.Location = new System.Drawing.Point(140, 71);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(195, 23);
-            this.textBox1.TabIndex = 2;
+            this.txtClassID.Location = new System.Drawing.Point(140, 71);
+            this.txtClassID.Name = "txtClassID";
+            this.txtClassID.ReadOnly = true;
+            this.txtClassID.Size = new System.Drawing.Size(195, 23);
+            this.txtClassID.TabIndex = 2;
             // 
             // lbEditClass
             // 
@@ -92,12 +93,12 @@
             this.label3.TabIndex = 6;
             this.label3.Text = "Class Name";
             // 
-            // textBox2
+            // txtClassName
             // 
-            this.textBox2.Location = new System.Drawing.Point(140, 112);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(195, 23);
-            this.textBox2.TabIndex = 5;
+            this.txtClassName.Location = new System.Drawing.Point(140, 112);
+            this.txtClassName.Name = "txtClassName";
+            this.txtClassName.Size = new System.Drawing.Size(195, 23);
+            this.txtClassName.TabIndex = 5;
             // 
             // FrmEditClass
             // 
@@ -105,14 +106,15 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(422, 219);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.txtClassName);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lbEditClass);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtClassID);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnCancel);
             this.Name = "FrmEditClass";
             this.Text = "FrmEditClass";
+            this.Load += new System.EventHandler(this.FrmEditClass_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -122,10 +124,10 @@
 
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtClassID;
         private System.Windows.Forms.Label lbEditClass;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtClassName;
     }
 }

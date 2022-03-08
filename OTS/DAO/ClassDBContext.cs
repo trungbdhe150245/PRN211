@@ -12,17 +12,31 @@ namespace OTS.DAO
 {
     internal class ClassDBContext : DBContext
     {
+        public int UpdateClass(Class targetClass)
+        {
+            int rowAffects = 0;
+            string sql_update_class = "";
+            connection = new SqlConnection(GetConnectionString());
+            command = new SqlCommand(sql_update_class, connection);
+
+            connection.Open();
+            rowAffects = command.ExecuteNonQuery();
+            
+            return rowAffects;
+        }
         public bool IsClassExist(string className)
         {
             bool isExist = false;
 
-            string sql_select_class = @"";
+            string sql_select_class = @"SELECT [Id]
+                                      ,[Name]
+                                  FROM [Class] WHERE NAME = @Name";
 
             try
             {
                 connection = new SqlConnection(GetConnectionString());
                 command = new SqlCommand(sql_select_class, connection);
-                
+                command.Parameters.AddWithValue("@Name", className);
                 connection.Open();
                 reader = command.ExecuteReader();
                 if (reader.HasRows)

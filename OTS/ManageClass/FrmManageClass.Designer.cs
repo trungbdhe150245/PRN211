@@ -97,6 +97,7 @@
             this.btnEditClass.TabIndex = 6;
             this.btnEditClass.Text = "Edit";
             this.btnEditClass.UseVisualStyleBackColor = true;
+            this.btnEditClass.Click += new System.EventHandler(this.btnEditClass_Click);
             // 
             // btnDeleteClass
             // 
