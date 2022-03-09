@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OTS.DAO
 {
-    internal class TypeDBContext : DBContext 
+    public class TypeDBContext : DBContext 
     {
     }
 }

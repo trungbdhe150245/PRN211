@@ -26,7 +26,7 @@ namespace OTS.DAO
                 parameters = String.Join(", ", listParam);
 
             string sql_delete_classes = @$"DELETE FROM [Class]
-                                        WHERE Id IN ({parameters})";
+                                        WHERE ClassCode IN ({parameters})";
 
             try
             {
@@ -34,7 +34,7 @@ namespace OTS.DAO
                 command = new SqlCommand(sql_delete_classes, connection);
                 for (int i = 0; i < Classes.Count; i++)
                 {
-                    command.Parameters.AddWithValue(listParam[i], Classes[i].Id);
+                    command.Parameters.AddWithValue(listParam[i], Classes[i].ClassCode);
                 }
                 connection.Open();
                 rowAffects = command.ExecuteNonQuery();
@@ -51,13 +51,13 @@ namespace OTS.DAO
             int rowAffects = 0;
             string sql_update_class = @"UPDATE [Class]
                                        SET [Name] = @name
-                                     WHERE Id = @id";
+                                     WHERE ClassCode = @id";
             try
             {
                 connection = new SqlConnection(GetConnectionString());
                 command = new SqlCommand(sql_update_class, connection);
                 command.Parameters.AddWithValue("@name", targetClass.Name);
-                command.Parameters.AddWithValue("@id", targetClass.Id);
+                command.Parameters.AddWithValue("@id", targetClass.ClassCode);
 
                 connection.Open();
                 rowAffects = command.ExecuteNonQuery();
@@ -76,7 +76,7 @@ namespace OTS.DAO
         {
             bool isExist = false;
 
-            string sql_select_class = @"SELECT [Id]
+            string sql_select_class = @"SELECT [ClassCode]
                                       ,[Name]
                                   FROM [Class] WHERE NAME = @Name";
             try
@@ -113,12 +113,12 @@ namespace OTS.DAO
                     whereQuery = " [Name] Like '%' + @name + '%'";
                     break;
                 case "id":
-                    whereQuery = " [Id] = @id";
+                    whereQuery = " [ClassCode] = @id";
                     break;
                 default: whereQuery = " (1=1) "; break;
             }
 
-            string sql_select_class = @$"SELECT [Id]
+            string sql_select_class = @$"SELECT [ClassCode]
                                       ,[Name]
                                   FROM [Class]
                                   WHERE {whereQuery}";
@@ -144,7 +144,7 @@ namespace OTS.DAO
                     Class cls = new Class()
                     {
                         Name = reader.GetString("Name"),
-                        Id = reader.GetInt32("Id"),
+                        ClassCode = reader.GetInt32("ClassCode"),
                     };
                     classes.Add(cls);
 

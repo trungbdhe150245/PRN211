@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OTS.Models
 {
-    internal class Level
+    public class Level
     {
         public short Id { get; set; }
         public string Name { get; set; }

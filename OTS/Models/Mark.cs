@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OTS.Models
 {
-    internal class Mark
+    public class Mark
     {
         public Test Test { get; set; }
         public Student Student { get; set; }

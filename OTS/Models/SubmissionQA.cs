@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace OTS.Models
 {
-    public class Answer
+    public class SubmissionQA
     {
-        public int Id { get; set; }
-        public string Content { get; set; }
+        public Submission Submission { get; set; }
         public Question Question { get; set; }
-        public bool IsCorrect { get; set; }
+        public Answer Answer { get; set; }
     }
 }

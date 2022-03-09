@@ -1,3 +1,4 @@
+using OTS.ViewTest;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace OTS
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 			//Application.Run(new FrmManageClass());
+			Application.Run(new FrmViewTest());
 		}
 	}
 }

@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 
 namespace OTS.Models
 {
-    internal class Test
+    public class Test
     {
         public int Id { get; set; }
         public string Code { get; set; }
-        public DateTime StartTime { get; set; }
+        public TimeSpan StartTime { get; set; }
         public DateTime TestDate { get; set; }
         public TimeSpan Duration { get; set; }
         public Subject Subject { get; set; }
+        public DateTime CreateDate { get; set; }
         public bool IsReview { get; set; }
     }
 }

@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace OTS.Models
 {
-    internal class Essay
+    public class Essay
     {
         public int Id { get; set; }
         public Student Student { get; set; }
         public Question Question { get; set; }
         public string Content { get; set; }
+        public DateTime SubmitDate { get; set; }
+        public TimeSpan Duration { get; set; }
     }
 }

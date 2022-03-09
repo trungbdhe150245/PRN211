@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace OTS.Models
 {
-    internal class Subject
+    public class Subject
     {
-        public int Id { get; set; } 
+        public string SubjectCode { get; set; } 
         public string Name { get; set; }
     }
 }

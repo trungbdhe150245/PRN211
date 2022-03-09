@@ -36,7 +36,7 @@ namespace OTS.ManageClass
                         if (classDBC.UpdateClass(new Class()
                         {
                             Name = txtClassName.Text,
-                            Id = editClass.Id
+                            ClassCode = editClass.ClassCode
                         }) > 0)
                         {
                             MessageBox.Show("Update Successful");
@@ -63,7 +63,7 @@ namespace OTS.ManageClass
 
         private void FrmEditClass_Load(object sender, EventArgs e)
         {
-            txtClassID.Text = editClass.Id.ToString();
+            txtClassID.Text = editClass.ClassCode.ToString();
             txtClassName.Text = editClass.Name;
         }
 
