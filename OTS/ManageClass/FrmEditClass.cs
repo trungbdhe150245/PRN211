@@ -63,7 +63,7 @@ namespace OTS.ManageClass
 
         private void FrmEditClass_Load(object sender, EventArgs e)
         {
-            txtClassID.Text = editClass.ClassCode.ToString();
+            txtClassCode.Text = editClass.ClassCode.ToString();
             txtClassName.Text = editClass.Name;
         }
 

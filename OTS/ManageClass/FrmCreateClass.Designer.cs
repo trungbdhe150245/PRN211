@@ -33,12 +33,14 @@
             this.lbEditClass = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtClassCode = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(66, 95);
+            this.label3.Location = new System.Drawing.Point(66, 115);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(69, 15);
             this.label3.TabIndex = 13;
@@ -46,7 +48,7 @@
             // 
             // txtClassName
             // 
-            this.txtClassName.Location = new System.Drawing.Point(146, 92);
+            this.txtClassName.Location = new System.Drawing.Point(146, 112);
             this.txtClassName.Name = "txtClassName";
             this.txtClassName.Size = new System.Drawing.Size(195, 23);
             this.txtClassName.TabIndex = 12;
@@ -81,11 +83,29 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(66, 76);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 15);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "Class Code";
+            // 
+            // txtClassCode
+            // 
+            this.txtClassCode.Location = new System.Drawing.Point(146, 73);
+            this.txtClassCode.Name = "txtClassCode";
+            this.txtClassCode.Size = new System.Drawing.Size(195, 23);
+            this.txtClassCode.TabIndex = 14;
+            // 
             // FrmCreateClass
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(422, 219);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.txtClassCode);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtClassName);
             this.Controls.Add(this.lbEditClass);
@@ -105,5 +125,7 @@
         private System.Windows.Forms.Label lbEditClass;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtClassCode;
     }
 }

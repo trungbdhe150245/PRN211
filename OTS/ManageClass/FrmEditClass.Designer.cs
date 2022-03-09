@@ -30,7 +30,7 @@
         {
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.txtClassID = new System.Windows.Forms.TextBox();
+            this.txtClassCode = new System.Windows.Forms.TextBox();
             this.lbEditClass = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -57,13 +57,13 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // txtClassID
+            // txtClassCode
             // 
-            this.txtClassID.Location = new System.Drawing.Point(140, 71);
-            this.txtClassID.Name = "txtClassID";
-            this.txtClassID.ReadOnly = true;
-            this.txtClassID.Size = new System.Drawing.Size(195, 23);
-            this.txtClassID.TabIndex = 2;
+            this.txtClassCode.Location = new System.Drawing.Point(140, 71);
+            this.txtClassCode.Name = "txtClassCode";
+            this.txtClassCode.ReadOnly = true;
+            this.txtClassCode.Size = new System.Drawing.Size(195, 23);
+            this.txtClassCode.TabIndex = 2;
             // 
             // lbEditClass
             // 
@@ -78,11 +78,11 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(84, 74);
+            this.label2.Location = new System.Drawing.Point(64, 74);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(45, 15);
+            this.label2.Size = new System.Drawing.Size(65, 15);
             this.label2.TabIndex = 4;
-            this.label2.Text = "ClassID";
+            this.label2.Text = "Class Code";
             // 
             // label3
             // 
@@ -109,7 +109,7 @@
             this.Controls.Add(this.txtClassName);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lbEditClass);
-            this.Controls.Add(this.txtClassID);
+            this.Controls.Add(this.txtClassCode);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnCancel);
             this.Name = "FrmEditClass";
@@ -124,7 +124,7 @@
 
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.TextBox txtClassID;
+        private System.Windows.Forms.TextBox txtClassCode;
         private System.Windows.Forms.Label lbEditClass;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;

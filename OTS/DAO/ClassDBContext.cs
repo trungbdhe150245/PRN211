@@ -72,18 +72,18 @@ namespace OTS.DAO
             }
             return rowAffects;
         }
-        public bool IsClassExist(string className)
+        public bool IsClassExist(string classCode)
         {
             bool isExist = false;
 
             string sql_select_class = @"SELECT [ClassCode]
                                       ,[Name]
-                                  FROM [Class] WHERE NAME = @Name";
+                                  FROM [Class] WHERE ClassCode = @ClassCode";
             try
             {
                 connection = new SqlConnection(GetConnectionString());
                 command = new SqlCommand(sql_select_class, connection);
-                command.Parameters.AddWithValue("@Name", className);
+                command.Parameters.AddWithValue("@ClassCode", classCode);
                 connection.Open();
                 reader = command.ExecuteReader();
                 if (reader.HasRows)
@@ -112,8 +112,8 @@ namespace OTS.DAO
                 case "name":
                     whereQuery = " [Name] Like '%' + @name + '%'";
                     break;
-                case "id":
-                    whereQuery = " [ClassCode] = @id";
+                case "code":
+                    whereQuery = " [ClassCode] Like '%' +  @code + '%'";
                     break;
                 default: whereQuery = " (1=1) "; break;
             }
@@ -131,8 +131,8 @@ namespace OTS.DAO
                     case "name":
                         command.Parameters.AddWithValue("@name", querySearch);
                         break;
-                    case "id":
-                        command.Parameters.AddWithValue("@id", querySearch);
+                    case "code":
+                        command.Parameters.AddWithValue("@code", querySearch);
                         break;
                 }
 
@@ -144,7 +144,7 @@ namespace OTS.DAO
                     Class cls = new Class()
                     {
                         Name = reader.GetString("Name"),
-                        ClassCode = reader.GetInt32("ClassCode"),
+                        ClassCode = reader.GetString("ClassCode"),
                     };
                     classes.Add(cls);
 
