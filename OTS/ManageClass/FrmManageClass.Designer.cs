@@ -76,6 +76,7 @@
             this.btnClassSearch.TabIndex = 4;
             this.btnClassSearch.Text = "Search";
             this.btnClassSearch.UseVisualStyleBackColor = true;
+            this.btnClassSearch.Click += new System.EventHandler(this.btnClassSearch_Click);
             // 
             // btnAddClass
             // 
@@ -108,6 +109,7 @@
             this.btnDeleteClass.TabIndex = 7;
             this.btnDeleteClass.Text = "Delete";
             this.btnDeleteClass.UseVisualStyleBackColor = true;
+            this.btnDeleteClass.Click += new System.EventHandler(this.btnDeleteClass_Click);
             // 
             // FrmManageClass
             // 

@@ -1,3 +1,4 @@
+D:\SourceCodes\Github\PRN211\OTS\bin\Debug\net5.0-windows\appsettings.json
 D:\SourceCodes\Github\PRN211\OTS\bin\Debug\net5.0-windows\OTS.exe
 D:\SourceCodes\Github\PRN211\OTS\bin\Debug\net5.0-windows\OTS.deps.json
 D:\SourceCodes\Github\PRN211\OTS\bin\Debug\net5.0-windows\OTS.runtimeconfig.json
@@ -30,6 +31,9 @@ D:\SourceCodes\Github\PRN211\OTS\bin\Debug\net5.0-windows\runtimes\win-x86\nativ
 D:\SourceCodes\Github\PRN211\OTS\bin\Debug\net5.0-windows\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 D:\SourceCodes\Github\PRN211\OTS\obj\Debug\net5.0-windows\OTS.csproj.AssemblyReference.cache
 D:\SourceCodes\Github\PRN211\OTS\obj\Debug\net5.0-windows\OTS.Form1.resources
+D:\SourceCodes\Github\PRN211\OTS\obj\Debug\net5.0-windows\OTS.ManageClass.FrmCreateClass.resources
+D:\SourceCodes\Github\PRN211\OTS\obj\Debug\net5.0-windows\OTS.ManageClass.FrmEditClass.resources
+D:\SourceCodes\Github\PRN211\OTS\obj\Debug\net5.0-windows\OTS.FrmManageClass.resources
 D:\SourceCodes\Github\PRN211\OTS\obj\Debug\net5.0-windows\OTS.csproj.GenerateResource.cache
 D:\SourceCodes\Github\PRN211\OTS\obj\Debug\net5.0-windows\OTS.GeneratedMSBuildEditorConfig.editorconfig
 D:\SourceCodes\Github\PRN211\OTS\obj\Debug\net5.0-windows\OTS.AssemblyInfoInputs.cache
@@ -41,7 +45,3 @@ D:\SourceCodes\Github\PRN211\OTS\obj\Debug\net5.0-windows\refint\OTS.dll
 D:\SourceCodes\Github\PRN211\OTS\obj\Debug\net5.0-windows\OTS.pdb
 D:\SourceCodes\Github\PRN211\OTS\obj\Debug\net5.0-windows\OTS.genruntimeconfig.cache
 D:\SourceCodes\Github\PRN211\OTS\obj\Debug\net5.0-windows\ref\OTS.dll
-D:\SourceCodes\Github\PRN211\OTS\obj\Debug\net5.0-windows\OTS.FrmManageClass.resources
-D:\SourceCodes\Github\PRN211\OTS\bin\Debug\net5.0-windows\appsettings.json
-D:\SourceCodes\Github\PRN211\OTS\obj\Debug\net5.0-windows\OTS.ManageClass.FrmEditClass.resources
-D:\SourceCodes\Github\PRN211\OTS\obj\Debug\net5.0-windows\OTS.ManageClass.FrmCreateClass.resources

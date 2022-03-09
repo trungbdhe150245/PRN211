@@ -49,5 +49,10 @@ namespace OTS.ManageClass
                 MessageBox.Show("Class Name does not empty!", "Warning");
             }
         }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

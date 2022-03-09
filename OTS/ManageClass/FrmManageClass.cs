@@ -15,6 +15,7 @@ namespace OTS
 {
     public partial class FrmManageClass : Form
     {
+        private string querySearch = "";
         public FrmManageClass()
         {
             InitializeComponent();
@@ -22,10 +23,11 @@ namespace OTS
 
         public void LoadClassData()
         {
+            txtClassSearch.Text = querySearch;
             try
             {
                 ClassDBContext classDBContext = new ClassDBContext();
-                dgvClasses.DataSource = classDBContext.getClasses();
+                dgvClasses.DataSource = classDBContext.getClasses(querySearch, "name");
             }
             catch (Exception ex)
             {
@@ -58,6 +60,37 @@ namespace OTS
                 FrmEditClass frmEdit = new FrmEditClass(this, targetEditClass);
                 frmEdit.Show();
             }
+        }
+
+        private void btnDeleteClass_Click(object sender, EventArgs e)
+        {
+            List<Class> classes = new List<Class>();
+           foreach (DataGridViewRow row in dgvClasses.SelectedRows)
+            {
+                Class eachSelectedClass = new Class();
+                string raw_select_Id = row.Cells["Id"].Value.ToString();
+                eachSelectedClass.Id = Int32.Parse(raw_select_Id);
+                classes.Add(eachSelectedClass);
+            }
+           try
+            {
+                ClassDBContext classDBC = new ClassDBContext();
+                int recordWasDelete = classDBC.DeleteClass(classes);
+                if (recordWasDelete > 0)
+                {
+                    MessageBox.Show($"Delete {recordWasDelete} Successful!");
+                    LoadClassData();
+                }
+            } catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+            }
+        }
+
+        private void btnClassSearch_Click(object sender, EventArgs e)
+        {
+            querySearch = txtClassSearch.Text;
+            LoadClassData();
         }
     }
 }

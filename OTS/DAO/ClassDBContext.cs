@@ -12,12 +12,46 @@ namespace OTS.DAO
 {
     internal class ClassDBContext : DBContext
     {
+        public int DeleteClass(List<Class> Classes)
+        {
+            int rowAffects = 0;
+            string parameters = "0";
+            List<string> listParam = new List<string>();
+
+            for (int i = 0; i < Classes.Count; i++)
+            {
+                listParam.Add("@ClassID" + i);
+            }
+            if (Classes.Count > 0)
+                parameters = String.Join(", ", listParam);
+
+            string sql_delete_classes = @$"DELETE FROM [Class]
+                                        WHERE Id IN ({parameters})";
+
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(sql_delete_classes, connection);
+                for (int i = 0; i < Classes.Count; i++)
+                {
+                    command.Parameters.AddWithValue(listParam[i], Classes[i].Id);
+                }
+                connection.Open();
+                rowAffects = command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally { connection.Close(); }
+            return rowAffects;
+        }
         public int UpdateClass(Class targetClass)
         {
             int rowAffects = 0;
             string sql_update_class = @"UPDATE [Class]
-                                   SET[Name] = @name
-                                 WHERE Id = @id ";
+                                       SET [Name] = @name
+                                     WHERE Id = @id";
             try
             {
                 connection = new SqlConnection(GetConnectionString());
@@ -27,10 +61,12 @@ namespace OTS.DAO
 
                 connection.Open();
                 rowAffects = command.ExecuteNonQuery();
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
-            } finally
+            }
+            finally
             {
                 connection.Close();
             }
@@ -43,7 +79,6 @@ namespace OTS.DAO
             string sql_select_class = @"SELECT [Id]
                                       ,[Name]
                                   FROM [Class] WHERE NAME = @Name";
-
             try
             {
                 connection = new SqlConnection(GetConnectionString());
@@ -55,10 +90,12 @@ namespace OTS.DAO
                 {
                     isExist = true;
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
-            } finally
+            }
+            finally
             {
                 connection.Close();
             }
@@ -66,16 +103,39 @@ namespace OTS.DAO
             return isExist;
         }
 
-        public List<Class> getClasses()
+        public List<Class> getClasses(string querySearch, string searchOption)
         {
             List<Class> classes = new List<Class>();
-            string sql_select_class = @"SELECT [Id]
-                                          ,[Name]
-                                      FROM [Class]";
+            string whereQuery = "";
+            switch (searchOption)
+            {
+                case "name":
+                    whereQuery = " [Name] Like '%' + @name + '%'";
+                    break;
+                case "id":
+                    whereQuery = " [Id] = @id";
+                    break;
+                default: whereQuery = " (1=1) "; break;
+            }
+
+            string sql_select_class = @$"SELECT [Id]
+                                      ,[Name]
+                                  FROM [Class]
+                                  WHERE {whereQuery}";
             try
             {
                 connection = new SqlConnection(GetConnectionString());
                 command = new SqlCommand(sql_select_class, connection);
+                switch (searchOption)
+                {
+                    case "name":
+                        command.Parameters.AddWithValue("@name", querySearch);
+                        break;
+                    case "id":
+                        command.Parameters.AddWithValue("@id", querySearch);
+                        break;
+                }
+
                 connection.Open();
 
                 reader = command.ExecuteReader();
@@ -110,15 +170,17 @@ namespace OTS.DAO
                                      VALUES (@className)";
             try
             {
-                connection=new SqlConnection(GetConnectionString());
+                connection = new SqlConnection(GetConnectionString());
                 command = new SqlCommand(@sql_insert_class, connection);
                 command.Parameters.AddWithValue("@className", newClass.Name);
                 connection.Open();
                 rowAffects = command.ExecuteNonQuery();
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
-            } finally
+            }
+            finally
             {
                 connection.Close();
             }

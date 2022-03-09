@@ -23,22 +23,21 @@ namespace OTS.ManageClass
             InitializeComponent();
         }
 
-        private void LoadEditClass()
-        {
-            txtClassID.Text = editClass.Id.ToString();
-            txtClassName.Text = editClass.Name;
-        }
-
         private void btnSave_Click(object sender, EventArgs e)
         {
-            try
+
+            if (editClass != null && editClass.Name.Length != 0)
             {
-                ClassDBContext classDBC = new ClassDBContext();
-                if (editClass != null && editClass.Name.Length != 0)
+                try
                 {
-                    if (classDBC.IsClassExist(editClass.Name))
+                    ClassDBContext classDBC = new ClassDBContext();
+                    if (!classDBC.IsClassExist(txtClassName.Text))
                     {
-                        if (classDBC.UpdateClass(editClass) > 0)
+                        if (classDBC.UpdateClass(new Class()
+                        {
+                            Name = txtClassName.Text,
+                            Id = editClass.Id
+                        }) > 0)
                         {
                             MessageBox.Show("Update Successful");
                             this.Close();
@@ -50,21 +49,22 @@ namespace OTS.ManageClass
                         MessageBox.Show("Duplicate class!", "Warring");
                     }
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Fields are not empty!", "Warring");
-
+                    MessageBox.Show(ex.Message, "Error");
                 }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message, "Error");
+                MessageBox.Show("Fields are empty!", "Warring");
+
             }
         }
 
         private void FrmEditClass_Load(object sender, EventArgs e)
         {
-            LoadEditClass();
+            txtClassID.Text = editClass.Id.ToString();
+            txtClassName.Text = editClass.Name;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
