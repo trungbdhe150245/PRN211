@@ -4,7 +4,13 @@
     <Compile Update="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="FrmManageClass.cs">
+    <Compile Update="ManageClass\FrmCreateClass.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ManageClass\FrmEditClass.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ManageClass\FrmManageClass.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
