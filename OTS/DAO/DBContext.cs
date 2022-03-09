@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace OTS.DAO
 {
-    internal class DBContext
+    public class DBContext
     {
         // Những đối tượng dùng chung
         internal SqlConnection connection = null;

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace OTS.Models
 {
-    internal class Moderator
+    public class Moderator
     {
-        public int Id { get; set; }
+        public string UserName { get; set; }
         public string FullName { get; set; }
         public string Password { get; set; }
     }
