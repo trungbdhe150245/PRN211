@@ -46,11 +46,11 @@
             this.label9 = new System.Windows.Forms.Label();
             this.txtTotalQuestion = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnCopy = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.dgvQuestion = new System.Windows.Forms.DataGridView();
-            this.btnDelete = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuestion)).BeginInit();
@@ -154,7 +154,7 @@
             // 
             // dtpDuration
             // 
-            this.dtpDuration.CustomFormat = "yyyy.MM.dd HH:mm";
+            this.dtpDuration.CustomFormat = "";
             this.dtpDuration.Location = new System.Drawing.Point(587, 204);
             this.dtpDuration.Name = "dtpDuration";
             this.dtpDuration.ShowUpDown = true;
@@ -223,6 +223,15 @@
             this.groupBox1.TabIndex = 19;
             this.groupBox1.TabStop = false;
             // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(567, 184);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(83, 29);
+            this.btnDelete.TabIndex = 22;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            // 
             // btnCancel
             // 
             this.btnCancel.Location = new System.Drawing.Point(459, 184);
@@ -259,15 +268,6 @@
             this.dgvQuestion.RowTemplate.Height = 25;
             this.dgvQuestion.Size = new System.Drawing.Size(893, 265);
             this.dgvQuestion.TabIndex = 20;
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Location = new System.Drawing.Point(567, 184);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(83, 29);
-            this.btnDelete.TabIndex = 22;
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.UseVisualStyleBackColor = true;
             // 
             // label8
             // 

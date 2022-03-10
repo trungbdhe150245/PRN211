@@ -13,12 +13,23 @@ namespace OTS.DAO
     {
         public Test GetTest(int testId)
         {
-            string sql_select_test = "";
+            string sql_select_test = @"SELECT [Id]
+                                      ,[Code]
+                                      ,[StartTime]
+                                      ,[TestDate]
+                                      ,[Duration]
+                                      ,Test.[SubjectCode]
+	                                  ,Subject.SubjectName
+                                      ,[CreateDate]
+                                      ,[Review]
+                                  FROM [Test] INNER JOIN Subject
+			                                ON Subject.SubjectCode=Test.SubjectCode
+                                  WHERE Test.Id = @TestId";
             try
             {
                 connection = new SqlConnection(GetConnectionString());
                 command = new SqlCommand(sql_select_test, connection);
-
+                command.Parameters.AddWithValue("@TestId", testId);
                 connection.Open();
                 reader = command.ExecuteReader();
                 if (reader.Read())
@@ -26,16 +37,16 @@ namespace OTS.DAO
                     return new Test()
                     {
                         Id = testId,
-                        Code = reader.GetString(""),
-                        CreateDate = reader.GetDateTime(""),
-                        TestDate = reader.GetDateTime(""),
-                        StartTime = reader.GetTimeSpan(""),
-                        Duration = reader.GetTimeSpan(""),
+                        Code = reader.GetString("Code"),
+                        CreateDate = reader.GetDateTime("CreateDate"),
+                        TestDate = reader.GetDateTime("TestDate"),
+                        StartTime = (TimeSpan)reader["StartTime"],
+                        Duration = (TimeSpan)reader["Duration"],
                         Subject = new Subject() { 
-                            SubjectCode = reader.GetString(""),
-                            SubjectName = reader.GetString(""),
+                            SubjectCode = reader.GetString("SubjectCode"),
+                            SubjectName = reader.GetString("SubjectName"),
                         },
-                        IsReview = reader.GetBoolean("")
+                        IsReview = reader.GetBoolean("Review")
                     };
                 }
             }
