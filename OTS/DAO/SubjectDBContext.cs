@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace OTS.DAO
 {
@@ -28,7 +29,8 @@ namespace OTS.DAO
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                MessageBox.Show(ex.Message.ToString(), "Warnning",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -59,7 +61,7 @@ namespace OTS.DAO
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                
             }
             finally
             {
