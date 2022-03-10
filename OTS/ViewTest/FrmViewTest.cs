@@ -20,7 +20,7 @@ namespace OTS.ViewTest
             InitializeComponent();
         }
 
-        public LoadTestInformation()
+        public void LoadTestInformation()
         {
 
         }
