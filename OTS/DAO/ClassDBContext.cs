@@ -50,13 +50,13 @@ namespace OTS.DAO
         {
             int rowAffects = 0;
             string sql_update_class = @"UPDATE [Class]
-                                       SET [Name] = @name
+                                       SET [ClassName] = @name
                                      WHERE ClassCode = @id";
             try
             {
                 connection = new SqlConnection(GetConnectionString());
                 command = new SqlCommand(sql_update_class, connection);
-                command.Parameters.AddWithValue("@name", targetClass.Name);
+                command.Parameters.AddWithValue("@name", targetClass.ClassName);
                 command.Parameters.AddWithValue("@id", targetClass.ClassCode);
 
                 connection.Open();
@@ -72,18 +72,18 @@ namespace OTS.DAO
             }
             return rowAffects;
         }
-        public bool IsClassExist(string className)
+        public bool IsClassExist(string classCode)
         {
             bool isExist = false;
 
             string sql_select_class = @"SELECT [ClassCode]
-                                      ,[Name]
-                                  FROM [Class] WHERE NAME = @Name";
+                                      ,[ClassName]
+                                  FROM [Class] WHERE ClassCode = @ClassCode";
             try
             {
                 connection = new SqlConnection(GetConnectionString());
                 command = new SqlCommand(sql_select_class, connection);
-                command.Parameters.AddWithValue("@Name", className);
+                command.Parameters.AddWithValue("@ClassCode", classCode);
                 connection.Open();
                 reader = command.ExecuteReader();
                 if (reader.HasRows)
@@ -110,16 +110,16 @@ namespace OTS.DAO
             switch (searchOption)
             {
                 case "name":
-                    whereQuery = " [Name] Like '%' + @name + '%'";
+                    whereQuery = " [ClassName] Like '%' + @name + '%'";
                     break;
-                case "id":
-                    whereQuery = " [ClassCode] = @id";
+                case "code":
+                    whereQuery = " [ClassCode] Like '%' +  @code + '%'";
                     break;
                 default: whereQuery = " (1=1) "; break;
             }
 
             string sql_select_class = @$"SELECT [ClassCode]
-                                      ,[Name]
+                                      ,[ClassName]
                                   FROM [Class]
                                   WHERE {whereQuery}";
             try
@@ -131,8 +131,8 @@ namespace OTS.DAO
                     case "name":
                         command.Parameters.AddWithValue("@name", querySearch);
                         break;
-                    case "id":
-                        command.Parameters.AddWithValue("@id", querySearch);
+                    case "code":
+                        command.Parameters.AddWithValue("@code", querySearch);
                         break;
                 }
 
@@ -143,8 +143,8 @@ namespace OTS.DAO
                 {
                     Class cls = new Class()
                     {
-                        Name = reader.GetString("Name"),
-                        ClassCode = reader.GetInt32("ClassCode"),
+                        ClassName = reader.GetString("ClassName"),
+                        ClassCode = reader.GetString("ClassCode"),
                     };
                     classes.Add(cls);
 
@@ -166,13 +166,15 @@ namespace OTS.DAO
         {
             int rowAffects = 0;
             string sql_insert_class = @"INSERT INTO [Class]
-                                           ([Name])
-                                     VALUES (@className)";
+                                           ([ClassCode] ,[ClassName])
+                                     VALUES (@classCode, @className)";
             try
             {
                 connection = new SqlConnection(GetConnectionString());
                 command = new SqlCommand(@sql_insert_class, connection);
-                command.Parameters.AddWithValue("@className", newClass.Name);
+                command.Parameters.AddWithValue("@className", newClass.ClassName);
+                command.Parameters.AddWithValue("@classCode", newClass.ClassCode);
+
                 connection.Open();
                 rowAffects = command.ExecuteNonQuery();
             }
