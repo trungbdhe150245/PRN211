@@ -50,12 +50,12 @@ namespace OTS
         {
             if (dgvClasses.SelectedRows.Count > 0)
             {
-                string className = dgvClasses.SelectedRows[0].Cells["Name"].Value.ToString();
-                string raw_classId = dgvClasses.SelectedRows[0].Cells["ClassCode"].Value.ToString();
+                string className = dgvClasses.SelectedRows[0].Cells["ClassName"].Value.ToString();
+                string classCode = dgvClasses.SelectedRows[0].Cells["ClassCode"].Value.ToString();
                 Class targetEditClass = new Class()
                 {
-                    Name = className,
-                    ClassCode = Int32.Parse(raw_classId)
+                    ClassName = className,
+                    ClassCode = classCode
                 };
                 FrmEditClass frmEdit = new FrmEditClass(this, targetEditClass);
                 frmEdit.Show();
@@ -68,8 +68,8 @@ namespace OTS
            foreach (DataGridViewRow row in dgvClasses.SelectedRows)
             {
                 Class eachSelectedClass = new Class();
-                string raw_select_Id = row.Cells["ClassCode"].Value.ToString();
-                eachSelectedClass.ClassCode = Int32.Parse(raw_select_Id);
+                string selectCode = row.Cells["ClassCode"].Value.ToString();
+                eachSelectedClass.ClassCode = selectCode;
                 classes.Add(eachSelectedClass);
             }
            try

@@ -23,14 +23,15 @@ namespace OTS.ManageClass
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            string newClassCode = txtClassCode.Text.Trim();
             string newClassName = txtClassName.Text.Trim();
-            if (newClassName.Length != 0) {
+            if (!(newClassCode.Length == 0 || newClassName.Length == 0)) {
                 try
                 {
                     ClassDBContext classDBC = new ClassDBContext();
-                    if (!classDBC.IsClassExist(newClassName))
+                    if (!classDBC.IsClassExist(newClassCode))
                     {
-                        if (classDBC.AddClass(new Class() { Name = newClassName }) > 0)
+                        if (classDBC.AddClass(new Class() { ClassCode = newClassCode, ClassName = newClassName }) > 0)
                         {
                             MessageBox.Show("Added Class Succesful!");
                             this.Close();
@@ -38,7 +39,7 @@ namespace OTS.ManageClass
                         }
                     }else
                     {
-                        MessageBox.Show("Class Name is duplicate!", "Warning");
+                        MessageBox.Show("Class Code is duplicate!", "Warning");
                     }
             } catch (Exception ex)
                 {
@@ -46,7 +47,7 @@ namespace OTS.ManageClass
                 } 
             } else
             {
-                MessageBox.Show("Class Name does not empty!", "Warning");
+                MessageBox.Show("Fields must not empty!", "Warning");
             }
         }
 

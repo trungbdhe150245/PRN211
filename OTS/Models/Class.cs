@@ -9,6 +9,6 @@ namespace OTS.Models
     public class Class
     {
         public string ClassCode { get; set; }
-        public string Name { get; set; }
+        public string ClassName { get; set; }
     }
 }

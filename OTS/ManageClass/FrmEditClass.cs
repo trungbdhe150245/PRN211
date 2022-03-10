@@ -26,7 +26,7 @@ namespace OTS.ManageClass
         private void btnSave_Click(object sender, EventArgs e)
         {
 
-            if (editClass != null && editClass.Name.Length != 0)
+            if (editClass != null && editClass.ClassName.Length != 0)
             {
                 try
                 {
@@ -35,7 +35,7 @@ namespace OTS.ManageClass
                     {
                         if (classDBC.UpdateClass(new Class()
                         {
-                            Name = txtClassName.Text,
+                            ClassName = txtClassName.Text,
                             ClassCode = editClass.ClassCode
                         }) > 0)
                         {
@@ -64,7 +64,7 @@ namespace OTS.ManageClass
         private void FrmEditClass_Load(object sender, EventArgs e)
         {
             txtClassCode.Text = editClass.ClassCode.ToString();
-            txtClassName.Text = editClass.Name;
+            txtClassName.Text = editClass.ClassName;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
