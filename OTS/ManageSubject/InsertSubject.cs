@@ -42,7 +42,7 @@ namespace OTS.ManageSubject
                     {
                         if (Regex.IsMatch(subjectName, rgxsubjectName)&&!String.IsNullOrEmpty(subjectName))
                         {
-                            
+                        subjectDBC.InsertSubject(subjectCode, subjectName);
                         }
                     }
                     else
@@ -57,17 +57,6 @@ namespace OTS.ManageSubject
                    
                 }
 
-            
-            subjectDBC.InsertSubject(subjectCode,subjectName);
         }
     }
 }
-//try
-//{
-//    SubjectDBContext subjectDBContext = new SubjectDBContext();
-//    dgvClasses.DataSource = subjectDBContext.getClasses(querySearch, "name");
-//}
-//catch (Exception ex)
-//{
-//    MessageBox.Show(ex.Message);
-//}
