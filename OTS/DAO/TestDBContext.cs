@@ -29,8 +29,8 @@ namespace OTS.DAO
                         Code = reader.GetString(""),
                         CreateDate = reader.GetDateTime(""),
                         TestDate = reader.GetDateTime(""),
-                        StartTime = reader.GetTimeSpan(""),
-                        Duration = reader.GetTimeSpan(""),
+                      //  StartTime = reader.GetTimeSpan(""),
+                      //  Duration = reader.GetTimeSpan(""),
                         Subject = new Subject() { 
                             SubjectCode = reader.GetString(""),
                             SubjectName = reader.GetString(""),

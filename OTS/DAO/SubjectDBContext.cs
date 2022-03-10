@@ -17,7 +17,7 @@ namespace OTS.DAO
         {
             int rowAffects = 0;
             string sql_insert_class = @"INSERT INTO Subject (SubjectCode, SubjectName)
-                                        VALUES ('@subjectCode','@subjectName');";
+                                        VALUES (@subjectCode,@subjectName);";
             try
             {
                 connection = new SqlConnection(GetConnectionString());
@@ -55,7 +55,7 @@ namespace OTS.DAO
                     {
                         Models.Subject subject = new Models.Subject();
                         subject.SubjectCode = reader.GetString("SubjectCode");
-                        subject.SubjectName = reader.GetString("ClassName");
+                        subject.SubjectName = reader.GetString("SubjectName");
                     }
                 }
             }
