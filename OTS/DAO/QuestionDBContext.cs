@@ -25,6 +25,17 @@ namespace OTS.DAO
 
                 connection.Open();
                 reader = command.ExecuteReader();
+                Test test = null;
+                while (reader.Read())
+                {
+                    if(test == null)
+                    {
+                        test = new Test()
+                        {
+                            Id = reader.GetInt32(""),
+                        };
+                    }
+                }
 
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
