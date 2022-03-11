@@ -2,6 +2,23 @@
   "version": 3,
   "targets": {
     "net5.0-windows7.0": {
+      "ADGV/0.1.0.10": {
+        "type": "package",
+        "compile": {
+          "lib/net40/AdvancedDataGridView.dll": {}
+        },
+        "runtime": {
+          "lib/net40/AdvancedDataGridView.dll": {}
+        },
+        "resource": {
+          "lib/net40/fr/AdvancedDataGridView.resources.dll": {
+            "locale": "fr"
+          },
+          "lib/net40/ru/AdvancedDataGridView.resources.dll": {
+            "locale": "ru"
+          }
+        }
+      },
       "Microsoft.CSharp/4.5.0": {
         "type": "package",
         "compile": {
@@ -479,6 +496,22 @@
     }
   },
   "libraries": {
+    "ADGV/0.1.0.10": {
+      "sha512": "leJ7YvECR+X/Sx5TS4Y5QETpRL4V08DMuje28PxHmAt9s+oVfEfmjVKzDZLkVfHZGcXJBMFjVRYeN3dfFl+s9A==",
+      "type": "package",
+      "path": "adgv/0.1.0.10",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "adgv.0.1.0.10.nupkg.sha512",
+        "adgv.nuspec",
+        "lib/net40/AdvancedDataGridView.XML",
+        "lib/net40/AdvancedDataGridView.dll",
+        "lib/net40/fr/AdvancedDataGridView.resources.dll",
+        "lib/net40/ru/AdvancedDataGridView.resources.dll",
+        "readme.txt"
+      ]
+    },
     "Microsoft.CSharp/4.5.0": {
       "sha512": "kaj6Wb4qoMuH3HySFJhxwQfe8R/sJsNJnANrvv8WdFPMoNbKY5htfNscv+LHCu5ipz+49m2e+WQXpLXr9XYemQ==",
       "type": "package",
@@ -1463,24 +1496,25 @@
   },
   "projectFileDependencyGroups": {
     "net5.0-windows7.0": [
+      "ADGV >= 0.1.0.10",
       "Microsoft.Data.SqlClient >= 2.1.3",
       "Microsoft.Extensions.Configuration.Json >= 5.0.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\fifak\\.nuget\\packages\\": {}
+    "C:\\Users\\Admin\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\fifak\\OneDrive\\Documents\\GitHub\\PRN211\\OTS\\OTS.csproj",
+      "projectUniqueName": "C:\\Users\\Admin\\Documents\\GitHub\\PRN211\\OTS\\OTS.csproj",
       "projectName": "OTS",
-      "projectPath": "C:\\Users\\fifak\\OneDrive\\Documents\\GitHub\\PRN211\\OTS\\OTS.csproj",
-      "packagesPath": "C:\\Users\\fifak\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\fifak\\OneDrive\\Documents\\GitHub\\PRN211\\OTS\\obj\\",
+      "projectPath": "C:\\Users\\Admin\\Documents\\GitHub\\PRN211\\OTS\\OTS.csproj",
+      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Admin\\Documents\\GitHub\\PRN211\\OTS\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\fifak\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1506,6 +1540,10 @@
       "net5.0-windows7.0": {
         "targetAlias": "net5.0-windows",
         "dependencies": {
+          "ADGV": {
+            "target": "Package",
+            "version": "[0.1.0.10, )"
+          },
           "Microsoft.Data.SqlClient": {
             "target": "Package",
             "version": "[2.1.3, )"
@@ -1525,6 +1563,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[5.0.12, 5.0.12]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
@@ -1533,8 +1577,20 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'ADGV 0.1.0.10' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0-windows7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "ADGV",
+      "targetGraphs": [
+        "net5.0-windows7.0"
+      ]
+    }
+  ]
 }
