@@ -95,5 +95,10 @@ namespace OTS.ViewTest
         {
             this.Close();
         }
+
+        private void dgvQuestion_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

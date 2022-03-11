@@ -283,6 +283,7 @@
             this.dgvQuestion.RowTemplate.Height = 25;
             this.dgvQuestion.Size = new System.Drawing.Size(893, 265);
             this.dgvQuestion.TabIndex = 20;
+            this.dgvQuestion.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvQuestion_CellContentClick);
             // 
             // QuestionID
             // 
