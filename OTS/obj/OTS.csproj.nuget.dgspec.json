@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\fifak\\OneDrive\\Documents\\GitHub\\PRN211\\OTS\\OTS.csproj": {}
+    "D:\\SourceCodes\\Github\\PRN211\\OTS\\OTS.csproj": {}
   },
   "projects": {
-    "C:\\Users\\fifak\\OneDrive\\Documents\\GitHub\\PRN211\\OTS\\OTS.csproj": {
+    "D:\\SourceCodes\\Github\\PRN211\\OTS\\OTS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\fifak\\OneDrive\\Documents\\GitHub\\PRN211\\OTS\\OTS.csproj",
+        "projectUniqueName": "D:\\SourceCodes\\Github\\PRN211\\OTS\\OTS.csproj",
         "projectName": "OTS",
-        "projectPath": "C:\\Users\\fifak\\OneDrive\\Documents\\GitHub\\PRN211\\OTS\\OTS.csproj",
-        "packagesPath": "C:\\Users\\fifak\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\fifak\\OneDrive\\Documents\\GitHub\\PRN211\\OTS\\obj\\",
+        "projectPath": "D:\\SourceCodes\\Github\\PRN211\\OTS\\OTS.csproj",
+        "packagesPath": "C:\\Users\\area1\\.nuget\\packages\\",
+        "outputPath": "D:\\SourceCodes\\Github\\PRN211\\OTS\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\fifak\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\area1\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -67,7 +67,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     }
