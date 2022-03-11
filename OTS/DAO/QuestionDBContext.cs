@@ -14,6 +14,47 @@ namespace OTS.DAO
     {
         public string Content { get; private set; }
 
+        public Question GetQuestionSameLevel(Level level, Subject subject)
+        {
+            string select_random_question = @"";
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(select_random_question, connection);
+
+
+                connection.Open();
+                reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    return new Question()
+                    {
+                        Id = reader.GetInt32(""),
+                        Content = reader.GetString(""),
+                        Level = new Level() {
+                            Id = reader.GetInt16(""),
+                            Name = reader.GetString(""),
+                        },
+                        Type = new Type() {
+                            Name = reader.GetString(""),
+                            Id = reader.GetInt16(""),
+                        },
+                        Subject = new Subject()
+                        {
+                            SubjectCode = reader.GetString(""),
+                            SubjectName = reader.GetString("")
+                        }
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally { connection.Close(); }
+            return null;
+        }
+
         public List<QuestionTest> GetQuestionByTests(int testID)
         {
             List<QuestionTest> result = new List<QuestionTest>();
