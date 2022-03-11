@@ -35,13 +35,31 @@ namespace OTS.DAO
                             Id = reader.GetInt32(""),
                         };
                     }
+                    Question question = new Question()
+                    {
+                        Id = reader.GetInt32(""),
+                        Content = reader.GetString(""),
+                        Level = new Level()
+                        {
+                            Name = reader.GetString(""),
+                        },
+                        Type = new Type()
+                        {
+                            Name = reader.GetString(""),
+                        }
+
+                    };
+                    result.Add(new QuestionTest()
+                    {
+                        Question = question,
+                        Test = test,
+                    });
                 }
 
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
             finally { connection.Close(); }
-            
-            
+                   
             return result;
         }
 
