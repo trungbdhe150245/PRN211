@@ -329,6 +329,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(965, 647);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.dgvQuestion);
@@ -346,6 +347,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox1);
+            this.MaximizeBox = false;
             this.Name = "FrmViewTest";
             this.Text = "FrmViewTest";
             this.Load += new System.EventHandler(this.FrmViewTest_Load);
