@@ -34,6 +34,27 @@ namespace OTS.ViewTest
             dtpDuration.Format = DateTimePickerFormat.Time;
             dtpDuration.CustomFormat = "HH:mm:ss";
         }
+        public void LoadQuestionsList()
+        {
+            try
+            {
+                QuestionDBContext questionDBC = new QuestionDBContext();
+                foreach (QuestionTest questionTest in questionDBC.GetQuestionByTests(testID))
+                {
+                    dgvQuestion.Rows.Add(
+                        questionTest.Question.Id,
+                        questionTest.Question.Content,
+                        questionTest.Question.Level.Name,
+                        questionTest.Question.Type.Name,
+                         "Change"
+                        );
+                }
+                //dgvQuestion.DataSource = questionTestDisplays;
+            } catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+            }
+        }
 
         public void LoadTestInformation()
         {
@@ -52,6 +73,8 @@ namespace OTS.ViewTest
                     DateTime dt = new DateTime(2022,12,31);
                     dtpStartTime.Value = dt.Add(test.StartTime);
                     dtpDuration.Value = dt.Add(test.Duration);
+
+                    LoadQuestionsList();
                 }
             }catch(Exception ex) {
                 MessageBox.Show(ex.Message, "Error");

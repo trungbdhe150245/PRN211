@@ -51,6 +51,11 @@
             this.btnCopy = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.dgvQuestion = new System.Windows.Forms.DataGridView();
+            this.QuestionID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Content = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TypeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LevelName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Action = new System.Windows.Forms.DataGridViewButtonColumn();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuestion)).BeginInit();
@@ -261,13 +266,54 @@
             // 
             // dgvQuestion
             // 
+            this.dgvQuestion.AllowUserToAddRows = false;
+            this.dgvQuestion.AllowUserToDeleteRows = false;
             this.dgvQuestion.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvQuestion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvQuestion.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.QuestionID,
+            this.Content,
+            this.TypeName,
+            this.LevelName,
+            this.Action});
             this.dgvQuestion.Location = new System.Drawing.Point(36, 356);
             this.dgvQuestion.Name = "dgvQuestion";
+            this.dgvQuestion.ReadOnly = true;
             this.dgvQuestion.RowTemplate.Height = 25;
             this.dgvQuestion.Size = new System.Drawing.Size(893, 265);
             this.dgvQuestion.TabIndex = 20;
+            // 
+            // QuestionID
+            // 
+            this.QuestionID.HeaderText = "ID";
+            this.QuestionID.Name = "QuestionID";
+            this.QuestionID.ReadOnly = true;
+            // 
+            // Content
+            // 
+            this.Content.HeaderText = "Content";
+            this.Content.Name = "Content";
+            this.Content.ReadOnly = true;
+            // 
+            // TypeName
+            // 
+            this.TypeName.HeaderText = "Type";
+            this.TypeName.Name = "TypeName";
+            this.TypeName.ReadOnly = true;
+            // 
+            // LevelName
+            // 
+            this.LevelName.HeaderText = "Level";
+            this.LevelName.Name = "LevelName";
+            this.LevelName.ReadOnly = true;
+            // 
+            // Action
+            // 
+            this.Action.HeaderText = "Acction";
+            this.Action.Name = "Action";
+            this.Action.ReadOnly = true;
+            this.Action.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Action.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // label8
             // 
@@ -337,5 +383,10 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn QuestionID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Content;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TypeName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LevelName;
+        private System.Windows.Forms.DataGridViewButtonColumn Action;
     }
 }

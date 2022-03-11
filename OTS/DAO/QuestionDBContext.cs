@@ -17,12 +17,17 @@ namespace OTS.DAO
         public List<QuestionTest> GetQuestionByTests(int testID)
         {
             List<QuestionTest> result = new List<QuestionTest>();
-            string sql_select_question = @"";
+            string sql_select_question = @"SELECT [QuestionId], Question.Content, Level.Name AS LevelName
+                                        , Type.Name AS TypeName
+                                  FROM [Question_Test] INNER JOIN Question ON Question.Id=Question_Test.QuestionId
+	                                INNER JOIN Type ON Question.Type=Type.Id
+	                                INNER JOIN LEVEL ON Question.Level=Level.Id
+	                                WHERE TestId=@testId";
             try
             {
                 connection = new SqlConnection(GetConnectionString());
                 command = new SqlCommand(sql_select_question, connection);
-
+                command.Parameters.AddWithValue("testId", testID);
                 connection.Open();
                 reader = command.ExecuteReader();
                 Test test = null;
@@ -32,20 +37,20 @@ namespace OTS.DAO
                     {
                         test = new Test()
                         {
-                            Id = reader.GetInt32(""),
+                            Id = testID,
                         };
                     }
                     Question question = new Question()
                     {
-                        Id = reader.GetInt32(""),
-                        Content = reader.GetString(""),
+                        Id = reader.GetInt32("QuestionId"),
+                        Content = reader.GetString("Content"),
                         Level = new Level()
                         {
-                            Name = reader.GetString(""),
+                            Name = reader.GetString("LevelName"),
                         },
                         Type = new Type()
                         {
-                            Name = reader.GetString(""),
+                            Name = reader.GetString("TypeName"),
                         }
 
                     };
