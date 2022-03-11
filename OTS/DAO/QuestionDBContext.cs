@@ -14,6 +14,26 @@ namespace OTS.DAO
     {
         public string Content { get; private set; }
 
+        public List<QuestionTest> GetQuestionByTests(int testID)
+        {
+            List<QuestionTest> result = new List<QuestionTest>();
+            string sql_select_question = @"";
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(sql_select_question, connection);
+
+                connection.Open();
+                reader = command.ExecuteReader();
+
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+            finally { connection.Close(); }
+            
+            
+            return result;
+        }
+
         public List<Question> getQuesCorrect()
         {
             List<Question> ListQues = new List<Question>();
