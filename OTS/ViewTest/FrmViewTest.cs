@@ -19,7 +19,7 @@ namespace OTS.ViewTest
         {
             this.testID = testID;
             InitializeComponent();
-           
+
             InitCustomStyle();
         }
 
@@ -44,13 +44,14 @@ namespace OTS.ViewTest
                     dgvQuestion.Rows.Add(
                         questionTest.Question.Id,
                         questionTest.Question.Content,
-                        questionTest.Question.Level.Name,
                         questionTest.Question.Type.Name,
+                        questionTest.Question.Level.Name,
                          "Change"
                         );
                 }
                 //dgvQuestion.DataSource = questionTestDisplays;
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error");
             }
@@ -62,7 +63,7 @@ namespace OTS.ViewTest
             {
                 TestDBContext testDBC = new TestDBContext();
                 Test test = testDBC.GetTest(testID);
-                if(test != null)
+                if (test != null)
                 {
                     txtTestID.Text = test.Id.ToString();
                     txtTestCode.Text = test.Code;
@@ -70,13 +71,15 @@ namespace OTS.ViewTest
                         + " - " + test.Subject.SubjectName;
                     dtpCreateDate.Value = test.CreateDate;
                     dtpStartDate.Value = test.TestDate;
-                    DateTime dt = new DateTime(2022,12,31);
+                    DateTime dt = new DateTime(2022, 12, 31);
                     dtpStartTime.Value = dt.Add(test.StartTime);
                     dtpDuration.Value = dt.Add(test.Duration);
 
                     LoadQuestionsList();
                 }
-            }catch(Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 MessageBox.Show(ex.Message, "Error");
             }
         }
@@ -97,6 +100,50 @@ namespace OTS.ViewTest
         }
 
         private void dgvQuestion_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridView dataGridViewQuestion = (DataGridView)sender;
+            if (e.ColumnIndex == 4 && e.RowIndex != -1)
+            {
+                try
+                {
+                    int selectedQuestionId = Int32.Parse(
+                        dataGridViewQuestion.Rows[e.RowIndex].Cells["QuestionID"].Value.ToString());
+
+                    QuestionDBContext questionDBC = new QuestionDBContext();
+                    Question selectedQuestion = questionDBC.GetQuestion(selectedQuestionId);
+                    if (selectedQuestion != null)
+                    {
+
+                        Question newQuestion = null;
+                        bool isFindAnother = false;
+                        //do
+                        //{
+                        newQuestion = questionDBC.GetRandomQuestionWithLevel(selectedQuestion.Level.Id, selectedQuestion.Subject.SubjectCode);
+                        foreach (DataGridViewRow row in dgvQuestion.Rows)
+                            {
+                                if (
+                                Int32.Parse(row.Cells["QuestionID"].Value.ToString()) == newQuestion.Id)
+                                {
+                                    isFindAnother = true;
+                                };
+                            }
+                        //} while (isFindAnother);
+                        if(newQuestion != null)
+                        {
+
+                            dataGridViewQuestion.Rows[e.RowIndex].SetValues(newQuestion.Id, newQuestion.Content, newQuestion.Type.Name, newQuestion.Level.Name, "Change");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Question not found", "Error");
+                    }
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message, "Error"); }
+            }
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
         {
 
         }

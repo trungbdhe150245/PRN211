@@ -14,14 +14,23 @@ namespace OTS.DAO
     {
         public string Content { get; private set; }
 
-        public Question GetQuestionSameLevel(Level level, Subject subject)
+        public Question GetQuestion(int questionId)
         {
-            string select_random_question = @"";
+            string sql_select_question = @"SELECT  Question.[Id]
+                                      ,[Content]
+                                      ,[Image]
+                                      ,[Level], Level.Name AS LevelName
+                                      ,Question.SubjectCode, Subject.SubjectName
+                                      ,[Type], Type.Name AS TypeName
+                                  FROM [Question] JOIN Type ON Question.Type=Type.Id
+		                                JOIN Level ON Question.Level=Level.Id
+		                                JOIN Subject ON Question.SubjectCode=Subject.SubjectCode
+                                  WHERE Question.Id = @questionId";
             try
             {
                 connection = new SqlConnection(GetConnectionString());
-                command = new SqlCommand(select_random_question, connection);
-
+                command = new SqlCommand(sql_select_question, connection);
+                command.Parameters.AddWithValue("@questionId", questionId);
 
                 connection.Open();
                 reader = command.ExecuteReader();
@@ -29,20 +38,75 @@ namespace OTS.DAO
                 {
                     return new Question()
                     {
-                        Id = reader.GetInt32(""),
-                        Content = reader.GetString(""),
-                        Level = new Level() {
-                            Id = reader.GetInt16(""),
-                            Name = reader.GetString(""),
+                        Id = questionId,
+                        Content = reader.GetString("Content"),
+                        Level = new Level()
+                        {
+                            Id = reader.GetInt16("Level"),
+                            Name = reader.GetString("LevelName"),
                         },
-                        Type = new Type() {
-                            Name = reader.GetString(""),
-                            Id = reader.GetInt16(""),
+                        Type = new Type()
+                        {
+                            Name = reader.GetString("TypeName"),
+                            Id = reader.GetInt16("Type"),
                         },
                         Subject = new Subject()
                         {
-                            SubjectCode = reader.GetString(""),
-                            SubjectName = reader.GetString("")
+                            SubjectCode = reader.GetString("SubjectCode"),
+                            SubjectName = reader.GetString("SubjectName")
+                        }
+                    };
+                }
+
+            } catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            } finally
+            {
+                connection.Close();
+            }
+            return null;
+        }
+
+        public Question GetRandomQuestionWithLevel(int levelId, string subjectCode)
+        {
+            string select_random_question = @"SELECT TOP 1 Question.[Id]
+                                              ,[Content]
+                                              ,[Image]
+                                              ,[Level], Level.Name AS LevelName
+                                              ,Question.SubjectCode, Subject.SubjectName
+                                              ,[Type], Type.Name AS TypeName
+                                          FROM [Question] JOIN Type ON Question.Type=Type.Id
+		                                        JOIN Level ON Question.Level=Level.Id
+		                                        JOIN Subject ON Question.SubjectCode=Subject.SubjectCode
+                                          WHERE Question.Level=@Level AND Question.SubjectCode=@Subject
+                                          ORDER BY NEWID()";
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(select_random_question, connection);
+                command.Parameters.AddWithValue("@Level", levelId);
+                command.Parameters.AddWithValue("@Subject", subjectCode);
+                connection.Open();
+                reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    return new Question()
+                    {
+                        Id = reader.GetInt32("Id"),
+                        Content = reader.GetString("Content"),
+                        Level = new Level() {
+                            Id = reader.GetInt16("Level"),
+                            Name = reader.GetString("LevelName"),
+                        },
+                        Type = new Type() {
+                            Name = reader.GetString("TypeName"),
+                            Id = reader.GetInt16("Type"),
+                        },
+                        Subject = new Subject()
+                        {
+                            SubjectCode = reader.GetString("SubjectCode"),
+                            SubjectName = reader.GetString("SubjectName")
                         }
                     };
                 }
