@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using OTS.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -10,56 +11,44 @@ namespace OTS.DAO
 {
     public class QuestionDBContext : DBContext 
     {
-        public string Content { get; private set; }
+        //public string Content { get; private set; }
 
-        public List<Question> getQuesCorrect()
+        public List<Question> getQues()
         {
             List<Question> ListQues = new List<Question>();
-            List<Type> listType = new List<Type>();
-            string getallQuestion = "SELECT A.Id,A.Content,D.[Name],A.SubjectCode,B.[Name],C.Content,isCorrect FROM Question AS A JOIN[Type] AS B ON A.[Type] = B.IdJOIN Answer AS C on C.QuestionId = A.Id JOIN[Level] AS D ON D.Id = A.[Level]WHERE C.isCorrect = 1";
+            List<Models.Type> listType = new List<Models.Type>();
+            string getallQuestion = "SELECT Question.Id,Question.Content,Level.[Name],Question.SubjectCode,Type.[Name],Question.Content,Level.Id,Question.[Type] FROM Question JOIN [Type] ON Question.[Type] = Type.Id  JOIN [Level] ON Level.Id = Question.[Level]";
+            TypeDBContext tDB = new TypeDBContext();
+            SubjectDBContext sDB = new SubjectDBContext();
+            LevelDBContext lDB = new LevelDBContext();
+            AnswerDBContext aDB = new AnswerDBContext();
             try
             {
                 connection = new SqlConnection(GetConnectionString());
                 command = new SqlCommand(getallQuestion, connection);
-
                 connection.Open();
-
                 reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    int typeId = reader.GetInt16("B.Id");
-                    Type t = new Type()
-                    {
-                        Id = reader.GetInt16("B.Id"),
-                        Name = reader.GetString("B.Name")
-                    };
-                    Subject s = new Subject()
-                    {
-                        SubjectCode = reader.GetString("S.SubjectCode"),
-                        SubjectName = reader.GetString("S.SubjectName")
-                    };
-                    Level l = new Level()
-                    {
-                        Id = reader.GetInt16("D.Id"),
-                        Name = reader.GetString("D.[Name]")
-                    };
-                    Answer a = new Answer()
-                    {
-                        Id = reader.GetInt32("")
-                    };
-                    if(!listType.Contains(t))
-                    {
-                        listType.Add(t);
-                    }
+
+                    Models.Type t = tDB.GetTypeById(reader.GetInt16(7));
+                    Subject s = sDB.getSubbyId(reader.GetString(3));
+                    Level l = lDB.GetLevelById(reader.GetInt16(6));
+                    List<Answer> answers = aDB.getAnswerByQues(reader.GetInt32(0));
                     Question ques = new Question()
                     {
-                        Content = reader.GetString("Content"),
+                        Content = reader.GetString(1),
                         Type = t,
                         Subject = s,
                         Level = l,
-
+                        Answers = answers,
+                        Id = reader.GetInt32(0)
                     };
-
+                    foreach (var ans in answers)
+                    {
+                        ans.Question = ques;
+                    }
+                    ListQues.Add(ques);
                 }
             }
             catch (Exception ex)

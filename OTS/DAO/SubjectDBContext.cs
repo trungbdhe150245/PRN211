@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using OTS.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -34,26 +35,35 @@ namespace OTS.DAO
             {
                 connection.Close();
             }
+
             return rowAffects;
         }
 
 
-        public List<Models.Subject> subjects()
+        public List<Subject> subjects()
         {
-            List<Models.Subject> subjects = new List<Models.Subject>();
-            connection = new SqlConnection(GetConnectionString());
-            command = new SqlCommand();
+            List<Subject> subjects = new List<Subject>();
+            string getSub = "SELECT [SubjectCode], [SubjectName] FROM[OTS].[dbo].[Subject]";
+            
             try
             {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(getSub, connection);
                 connection.Open();
-                reader = command.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
-                if (reader.HasRows == true)
+                reader = command.ExecuteReader();
+                if (reader.HasRows)
                 {
                     while (reader.Read())
                     {
-                        Models.Subject subject = new Models.Subject();
-                        subject.SubjectCode = reader.GetString("SubjectCode");
-                        subject.SubjectName = reader.GetString("ClassName");
+
+                        Subject subject = new Subject()
+                        {
+                            SubjectCode = reader.GetString("SubjectCode"),
+                            SubjectName = reader.GetString("SubjectName")
+                        };
+                        //subject.SubjectCode = reader.GetString("SubjectCode");
+                        //subject.SubjectName = reader.GetString("SubjectName");
+                        subjects.Add(subject);
                     }
                 }
             }
@@ -66,6 +76,20 @@ namespace OTS.DAO
                 connection.Close();
             }
             return subjects;
+        }
+
+        public Subject getSubbyId(string code)
+        {
+            List<Subject> subs = subjects();
+            foreach (var s in subs)
+            {
+                if (s.SubjectCode.Equals(code))
+                {
+                    return s;
+                }
+            }
+
+            return null;
         }
 
     }
