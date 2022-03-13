@@ -20,7 +20,7 @@ namespace OTS
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new FrmManageClass());
-            Application.Run(new FrmViewTest(1));
+            Application.Run(new FrmViewTest(3));
         }
 	}
 }
