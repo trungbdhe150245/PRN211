@@ -59,6 +59,21 @@ namespace OTS.ViewTest
             }
         }
 
+        public void LoadClassList()
+        {
+            try
+            {
+                ClassDBContext classDBC = new ClassDBContext();
+                foreach(Class c in classDBC.GetClassByTest(testID)){
+                    lbClasses.Items.Add(c.ClassCode + " - " + c.ClassName);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+            }
+        }
+
         public void LoadTestInformation()
         {
             try
@@ -78,6 +93,7 @@ namespace OTS.ViewTest
                     dtpDuration.Value = dt.Add(test.Duration);
                     cbReview.Checked = test.IsReview;
                     LoadQuestionsList();
+                    LoadClassList();
                 }
             }
             catch (Exception ex)
@@ -150,43 +166,80 @@ namespace OTS.ViewTest
 
         }
 
+        private Test GetTestInfo()
+        {
+            Test test = new Test()
+            {
+                Id = Int32.Parse(txtTestID.Text),
+                Code = txtTestCode.Text,
+                Duration = dtpDuration.Value.TimeOfDay,
+                StartTime = dtpStartTime.Value.TimeOfDay,
+                TestDate = dtpStartDate.Value.Date,
+                IsReview = cbReview.Checked,
+                Subject = new Subject()
+                {
+                    SubjectCode = txtSubject.Text.Split("-")[0].Trim(),
+                    SubjectName = txtSubject.Text.Split("-")[1].Trim(),
+                }
+            };
+            return test;
+        }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (txtTestCode.Text.Length != 0)
             {
-                Test test = new Test()
+                Test test = GetTestInfo();
+                try
                 {
-                    Id = Int32.Parse(txtTestID.Text),
-                    Code = txtTestCode.Text,
-                    Duration = dtpDuration.Value.TimeOfDay,
-                    StartTime = dtpStartTime.Value.TimeOfDay,
-                    TestDate = dtpStartDate.Value.Date,
-                    IsReview = cbReview.Checked,
-                    Subject = new Subject()
+                    TestDBContext testDBC = new TestDBContext();
+                    QuestionDBContext questionDBC = new QuestionDBContext();
+                    List<int> questionIds = new List<int>();
+                    foreach (DataGridViewRow row in dgvQuestion.Rows)
                     {
-                        SubjectCode=txtSubject.Text.Split("-")[0].Trim(),
-                        SubjectName=txtSubject.Text.Split("-")[1].Trim(),
+                        questionIds.Add(
+                        Int32.Parse(row.Cells["QuestionId"].Value.ToString())
+                        );
                     }
-                };
-                TestDBContext testDBC = new TestDBContext();
-                QuestionDBContext questionDBC = new QuestionDBContext();
-                List<int> questionIds = new List<int>();
-                foreach (DataGridViewRow row in dgvQuestion.Rows)
-                {
-                    questionIds.Add(
-                    Int32.Parse(row.Cells["QuestionId"].Value.ToString())
-                    );
-                }
 
-                if (testDBC.UpdateTest(test) > 0 && questionDBC.UpdateTestQuestion(test.Id, questionIds) > 0)
+                    if (testDBC.UpdateTest(test) > 0 && questionDBC.UpdateTestQuestion(test.Id, questionIds) > 0)
+                    {
+                        MessageBox.Show("Update succesful");
+                    }
+                }
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Update succesful");
+                    MessageBox.Show(ex.Message, "Error");
                 }
             }
             else
             {
                 MessageBox.Show("Test Code must not be empty!", "Waring");
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            int testId = Int32.Parse(txtTestID.Text);
+
+            try
+            {
+                SubmissionDBContext submissionDBC = new SubmissionDBContext();
+                EssayDBContext essayDBC = new EssayDBContext();
+                if (!(submissionDBC.CheckIsTested(testId)&&essayDBC.CheckIsTested(testId)))
+                {
+                    TestDBContext testDBC = new TestDBContext();
+                    if (testDBC.DeleteTest(testId)>0) {
+                        MessageBox.Show("Delete Sucessful");
+                    };
+                }else
+                {
+                    MessageBox.Show("This test had been taken\nCan not delete", "Error");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
             }
         }
     }

@@ -11,6 +11,47 @@ namespace OTS.DAO
 {
     public class TestDBContext : DBContext
     {
+        public int DeleteTest(int testId)
+        {
+
+            int rowAffects = 0;
+            string sql_delete = @"DELETE FROM [Test]
+                        WHERE Id=@testId";
+            try
+            {
+                QuestionDBContext questionDBC = new QuestionDBContext();
+                questionDBC.DeleteQuestionTest(testId);
+                DeleteTestClass(testId);
+
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(sql_delete, connection);
+                command.Parameters.AddWithValue("@testId", testId);
+                connection.Open();
+                rowAffects = command.ExecuteNonQuery();
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+            finally { connection.Close(); }
+
+            return rowAffects;
+        }
+        public int DeleteTestClass(int testId)
+        {
+            int rowAffects = 0;
+            string sql_delete = @"DELETE FROM [Test_Class]
+                        WHERE TestId=@testId";
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(sql_delete, connection);
+                command.Parameters.AddWithValue("@testId", testId);
+                connection.Open();
+                rowAffects = command.ExecuteNonQuery();
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+            finally { connection.Close(); }
+
+            return rowAffects;
+        }
         public int UpdateTest(Test test)
         {
             int rowAffects = 0;

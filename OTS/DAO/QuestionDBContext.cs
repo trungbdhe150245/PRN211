@@ -14,6 +14,27 @@ namespace OTS.DAO
     {
         public string Content { get; private set; }
 
+        public int DeleteQuestionTest(int testId)
+        {
+            int rowAffects = 0;
+            string sql_delete_oldQuestion = @"DELETE FROM [Question_Test]
+                                              WHERE TestId=@testId";
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                connection.Open();
+                command = new SqlCommand(sql_delete_oldQuestion, connection);
+                command.Parameters.AddWithValue("@testId", testId);
+                rowAffects = command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally { connection.Close(); }
+            return rowAffects;
+        }
+
         public int UpdateTestQuestion(int testId, List<int> questionIds)
         {
             int rowAffects = 0;
