@@ -46,9 +46,11 @@ namespace OTS.ViewTest
                         questionTest.Question.Content,
                         questionTest.Question.Type.Name,
                         questionTest.Question.Level.Name,
+                        "View",
                          "Change"
                         );
                 }
+                txtTotalQuestion.Text = dgvQuestion.Rows.Count.ToString();
                 //dgvQuestion.DataSource = questionTestDisplays;
             }
             catch (Exception ex)
@@ -74,7 +76,7 @@ namespace OTS.ViewTest
                     DateTime dt = new DateTime(2022, 12, 31);
                     dtpStartTime.Value = dt.Add(test.StartTime);
                     dtpDuration.Value = dt.Add(test.Duration);
-
+                    cbReview.Checked = test.IsReview;
                     LoadQuestionsList();
                 }
             }
@@ -102,7 +104,7 @@ namespace OTS.ViewTest
         private void dgvQuestion_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridView dataGridViewQuestion = (DataGridView)sender;
-            if (e.ColumnIndex == 4 && e.RowIndex != -1)
+            if (e.ColumnIndex == 5 && e.RowIndex != -1)
             {
                 try
                 {
@@ -120,18 +122,18 @@ namespace OTS.ViewTest
                         //{
                         newQuestion = questionDBC.GetRandomQuestionWithLevel(selectedQuestion.Level.Id, selectedQuestion.Subject.SubjectCode);
                         foreach (DataGridViewRow row in dgvQuestion.Rows)
+                        {
+                            if (
+                            Int32.Parse(row.Cells["QuestionID"].Value.ToString()) == newQuestion.Id)
                             {
-                                if (
-                                Int32.Parse(row.Cells["QuestionID"].Value.ToString()) == newQuestion.Id)
-                                {
-                                    isFindAnother = true;
-                                };
-                            }
+                                isFindAnother = true;
+                            };
+                        }
                         //} while (isFindAnother);
-                        if(newQuestion != null)
+                        if (newQuestion != null)
                         {
 
-                            dataGridViewQuestion.Rows[e.RowIndex].SetValues(newQuestion.Id, newQuestion.Content, newQuestion.Type.Name, newQuestion.Level.Name, "Change");
+                            dataGridViewQuestion.Rows[e.RowIndex].SetValues(newQuestion.Id, newQuestion.Content, newQuestion.Type.Name, newQuestion.Level.Name, "View", "Change");
                         }
                     }
                     else
@@ -146,6 +148,46 @@ namespace OTS.ViewTest
         private void groupBox1_Enter(object sender, EventArgs e)
         {
 
+        }
+
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (txtTestCode.Text.Length != 0)
+            {
+                Test test = new Test()
+                {
+                    Id = Int32.Parse(txtTestID.Text),
+                    Code = txtTestCode.Text,
+                    Duration = dtpDuration.Value.TimeOfDay,
+                    StartTime = dtpStartTime.Value.TimeOfDay,
+                    TestDate = dtpStartDate.Value.Date,
+                    IsReview = cbReview.Checked,
+                    Subject = new Subject()
+                    {
+                        SubjectCode=txtSubject.Text.Split("-")[0].Trim(),
+                        SubjectName=txtSubject.Text.Split("-")[1].Trim(),
+                    }
+                };
+                TestDBContext testDBC = new TestDBContext();
+                QuestionDBContext questionDBC = new QuestionDBContext();
+                List<int> questionIds = new List<int>();
+                foreach (DataGridViewRow row in dgvQuestion.Rows)
+                {
+                    questionIds.Add(
+                    Int32.Parse(row.Cells["QuestionId"].Value.ToString())
+                    );
+                }
+
+                if (testDBC.UpdateTest(test) > 0 && questionDBC.UpdateTestQuestion(test.Id, questionIds) > 0)
+                {
+                    MessageBox.Show("Update succesful");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Test Code must not be empty!", "Waring");
+            }
         }
     }
 }

@@ -14,6 +14,39 @@ namespace OTS.DAO
     {
         public string Content { get; private set; }
 
+        public int UpdateTestQuestion(int testId, List<int> questionIds)
+        {
+            int rowAffects = 0;
+            //Delete Old question
+            string sql_delete_oldQuestion = @"DELETE FROM [Question_Test]
+                                              WHERE TestId=@testId";
+            string sql_insert_newQuestion = @"INSERT INTO [Question_Test]
+                                               ([QuestionId]
+                                               ,[TestId])
+                                         VALUES
+                                               (@questionId
+                                               ,@testId)";
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                connection.Open();
+                command = new SqlCommand(sql_delete_oldQuestion, connection);
+                command.Parameters.AddWithValue("@testId", testId);
+                command.ExecuteNonQuery();
+                foreach (int questionId in questionIds)
+                {
+                    command = new SqlCommand(sql_insert_newQuestion, connection);
+                    command.Parameters.AddWithValue("@questionId", questionId);
+                    command.Parameters.AddWithValue("@testId", testId);
+                    rowAffects += command.ExecuteNonQuery();
+                }
+                
+            } catch (Exception ex) {
+                throw new Exception(ex.Message); }
+            finally { connection.Close(); }
+            return rowAffects;
+        }
+
         public Question GetQuestion(int questionId)
         {
             string sql_select_question = @"SELECT  Question.[Id]

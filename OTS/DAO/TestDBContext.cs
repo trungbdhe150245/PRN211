@@ -11,6 +11,33 @@ namespace OTS.DAO
 {
     public class TestDBContext : DBContext
     {
+        public int UpdateTest(Test test)
+        {
+            int rowAffects = 0;
+            string sql_update_test = @"UPDATE [dbo].[Test]
+                               SET [Code] = @Code
+                                  ,[StartTime] = @startTime
+                                  ,[TestDate] = @testDate
+                                  ,[Duration] = @duration
+                                  ,[Review] = @review
+                             WHERE Test.Id=@testId";
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(sql_update_test, connection);
+                command.Parameters.AddWithValue("@testId", test.Id);
+                command.Parameters.AddWithValue("@Code", test.Code);
+                command.Parameters.AddWithValue("@startTime", test.StartTime);
+                command.Parameters.AddWithValue("@testDate", test.TestDate);
+                command.Parameters.AddWithValue("@duration", test.Duration);
+                command.Parameters.AddWithValue("@review", test.IsReview);
+                connection.Open();
+                rowAffects = command.ExecuteNonQuery();
+            } catch (Exception ex) { throw new Exception(ex.Message); }
+            finally {connection.Close();}
+
+            return rowAffects;
+        }
         public Test GetTest(int testId)
         {
             string sql_select_test = @"SELECT [Id]
