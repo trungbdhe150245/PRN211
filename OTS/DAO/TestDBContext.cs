@@ -11,6 +11,34 @@ namespace OTS.DAO
 {
     public class TestDBContext : DBContext
     {
+        public int UpdateClassesTest(int testId, List<string> classCodes)
+        {
+            int rowAffects = 0;
+            try
+            {
+                DeleteTestClass(testId);
+                string sql_insert_class = @"INSERT INTO [Test_Class]
+                                           ([TestId]
+                                           ,[ClassCode])
+                                     VALUES
+                                           (@testId
+                                           ,@classCode)";
+                connection = new SqlConnection(GetConnectionString());
+                connection.Open();
+                foreach (string classCode in classCodes)
+                {
+                    command = new SqlCommand(sql_insert_class, connection);
+                    command.Parameters.AddWithValue("@testId", testId);
+                    command.Parameters.AddWithValue("classCode", classCode);
+                    rowAffects += command.ExecuteNonQuery();
+                }
+                
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+            finally { connection.Close(); }
+
+            return rowAffects;
+        }
         public int DeleteTest(int testId)
         {
 

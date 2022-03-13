@@ -64,7 +64,8 @@ namespace OTS.ViewTest
             try
             {
                 ClassDBContext classDBC = new ClassDBContext();
-                foreach(Class c in classDBC.GetClassByTest(testID)){
+                foreach (Class c in classDBC.GetClassByTest(testID))
+                {
                     lbClasses.Items.Add(c.ClassCode + " - " + c.ClassName);
                 }
             }
@@ -114,7 +115,8 @@ namespace OTS.ViewTest
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            if (MessageBox.Show("Do you want to cancel!\nAll change will be canceled", "Warning", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                this.Close();
         }
 
         private void dgvQuestion_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -201,10 +203,22 @@ namespace OTS.ViewTest
                         Int32.Parse(row.Cells["QuestionId"].Value.ToString())
                         );
                     }
+                    List<string> classCodes = new List<string>();
+                    for (int i = 0; i < lbClasses.Items.Count; i++)
+                    {
+                        string classText = lbClasses.Items[i].ToString();
+                        classCodes.Add(classText.Split(" - ")[0].Trim());
+                    }
 
-                    if (testDBC.UpdateTest(test) > 0 && questionDBC.UpdateTestQuestion(test.Id, questionIds) > 0)
+                    if (testDBC.UpdateTest(test) > 0
+                        && questionDBC.UpdateTestQuestion(test.Id, questionIds) > 0
+                        && testDBC.UpdateClassesTest(testID, classCodes) > 0)
                     {
                         MessageBox.Show("Update succesful");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Update Fail");
                     }
                 }
                 catch (Exception ex)
@@ -220,27 +234,77 @@ namespace OTS.ViewTest
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            int testId = Int32.Parse(txtTestID.Text);
-
-            try
+            if (MessageBox.Show("Do you want to Delete!\nThis action can not revert", "Warning", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
-                SubmissionDBContext submissionDBC = new SubmissionDBContext();
-                EssayDBContext essayDBC = new EssayDBContext();
-                if (!(submissionDBC.CheckIsTested(testId)&&essayDBC.CheckIsTested(testId)))
+
+                int testId = Int32.Parse(txtTestID.Text);
+
+                try
                 {
-                    TestDBContext testDBC = new TestDBContext();
-                    if (testDBC.DeleteTest(testId)>0) {
-                        MessageBox.Show("Delete Sucessful");
-                    };
-                }else
+                    SubmissionDBContext submissionDBC = new SubmissionDBContext();
+                    EssayDBContext essayDBC = new EssayDBContext();
+                    if (!(submissionDBC.CheckIsTested(testId) && essayDBC.CheckIsTested(testId)))
+                    {
+                        TestDBContext testDBC = new TestDBContext();
+                        if (testDBC.DeleteTest(testId) > 0)
+                        {
+                            MessageBox.Show("Delete Sucessful");
+                        };
+                    }
+                    else
+                    {
+                        MessageBox.Show("This test had been taken\nCan not delete", "Error");
+                    }
+                }
+                catch (Exception ex)
                 {
-                    MessageBox.Show("This test had been taken\nCan not delete", "Error");
+                    MessageBox.Show(ex.Message, "Error");
                 }
             }
-            catch (Exception ex)
+        }
+
+        private void txtAddClassCode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
             {
-                MessageBox.Show(ex.Message, "Error");
+                string inputClassCode = txtAddClassCode.Text;
+                if (inputClassCode.Length > 0)
+                {
+                    for (int i = 0; i < lbClasses.Items.Count; i++)
+                    {
+                        string classTextList = lbClasses.Items[i].ToString();
+                        if (classTextList.Split("-")[0].Trim().Equals(inputClassCode))
+                        {
+                            MessageBox.Show($"Class {inputClassCode} already exists", "Notice");
+                            return;
+                        }
+
+                    }
+                    try
+                    {
+                        ClassDBContext classDBC = new ClassDBContext();
+                        Class newClass = classDBC.GetClass(inputClassCode);
+                        if (newClass != null)
+                        {
+                            lbClasses.Items.Add(newClass);
+                            txtAddClassCode.Text = "";
+                        }
+                        else
+                        {
+                            MessageBox.Show("Class does not exist!", "Warning");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
             }
+        }
+
+        private void btnRemoveClass_Click(object sender, EventArgs e)
+        {
+            lbClasses.Items.Remove(lbClasses.SelectedItem);
         }
     }
 }

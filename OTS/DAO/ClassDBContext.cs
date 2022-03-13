@@ -12,6 +12,36 @@ namespace OTS.DAO
 {
     internal class ClassDBContext : DBContext
     {
+        public Class GetClass(string classCode)
+        {
+            string sql_select_class = @"SELECT [ClassCode]
+                                      ,[ClassName]
+                                  FROM [Class]
+                                  WHERE ClassCode=@classCode";
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(sql_select_class, connection);
+                command.Parameters.AddWithValue("classCode", classCode);
+                connection.Open();
+                reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    return new Class()
+                    {
+                        ClassCode = reader.GetString("ClassCode"),
+                        ClassName = reader.GetString("ClassName"),
+                    };
+                }
+            }catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            } finally
+            {
+                connection.Close();
+            }
+            return null;
+        }
         public List<Class> GetClassByTest(int testId)
         {
             List<Class> classes = new List<Class>();

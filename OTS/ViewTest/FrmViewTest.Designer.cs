@@ -46,10 +46,11 @@
             this.label9 = new System.Windows.Forms.Label();
             this.txtTotalQuestion = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lbClasses = new System.Windows.Forms.ListBox();
             this.btnRemoveClass = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtAddClassCode = new System.Windows.Forms.TextBox();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnCopy = new System.Windows.Forms.Button();
@@ -62,7 +63,6 @@
             this.View = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Action = new System.Windows.Forms.DataGridViewButtonColumn();
             this.label8 = new System.Windows.Forms.Label();
-            this.lbClasses = new System.Windows.Forms.ListBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuestion)).BeginInit();
             this.SuspendLayout();
@@ -233,7 +233,7 @@
             this.groupBox1.Controls.Add(this.btnRemoveClass);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.label10);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.txtAddClassCode);
             this.groupBox1.Controls.Add(this.btnDelete);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.btnCancel);
@@ -254,6 +254,16 @@
             this.groupBox1.TabIndex = 19;
             this.groupBox1.TabStop = false;
             // 
+            // lbClasses
+            // 
+            this.lbClasses.FormattingEnabled = true;
+            this.lbClasses.ItemHeight = 20;
+            this.lbClasses.Location = new System.Drawing.Point(153, 261);
+            this.lbClasses.Name = "lbClasses";
+            this.lbClasses.Size = new System.Drawing.Size(300, 84);
+            this.lbClasses.Sorted = true;
+            this.lbClasses.TabIndex = 28;
+            // 
             // btnRemoveClass
             // 
             this.btnRemoveClass.Location = new System.Drawing.Point(153, 356);
@@ -262,6 +272,7 @@
             this.btnRemoveClass.TabIndex = 27;
             this.btnRemoveClass.Text = "Remove";
             this.btnRemoveClass.UseVisualStyleBackColor = true;
+            this.btnRemoveClass.Click += new System.EventHandler(this.btnRemoveClass_Click);
             // 
             // label11
             // 
@@ -281,12 +292,13 @@
             this.label10.TabIndex = 25;
             this.label10.Text = "Add ClassCode";
             // 
-            // textBox1
+            // txtAddClassCode
             // 
-            this.textBox1.Location = new System.Drawing.Point(284, 228);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(169, 27);
-            this.textBox1.TabIndex = 24;
+            this.txtAddClassCode.Location = new System.Drawing.Point(284, 228);
+            this.txtAddClassCode.Name = "txtAddClassCode";
+            this.txtAddClassCode.Size = new System.Drawing.Size(169, 27);
+            this.txtAddClassCode.TabIndex = 24;
+            this.txtAddClassCode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtAddClassCode_KeyDown);
             // 
             // btnDelete
             // 
@@ -421,15 +433,6 @@
             this.label8.TabIndex = 21;
             this.label8.Text = "Questions";
             // 
-            // lbClasses
-            // 
-            this.lbClasses.FormattingEnabled = true;
-            this.lbClasses.ItemHeight = 20;
-            this.lbClasses.Location = new System.Drawing.Point(153, 261);
-            this.lbClasses.Name = "lbClasses";
-            this.lbClasses.Size = new System.Drawing.Size(300, 84);
-            this.lbClasses.TabIndex = 28;
-            // 
             // FrmViewTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -496,7 +499,7 @@
         private System.Windows.Forms.Button btnRemoveClass;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtAddClassCode;
         private System.Windows.Forms.ListBox lbClasses;
     }
 }
