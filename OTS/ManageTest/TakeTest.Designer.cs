@@ -403,7 +403,7 @@ namespace OTS.ManageTest
             // 
             this.button4.Location = new System.Drawing.Point(12, 748);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(92, 23);
+            this.button4.Size = new System.Drawing.Size(72, 23);
             this.button4.TabIndex = 24;
             this.button4.Text = "button4";
             this.button4.UseVisualStyleBackColor = true;
