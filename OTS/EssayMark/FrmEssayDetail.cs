@@ -36,15 +36,19 @@ namespace OTS.EssayMark
                 txtSolution.Text = essay.Content;
                 dtpSubmitTime.Value = essay.SubmitDate;
                 DateTime dt = new DateTime(2022, 03, 14);
-                dt.Add(essay.Duration);
-                dtpDuration.Value = dt;
+                dtpDuration.Value = dt.Add(essay.Duration);
             }catch (Exception ex) { MessageBox.Show(ex.Message); }
             
         }
 
         private void FrmEssayMark_Load(object sender, EventArgs e)
         {
+            LoadEssaySubmit();
+        }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

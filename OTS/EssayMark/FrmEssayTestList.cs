@@ -1,5 +1,6 @@
 ﻿using OTS.DAO;
 using OTS.Models;
+using OTS.ViewTest;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -79,6 +80,21 @@ namespace OTS.EssayMark
                 FrmEssayDetail frmEssayDetail = new FrmEssayDetail(essayId);
                 frmEssayDetail.Show();
             }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            if(MessageBox.Show("Every changes will be ignored!.\nDo you want to Cancel?"
+                , "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                this.Close();
+            }
+        }
+
+        private void btnTestDetail_Click(object sender, EventArgs e)
+        {
+            FrmViewTest frmViewTest = new FrmViewTest(testId);
+            frmViewTest.Show();
         }
 
         private void FrmEssayTestList_Load(object sender, EventArgs e)
