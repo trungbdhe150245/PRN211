@@ -13,18 +13,6 @@
     <Compile Update="ManageClass\FrmManageClass.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="ManageSubject\DeleteSubject.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="ManageSubject\InsertSubject.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="ManageSubject\ManagerSubject.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="ManageSubject\UpdateSubject.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="ViewTest\FrmViewTest.cs">
       <SubType>Form</SubType>
     </Compile>

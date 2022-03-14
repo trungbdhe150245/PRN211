@@ -98,3 +98,4 @@ C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS
 C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\ref\OTS.dll
 C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.pdb
 C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.genruntimeconfig.cache
+C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.ManageQuestion.ListQuestionBank.resources

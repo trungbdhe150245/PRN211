@@ -29,8 +29,6 @@ namespace OTS.ManageSubject
         private void UpdateSubject_Load(object sender, EventArgs e)
         {
 
-
-
             try
             {
                 LoadSubject();
@@ -72,7 +70,7 @@ namespace OTS.ManageSubject
                 {
                     option = "FindBySubjectCode";
 
-                    UpdateSubject_Load(option, oldsubjectCode, oldsubjectName, gdvUpdateSubject, sender, e);
+                    //UpdateSubject_Load(option, oldsubjectCode, oldsubjectName, gdvUpdateSubject, sender, e);
                 }
                 else if (Regex.IsMatch(oldsubjectName, rgxsubjectName) && !String.IsNullOrEmpty(oldsubjectName) && String.IsNullOrEmpty(oldsubjectCode))
                 {

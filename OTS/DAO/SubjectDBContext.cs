@@ -108,7 +108,7 @@ namespace OTS.DAO
                     command.Parameters.AddWithValue("@subjectCode", subjectCode);
                     command.Parameters.AddWithValue("@subjectName", subjectName);
                 }
-
+                
                 connection.Open();
                 rowAffects = command.ExecuteNonQuery();
             }

@@ -175,7 +175,7 @@
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.btnCancel);
             this.Name = "UpdateSubject";
-            this.Text = "UpdateSubject";
+            this.Text = " ";
             ((System.ComponentModel.ISupportInitialize)(this.gdvUpdateSubject)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
