@@ -71,17 +71,23 @@ namespace OTS.DAO
         {
             int rowAffects = 0;
             string sql_view_subject = "";
-            if (option=="FindBySubjectCode")
+            if (option.Equals("FindBySubjectCode"))
             {
                  sql_view_subject = @"Select [SubjectCode]
                                         from Subject
                                         Where SubjectCode=@subjectCode;";
             }
-            else
+            else if(option=="FindBySubjectName")
             {
                  sql_view_subject = @"Select [SubjectName]
                                         from Subject
                                         Where SubjectName=@subjectName;";
+            }
+            else if(option == "FindBySubjectCodeAndName")
+            {
+                sql_view_subject = @"Select [SubjectCode],[SubjectName]
+                                        from Subject
+                                        Where SubjectCode=@subjectCode And SubjectName=@subjectName;";
             }
             
             try
@@ -94,24 +100,14 @@ namespace OTS.DAO
                 {
                    command.Parameters.AddWithValue("@subjectCode", subjectCode);
                 }
-                else
+                else if(option == "FindBySubjectName")
                 {
                    command.Parameters.AddWithValue("@subjectName", subjectName);
-                }
-
-
-                try
+                }else if(option == "FindBySubjectCodeAndName")
                 {
-                    SubjectDBContext subjectDBContext = new SubjectDBContext();
-                    gdvUpdateSubject.DataSource = subjectDBContext.GetConnectionString();
-                    gdvUpdateSubject.AutoGenerateColumns = false;
+                    command.Parameters.AddWithValue("@subjectCode", subjectCode);
+                    command.Parameters.AddWithValue("@subjectName", subjectName);
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-
-
 
                 connection.Open();
                 rowAffects = command.ExecuteNonQuery();

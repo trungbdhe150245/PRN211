@@ -143,7 +143,7 @@
             this.gdvUpdateSubject.Location = new System.Drawing.Point(382, 15);
             this.gdvUpdateSubject.Name = "gdvUpdateSubject";
             this.gdvUpdateSubject.RowTemplate.Height = 25;
-            this.gdvUpdateSubject.Size = new System.Drawing.Size(301, 325);
+            this.gdvUpdateSubject.Size = new System.Drawing.Size(273, 325);
             this.gdvUpdateSubject.TabIndex = 28;
             // 
             // btnFind
@@ -160,7 +160,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(695, 352);
+            this.ClientSize = new System.Drawing.Size(667, 352);
             this.Controls.Add(this.btnFind);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtNewSubjectName);
@@ -176,7 +176,6 @@
             this.Controls.Add(this.btnCancel);
             this.Name = "UpdateSubject";
             this.Text = "UpdateSubject";
-            this.Load += new System.EventHandler(this.UpdateSubject_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gdvUpdateSubject)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
