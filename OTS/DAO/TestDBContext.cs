@@ -120,12 +120,12 @@ namespace OTS.DAO
                                       ,[Review]
                                   FROM [Test] INNER JOIN Subject
 			                                ON Subject.SubjectCode=Test.SubjectCode
-                                  WHERE Test.Id = @TestId";
+                                  WHERE Test.Id = @testId";
             try
             {
                 connection = new SqlConnection(GetConnectionString());
                 command = new SqlCommand(sql_select_test, connection);
-                command.Parameters.AddWithValue("@TestId", testId);
+                command.Parameters.AddWithValue("@testId", testId);
                 connection.Open();
                 reader = command.ExecuteReader();
                 if (reader.Read())

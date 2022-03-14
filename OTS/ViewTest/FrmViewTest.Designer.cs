@@ -53,7 +53,6 @@
             this.txtAddClassCode = new System.Windows.Forms.TextBox();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.btnCopy = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.dgvQuestion = new System.Windows.Forms.DataGridView();
             this.QuestionID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -237,7 +236,6 @@
             this.groupBox1.Controls.Add(this.btnDelete);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.btnCancel);
-            this.groupBox1.Controls.Add(this.btnCopy);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.btnSave);
             this.groupBox1.Controls.Add(this.label6);
@@ -302,7 +300,7 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(648, 283);
+            this.btnDelete.Location = new System.Drawing.Point(789, 283);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(95, 39);
@@ -313,7 +311,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(525, 283);
+            this.btnCancel.Location = new System.Drawing.Point(920, 283);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(95, 39);
@@ -322,19 +320,9 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // btnCopy
-            // 
-            this.btnCopy.Location = new System.Drawing.Point(766, 283);
-            this.btnCopy.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnCopy.Name = "btnCopy";
-            this.btnCopy.Size = new System.Drawing.Size(95, 39);
-            this.btnCopy.TabIndex = 20;
-            this.btnCopy.Text = "Copy";
-            this.btnCopy.UseVisualStyleBackColor = true;
-            // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(887, 283);
+            this.btnSave.Location = new System.Drawing.Point(660, 283);
             this.btnSave.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(95, 39);
@@ -495,7 +483,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn LevelName;
         private System.Windows.Forms.DataGridViewButtonColumn View;
         private System.Windows.Forms.DataGridViewButtonColumn Action;
-        private System.Windows.Forms.Button btnCopy;
         private System.Windows.Forms.Button btnRemoveClass;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;

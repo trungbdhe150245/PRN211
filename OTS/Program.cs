@@ -19,10 +19,8 @@ namespace OTS
 			Application.SetHighDpiMode(HighDpiMode.SystemAware);
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			//Application.Run(new FrmManageClass());
-			//Application.Run(new FrmViewTest());
-			//Application.Run(new ManageSubject.InsertSubject());
-			Application.Run(new ManageSubject.UpdateSubject());
+            //Application.Run(new FrmManageClass());
+            Application.Run(new FrmViewTest(3));
         }
 	}
 }

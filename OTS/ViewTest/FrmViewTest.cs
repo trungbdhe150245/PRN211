@@ -161,6 +161,10 @@ namespace OTS.ViewTest
                 }
                 catch (Exception ex) { MessageBox.Show(ex.Message, "Error"); }
             }
+            if (e.ColumnIndex == 4 && e.RowIndex != -1)
+            {
+                // thực hiện hành động khi chọn view trên dgvQuestions
+            }
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -210,10 +214,10 @@ namespace OTS.ViewTest
                         classCodes.Add(classText.Split(" - ")[0].Trim());
                     }
 
-                    if (testDBC.UpdateTest(test) > 0
-                        && questionDBC.UpdateTestQuestion(test.Id, questionIds) > 0
-                        && testDBC.UpdateClassesTest(testID, classCodes) > 0)
+                    if (testDBC.UpdateTest(test) > 0)
                     {
+                        questionDBC.UpdateTestQuestion(test.Id, questionIds);
+                        testDBC.UpdateClassesTest(testID, classCodes);
                         MessageBox.Show("Update succesful");
                     }
                     else
