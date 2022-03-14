@@ -27,7 +27,7 @@ namespace OTS.ManageTest
 
         private bool _mustStop => (_max.TotalMilliseconds - _stpWatch.ElapsedMilliseconds) < 0;
 
-        public string TimeLeftStr => TimeLeft.ToString(@"\mm\:ss");
+        public string TimeLeftStr => TimeLeft.ToString(@"mm\:ss");
 
         public string TimeLeftMsStr => TimeLeft.ToString(@"mm\:ss\.fff");
 

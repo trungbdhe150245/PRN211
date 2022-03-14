@@ -25,9 +25,20 @@ namespace OTS.ManageTest
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
             this.label_mcname.Text = Environment.MachineName;
-            this.label_mcname.ForeColor = Color.AliceBlue;
+            Timer();
             
         }
+        private void Timer()
+        {
+            CountDownTimer timer = new CountDownTimer();
+            timer.SetTime(Convert.ToInt32("100"), 0);
+            timer.Start();
+            timer.TimeChanged += () => label13.Text = timer.TimeLeftStr;
+            timer.CountDownFinished += () => label13.Text = "Finish!";
+            timer.StepMs = 77;
+        }
+
+
 
         private List<string> FilePath(string dir)
         {
@@ -83,6 +94,11 @@ namespace OTS.ManageTest
         }
 
         private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label13_Click(object sender, EventArgs e)
         {
 
         }

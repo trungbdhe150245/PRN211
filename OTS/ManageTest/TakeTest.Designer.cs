@@ -249,6 +249,7 @@ namespace OTS.ManageTest
             this.label13.Size = new System.Drawing.Size(153, 65);
             this.label13.TabIndex = 18;
             this.label13.Text = "22:22";
+            this.label13.Click += new System.EventHandler(this.label13_Click);
             // 
             // label15
             // 
