@@ -156,5 +156,165 @@ namespace OTS.DAO
             }
             return null;
         }
+
+        public List<Test> GetTests()
+        {
+            List<Test> tests = new List<Test>();
+            string sql_select_test = @"SELECT [Id]
+                                      ,[Code]
+                                      ,[StartTime]
+                                      ,[TestDate]
+                                      ,[Duration]
+                                      ,Test.[SubjectCode]
+	                                  ,Subject.SubjectName
+                                      ,[CreateDate]
+                                      ,[Review]
+                                  FROM [Test] INNER JOIN Subject
+			                                ON Subject.SubjectCode=Test.SubjectCode
+                                  WHERE 1=1";
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(sql_select_test, connection);
+                connection.Open();
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    tests.Add(new Test()
+                    {
+                        Id = reader.GetInt32("ID"),
+                        Code = reader.GetString("Code"),
+                        CreateDate = reader.GetDateTime("CreateDate"),
+                        TestDate = reader.GetDateTime("TestDate"),
+                        StartTime = (TimeSpan)reader["StartTime"],
+                        EndTime = (TimeSpan)reader["EndTime"],
+                        Duration = (TimeSpan)reader["Duration"],
+                        Subject = new Subject()
+                        {
+                            SubjectCode = reader.GetString("SubjectCode"),
+                            SubjectName = reader.GetString("SubjectName"),
+                        },
+                        IsReview = reader.GetBoolean("Review")
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return tests;
+        }
+
+        public List<Test> GetTests(int pageIndex, int pageSize, string subjectCode
+            , DateTime createFrom, DateTime createTo, DateTime testFrom, DateTime testTo, string status)
+        {
+            List<Test> tests = new List<Test>();
+
+            string table_rowNum = @"SELECT ROW_NUMBER() OVER (ORDER BY [ID] ASC) as rownum, * 
+                                    FROM [Test]
+                                    WHERE 1=1 ";
+            
+            if (!subjectCode.Equals(""))
+            {
+                table_rowNum += " AND [Test].[SubjectCode] = @subjectCode ";
+            }
+            if (createFrom != null && createTo != null)
+            {
+                table_rowNum += " AND [Test].[CreateDate] between @createFrom and @createTo ";
+            }
+            if (testFrom != null && testTo != null)
+            {
+                table_rowNum += " AND [Test].[TestDate] between @testFrom and @testTo ";
+            }
+
+            if (status.Equals("Started"))
+            {
+                table_rowNum += @" AND (CAST(TestDate AS datetime) + CAST(StartTime AS datetime)) < GETDATE()
+                                    AND (CAST(TestDate AS datetime) + CAST(EndTime AS datetime)) > GETDATE() ";
+            } 
+            else if (status.Equals("Ended"))
+            {
+                table_rowNum += @" AND (CAST(TestDate AS datetime) + CAST(EndTime AS datetime)) <= GETDATE() ";
+            }
+            else if (status.Equals("Not Started"))
+            {
+                table_rowNum += @" AND (CAST(TestDate AS datetime) + CAST(StartTime AS datetime)) >= GETDATE() ";
+            }
+
+
+            string sql_select_test = @$"SELECT [Id]
+                                      ,[Code]
+                                      ,[StartTime]
+                                      ,[TestDate]
+                                      ,[Duration]
+                                      ,Test.[SubjectCode]
+	                                  ,Subject.SubjectName
+                                      ,[CreateDate]
+                                      ,[Review]
+                                  FROM ({table_rowNum}) as p INNER JOIN Subject
+			                                ON Subject.SubjectCode=Test.SubjectCode
+                                  WHERE 1=1";
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(sql_select_test, connection);
+                connection.Open();
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    tests.Add(new Test()
+                    {
+                        Id = reader.GetInt32("ID"),
+                        Code = reader.GetString("Code"),
+                        CreateDate = reader.GetDateTime("CreateDate"),
+                        TestDate = reader.GetDateTime("TestDate"),
+                        StartTime = (TimeSpan)reader["StartTime"],
+                        Duration = (TimeSpan)reader["Duration"],
+                        Subject = new Subject()
+                        {
+                            SubjectCode = reader.GetString("SubjectCode"),
+                            SubjectName = reader.GetString("SubjectName"),
+                        },
+                        IsReview = reader.GetBoolean("Review")
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return tests;
+        }
+
+
+        public int StartTest(Test test)
+        {
+            int rowAffects = 0;
+            string sql_update_test = @"UPDATE [Test]
+                               SET [StartTime] = GETDATE()
+                                  ,[StartTime] = @endTime
+                             WHERE Test.Id=@testId";
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(sql_update_test, connection);
+                command.Parameters.AddWithValue("@testId", test.Id);
+                command.Parameters.AddWithValue("@endTime", test.EndTime);
+                connection.Open();
+                rowAffects = command.ExecuteNonQuery();
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+            finally { connection.Close(); }
+
+            return rowAffects;
+        }
     }
 }
