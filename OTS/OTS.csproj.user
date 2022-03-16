@@ -1,10 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Compile Update="EssayMark\FrmEssayMark.cs">
+    <Compile Update="Dashboard\FrmStudentDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="EssayMark\FrmEssayDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="EssayMark\FrmEssayTestList.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Login\FrmLoginStudent.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="ManageClass\FrmCreateClass.cs">
@@ -14,6 +23,21 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="ManageClass\FrmManageClass.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ManageQuestion\ListQuestionBank.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ManageSubject\DeleteSubject.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ManageSubject\InsertSubject.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ManageSubject\ManagerSubject.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ManageSubject\UpdateSubject.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="ViewTest\FrmViewTest.cs">
