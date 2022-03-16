@@ -46,6 +46,8 @@
             this.label9 = new System.Windows.Forms.Label();
             this.txtTotalQuestion = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.dtpEndTime = new System.Windows.Forms.DateTimePicker();
             this.lbClasses = new System.Windows.Forms.ListBox();
             this.btnRemoveClass = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
@@ -62,8 +64,6 @@
             this.View = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Action = new System.Windows.Forms.DataGridViewButtonColumn();
             this.label8 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.dtpEndTime = new System.Windows.Forms.DateTimePicker();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuestion)).BeginInit();
             this.SuspendLayout();
@@ -120,7 +120,7 @@
             this.dtpCreateDate.Location = new System.Drawing.Point(671, 161);
             this.dtpCreateDate.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dtpCreateDate.Name = "dtpCreateDate";
-            this.dtpCreateDate.Size = new System.Drawing.Size(230, 27);
+            this.dtpCreateDate.Size = new System.Drawing.Size(254, 27);
             this.dtpCreateDate.TabIndex = 5;
             // 
             // label4
@@ -148,7 +148,7 @@
             this.dtpStartTime.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dtpStartTime.Name = "dtpStartTime";
             this.dtpStartTime.ShowUpDown = true;
-            this.dtpStartTime.Size = new System.Drawing.Size(71, 27);
+            this.dtpStartTime.Size = new System.Drawing.Size(95, 27);
             this.dtpStartTime.TabIndex = 7;
             this.dtpStartTime.Value = new System.DateTime(2022, 3, 18, 0, 0, 0, 0);
             // 
@@ -201,7 +201,7 @@
             // cbReview
             // 
             this.cbReview.AutoSize = true;
-            this.cbReview.Location = new System.Drawing.Point(753, 203);
+            this.cbReview.Location = new System.Drawing.Point(777, 203);
             this.cbReview.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cbReview.Name = "cbReview";
             this.cbReview.Size = new System.Drawing.Size(107, 24);
@@ -256,6 +256,26 @@
             this.groupBox1.Size = new System.Drawing.Size(1021, 413);
             this.groupBox1.TabIndex = 19;
             this.groupBox1.TabStop = false;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(557, 166);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(67, 20);
+            this.label12.TabIndex = 29;
+            this.label12.Text = "EndTime";
+            // 
+            // dtpEndTime
+            // 
+            this.dtpEndTime.CustomFormat = "";
+            this.dtpEndTime.Location = new System.Drawing.Point(630, 162);
+            this.dtpEndTime.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dtpEndTime.Name = "dtpEndTime";
+            this.dtpEndTime.ShowUpDown = true;
+            this.dtpEndTime.Size = new System.Drawing.Size(102, 27);
+            this.dtpEndTime.TabIndex = 30;
+            this.dtpEndTime.Value = new System.DateTime(2022, 3, 18, 0, 0, 0, 0);
             // 
             // lbClasses
             // 
@@ -425,26 +445,6 @@
             this.label8.Size = new System.Drawing.Size(128, 32);
             this.label8.TabIndex = 21;
             this.label8.Text = "Questions";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(557, 166);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(67, 20);
-            this.label12.TabIndex = 29;
-            this.label12.Text = "EndTime";
-            // 
-            // dtpEndTime
-            // 
-            this.dtpEndTime.CustomFormat = "";
-            this.dtpEndTime.Location = new System.Drawing.Point(630, 162);
-            this.dtpEndTime.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.dtpEndTime.Name = "dtpEndTime";
-            this.dtpEndTime.ShowUpDown = true;
-            this.dtpEndTime.Size = new System.Drawing.Size(102, 27);
-            this.dtpEndTime.TabIndex = 30;
-            this.dtpEndTime.Value = new System.DateTime(2022, 3, 18, 0, 0, 0, 0);
             // 
             // FrmViewTest
             // 

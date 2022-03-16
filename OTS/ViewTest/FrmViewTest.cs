@@ -14,6 +14,7 @@ namespace OTS.ViewTest
 {
     public partial class FrmViewTest : Form
     {
+        private Test old;
         private int testID;
         public FrmViewTest(int testID)
         {
@@ -85,6 +86,7 @@ namespace OTS.ViewTest
                 Test test = testDBC.GetTest(testID);
                 if (test != null)
                 {
+                    old = test;
                     txtTestID.Text = test.Id.ToString();
                     txtTestCode.Text = test.Code;
                     txtSubject.Text = test.Subject.SubjectCode
@@ -204,34 +206,41 @@ namespace OTS.ViewTest
                 {
                     TestDBContext testDBC = new TestDBContext();
                     QuestionDBContext questionDBC = new QuestionDBContext();
-                    List<int> questionIds = new List<int>();
-                    foreach (DataGridViewRow row in dgvQuestion.Rows)
-                    {
-                        questionIds.Add(
-                        Int32.Parse(row.Cells["QuestionId"].Value.ToString())
-                        );
-                    }
-                    List<string> classCodes = new List<string>();
-                    for (int i = 0; i < lbClasses.Items.Count; i++)
-                    {
-                        string classText = lbClasses.Items[i].ToString();
-                        classCodes.Add(classText.Split(" - ")[0].Trim());
-                    }
+                    Test testByCode = testDBC.GetTestByCode(test.Code);
 
-                    if (testDBC.UpdateTest(test) > 0)
+                    if (testByCode == null || old.Code.Equals(testByCode.Code))
                     {
+
+                        testDBC.UpdateTest(test);
+
+                        List<int> questionIds = new List<int>();
+                        foreach (DataGridViewRow row in dgvQuestion.Rows)
+                        {
+                            questionIds.Add(
+                            Int32.Parse(row.Cells["QuestionId"].Value.ToString())
+                            );
+                        }
+                        List<string> classCodes = new List<string>();
+                        for (int i = 0; i < lbClasses.Items.Count; i++)
+                        {
+                            string classText = lbClasses.Items[i].ToString();
+                            classCodes.Add(classText.Split(" - ")[0].Trim());
+                        }
                         questionDBC.UpdateTestQuestion(test.Id, questionIds);
                         testDBC.UpdateClassesTest(testID, classCodes);
                         MessageBox.Show("Update succesful");
+
                     }
                     else
                     {
-                        MessageBox.Show("Update Fail");
+                        MessageBox.Show($"Duplicate Test Code "{txtTestCode.Text}"\nUpdate Fail");
                     }
-                }
+
+                    }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Error");
+                    MessageBox.Show("Update Fail");
                 }
             }
             else
