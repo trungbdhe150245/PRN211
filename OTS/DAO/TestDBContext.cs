@@ -88,6 +88,7 @@ namespace OTS.DAO
                                   ,[StartTime] = @startTime
                                   ,[TestDate] = @testDate
                                   ,[Duration] = @duration
+                                  ,[EndTime] = @endtime
                                   ,[Review] = @review
                              WHERE Test.Id=@testId";
             try
@@ -100,6 +101,7 @@ namespace OTS.DAO
                 command.Parameters.AddWithValue("@testDate", test.TestDate);
                 command.Parameters.AddWithValue("@duration", test.Duration);
                 command.Parameters.AddWithValue("@review", test.IsReview);
+                command.Parameters.AddWithValue("@endtime", test.EndTime);
                 connection.Open();
                 rowAffects = command.ExecuteNonQuery();
             } catch (Exception ex) { throw new Exception(ex.Message); }
@@ -114,6 +116,7 @@ namespace OTS.DAO
                                       ,[StartTime]
                                       ,[TestDate]
                                       ,[Duration]
+                                      ,[EndTime]
                                       ,Test.[SubjectCode]
 	                                  ,Subject.SubjectName
                                       ,[CreateDate]
@@ -142,6 +145,7 @@ namespace OTS.DAO
                             SubjectCode = reader.GetString("SubjectCode"),
                             SubjectName = reader.GetString("SubjectName"),
                         },
+                        EndTime = (TimeSpan)reader["EndTime"],
                         IsReview = reader.GetBoolean("Review")
                     };
                 }

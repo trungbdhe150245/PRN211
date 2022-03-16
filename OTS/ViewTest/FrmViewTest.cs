@@ -33,6 +33,8 @@ namespace OTS.ViewTest
             dtpStartDate.CustomFormat = "dd/MM/yyyy";
             dtpDuration.Format = DateTimePickerFormat.Time;
             dtpDuration.CustomFormat = "HH:mm:ss";
+            dtpEndTime.Format = DateTimePickerFormat.Time;
+            dtpEndTime.CustomFormat = "HH:mm:ss";
         }
         public void LoadQuestionsList()
         {
@@ -92,6 +94,7 @@ namespace OTS.ViewTest
                     DateTime dt = new DateTime(2022, 12, 31);
                     dtpStartTime.Value = dt.Add(test.StartTime);
                     dtpDuration.Value = dt.Add(test.Duration);
+                    dtpEndTime.Value = dt.Add(test.EndTime);
                     cbReview.Checked = test.IsReview;
                     LoadQuestionsList();
                     LoadClassList();
@@ -181,6 +184,7 @@ namespace OTS.ViewTest
                 Duration = dtpDuration.Value.TimeOfDay,
                 StartTime = dtpStartTime.Value.TimeOfDay,
                 TestDate = dtpStartDate.Value.Date,
+                EndTime = dtpEndTime.Value.TimeOfDay,
                 IsReview = cbReview.Checked,
                 Subject = new Subject()
                 {
