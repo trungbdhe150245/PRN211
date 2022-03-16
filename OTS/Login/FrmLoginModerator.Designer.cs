@@ -1,6 +1,6 @@
 ﻿namespace OTS.Login
 {
-    partial class FrmLoginStudent
+    partial class FrmLoginModerator
     {
         /// <summary>
         /// Required designer variable.
@@ -28,82 +28,82 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtUsername = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.btnExit = new System.Windows.Forms.Button();
+            this.btnLogin = new System.Windows.Forms.Button();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.btnLogin = new System.Windows.Forms.Button();
-            this.btnExit = new System.Windows.Forms.Button();
+            this.txtUsername = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // txtUsername
+            // btnExit
             // 
-            this.txtUsername.Location = new System.Drawing.Point(133, 77);
-            this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(292, 23);
-            this.txtUsername.TabIndex = 3;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(33, 80);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(65, 15);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "User Name";
-            // 
-            // txtPassword
-            // 
-            this.txtPassword.Location = new System.Drawing.Point(133, 122);
-            this.txtPassword.Name = "txtPassword";
-            this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(292, 23);
-            this.txtPassword.TabIndex = 5;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(33, 125);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(57, 15);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Password";
+            this.btnExit.Location = new System.Drawing.Point(272, 178);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(86, 28);
+            this.btnExit.TabIndex = 13;
+            this.btnExit.Text = "Exit";
+            this.btnExit.UseVisualStyleBackColor = true;
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(133, 194);
+            this.btnLogin.Location = new System.Drawing.Point(144, 178);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(86, 28);
-            this.btnLogin.TabIndex = 6;
+            this.btnLogin.TabIndex = 12;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = true;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
-            // btnExit
+            // txtPassword
             // 
-            this.btnExit.Location = new System.Drawing.Point(261, 194);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(86, 28);
-            this.btnExit.TabIndex = 7;
-            this.btnExit.Text = "Exit";
-            this.btnExit.UseVisualStyleBackColor = true;
+            this.txtPassword.Location = new System.Drawing.Point(144, 106);
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.PasswordChar = '*';
+            this.txtPassword.Size = new System.Drawing.Size(292, 23);
+            this.txtPassword.TabIndex = 11;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(44, 109);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(57, 15);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "Password";
+            // 
+            // txtUsername
+            // 
+            this.txtUsername.Location = new System.Drawing.Point(144, 61);
+            this.txtUsername.Name = "txtUsername";
+            this.txtUsername.Size = new System.Drawing.Size(292, 23);
+            this.txtUsername.TabIndex = 9;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(44, 64);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(65, 15);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "User Name";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(198, 9);
+            this.label1.Location = new System.Drawing.Point(189, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(94, 25);
-            this.label1.TabIndex = 15;
-            this.label1.Text = "STUDENT";
+            this.label1.Size = new System.Drawing.Size(126, 25);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "MODERATOR";
             // 
-            // FrmLoginStudent
+            // FrmLoginModerator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(480, 249);
+            this.ClientSize = new System.Drawing.Size(515, 228);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnLogin);
@@ -111,23 +111,21 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtUsername);
             this.Controls.Add(this.label2);
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "FrmLoginStudent";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FrmLoginStudent";
+            this.Name = "FrmLoginModerator";
+            this.Text = "FrmLoginModerator";
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.TextBox txtUsername;
-        private System.Windows.Forms.Label label2;
+
+        private System.Windows.Forms.Button btnExit;
+        private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button btnLogin;
-        private System.Windows.Forms.Button btnExit;
+        private System.Windows.Forms.TextBox txtUsername;
+        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
     }
 }

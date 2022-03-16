@@ -13,49 +13,54 @@ using System.Windows.Forms;
 
 namespace OTS.Login
 {
-    public partial class FrmLoginStudent : Form
+    public partial class FrmLoginModerator : Form
     {
-        public FrmLoginStudent()
+        public FrmLoginModerator()
         {
             InitializeComponent();
         }
+
         private bool ValidateLogin()
         {
             string regex = "^[A-Za-z0-9]+$";
             string mess = "";
-            if(txtUsername.Text.Equals(""))
+            if (txtUsername.Text.Equals(""))
             {
                 mess = "Username cannot empty";
-            } else if (txtPassword.Text.Equals(""))
+            }
+            else if (txtPassword.Text.Equals(""))
             {
                 mess = "Password cannot empty";
             }
             else if (!Regex.IsMatch(txtUsername.Text.Trim(), regex))
             {
                 mess = "Username invalid format";
-            } else if (!Regex.IsMatch(txtPassword.Text.Trim(), regex))
+            }
+            else if (!Regex.IsMatch(txtPassword.Text.Trim(), regex))
             {
                 mess = "Password invalid format";
             }
 
-                if (mess.Equals(""))
+            if (mess.Equals(""))
             {
                 return true;
-            } else
+            }
+            else
             {
                 MessageBox.Show(mess, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
         }
+
         private void btnLogin_Click(object sender, EventArgs e)
         {
             if (ValidateLogin())
             {
-                StudentDBContext dbStudent = new StudentDBContext();
-                if (dbStudent.GetStudent(txtUsername.Text, txtPassword.Text) != null)
+                ModeratorDBContext dbMod = new ModeratorDBContext();
+                if (dbMod.GetModerator(txtUsername.Text, txtPassword.Text) != null)
                 {
-                    FrmStudentDashboard frmStudentDashboard = new FrmStudentDashboard();
-                    frmStudentDashboard.Show();
+                    FrmModDashboard frmModDashboard = new FrmModDashboard();
+                    frmModDashboard.Show();
                     this.Hide();
                 }
                 else
@@ -63,7 +68,6 @@ namespace OTS.Login
                     MessageBox.Show("Username or Password is incorrect.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-
         }
     }
 }
