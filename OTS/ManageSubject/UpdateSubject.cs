@@ -20,18 +20,18 @@ namespace OTS.ManageSubject
         String oldsubjectName = "";
         String option = "";
         String rgxsubjectCode = "^[a-zA-Z0-9]{2,50}$";
-        String rgxsubjectName = "^[a-zA-Z0-9]{2,255}$";
+        String rgxsubjectName = "^[a-zA-Z0-9 ]{2,255}$";
         public UpdateSubject()
         {
             InitializeComponent();
         }
 
-        private void UpdateSubject_Load(object sender, EventArgs e)
+        private void UpdateSubject_Load(String option, String subjectCode, String subjectName,object sender, EventArgs e)
         {
 
             try
             {
-                LoadSubject();
+                LoadSubject( option,  subjectCode,  subjectName);
             }catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -41,7 +41,7 @@ namespace OTS.ManageSubject
 
         }
 
-        private void LoadSubject()
+        private void LoadSubject(String option, String subjectCode, String subjectName)
         {
 
 
@@ -50,7 +50,7 @@ namespace OTS.ManageSubject
             try
             {
                 SubjectDBContext subjectDBContext = new SubjectDBContext();
-                gdvUpdateSubject.DataSource = subjectDBContext.Getsubjects();
+                gdvUpdateSubject.DataSource = subjectDBContext.FindSubject( option,  subjectCode,  subjectName);
                 gdvUpdateSubject.AutoGenerateColumns = false;
             }
             catch (Exception ex)
@@ -69,13 +69,12 @@ namespace OTS.ManageSubject
                 if (Regex.IsMatch(oldsubjectCode, rgxsubjectCode) && !String.IsNullOrEmpty(oldsubjectCode) && String.IsNullOrEmpty(oldsubjectName))
                 {
                     option = "FindBySubjectCode";
-
-                    //UpdateSubject_Load(option, oldsubjectCode, oldsubjectName, gdvUpdateSubject, sender, e);
+                    UpdateSubject_Load( option,  oldsubjectCode, oldsubjectName, sender, e);
                 }
                 else if (Regex.IsMatch(oldsubjectName, rgxsubjectName) && !String.IsNullOrEmpty(oldsubjectName) && String.IsNullOrEmpty(oldsubjectCode))
                 {
                     option = "FindBySubjectName";
-                    subjectDBC.FindSubject(option, oldsubjectCode, oldsubjectName, gdvUpdateSubject);
+                    UpdateSubject_Load(option, oldsubjectCode, oldsubjectName, sender, e);
                 }
                 else
                 {
@@ -84,7 +83,7 @@ namespace OTS.ManageSubject
                         if (Regex.IsMatch(oldsubjectName, rgxsubjectName) && !String.IsNullOrEmpty(oldsubjectName))
                         {
                             option = "FindBySubjectCodeAndName";
-                            subjectDBC.FindSubject(option, oldsubjectCode, oldsubjectName, gdvUpdateSubject);
+                            UpdateSubject_Load(option, oldsubjectCode, oldsubjectName, sender, e);
                         }
                     }
                 }
@@ -139,6 +138,6 @@ namespace OTS.ManageSubject
             this.Close();
         }
 
-
+        
     }
 }

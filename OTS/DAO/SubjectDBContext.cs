@@ -67,21 +67,22 @@ namespace OTS.DAO
             }
             return rowAffects;
         }
-        public int FindSubject(String option,String subjectCode,String subjectName,DataGridView gdvUpdateSubject)
+        public List<Models.Subject> FindSubject(String option,String subjectCode,String subjectName)
         {
             int rowAffects = 0;
             string sql_view_subject = "";
+            List<Models.Subject> sub = new List<Models.Subject>();
             if (option.Equals("FindBySubjectCode"))
             {
-                 sql_view_subject = @"Select [SubjectCode]
+                sql_view_subject = @"Select [SubjectCode],[SubjectName]
                                         from Subject
                                         Where SubjectCode=@subjectCode;";
             }
-            else if(option=="FindBySubjectName")
+            else if (option == "FindBySubjectName")
             {
-                 sql_view_subject = @"Select [SubjectName]
+                sql_view_subject = @"Select [SubjectCode],[SubjectName]
                                         from Subject
-                                        Where SubjectName=@subjectName;";
+                                       Where SubjectName = '@subjectName";
             }
             else if(option == "FindBySubjectCodeAndName")
             {
@@ -109,6 +110,28 @@ namespace OTS.DAO
                     command.Parameters.AddWithValue("@subjectName", subjectName);
                 }
                 
+                
+                try
+                {
+                    connection.Open();
+                    reader = command.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
+                    if (reader.HasRows == true)
+                    {
+                        while (reader.Read())
+                        {
+                            Models.Subject subject = new Models.Subject();
+                            subject.SubjectCode = reader.GetString("SubjectCode");
+                            subject.SubjectName = reader.GetString("SubjectName");
+                            sub.Add(subject);
+                        }
+                     
+                    }
+                    connection.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message,"Error");
+                }
                 connection.Open();
                 rowAffects = command.ExecuteNonQuery();
             }
@@ -121,7 +144,7 @@ namespace OTS.DAO
             {
                 connection.Close();
             }
-            return rowAffects;
+            return sub  ;
         }
 
         public List<Models.Subject> Getsubjects()
