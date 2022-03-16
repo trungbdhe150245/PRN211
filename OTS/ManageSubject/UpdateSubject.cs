@@ -25,43 +25,8 @@ namespace OTS.ManageSubject
         {
             InitializeComponent();
         }
-
-        private void UpdateSubject_Load(String option, String subjectCode, String subjectName,object sender, EventArgs e)
+        public String getOption(object sender, EventArgs e)
         {
-
-            try
-            {
-                LoadSubject( option,  subjectCode,  subjectName);
-            }catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            
-
-
-        }
-
-        private void LoadSubject(String option, String subjectCode, String subjectName)
-        {
-
-
-            List<Models.Subject> subject=new DAO.SubjectDBContext().Getsubjects();
-            
-            try
-            {
-                SubjectDBContext subjectDBContext = new SubjectDBContext();
-                gdvUpdateSubject.DataSource = subjectDBContext.FindSubject( option,  subjectCode,  subjectName);
-                gdvUpdateSubject.AutoGenerateColumns = false;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void btnFind_Click(object sender, EventArgs e)
-        {
-            SubjectDBContext subjectDBC = new SubjectDBContext();
             try
             {
                 oldsubjectCode = txtSubjectCode.Text;
@@ -69,7 +34,7 @@ namespace OTS.ManageSubject
                 if (Regex.IsMatch(oldsubjectCode, rgxsubjectCode) && !String.IsNullOrEmpty(oldsubjectCode) && String.IsNullOrEmpty(oldsubjectName))
                 {
                     option = "FindBySubjectCode";
-                    UpdateSubject_Load( option,  oldsubjectCode, oldsubjectName, sender, e);
+                    UpdateSubject_Load(option, oldsubjectCode, oldsubjectName, sender, e);
                 }
                 else if (Regex.IsMatch(oldsubjectName, rgxsubjectName) && !String.IsNullOrEmpty(oldsubjectName) && String.IsNullOrEmpty(oldsubjectCode))
                 {
@@ -93,28 +58,99 @@ namespace OTS.ManageSubject
                 MessageBox.Show("Invalid Value", "Warnning",
                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            return option;
         }
-        private void btnUpdate_Click(object sender, EventArgs e)
+
+        private void UpdateSubject_Load(String option, String subjectCode, String subjectName, object sender, EventArgs e)
+        {
+
+            try
+            {
+                LoadSubject(option, subjectCode, subjectName);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+
+
+        }
+
+        private void LoadSubject(String option, String subjectCode, String subjectName)
+        {
+
+
+            List<Models.Subject> subject = new DAO.SubjectDBContext().Getsubjects();
+
+            try
+            {
+                SubjectDBContext subjectDBContext = new SubjectDBContext();
+                gdvUpdateSubject.DataSource = subjectDBContext.FindSubject(option, subjectCode, subjectName);
+                gdvUpdateSubject.AutoGenerateColumns = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btnFind_Click(object sender, EventArgs e)
         {
             SubjectDBContext subjectDBC = new SubjectDBContext();
+            try
+            {
+                oldsubjectCode = txtSubjectCode.Text;
+                oldsubjectName = txtSubjectName.Text;
+                option = getOption(sender, e);
+                if (option == "FindBySubjectCode")
+                {
+                    UpdateSubject_Load(option, oldsubjectCode, oldsubjectName, sender, e);
+                }
+                else if (option == "FindBySubjectName")
+                {
+                    UpdateSubject_Load(option, oldsubjectCode, oldsubjectName, sender, e);
+                }
+                else if (option == "FindBySubjectCodeAndName")
+                {
+                    UpdateSubject_Load(option, oldsubjectCode, oldsubjectName, sender, e);
+                }
 
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Invalid Value", "Warnning",
+                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnUpdate_Click_1(object sender, EventArgs e)
+        {
+            SubjectDBContext subjectDBC = new SubjectDBContext();
+            int rowefect = 0;
+            option = getOption(sender, e);
             try
             {
                 oldsubjectCode = txtSubjectCode.Text;
                 oldsubjectName = txtSubjectName.Text;
                 newsubjectCode = txtNewSubjectCode.Text;
                 newsubjectName = txtNewSubjectName.Text;
-                if (Regex.IsMatch(oldsubjectCode, rgxsubjectCode) && !String.IsNullOrEmpty(oldsubjectCode))
+
+
+                if (option.Length > 0)
                 {
-                    if (Regex.IsMatch(oldsubjectName, rgxsubjectName) && !String.IsNullOrEmpty(oldsubjectName))
+                    rowefect = subjectDBC.UpdateSubject(option, oldsubjectCode, oldsubjectName, newsubjectCode, newsubjectName);
+                   
+                    if (rowefect > 0)
                     {
-                        if (Regex.IsMatch(newsubjectCode, rgxsubjectCode) && !String.IsNullOrEmpty(newsubjectCode))
-                        {
-                            if (Regex.IsMatch(newsubjectName, rgxsubjectName) && !String.IsNullOrEmpty(newsubjectName))
-                            {
-                                subjectDBC.UpdateSubject(oldsubjectCode, oldsubjectName, newsubjectCode, newsubjectName);
-                            }
-                        }
+                        MessageBox.Show("Update sucessfull", "Message",
+                   MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
                 else
@@ -129,15 +165,6 @@ namespace OTS.ManageSubject
 
             }
 
-
-
         }
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        
     }
 }

@@ -39,20 +39,58 @@ namespace OTS.DAO
             return rowAffects;
         }
         //--------------------------------------------------------
-        public int UpdateSubject(String oldsubjectCode, String oldsubjectName,String newsubjectCode,String newsubjectName)
+        public int UpdateSubject(String option, String oldsubjectCode, String oldsubjectName,String newsubjectCode,String newsubjectName)
         {
             int rowAffects = 0;
-            string sql_insert_subject = @"UPDATE Subject
+            string sql_update_subject = "";
+            if (option.Equals("FindBySubjectCode"))
+            {
+                 sql_update_subject = @"UPDATE Subject
                                        SET SubjectCode = @newsubjectCode, SubjectName = @newsubjectName
-                                       WHERE SubjectCode = @oldsubjectCode and SubjectName = @oldsubjectName;";
+                                       WHERE SubjectCode = @oldsubjectCode;";
+            }
+            else if (option == "FindBySubjectName")
+            {
+                 sql_update_subject = @"UPDATE Subject
+                                       SET SubjectCode = @newsubjectCode, SubjectName = @newsubjectName
+                                       WHERE SubjectName like '%' + @oldsubjectName + '%';";
+            }
+            else if (option == "FindBySubjectCodeAndName")
+            {
+                 sql_update_subject = @"UPDATE Subject
+                                       SET SubjectCode = @newsubjectCode, SubjectName = @newsubjectName
+                                       WHERE SubjectCode = @oldsubjectCode and SubjectName like '%' + @SubjectName + '%';";
+            }
+
             try
             {
                 connection = new SqlConnection(GetConnectionString());
-                command = new SqlCommand(@sql_insert_subject, connection);
-                command.Parameters.AddWithValue("@oldsubjectCode", oldsubjectCode);
-                command.Parameters.AddWithValue("@oldsubjectName", oldsubjectName);
-                command.Parameters.AddWithValue("@newsubjectCode", newsubjectCode);
-                command.Parameters.AddWithValue("@newsubjectName", newsubjectName);
+                command = new SqlCommand(sql_update_subject, connection);
+
+
+                if (option == "FindBySubjectCode")
+                {
+                    command.Parameters.AddWithValue("@newsubjectCode", newsubjectCode);
+                    command.Parameters.AddWithValue("@newsubjectName", newsubjectName);
+                    command.Parameters.AddWithValue("@oldsubjectCode", oldsubjectCode);
+
+                }
+                else if (option == "FindBySubjectName")
+                {
+                    command.Parameters.AddWithValue("@newsubjectCode", newsubjectCode);
+                    command.Parameters.AddWithValue("@newsubjectName", newsubjectName);
+                    command.Parameters.AddWithValue("@oldsubjectName", oldsubjectName);
+                }
+                else if (option == "FindBySubjectCodeAndName")
+                {
+                    command.Parameters.AddWithValue("@newsubjectCode", newsubjectCode);
+                    command.Parameters.AddWithValue("@newsubjectName", newsubjectName);
+                    command.Parameters.AddWithValue("@oldsubjectCode", oldsubjectCode);
+                    command.Parameters.AddWithValue("@oldsubjectName", oldsubjectName);
+                }
+
+                
+                
                 connection.Open();
                 rowAffects = command.ExecuteNonQuery();
             }
@@ -82,13 +120,13 @@ namespace OTS.DAO
             {
                 sql_view_subject = @"Select [SubjectCode],[SubjectName]
                                         from Subject
-                                       Where SubjectName = '@subjectName";
+                                       Where SubjectName like '%' + @SubjectName + '%'";
             }
             else if(option == "FindBySubjectCodeAndName")
             {
                 sql_view_subject = @"Select [SubjectCode],[SubjectName]
                                         from Subject
-                                        Where SubjectCode=@subjectCode And SubjectName=@subjectName;";
+                                        Where SubjectCode=@subjectCode And SubjectName like '%' + @SubjectName + '%' ";
             }
             
             try
