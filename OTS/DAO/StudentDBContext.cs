@@ -23,7 +23,8 @@ namespace OTS.DAO
                                   , c.[ClassCode]
 	                              ,c.[ClassName]
                               FROM[Student] s INNER JOIN[Class] c ON s.ClassCode = c.ClassCode
-                              WHERE[FullName] = @username and[Password] = @password";
+                              WHERE BINARY_CHECKSUM([FullName]) = BINARY_CHECKSUM(@username)
+                                and BINARY_CHECKSUM([Password]) = BINARY_CHECKSUM(@password)";
                 connection = new SqlConnection(GetConnectionString());
                 command = new SqlCommand(sql, connection);
                 command.Parameters.AddWithValue("@username", username);
