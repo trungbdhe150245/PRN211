@@ -38,14 +38,14 @@
             this.numHard = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.numQuestions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numEasy)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMedium)).BeginInit();
@@ -62,7 +62,6 @@
             this.label1.Size = new System.Drawing.Size(207, 37);
             this.label1.TabIndex = 0;
             this.label1.Text = "CREATE A TEST";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -97,7 +96,6 @@
             this.label3.Size = new System.Drawing.Size(41, 20);
             this.label3.TabIndex = 3;
             this.label3.Text = "Easy:";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // numMedium
             // 
@@ -135,7 +133,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.comboBox3);
+            this.groupBox1.Controls.Add(this.dateTimePicker2);
             this.groupBox1.Controls.Add(this.comboBox2);
             this.groupBox1.Controls.Add(this.comboBox1);
             this.groupBox1.Controls.Add(this.dateTimePicker1);
@@ -158,32 +156,28 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Set up test";
             // 
-            // label6
+            // comboBox2
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(493, 213);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(70, 20);
-            this.label6.TabIndex = 9;
-            this.label6.Text = "Duration:";
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(677, 164);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(229, 28);
+            this.comboBox2.TabIndex = 16;
             // 
-            // label7
+            // comboBox1
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(493, 67);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(77, 20);
-            this.label7.TabIndex = 10;
-            this.label7.Text = "Start date:";
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(677, 114);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(229, 28);
+            this.comboBox1.TabIndex = 15;
             // 
-            // label8
+            // dateTimePicker1
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(493, 117);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(100, 20);
-            this.label8.TabIndex = 11;
-            this.label8.Text = "Subject Code:";
+            this.dateTimePicker1.Location = new System.Drawing.Point(677, 62);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(229, 27);
+            this.dateTimePicker1.TabIndex = 13;
             // 
             // label9
             // 
@@ -194,36 +188,41 @@
             this.label9.TabIndex = 12;
             this.label9.Text = "Class Name:";
             // 
-            // dateTimePicker1
+            // label8
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(677, 62);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(229, 27);
-            this.dateTimePicker1.TabIndex = 13;
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(493, 117);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(100, 20);
+            this.label8.TabIndex = 11;
+            this.label8.Text = "Subject Code:";
             // 
-            // comboBox1
+            // label7
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(677, 114);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(229, 28);
-            this.comboBox1.TabIndex = 15;
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(493, 67);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(77, 20);
+            this.label7.TabIndex = 10;
+            this.label7.Text = "Start date:";
             // 
-            // comboBox2
+            // label6
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(677, 164);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(229, 28);
-            this.comboBox2.TabIndex = 16;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(493, 213);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(70, 20);
+            this.label6.TabIndex = 9;
+            this.label6.Text = "Duration:";
             // 
-            // comboBox3
+            // dateTimePicker2
             // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(379, 144);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(229, 28);
-            this.comboBox3.TabIndex = 17;
+            this.dateTimePicker2.CustomFormat = "HH:mm:ss";
+            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker2.Location = new System.Drawing.Point(677, 208);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(229, 27);
+            this.dateTimePicker2.TabIndex = 17;
             // 
             // FrmCreateTest
             // 
@@ -266,6 +265,6 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
     }
 }
