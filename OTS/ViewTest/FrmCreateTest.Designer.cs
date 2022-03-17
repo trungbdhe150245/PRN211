@@ -30,27 +30,43 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.numQuestions = new System.Windows.Forms.NumericUpDown();
-            this.numEasy = new System.Windows.Forms.NumericUpDown();
+            this.nudQuestions = new System.Windows.Forms.NumericUpDown();
+            this.nudEasy = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
-            this.numMedium = new System.Windows.Forms.NumericUpDown();
+            this.nudMedium = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
-            this.numHard = new System.Windows.Forms.NumericUpDown();
+            this.nudHard = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dtpStartTime = new System.Windows.Forms.DateTimePicker();
+            this.label11 = new System.Windows.Forms.Label();
+            this.checkReview = new System.Windows.Forms.CheckBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.dtpDuration = new System.Windows.Forms.DateTimePicker();
+            this.cbClassCode = new System.Windows.Forms.ComboBox();
+            this.cbSubjectCode = new System.Windows.Forms.ComboBox();
+            this.dtpTestDate = new System.Windows.Forms.DateTimePicker();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            ((System.ComponentModel.ISupportInitialize)(this.numQuestions)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numEasy)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numMedium)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numHard)).BeginInit();
+            this.dgvTest = new System.Windows.Forms.DataGridView();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClassCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StartTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TestDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Duration = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SubjectCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CreateDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Review = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.nudQuestions)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudEasy)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMedium)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHard)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTest)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -73,19 +89,19 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Number of questions:";
             // 
-            // numQuestions
+            // nudQuestions
             // 
-            this.numQuestions.Location = new System.Drawing.Point(269, 65);
-            this.numQuestions.Name = "numQuestions";
-            this.numQuestions.Size = new System.Drawing.Size(120, 27);
-            this.numQuestions.TabIndex = 2;
+            this.nudQuestions.Location = new System.Drawing.Point(269, 65);
+            this.nudQuestions.Name = "nudQuestions";
+            this.nudQuestions.Size = new System.Drawing.Size(120, 27);
+            this.nudQuestions.TabIndex = 2;
             // 
-            // numEasy
+            // nudEasy
             // 
-            this.numEasy.Location = new System.Drawing.Point(269, 115);
-            this.numEasy.Name = "numEasy";
-            this.numEasy.Size = new System.Drawing.Size(120, 27);
-            this.numEasy.TabIndex = 4;
+            this.nudEasy.Location = new System.Drawing.Point(269, 115);
+            this.nudEasy.Name = "nudEasy";
+            this.nudEasy.Size = new System.Drawing.Size(120, 27);
+            this.nudEasy.TabIndex = 4;
             // 
             // label3
             // 
@@ -97,12 +113,12 @@
             this.label3.TabIndex = 3;
             this.label3.Text = "Easy:";
             // 
-            // numMedium
+            // nudMedium
             // 
-            this.numMedium.Location = new System.Drawing.Point(269, 165);
-            this.numMedium.Name = "numMedium";
-            this.numMedium.Size = new System.Drawing.Size(120, 27);
-            this.numMedium.TabIndex = 6;
+            this.nudMedium.Location = new System.Drawing.Point(269, 165);
+            this.nudMedium.Name = "nudMedium";
+            this.nudMedium.Size = new System.Drawing.Size(120, 27);
+            this.nudMedium.TabIndex = 6;
             // 
             // label4
             // 
@@ -114,12 +130,12 @@
             this.label4.TabIndex = 5;
             this.label4.Text = "Medium:";
             // 
-            // numHard
+            // nudHard
             // 
-            this.numHard.Location = new System.Drawing.Point(269, 211);
-            this.numHard.Name = "numHard";
-            this.numHard.Size = new System.Drawing.Size(120, 27);
-            this.numHard.TabIndex = 8;
+            this.nudHard.Location = new System.Drawing.Point(269, 211);
+            this.nudHard.Name = "nudHard";
+            this.nudHard.Size = new System.Drawing.Size(120, 27);
+            this.nudHard.TabIndex = 8;
             // 
             // label5
             // 
@@ -133,60 +149,132 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.dateTimePicker2);
-            this.groupBox1.Controls.Add(this.comboBox2);
-            this.groupBox1.Controls.Add(this.comboBox1);
-            this.groupBox1.Controls.Add(this.dateTimePicker1);
+            this.groupBox1.Controls.Add(this.dtpStartTime);
+            this.groupBox1.Controls.Add(this.label11);
+            this.groupBox1.Controls.Add(this.checkReview);
+            this.groupBox1.Controls.Add(this.label10);
+            this.groupBox1.Controls.Add(this.btnCancel);
+            this.groupBox1.Controls.Add(this.btnSave);
+            this.groupBox1.Controls.Add(this.dtpDuration);
+            this.groupBox1.Controls.Add(this.cbClassCode);
+            this.groupBox1.Controls.Add(this.cbSubjectCode);
+            this.groupBox1.Controls.Add(this.dtpTestDate);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.numHard);
+            this.groupBox1.Controls.Add(this.nudHard);
             this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.numMedium);
+            this.groupBox1.Controls.Add(this.nudMedium);
             this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.numEasy);
+            this.groupBox1.Controls.Add(this.nudEasy);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.numQuestions);
+            this.groupBox1.Controls.Add(this.nudQuestions);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Location = new System.Drawing.Point(24, 89);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(986, 317);
+            this.groupBox1.Size = new System.Drawing.Size(986, 365);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Set up test";
             // 
-            // comboBox2
+            // dtpStartTime
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(677, 164);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(229, 28);
-            this.comboBox2.TabIndex = 16;
+            this.dtpStartTime.CustomFormat = "HH:mm:ss";
+            this.dtpStartTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpStartTime.Location = new System.Drawing.Point(677, 208);
+            this.dtpStartTime.Name = "dtpStartTime";
+            this.dtpStartTime.Size = new System.Drawing.Size(229, 27);
+            this.dtpStartTime.TabIndex = 23;
             // 
-            // comboBox1
+            // label11
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(677, 114);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(229, 28);
-            this.comboBox1.TabIndex = 15;
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(493, 213);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(77, 20);
+            this.label11.TabIndex = 22;
+            this.label11.Text = "Start time:";
             // 
-            // dateTimePicker1
+            // checkReview
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(677, 62);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(229, 27);
-            this.dateTimePicker1.TabIndex = 13;
+            this.checkReview.AutoSize = true;
+            this.checkReview.Location = new System.Drawing.Point(269, 271);
+            this.checkReview.Name = "checkReview";
+            this.checkReview.Size = new System.Drawing.Size(15, 14);
+            this.checkReview.TabIndex = 21;
+            this.checkReview.UseVisualStyleBackColor = true;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(60, 265);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(59, 20);
+            this.label10.TabIndex = 20;
+            this.label10.Text = "Review:";
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Location = new System.Drawing.Point(518, 316);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 32);
+            this.btnCancel.TabIndex = 19;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(339, 316);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 32);
+            this.btnSave.TabIndex = 18;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // dtpDuration
+            // 
+            this.dtpDuration.CustomFormat = "HH:mm:ss";
+            this.dtpDuration.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpDuration.Location = new System.Drawing.Point(677, 258);
+            this.dtpDuration.Name = "dtpDuration";
+            this.dtpDuration.Size = new System.Drawing.Size(229, 27);
+            this.dtpDuration.TabIndex = 17;
+            // 
+            // cbClassCode
+            // 
+            this.cbClassCode.FormattingEnabled = true;
+            this.cbClassCode.Location = new System.Drawing.Point(677, 164);
+            this.cbClassCode.Name = "cbClassCode";
+            this.cbClassCode.Size = new System.Drawing.Size(229, 28);
+            this.cbClassCode.TabIndex = 16;
+            // 
+            // cbSubjectCode
+            // 
+            this.cbSubjectCode.FormattingEnabled = true;
+            this.cbSubjectCode.Location = new System.Drawing.Point(677, 114);
+            this.cbSubjectCode.Name = "cbSubjectCode";
+            this.cbSubjectCode.Size = new System.Drawing.Size(229, 28);
+            this.cbSubjectCode.TabIndex = 15;
+            // 
+            // dtpTestDate
+            // 
+            this.dtpTestDate.CustomFormat = "yyyy-MM-dd";
+            this.dtpTestDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpTestDate.Location = new System.Drawing.Point(677, 62);
+            this.dtpTestDate.Name = "dtpTestDate";
+            this.dtpTestDate.Size = new System.Drawing.Size(229, 27);
+            this.dtpTestDate.TabIndex = 13;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(493, 167);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(89, 20);
+            this.label9.Size = new System.Drawing.Size(84, 20);
             this.label9.TabIndex = 12;
-            this.label9.Text = "Class Name:";
+            this.label9.Text = "Class Code:";
             // 
             // label8
             // 
@@ -202,45 +290,100 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(493, 67);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(77, 20);
+            this.label7.Size = new System.Drawing.Size(72, 20);
             this.label7.TabIndex = 10;
-            this.label7.Text = "Start date:";
+            this.label7.Text = "Test date:";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(493, 213);
+            this.label6.Location = new System.Drawing.Point(493, 263);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(70, 20);
             this.label6.TabIndex = 9;
             this.label6.Text = "Duration:";
             // 
-            // dateTimePicker2
+            // dgvTest
             // 
-            this.dateTimePicker2.CustomFormat = "HH:mm:ss";
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker2.Location = new System.Drawing.Point(677, 208);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(229, 27);
-            this.dateTimePicker2.TabIndex = 17;
+            this.dgvTest.AllowUserToResizeRows = false;
+            this.dgvTest.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvTest.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTest.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ID,
+            this.ClassCode,
+            this.StartTime,
+            this.TestDate,
+            this.Duration,
+            this.SubjectCode,
+            this.CreateDate,
+            this.Review});
+            this.dgvTest.Location = new System.Drawing.Point(24, 475);
+            this.dgvTest.Name = "dgvTest";
+            this.dgvTest.RowTemplate.Height = 25;
+            this.dgvTest.Size = new System.Drawing.Size(986, 330);
+            this.dgvTest.TabIndex = 11;
+            // 
+            // ID
+            // 
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            // 
+            // ClassCode
+            // 
+            this.ClassCode.HeaderText = "Code";
+            this.ClassCode.Name = "ClassCode";
+            // 
+            // StartTime
+            // 
+            this.StartTime.HeaderText = "StartTime";
+            this.StartTime.Name = "StartTime";
+            // 
+            // TestDate
+            // 
+            this.TestDate.HeaderText = "TestDate";
+            this.TestDate.Name = "TestDate";
+            // 
+            // Duration
+            // 
+            this.Duration.HeaderText = "Duration";
+            this.Duration.Name = "Duration";
+            // 
+            // SubjectCode
+            // 
+            this.SubjectCode.HeaderText = "SubjectCode";
+            this.SubjectCode.Name = "SubjectCode";
+            // 
+            // CreateDate
+            // 
+            this.CreateDate.HeaderText = "CreateDate";
+            this.CreateDate.Name = "CreateDate";
+            // 
+            // Review
+            // 
+            this.Review.HeaderText = "Review";
+            this.Review.Name = "Review";
+            this.Review.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // FrmCreateTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1030, 831);
+            this.Controls.Add(this.dgvTest);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FrmCreateTest";
             this.Text = "FrmCreateTest";
-            ((System.ComponentModel.ISupportInitialize)(this.numQuestions)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numEasy)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numMedium)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numHard)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudQuestions)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudEasy)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMedium)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHard)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTest)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -250,21 +393,36 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.NumericUpDown numQuestions;
-        private System.Windows.Forms.NumericUpDown numEasy;
+        private System.Windows.Forms.NumericUpDown nudQuestions;
+        private System.Windows.Forms.NumericUpDown nudEasy;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.NumericUpDown numMedium;
+        private System.Windows.Forms.NumericUpDown nudMedium;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.NumericUpDown numHard;
+        private System.Windows.Forms.NumericUpDown nudHard;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker dtpTestDate;
+        private System.Windows.Forms.ComboBox cbSubjectCode;
+        private System.Windows.Forms.ComboBox cbClassCode;
+        private System.Windows.Forms.DateTimePicker dtpDuration;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.DataGridView dgvTest;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClassCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn StartTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TestDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Duration;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SubjectCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CreateDate;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Review;
+        private System.Windows.Forms.CheckBox checkReview;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.DateTimePicker dtpStartTime;
+        private System.Windows.Forms.Label label11;
     }
 }

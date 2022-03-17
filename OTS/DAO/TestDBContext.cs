@@ -32,7 +32,7 @@ namespace OTS.DAO
                     command.Parameters.AddWithValue("classCode", classCode);
                     rowAffects += command.ExecuteNonQuery();
                 }
-                
+
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
             finally { connection.Close(); }
@@ -102,8 +102,9 @@ namespace OTS.DAO
                 command.Parameters.AddWithValue("@review", test.IsReview);
                 connection.Open();
                 rowAffects = command.ExecuteNonQuery();
-            } catch (Exception ex) { throw new Exception(ex.Message); }
-            finally {connection.Close();}
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+            finally { connection.Close(); }
 
             return rowAffects;
         }
@@ -138,7 +139,8 @@ namespace OTS.DAO
                         TestDate = reader.GetDateTime("TestDate"),
                         StartTime = (TimeSpan)reader["StartTime"],
                         Duration = (TimeSpan)reader["Duration"],
-                        Subject = new Subject() { 
+                        Subject = new Subject()
+                        {
                             SubjectCode = reader.GetString("SubjectCode"),
                             SubjectName = reader.GetString("SubjectName"),
                         },
@@ -155,6 +157,106 @@ namespace OTS.DAO
                 connection.Close();
             }
             return null;
+        }
+
+        public int InsertTest(Test test)
+        {
+            int row = 0;
+            string sql_insert_test = @"INSERT INTO [Test]
+                                                   ([Code]
+                                                   ,[StartTime]
+                                                   ,[TestDate]
+                                                   ,[Duration]
+                                                   ,[SubjectCode]
+                                                   ,[CreateDate]
+                                                   ,[Review])
+                                             VALUES
+                                                   (@code,
+                                                   ,@starttime
+                                                   ,@testdate
+                                                   ,@duration
+                                                   ,@subjectcode
+                                                   ,@createdate
+                                                   ,@review)";
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(sql_insert_test, connection);
+                command.Parameters.AddWithValue("@code", test.Code);
+                command.Parameters.AddWithValue("@starttime", test.StartTime);
+                command.Parameters.AddWithValue("@testdate", test.TestDate);
+                command.Parameters.AddWithValue("@duration", test.Duration);
+                command.Parameters.AddWithValue("@subjectcode", test.Subject.SubjectCode);
+                command.Parameters.AddWithValue("@createdate", test.CreateDate);
+                command.Parameters.AddWithValue("@review", test.IsReview);
+                connection.Open();
+                row = command.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            } finally
+            {
+                connection.Close();
+            }
+            return row;
+        }
+
+        public List<Test> GetTests()
+        {
+            List<Test> tests = new List<Test>();
+            string sql = @"SELECT [Id]
+                                  ,[Code]
+                                  ,[StartTime]
+                                  ,[TestDate]
+                                  ,[Duration]
+                                  ,s.[SubjectCode]
+	                              ,s.[SubjectName]
+                                  ,[CreateDate]
+                                  ,[Review]
+                              FROM [Test] t INNER JOIN [Subject] s ON t.[SubjectCode] = s.[SubjectCode]";
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(sql, connection);
+                connection.Open();
+                reader = command.ExecuteReader(CommandBehavior.CloseConnection);
+                if (reader.HasRows)
+                {
+                    while(reader.Read())
+                    {
+                        Subject subject = new Subject()
+                        {
+                            SubjectCode = reader.GetString(6),
+                            SubjectName = reader.GetString(7)
+                        };
+
+                        Test test = new Test()
+                        {
+                            Id = reader.GetInt32(1),
+                            Code = reader.GetString(2),
+                            StartTime = reader.GetTimeSpan(3),
+                            TestDate = reader.GetDateTime(4),
+                            Duration = reader.GetTimeSpan(5),
+                            Subject = subject,
+                            CreateDate = reader.GetDateTime(8),
+                            IsReview = reader.GetBoolean(9)
+                        };
+                        tests.Add(test);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return tests;
         }
     }
 }
