@@ -34,12 +34,12 @@ namespace OTS.ManageSubject
                 if (Regex.IsMatch(oldsubjectCode, rgxsubjectCode) && !String.IsNullOrEmpty(oldsubjectCode) && String.IsNullOrEmpty(oldsubjectName))
                 {
                     option = "FindBySubjectCode";
-                    UpdateSubject_Load(option, oldsubjectCode, oldsubjectName, sender, e);
+                    
                 }
                 else if (Regex.IsMatch(oldsubjectName, rgxsubjectName) && !String.IsNullOrEmpty(oldsubjectName) && String.IsNullOrEmpty(oldsubjectCode))
                 {
                     option = "FindBySubjectName";
-                    UpdateSubject_Load(option, oldsubjectCode, oldsubjectName, sender, e);
+                    
                 }
                 else
                 {
@@ -47,8 +47,7 @@ namespace OTS.ManageSubject
                     {
                         if (Regex.IsMatch(oldsubjectName, rgxsubjectName) && !String.IsNullOrEmpty(oldsubjectName))
                         {
-                            option = "FindBySubjectCodeAndName";
-                            UpdateSubject_Load(option, oldsubjectCode, oldsubjectName, sender, e);
+                            option = "FindBySubjectCodeAndName";                           
                         }
                     }
                 }
