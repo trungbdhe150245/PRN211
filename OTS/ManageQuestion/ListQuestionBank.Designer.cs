@@ -38,6 +38,8 @@ namespace OTS.ManageQuestion
             this.editQues = new System.Windows.Forms.Button();
             this.delQues = new System.Windows.Forms.Button();
             this.dataQuestion = new System.Windows.Forms.DataGridView();
+            this.checkType = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataQuestion)).BeginInit();
             this.SuspendLayout();
@@ -123,11 +125,35 @@ namespace OTS.ManageQuestion
             this.dataQuestion.Size = new System.Drawing.Size(869, 188);
             this.dataQuestion.TabIndex = 9;
             // 
+            // checkType
+            // 
+            this.checkType.FormattingEnabled = true;
+            this.checkType.Items.AddRange(new object[] {
+            "Multiple-choice",
+            "Essay"});
+            this.checkType.Location = new System.Drawing.Point(683, 143);
+            this.checkType.Name = "checkType";
+            this.checkType.Size = new System.Drawing.Size(162, 28);
+            this.checkType.TabIndex = 10;
+            this.checkType.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 10.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.label3.Location = new System.Drawing.Point(692, 113);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(141, 23);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "Type of question";
+            // 
             // ListQuestionBank
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(892, 760);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.checkType);
             this.Controls.Add(this.dataQuestion);
             this.Controls.Add(this.delQues);
             this.Controls.Add(this.editQues);
@@ -158,5 +184,7 @@ namespace OTS.ManageQuestion
         private System.Windows.Forms.Button editQues;
         private System.Windows.Forms.Button delQues;
         private System.Windows.Forms.DataGridView dataQuestion;
+        private System.Windows.Forms.ComboBox checkType;
+        private System.Windows.Forms.Label label3;
     }
 }

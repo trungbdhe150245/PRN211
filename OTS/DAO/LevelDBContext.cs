@@ -14,13 +14,12 @@ namespace OTS.DAO
         public List<Level> GetLevels()
         {
             List<Level> levels = new List<Level>();
-            string getLevels = "SELECT [Id], [Name] FROM [OTS].[dbo].[Level]";
+            string getLevels = "SELECT [Id], [Name] FROM [Level]";
 
             try
             {
                 connection = new SqlConnection(GetConnectionString());
                 command = new SqlCommand(getLevels, connection);
-
                 connection.Open();
 
                 reader = command.ExecuteReader();

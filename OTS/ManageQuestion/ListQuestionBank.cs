@@ -22,7 +22,6 @@ namespace OTS.ManageQuestion
 
         private void ListQuestionBank_Load(object sender, EventArgs e)
         {
-
             loadQues();
         }
 
@@ -73,29 +72,94 @@ namespace OTS.ManageQuestion
 
         public void loadQues()
         {
+            
             try
             {
                 QuestionDBContext qDB = new QuestionDBContext();
                 AnswerDBContext aDB = new AnswerDBContext();
-                //BindingSource bs = new BindingSource();
+                TypeDBContext tDB = new TypeDBContext();
                 List<Question> questions = qDB.getQues();
-                List<Answer> correctAns = aDB.getCorrectAnswer();
-                var listQues = questions.Select(l => new
+                List<Answer> answers = aDB.getAnswer();
+                var types = tDB.GetTypes();
+                checkType.DataSource = types;
+                checkType.DisplayMember = "Name";
+
+                foreach (var item in questions)
+                {
+                    item.Answers = answers.Where(a => a.Question.Id == item.Id).ToList();
+                }
+                if (checkType.SelectedIndex == 0)
+                {
+                    var listQues = questions.Where(q => q.Type.Id == 1).Select(l => new
+                    {
+                        Id = l.Id,
+                        Content = l.Content,
+                        Level = l.Level.Name,
+                        SubCode = l.Subject.SubjectCode,
+                        Type = l.Type.Name,
+                        CorrectAns = l.Answers.FirstOrDefault(c => c.IsCorrect).Content.ToString()
+                    }).ToList();
+                    dataQuestion.DataSource = listQues;
+                }
+                else
+                {
+                    var listQues = questions.Where(q => q.Type.Id == 2).Select(l => new
+                    {
+                        Id = l.Id,
+                        Content = l.Content,
+                        Level = l.Level.Name,
+                        SubCode = l.Subject.SubjectCode,
+                        Type = l.Type.Name,
+                    }).ToList();
+                    dataQuestion.DataSource = listQues;
+                }
+
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            AnswerDBContext aDB = new AnswerDBContext();
+            QuestionDBContext qDB = new QuestionDBContext();
+            TypeDBContext tDB = new TypeDBContext();
+            List<Question> questions = qDB.getQues();
+            List<Answer> answers = aDB.getAnswer();
+            foreach (var item in questions)
+            {
+                item.Answers = answers.Where(a => a.Question.Id == item.Id).ToList();
+            }
+            if (checkType.SelectedIndex == 0)
+            {
+                checkType.SelectedItem = tDB.GetTypes().FirstOrDefault(c => c.Id == 1);
+                var listQues = questions.Where(q => q.Type.Id == 1).Select(l => new
                 {
                     Id = l.Id,
                     Content = l.Content,
                     Level = l.Level.Name,
                     SubCode = l.Subject.SubjectCode,
                     Type = l.Type.Name,
-                    CorrectAnswer = correctAns.Where(c => c.Question.Id == l.Id).ToList().Select(c => c.Content).ToList()
-                    .Aggregate((a, b) => a + ", " + b).ToString()
+                    CorrectAns = l.Answers.FirstOrDefault(c => c.IsCorrect).Content.ToString()
                 }).ToList();
                 dataQuestion.DataSource = listQues;
-                
+                return;
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message);
+                checkType.SelectedItem = tDB.GetTypes().FirstOrDefault(c => c.Id == 2);
+                var listQues = questions.Where(q => q.Type.Id == 2).Select(l => new
+                {
+                    Id = l.Id,
+                    Content = l.Content,
+                    Level = l.Level.Name,
+                    SubCode = l.Subject.SubjectCode,
+                    Type = l.Type.Name,
+                }).ToList();
+                dataQuestion.DataSource = listQues;
             }
         }
     }

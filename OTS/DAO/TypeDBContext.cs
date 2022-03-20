@@ -25,11 +25,10 @@ namespace OTS.DAO
 
             return null;
         }
-
         public List<Models.Type> GetTypes()
         {
             List<Models.Type> types = new List<Models.Type>();
-            string getType = "SELECT [Id],[Name] FROM [OTS].[dbo].[Type]";
+            string getType = "SELECT [Id],[Name] FROM [Type]";
 
             try
             {
@@ -37,7 +36,6 @@ namespace OTS.DAO
                 command = new SqlCommand(getType, connection);
 
                 connection.Open();
-
                 reader = command.ExecuteReader();
                 while (reader.Read())
                 {

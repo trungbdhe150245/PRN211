@@ -85,6 +85,7 @@ C:\Users\Admin\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.Form1.re
 C:\Users\Admin\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.ManageClass.FrmCreateClass.resources
 C:\Users\Admin\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.ManageClass.FrmEditClass.resources
 C:\Users\Admin\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.FrmManageClass.resources
+C:\Users\Admin\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.ManageQuestion.AddQuestion.resources
 C:\Users\Admin\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.ManageQuestion.ListQuestionBank.resources
 C:\Users\Admin\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.ManageSubject.DeleteSubject.resources
 C:\Users\Admin\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.ManageSubject.InsertSubject.resources

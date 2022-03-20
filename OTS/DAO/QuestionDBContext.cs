@@ -34,20 +34,17 @@ namespace OTS.DAO
                     Models.Type t = tDB.GetTypeById(reader.GetInt16(7));
                     Subject s = sDB.getSubbyId(reader.GetString(3));
                     Level l = lDB.GetLevelById(reader.GetInt16(6));
-                    List<Answer> answers = aDB.getAnswerByQues(reader.GetInt32(0));
+                    //List<Answer> answers = aDB.getAnswerByCID(reader.GetInt32(0));
                     Question ques = new Question()
                     {
                         Content = reader.GetString(1),
                         Type = t,
                         Subject = s,
                         Level = l,
-                        Answers = answers,
-                        Id = reader.GetInt32(0)
+                        Id = reader.GetInt32(0),
+                        //Answers = aDB.getAnswerByCID(reader.GetInt32(0))
                     };
-                    foreach (var ans in answers)
-                    {
-                        ans.Question = ques;
-                    }
+                    //ques.Answers = answers;
                     ListQues.Add(ques);
                 }
             }
@@ -60,6 +57,13 @@ namespace OTS.DAO
                 connection.Close();
             }
             return ListQues;
+        }
+
+        public Question findQuesID(int id)
+        {
+            List<Question> list = getQues();
+            Question q = getQues().FirstOrDefault(q => q.Id == id);
+            return q;
         }
     }
 }

@@ -43,7 +43,7 @@ namespace OTS.DAO
         public List<Subject> subjects()
         {
             List<Subject> subjects = new List<Subject>();
-            string getSub = "SELECT [SubjectCode], [SubjectName] FROM[OTS].[dbo].[Subject]";
+            string getSub = "SELECT [SubjectCode], [SubjectName] FROM [Subject]";
             
             try
             {
