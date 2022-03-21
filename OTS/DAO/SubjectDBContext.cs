@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using OTS.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -152,6 +153,40 @@ namespace OTS.DAO
                 connection.Close();
             }
             return subjects;
+        }
+
+        public Subject GetSubject(string subjectCode)
+        {
+            string sql = @"SELECT [SubjectCode]
+                                  ,[SubjectName]
+                              FROM [Subject]
+                              WHERE [SubjectCode] = @subjectcode";
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(sql, connection);
+                command.Parameters.AddWithValue("@subjectcode", subjectCode);
+                connection.Open();
+                reader = command.ExecuteReader(CommandBehavior.CloseConnection);
+                if (reader.HasRows)
+                {
+                    Subject subject = new Subject()
+                    {
+                        SubjectCode = subjectCode,
+                        SubjectName = reader.GetString("SubjectName")
+                    };
+                    return subject;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            } finally
+            {
+                connection.Close();
+            }
+            return null;
         }
 
     }
