@@ -23,7 +23,9 @@ namespace OTS
 			//Application.Run(new FrmViewTest());
 			//Application.Run(new ManageSubject.InsertSubject());
 			//Application.Run(new ManageSubject.UpdateSubject());
-			Application.Run(new ManageTest.frmManageTest());
+			//Application.Run(new ManageTest.frmManageTest());
+            //Application.Run(new FrmManageClass());
+            Application.Run(new FrmViewTest(3));
         }
 	}
 }
