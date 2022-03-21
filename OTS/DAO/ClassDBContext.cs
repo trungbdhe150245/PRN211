@@ -33,10 +33,12 @@ namespace OTS.DAO
                         ClassName = reader.GetString("ClassName"),
                     };
                 }
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
-            } finally
+            }
+            finally
             {
                 connection.Close();
             }
@@ -64,11 +66,13 @@ namespace OTS.DAO
                         ClassName = reader.GetString("ClassName")
                     });
                 }
-                
-            }catch (Exception ex)
+
+            }
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
-            } finally
+            }
+            finally
             {
                 connection.Close();
             }
@@ -250,6 +254,39 @@ namespace OTS.DAO
                 connection.Close();
             }
             return rowAffects;
+        }
+
+        public List<Class> GetClasses()
+        {
+            List<Class> classes = new List<Class>();
+            string sql = @"SELECT [ClassCode]
+                              ,[ClassName]
+                          FROM [Class]";
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(sql, connection);
+
+                connection.Open();
+                reader = command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        classes.Add(new Class
+                        {
+                            ClassCode = reader.GetString(0),
+                            ClassName = reader.GetString(1)
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            return classes;
         }
     }
 

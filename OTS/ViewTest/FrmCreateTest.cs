@@ -48,6 +48,18 @@ namespace OTS.ViewTest
             dgvTest.DataSource = tests;
         }
 
+        private void LoadClass()
+        {
+            ClassDBContext classDBContext = new ClassDBContext();
+            List<Class> classes = classDBContext.GetClasses();
+            foreach (Class c in classes)
+            {
+                cbClass.DisplayMember = c.ClassName;
+                cbClass.ValueMember = c.ClassCode;
+            }
+            cbClass.DataSource = classes;
+        }
+
         private bool CheckInput()
         {
             string mess = "";
@@ -57,10 +69,10 @@ namespace OTS.ViewTest
             } else if (dtpTestDate.Value.CompareTo(DateTime.Now) < 0)
             {
                 mess = "Invalid Test Date";
-            } else if (cbSubjectCode.Text.Equals(""))
+            } else if (cbSubject.Text.Equals(""))
             {
                 mess = "Subject Code cannot empty";
-            } else if (cbClassCode.Text.Equals(""))
+            } else if (cbClass.Text.Equals(""))
             {
                 mess = "Class Name cannot empty";
             }
@@ -81,7 +93,7 @@ namespace OTS.ViewTest
             {
                 Test test = new Test()
                 {
-                    Code = cbClassCode.Text,
+                    Code = cbClass.Text,
                     StartTime = TimeSpan.Parse(dtpStartTime.Text),
                     TestDate = DateTime.Parse(dtpTestDate.Text),
                     Duration = TimeSpan.Parse(dtpDuration.Text),
@@ -89,7 +101,7 @@ namespace OTS.ViewTest
                     IsReview = checkReview.Checked,
                 };
                 SubjectDBContext subjectDBContext = new SubjectDBContext();
-                Subject subject = subjectDBContext.GetSubject(cbSubjectCode.Text);
+                Subject subject = subjectDBContext.GetSubject(cbSubject.Text);
                 test.Subject = subject;
 
                 TestDBContext testDBContext = new TestDBContext();
@@ -98,6 +110,11 @@ namespace OTS.ViewTest
                 LoadTest();
 
             }
+        }
+
+        private void FrmCreateTest_Load(object sender, EventArgs e)
+        {
+            LoadClass();
         }
     }
 }

@@ -45,8 +45,8 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.dtpDuration = new System.Windows.Forms.DateTimePicker();
-            this.cbClassCode = new System.Windows.Forms.ComboBox();
-            this.cbSubjectCode = new System.Windows.Forms.ComboBox();
+            this.cbClass = new System.Windows.Forms.ComboBox();
+            this.cbSubject = new System.Windows.Forms.ComboBox();
             this.dtpTestDate = new System.Windows.Forms.DateTimePicker();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -156,8 +156,8 @@
             this.groupBox1.Controls.Add(this.btnCancel);
             this.groupBox1.Controls.Add(this.btnSave);
             this.groupBox1.Controls.Add(this.dtpDuration);
-            this.groupBox1.Controls.Add(this.cbClassCode);
-            this.groupBox1.Controls.Add(this.cbSubjectCode);
+            this.groupBox1.Controls.Add(this.cbClass);
+            this.groupBox1.Controls.Add(this.cbSubject);
             this.groupBox1.Controls.Add(this.dtpTestDate);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.label8);
@@ -242,21 +242,21 @@
             this.dtpDuration.Size = new System.Drawing.Size(229, 27);
             this.dtpDuration.TabIndex = 17;
             // 
-            // cbClassCode
+            // cbClass
             // 
-            this.cbClassCode.FormattingEnabled = true;
-            this.cbClassCode.Location = new System.Drawing.Point(677, 164);
-            this.cbClassCode.Name = "cbClassCode";
-            this.cbClassCode.Size = new System.Drawing.Size(229, 28);
-            this.cbClassCode.TabIndex = 16;
+            this.cbClass.FormattingEnabled = true;
+            this.cbClass.Location = new System.Drawing.Point(677, 164);
+            this.cbClass.Name = "cbClass";
+            this.cbClass.Size = new System.Drawing.Size(229, 28);
+            this.cbClass.TabIndex = 16;
             // 
-            // cbSubjectCode
+            // cbSubject
             // 
-            this.cbSubjectCode.FormattingEnabled = true;
-            this.cbSubjectCode.Location = new System.Drawing.Point(677, 114);
-            this.cbSubjectCode.Name = "cbSubjectCode";
-            this.cbSubjectCode.Size = new System.Drawing.Size(229, 28);
-            this.cbSubjectCode.TabIndex = 15;
+            this.cbSubject.FormattingEnabled = true;
+            this.cbSubject.Location = new System.Drawing.Point(677, 114);
+            this.cbSubject.Name = "cbSubject";
+            this.cbSubject.Size = new System.Drawing.Size(229, 28);
+            this.cbSubject.TabIndex = 15;
             // 
             // dtpTestDate
             // 
@@ -272,18 +272,18 @@
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(493, 167);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(84, 20);
+            this.label9.Size = new System.Drawing.Size(45, 20);
             this.label9.TabIndex = 12;
-            this.label9.Text = "Class Code:";
+            this.label9.Text = "Class:";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(493, 117);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(100, 20);
+            this.label8.Size = new System.Drawing.Size(61, 20);
             this.label8.TabIndex = 11;
-            this.label8.Text = "Subject Code:";
+            this.label8.Text = "Subject:";
             // 
             // label7
             // 
@@ -375,8 +375,11 @@
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.MaximizeBox = false;
             this.Name = "FrmCreateTest";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmCreateTest";
+            this.Load += new System.EventHandler(this.FrmCreateTest_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudQuestions)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudEasy)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMedium)).EndInit();
@@ -406,8 +409,8 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.DateTimePicker dtpTestDate;
-        private System.Windows.Forms.ComboBox cbSubjectCode;
-        private System.Windows.Forms.ComboBox cbClassCode;
+        private System.Windows.Forms.ComboBox cbSubject;
+        private System.Windows.Forms.ComboBox cbClass;
         private System.Windows.Forms.DateTimePicker dtpDuration;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
