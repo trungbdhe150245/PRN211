@@ -143,19 +143,19 @@ namespace OTS.ViewTest
                         bool isFindAnother = false;
                         //do
                         //{
-                        newQuestion = questionDBC.GetRandomQuestionWithLevel(selectedQuestion.Level.Id, selectedQuestion.Subject.SubjectCode);
+                        newQuestion = questionDBC.GetRandomQuestionWithLevel(selectedQuestion.Level.Id, selectedQuestion.Subject.SubjectCode, selectedQuestion.Type.Id);
                         foreach (DataGridViewRow row in dgvQuestion.Rows)
                         {
                             if (
-                            Int32.Parse(row.Cells["QuestionID"].Value.ToString()) == newQuestion.Id)
+                            Int32.Parse(row.Cells[0].Value.ToString()) == newQuestion.Id)
                             {
                                 isFindAnother = true;
+                                break;
                             };
                         }
                         //} while (isFindAnother);
-                        if (newQuestion != null)
+                        if (newQuestion != null && !isFindAnother)
                         {
-
                             dataGridViewQuestion.Rows[e.RowIndex].SetValues(newQuestion.Id, newQuestion.Content, newQuestion.Type.Name, newQuestion.Level.Name, "View", "Change");
                         }
                     }
@@ -233,7 +233,7 @@ namespace OTS.ViewTest
                     }
                     else
                     {
-                        MessageBox.Show($"Duplicate Test Code "{txtTestCode.Text}"\nUpdate Fail");
+                        MessageBox.Show($"Duplicate Test Code {txtTestCode.Text}\nUpdate Fail");
                     }
 
                     }
