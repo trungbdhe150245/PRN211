@@ -11,6 +11,59 @@ namespace OTS.DAO
 {
     public class TestDBContext : DBContext
     {
+        public Test GetTestByCode (string testCode)
+        {
+
+            string sql_select_test = @"SELECT [Id]
+                                      ,[Code]
+                                      ,[StartTime]
+                                      ,[TestDate]
+                                      ,[Duration]
+                                      ,[EndTime]
+                                      ,Test.[SubjectCode]
+	                                  ,Subject.SubjectName
+                                      ,[CreateDate]
+                                      ,[Review]
+                                  FROM [Test] INNER JOIN Subject
+			                                ON Subject.SubjectCode=Test.SubjectCode
+                                  WHERE Test.Code = @testCode";
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(sql_select_test, connection);
+                command.Parameters.AddWithValue("@testCode", testCode);
+                connection.Open();
+                reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    return new Test()
+                    {
+                        Id = reader.GetInt32("Id"),
+                        Code = reader.GetString("Code"),
+                        CreateDate = reader.GetDateTime("CreateDate"),
+                        TestDate = reader.GetDateTime("TestDate"),
+                        StartTime = (TimeSpan)reader["StartTime"],
+                        Duration = (TimeSpan)reader["Duration"],
+                        Subject = new Subject()
+                        {
+                            SubjectCode = reader.GetString("SubjectCode"),
+                            SubjectName = reader.GetString("SubjectName"),
+                        },
+                        EndTime = (TimeSpan)reader["EndTime"],
+                        IsReview = reader.GetBoolean("Review")
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return null;
+        }
         public int UpdateClassesTest(int testId, List<string> classCodes)
         {
             int rowAffects = 0;
@@ -88,6 +141,7 @@ namespace OTS.DAO
                                   ,[StartTime] = @startTime
                                   ,[TestDate] = @testDate
                                   ,[Duration] = @duration
+                                  ,[EndTime] = @endtime
                                   ,[Review] = @review
                              WHERE Test.Id=@testId";
             try
@@ -100,6 +154,7 @@ namespace OTS.DAO
                 command.Parameters.AddWithValue("@testDate", test.TestDate);
                 command.Parameters.AddWithValue("@duration", test.Duration);
                 command.Parameters.AddWithValue("@review", test.IsReview);
+                command.Parameters.AddWithValue("@endtime", test.EndTime);
                 connection.Open();
                 rowAffects = command.ExecuteNonQuery();
             }
@@ -115,6 +170,7 @@ namespace OTS.DAO
                                       ,[StartTime]
                                       ,[TestDate]
                                       ,[Duration]
+                                      ,[EndTime]
                                       ,Test.[SubjectCode]
 	                                  ,Subject.SubjectName
                                       ,[CreateDate]
@@ -144,6 +200,7 @@ namespace OTS.DAO
                             SubjectCode = reader.GetString("SubjectCode"),
                             SubjectName = reader.GetString("SubjectName"),
                         },
+                        EndTime = (TimeSpan)reader["EndTime"],
                         IsReview = reader.GetBoolean("Review")
                     };
                 }

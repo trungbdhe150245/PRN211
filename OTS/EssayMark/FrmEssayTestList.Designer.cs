@@ -43,6 +43,8 @@
             this.btnTestDetail = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSolution)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMark)).BeginInit();
             this.SuspendLayout();
@@ -93,7 +95,7 @@
             // 
             // txtTestId
             // 
-            this.txtTestId.Location = new System.Drawing.Point(367, 79);
+            this.txtTestId.Location = new System.Drawing.Point(365, 95);
             this.txtTestId.Name = "txtTestId";
             this.txtTestId.ReadOnly = true;
             this.txtTestId.Size = new System.Drawing.Size(110, 27);
@@ -102,7 +104,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(302, 82);
+            this.label1.Location = new System.Drawing.Point(300, 98);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(48, 20);
             this.label1.TabIndex = 2;
@@ -111,7 +113,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(302, 35);
+            this.label2.Location = new System.Drawing.Point(300, 51);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(58, 20);
             this.label2.TabIndex = 4;
@@ -119,7 +121,7 @@
             // 
             // txtSubject
             // 
-            this.txtSubject.Location = new System.Drawing.Point(367, 32);
+            this.txtSubject.Location = new System.Drawing.Point(365, 48);
             this.txtSubject.Name = "txtSubject";
             this.txtSubject.ReadOnly = true;
             this.txtSubject.Size = new System.Drawing.Size(212, 27);
@@ -166,7 +168,7 @@
             // 
             // btnTestDetail
             // 
-            this.btnTestDetail.Location = new System.Drawing.Point(490, 78);
+            this.btnTestDetail.Location = new System.Drawing.Point(488, 94);
             this.btnTestDetail.Name = "btnTestDetail";
             this.btnTestDetail.Size = new System.Drawing.Size(89, 29);
             this.btnTestDetail.TabIndex = 9;
@@ -194,11 +196,33 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 22F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label5.Location = new System.Drawing.Point(26, 22);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(114, 50);
+            this.label5.TabIndex = 22;
+            this.label5.Text = "Essay";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 22F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label6.Location = new System.Drawing.Point(106, 72);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(113, 50);
+            this.label6.TabIndex = 23;
+            this.label6.Text = "Mark";
+            // 
             // FrmEssayTestList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(802, 562);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnTestDetail);
@@ -212,7 +236,7 @@
             this.Controls.Add(this.txtTestId);
             this.Controls.Add(this.dgvSolution);
             this.Name = "FrmEssayTestList";
-            this.Text = "Form1";
+            this.Text = "Essay Mark";
             this.Load += new System.EventHandler(this.FrmEssayTestList_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSolution)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMark)).EndInit();
@@ -238,5 +262,7 @@
         private System.Windows.Forms.Button btnTestDetail;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
     }
 }

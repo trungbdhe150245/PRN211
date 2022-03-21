@@ -14,6 +14,7 @@ namespace OTS.ViewTest
 {
     public partial class FrmViewTest : Form
     {
+        private Test old;
         private int testID;
         public FrmViewTest(int testID)
         {
@@ -33,6 +34,8 @@ namespace OTS.ViewTest
             dtpStartDate.CustomFormat = "dd/MM/yyyy";
             dtpDuration.Format = DateTimePickerFormat.Time;
             dtpDuration.CustomFormat = "HH:mm:ss";
+            dtpEndTime.Format = DateTimePickerFormat.Time;
+            dtpEndTime.CustomFormat = "HH:mm:ss";
         }
         public void LoadQuestionsList()
         {
@@ -83,6 +86,7 @@ namespace OTS.ViewTest
                 Test test = testDBC.GetTest(testID);
                 if (test != null)
                 {
+                    old = test;
                     txtTestID.Text = test.Id.ToString();
                     txtTestCode.Text = test.Code;
                     txtSubject.Text = test.Subject.SubjectCode
@@ -92,6 +96,7 @@ namespace OTS.ViewTest
                     DateTime dt = new DateTime(2022, 12, 31);
                     dtpStartTime.Value = dt.Add(test.StartTime);
                     dtpDuration.Value = dt.Add(test.Duration);
+                    dtpEndTime.Value = dt.Add(test.EndTime);
                     cbReview.Checked = test.IsReview;
                     LoadQuestionsList();
                     LoadClassList();
@@ -138,19 +143,19 @@ namespace OTS.ViewTest
                         bool isFindAnother = false;
                         //do
                         //{
-                        newQuestion = questionDBC.GetRandomQuestionWithLevel(selectedQuestion.Level.Id, selectedQuestion.Subject.SubjectCode);
+                        newQuestion = questionDBC.GetRandomQuestionWithLevel(selectedQuestion.Level.Id, selectedQuestion.Subject.SubjectCode, selectedQuestion.Type.Id);
                         foreach (DataGridViewRow row in dgvQuestion.Rows)
                         {
                             if (
-                            Int32.Parse(row.Cells["QuestionID"].Value.ToString()) == newQuestion.Id)
+                            Int32.Parse(row.Cells[0].Value.ToString()) == newQuestion.Id)
                             {
                                 isFindAnother = true;
+                                break;
                             };
                         }
                         //} while (isFindAnother);
-                        if (newQuestion != null)
+                        if (newQuestion != null && !isFindAnother)
                         {
-
                             dataGridViewQuestion.Rows[e.RowIndex].SetValues(newQuestion.Id, newQuestion.Content, newQuestion.Type.Name, newQuestion.Level.Name, "View", "Change");
                         }
                     }
@@ -181,6 +186,7 @@ namespace OTS.ViewTest
                 Duration = dtpDuration.Value.TimeOfDay,
                 StartTime = dtpStartTime.Value.TimeOfDay,
                 TestDate = dtpStartDate.Value.Date,
+                EndTime = dtpEndTime.Value.TimeOfDay,
                 IsReview = cbReview.Checked,
                 Subject = new Subject()
                 {
@@ -200,34 +206,41 @@ namespace OTS.ViewTest
                 {
                     TestDBContext testDBC = new TestDBContext();
                     QuestionDBContext questionDBC = new QuestionDBContext();
-                    List<int> questionIds = new List<int>();
-                    foreach (DataGridViewRow row in dgvQuestion.Rows)
-                    {
-                        questionIds.Add(
-                        Int32.Parse(row.Cells["QuestionId"].Value.ToString())
-                        );
-                    }
-                    List<string> classCodes = new List<string>();
-                    for (int i = 0; i < lbClasses.Items.Count; i++)
-                    {
-                        string classText = lbClasses.Items[i].ToString();
-                        classCodes.Add(classText.Split(" - ")[0].Trim());
-                    }
+                    Test testByCode = testDBC.GetTestByCode(test.Code);
 
-                    if (testDBC.UpdateTest(test) > 0)
+                    if (testByCode == null || old.Code.Equals(testByCode.Code))
                     {
+
+                        testDBC.UpdateTest(test);
+
+                        List<int> questionIds = new List<int>();
+                        foreach (DataGridViewRow row in dgvQuestion.Rows)
+                        {
+                            questionIds.Add(
+                            Int32.Parse(row.Cells["QuestionId"].Value.ToString())
+                            );
+                        }
+                        List<string> classCodes = new List<string>();
+                        for (int i = 0; i < lbClasses.Items.Count; i++)
+                        {
+                            string classText = lbClasses.Items[i].ToString();
+                            classCodes.Add(classText.Split(" - ")[0].Trim());
+                        }
                         questionDBC.UpdateTestQuestion(test.Id, questionIds);
                         testDBC.UpdateClassesTest(testID, classCodes);
                         MessageBox.Show("Update succesful");
+
                     }
                     else
                     {
-                        MessageBox.Show("Update Fail");
+                        MessageBox.Show($"Duplicate Test Code {txtTestCode.Text}\nUpdate Fail");
                     }
-                }
+
+                    }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Error");
+                    MessageBox.Show("Update Fail");
                 }
             }
             else
