@@ -54,6 +54,7 @@ C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\bin\Debug\net5.0-windows\OTS
 C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\bin\Debug\net5.0-windows\OTS.dll
 C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\bin\Debug\net5.0-windows\ref\OTS.dll
 C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\bin\Debug\net5.0-windows\OTS.pdb
+C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\bin\Debug\net5.0-windows\AdvancedDataGridView.dll
 C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\bin\Debug\net5.0-windows\Microsoft.Data.SqlClient.dll
 C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\bin\Debug\net5.0-windows\Microsoft.Extensions.Configuration.dll
 C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\bin\Debug\net5.0-windows\Microsoft.Extensions.Configuration.Abstractions.dll
@@ -71,6 +72,8 @@ C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\bin\Debug\net5.0-windows\Mic
 C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\bin\Debug\net5.0-windows\Microsoft.IdentityModel.Tokens.dll
 C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\bin\Debug\net5.0-windows\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\bin\Debug\net5.0-windows\System.Runtime.Caching.dll
+C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\bin\Debug\net5.0-windows\fr\AdvancedDataGridView.resources.dll
+C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\bin\Debug\net5.0-windows\ru\AdvancedDataGridView.resources.dll
 C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\bin\Debug\net5.0-windows\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
 C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\bin\Debug\net5.0-windows\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
 C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\bin\Debug\net5.0-windows\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
@@ -78,15 +81,11 @@ C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\bin\Debug\net5.0-windows\run
 C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\bin\Debug\net5.0-windows\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\bin\Debug\net5.0-windows\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\bin\Debug\net5.0-windows\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
-C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.csproj.AssemblyReference.cache
 C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.Form1.resources
 C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.ManageClass.FrmCreateClass.resources
 C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.ManageClass.FrmEditClass.resources
 C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.FrmManageClass.resources
-C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.ManageSubject.DeleteSubject.resources
-C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.ManageSubject.InsertSubject.resources
-C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.ManageSubject.ManagerSubject.resources
-C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.ManageSubject.UpdateSubject.resources
+C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.ManageQuestion.ListQuestionBank.resources
 C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.ViewTest.FrmViewTest.resources
 C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.csproj.GenerateResource.cache
 C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.GeneratedMSBuildEditorConfig.editorconfig
@@ -98,7 +97,7 @@ C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS
 C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\ref\OTS.dll
 C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.pdb
 C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.genruntimeconfig.cache
-C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.ManageQuestion.ListQuestionBank.resources
-C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\bin\Debug\net5.0-windows\AdvancedDataGridView.dll
-C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\bin\Debug\net5.0-windows\fr\AdvancedDataGridView.resources.dll
-C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\bin\Debug\net5.0-windows\ru\AdvancedDataGridView.resources.dll
+C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.csproj.AssemblyReference.cache
+C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.ManageSubject.frmInsert.resources
+C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.ManageSubject.frmManagerSubject.resources
+C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.ManageSubject.frmUpdate.resources

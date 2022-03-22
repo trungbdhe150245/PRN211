@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using OTS.Models;
 
 namespace OTS.DAO
 {
@@ -39,25 +40,25 @@ namespace OTS.DAO
             return rowAffects;
         }
         //--------------------------------------------------------
-        public int UpdateSubject(String option, String oldsubjectCode, String oldsubjectName,String newsubjectCode,String newsubjectName)
+        public int UpdateSubject(String option, String oldsubjectCode, String oldsubjectName, String newsubjectCode, String newsubjectName)
         {
             int rowAffects = 0;
             string sql_update_subject = "";
             if (option.Equals("FindBySubjectCode"))
             {
-                 sql_update_subject = @"UPDATE Subject
+                sql_update_subject = @"UPDATE Subject
                                        SET SubjectCode = @newsubjectCode, SubjectName = @newsubjectName
                                        WHERE SubjectCode = @oldsubjectCode;";
             }
             else if (option == "FindBySubjectName")
             {
-                 sql_update_subject = @"UPDATE Subject
+                sql_update_subject = @"UPDATE Subject
                                        SET SubjectCode = @newsubjectCode, SubjectName = @newsubjectName
                                        WHERE SubjectName like '%' + @oldsubjectName + '%';";
             }
             else if (option == "FindBySubjectCodeAndName")
             {
-                 sql_update_subject = @"UPDATE Subject
+                sql_update_subject = @"UPDATE Subject
                                        SET SubjectCode = @newsubjectCode, SubjectName = @newsubjectName
                                        WHERE SubjectCode = @oldsubjectCode and SubjectName like '%' + @SubjectName + '%';";
             }
@@ -89,8 +90,8 @@ namespace OTS.DAO
                     command.Parameters.AddWithValue("@oldsubjectName", oldsubjectName);
                 }
 
-                
-                
+
+
                 connection.Open();
                 rowAffects = command.ExecuteNonQuery();
             }
@@ -105,7 +106,8 @@ namespace OTS.DAO
             }
             return rowAffects;
         }
-        public List<Models.Subject> FindSubject(String option,String subjectCode,String subjectName)
+        //--------------------------------------------------------
+        public List<Models.Subject> FindSubject(String option, String subjectCode, String subjectName)
         {
             int rowAffects = 0;
             string sql_view_subject = "";
@@ -122,33 +124,40 @@ namespace OTS.DAO
                                         from Subject
                                        Where SubjectName like '%' + @SubjectName + '%'";
             }
-            else if(option == "FindBySubjectCodeAndName")
+            else if (option == "FindBySubjectCodeAndName")
             {
                 sql_view_subject = @"Select [SubjectCode],[SubjectName]
                                         from Subject
                                         Where SubjectCode=@subjectCode And SubjectName like '%' + @SubjectName + '%' ";
             }
-            
+            else if (option == "getAll")
+            {
+                sql_view_subject = @"Select [SubjectCode],[SubjectName]
+                                        from Subject";
+            }
+
+
             try
             {
                 connection = new SqlConnection(GetConnectionString());
                 command = new SqlCommand(@sql_view_subject, connection);
-                
-                
+
+
                 if (option == "FindBySubjectCode")
                 {
-                   command.Parameters.AddWithValue("@subjectCode", subjectCode);
+                    command.Parameters.AddWithValue("@subjectCode", subjectCode);
                 }
-                else if(option == "FindBySubjectName")
+                else if (option == "FindBySubjectName")
                 {
-                   command.Parameters.AddWithValue("@subjectName", subjectName);
-                }else if(option == "FindBySubjectCodeAndName")
+                    command.Parameters.AddWithValue("@subjectName", subjectName);
+                }
+                else if (option == "FindBySubjectCodeAndName")
                 {
                     command.Parameters.AddWithValue("@subjectCode", subjectCode);
                     command.Parameters.AddWithValue("@subjectName", subjectName);
                 }
-                
-                
+
+
                 try
                 {
                     connection.Open();
@@ -162,13 +171,13 @@ namespace OTS.DAO
                             subject.SubjectName = reader.GetString("SubjectName");
                             sub.Add(subject);
                         }
-                     
+
                     }
                     connection.Close();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message,"Error");
+                    MessageBox.Show(ex.Message, "Error");
                 }
                 connection.Open();
                 rowAffects = command.ExecuteNonQuery();
@@ -182,39 +191,91 @@ namespace OTS.DAO
             {
                 connection.Close();
             }
-            return sub  ;
+            return sub;
         }
-
-        public List<Models.Subject> Getsubjects()
+        //--------------------------------------------------------
+        public Subject GetSubject(String option, String subjectCode, String subjectName)
         {
-            List<Models.Subject> subjects = new List<Models.Subject>();
-            connection = new SqlConnection(GetConnectionString());
-            command = new SqlCommand();
+            int rowAffects = 0;
+            string sql_view_subject = "";
+            Subject sub = new Subject();
+            if (option.Equals("FindBySubjectCode"))
+            {
+                sql_view_subject = @"Select [SubjectCode],[SubjectName]
+                                        from Subject
+                                        Where SubjectCode=@subjectCode;";
+            }
+            else if (option == "FindBySubjectName")
+            {
+                sql_view_subject = @"Select [SubjectCode],[SubjectName]
+                                        from Subject
+                                       Where SubjectName like '%' + @SubjectName + '%'";
+            }
+            else if (option == "FindBySubjectCodeAndName")
+            {
+                sql_view_subject = @"Select [SubjectCode],[SubjectName]
+                                        from Subject
+                                        Where SubjectCode=@subjectCode And SubjectName like '%' + @SubjectName + '%' ";
+            }
+            
+
+
             try
             {
-                connection.Open();
-                reader = command.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
-                if (reader.HasRows == true)
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(@sql_view_subject, connection);
+
+
+                if (option == "FindBySubjectCode")
                 {
-                    while (reader.Read())
-                    {
-                        Models.Subject subject = new Models.Subject();
-                        subject.SubjectCode = reader.GetString("SubjectCode");
-                        subject.SubjectName = reader.GetString("SubjectName");
-                    }
+                    command.Parameters.AddWithValue("@subjectCode", subjectCode);
                 }
+                else if (option == "FindBySubjectName")
+                {
+                    command.Parameters.AddWithValue("@subjectName", subjectName);
+                }
+                else if (option == "FindBySubjectCodeAndName")
+                {
+                    command.Parameters.AddWithValue("@subjectCode", subjectCode);
+                    command.Parameters.AddWithValue("@subjectName", subjectName);
+                }
+
+
+                try
+                {
+                    connection.Open();
+                    reader = command.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
+                    if (reader.HasRows == true)
+                    {
+                        while (reader.Read())
+                        {
+                            Models.Subject subject = new Models.Subject();
+                            subject.SubjectCode = reader.GetString("SubjectCode");
+                            subject.SubjectName = reader.GetString("SubjectName");
+                            sub=subject;
+                        }
+
+                    }
+                    connection.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error");
+                }
+                connection.Open();
+                rowAffects = command.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
-                
+                MessageBox.Show(ex.Message.ToString(), "Warnning",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
                 connection.Close();
             }
-            return subjects;
+            return sub;
         }
-
     }
 }
 
