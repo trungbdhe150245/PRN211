@@ -118,7 +118,7 @@
             this.cbStatus.Enabled = false;
             this.cbStatus.FormattingEnabled = true;
             this.cbStatus.Items.AddRange(new object[] {
-            "Not started",
+            "Not Started",
             "Started",
             "Ended"});
             this.cbStatus.Location = new System.Drawing.Point(11, 294);

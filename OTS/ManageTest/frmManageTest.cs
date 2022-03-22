@@ -1,5 +1,6 @@
 ﻿using OTS.DAO;
 using OTS.Models;
+using OTS.ViewTest;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -90,7 +91,7 @@ namespace OTS.ManageTest
             }
         }
 
-        public void EnablePageButton(int pageIndex, int pageSize)
+        public void EnablePageButton(int pageIndex, int totalPage)
         {
             if (pageIndex > 1)
             {
@@ -103,7 +104,7 @@ namespace OTS.ManageTest
                 btnPrevPage.Enabled = false;
             }
 
-            if (pageIndex < pageSize)
+            if (pageIndex < totalPage)
             {
                 btnLastPage.Enabled = true;
                 btnNextPage.Enabled = true;
@@ -126,10 +127,30 @@ namespace OTS.ManageTest
             int pageIndex;
             int pageSize = 10;
 
+            //get filter value when corresponding checkbox is checked
+            if (chkSubject.Checked)
+            {
+                subjectCode = cbSubject.SelectedValue.ToString();
+            }
+            if (chkCreate.Checked)
+            {
+                createFrom = dtpCreateFrom.Value.Date;
+                createTo = dtpCreateTo.Value.Date;
+            }
+            if (chkTest.Checked)
+            {
+                testFrom = dtpTestFrom.Value.Date;
+                testTo = dtpTestTo.Value.Date;
+            }
+            if (chkStatus.Checked)
+            {
+                status = cbStatus.SelectedItem.ToString();
+            }
+
             int totalRecords = testDB.CountTests(subjectCode, createFrom, createTo,
                     testFrom, testTo, status);
             int totalPages = totalRecords % pageSize == 0 ? totalRecords / pageSize : (totalRecords / pageSize) + 1;
-            
+
             //set the page index
             if (txtPageIndex.Text.Trim().Equals(""))
             {
@@ -141,7 +162,7 @@ namespace OTS.ManageTest
                 {
                     pageIndex = int.Parse(txtPageIndex.Text);
                     //if page index over the total of pages then redirect to end page
-                    if(pageIndex > totalPages)
+                    if (pageIndex > totalPages)
                     {
                         pageIndex = totalPages;
                     }
@@ -153,27 +174,7 @@ namespace OTS.ManageTest
                 }
             }
             //enable the appropriate pagging button
-            EnablePageButton(pageIndex, pageSize);
-
-            //get filter value when corresponding checkbox is checked
-            if (chkSubject.Checked)
-            {
-                subjectCode = cbSubject.SelectedValue.ToString();
-            }
-            if (chkCreate.Checked)
-            {
-                createFrom = dtpCreateFrom.Value;
-                createTo= dtpCreateTo.Value;
-            }
-            if (chkTest.Checked)
-            {
-                testFrom = dtpTestFrom.Value;
-                testTo = dtpTestTo.Value;
-            }
-            if (chkStatus.Checked)
-            {
-                status = cbStatus.SelectedItem.ToString();
-            }
+            EnablePageButton(pageIndex, totalPages);
 
             //gets the data using corressponding filter data
             var tests = testDB.GetTests(pageIndex, pageSize, subjectCode
@@ -184,14 +185,14 @@ namespace OTS.ManageTest
             for (int i = 0; i < tests.Count; i++)
             {
                 //Set status for status cell
-                if(tests[i].TestDate == DateTime.Now.Date 
+                if (tests[i].TestDate == DateTime.Now.Date
                     && tests[i].StartTime <= DateTime.Now.TimeOfDay
                     && tests[i].EndTime > DateTime.Now.TimeOfDay)
                 {
                     dgvTest.Rows[i].Cells[5].Value = "Started";
                 }
                 else if (tests[i].TestDate < DateTime.Now.Date
-                    ||(tests[i].TestDate == DateTime.Now.Date
+                    || (tests[i].TestDate == DateTime.Now.Date
                     && tests[i].EndTime < DateTime.Now.TimeOfDay))
                 {
                     dgvTest.Rows[i].Cells[5].Value = "Ended";
@@ -201,7 +202,7 @@ namespace OTS.ManageTest
                     dgvTest.Rows[i].Cells[5].Value = "Not started";
                 }
                 //Set text for button cell
-                dgvTest.Rows[i].Cells[6].Value = "Start";                
+                dgvTest.Rows[i].Cells[6].Value = "Start";
                 dgvTest.Rows[i].Cells[7].Value = "End";
                 dgvTest.Rows[i].Cells[8].Value = "View detail";
             }
@@ -236,6 +237,7 @@ namespace OTS.ManageTest
         {
             try
             {
+                txtPageIndex.Text = "1";
                 ClearCheckBox();
                 LoadTest();
             }
@@ -249,6 +251,7 @@ namespace OTS.ManageTest
         {
             try
             {
+                txtPageIndex.Text = "1";
                 LoadTest();
             }
             catch (Exception ex)
@@ -389,7 +392,7 @@ namespace OTS.ManageTest
             if (e.ColumnIndex == 6)
             {
                 btnStart_Click(testID);
-            } 
+            }
             else if (e.ColumnIndex == 7)
             {
                 btnEnd_Click(testID);
@@ -402,19 +405,71 @@ namespace OTS.ManageTest
 
         private void btnDetail_Click(int testID)
         {
-            throw new NotImplementedException();
+            //hide current form and show again when close view detail test form
+            this.Hide();
+            FrmViewTest frmViewTest = new FrmViewTest(testID);
+            frmViewTest.FormClosed += (s, args) => this.Show();
+            frmViewTest.Show();
         }
 
         private void btnEnd_Click(int testID)
         {
-            throw new NotImplementedException();
+            Test test = testDB.GetTest(testID);
+
+            // if the test is already ended, inform to user and do nothìng
+            if (test.TestDate < DateTime.Now.Date
+                || (test.TestDate == DateTime.Now.Date
+                && test.EndTime < DateTime.Now.TimeOfDay))
+            {
+                MessageBox.Show("This test is already ended");
+            }
+            else
+            {
+                if (MessageBox.Show("Are you sure to end the test now?"
+                , "Confirm", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                {
+                    //if the test is not started yet, update the start time to current time
+                    if (test.TestDate > DateTime.Now.Date)
+                    {
+                        test.TestDate = DateTime.Now.Date;
+                    }
+                    if (test.TestDate == DateTime.Now.Date
+                        && test.StartTime > DateTime.Now.TimeOfDay)
+                    {
+                        test.StartTime = DateTime.Now.TimeOfDay;
+                    }
+                    //update endtime to current time
+                    test.EndTime = DateTime.Now.TimeOfDay;
+                    //update to DB
+                    testDB.ChangeTestTime(test);
+                    //reload form
+                    try
+                    {
+                        LoadTest();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
         }
 
         private void btnStart_Click(int testID)
         {
             Test test = testDB.GetTest(testID);
-            frmStartTest frmStart = new frmStartTest(test, this);
-            frmStart.Show();
+            //if the test is already started, inform to user and do nothing
+            if (test.TestDate == DateTime.Now.Date
+                && test.StartTime <= DateTime.Now.TimeOfDay
+                && test.EndTime > DateTime.Now.TimeOfDay)
+            {
+                MessageBox.Show("This test is already started");
+            }
+            else
+            {
+                frmStartTest frmStart = new frmStartTest(test, this);
+                frmStart.Show();
+            }
         }
 
         private void frmManageTest_Activated(object sender, EventArgs e)

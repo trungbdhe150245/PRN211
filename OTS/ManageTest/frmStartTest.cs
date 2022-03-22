@@ -79,7 +79,7 @@ namespace OTS.ManageTest
                 currentTest.EndTime = dtpEnd.Value.TimeOfDay;
                 try
                 {
-                    testDB.StartTest(currentTest);
+                    testDB.ChangeTestTime(currentTest);
                 }
                 catch (Exception ex)
                 {

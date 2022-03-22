@@ -124,7 +124,7 @@
             this.Controls.Add(this.dtpStart);
             this.Controls.Add(this.label2);
             this.Name = "frmStartTest";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Start Test";
             this.Load += new System.EventHandler(this.frmStartTest_Load);
             this.ResumeLayout(false);

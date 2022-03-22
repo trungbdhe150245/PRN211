@@ -112,6 +112,7 @@ namespace OTS.DAO
             string sql_select_test = @"SELECT [Id]
                                       ,[Code]
                                       ,[StartTime]
+                                      ,[EndTime]
                                       ,[TestDate]
                                       ,[Duration]
                                       ,Test.[SubjectCode]
@@ -137,6 +138,7 @@ namespace OTS.DAO
                         CreateDate = reader.GetDateTime("CreateDate"),
                         TestDate = reader.GetDateTime("TestDate"),
                         StartTime = (TimeSpan)reader["StartTime"],
+                        EndTime = (TimeSpan)reader["EndTime"],
                         Duration = (TimeSpan)reader["Duration"],
                         Subject = new Subject() { 
                             SubjectCode = reader.GetString("SubjectCode"),
@@ -224,7 +226,7 @@ namespace OTS.DAO
             }
             if (createFrom != new DateTime() && createTo != new DateTime())
             {
-                table_rowNum += " AND [Test].[CreateDate] between @createFrom and @createTo ";
+                table_rowNum += " AND CAST([Test].[CreateDate] AS date) between @createFrom and @createTo ";
             }
             if (testFrom != new DateTime() && testTo != new DateTime())
             {
@@ -383,7 +385,7 @@ namespace OTS.DAO
         }
 
 
-        public int StartTest(Test test)
+        public int ChangeTestTime(Test test)
         {
             int rowAffects = 0;
             string sql_update_test = @"UPDATE [Test]
