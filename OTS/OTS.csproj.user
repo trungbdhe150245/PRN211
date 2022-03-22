@@ -50,7 +50,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="ManageTest\frmStartTest.cs">
-	<SubType>Form</SubType>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Update="ViewTest\FrmCreateTest.cs">
       <SubType>Form</SubType>
