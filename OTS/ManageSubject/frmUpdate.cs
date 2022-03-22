@@ -16,7 +16,7 @@ namespace OTS.ManageSubject
         {
             InitializeComponent();
         }
-        public void getData(String oldSubjectCode)
+        public void getData(String oldSubjectCode,String oldSubjectName)
         {
 
         }
