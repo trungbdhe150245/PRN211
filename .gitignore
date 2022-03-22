@@ -3,3 +3,8 @@ OTS/.vs/*
 OTS/bin/*
 OTS/obj/*
 OTS/Program.cs
+OTS/.vs/OTS/v17/.suo
+OTS/bin/Debug/net5.0-windows/OTS.dll
+OTS/bin/Debug/net5.0-windows/OTS.pdb
+OTS/bin/Debug/net5.0-windows/ref/OTS.dll
+OTS/obj/Debug/net5.0-windows/OTS.csproj.AssemblyReference.cache
