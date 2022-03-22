@@ -90,6 +90,7 @@
             this.btnClearSearch.TabIndex = 16;
             this.btnClearSearch.Text = "View all tests";
             this.btnClearSearch.UseVisualStyleBackColor = true;
+            this.btnClearSearch.Click += new System.EventHandler(this.btnClearSearch_Click);
             // 
             // btnSearch
             // 
@@ -99,6 +100,7 @@
             this.btnSearch.TabIndex = 15;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // chkStatus
             // 
@@ -109,10 +111,16 @@
             this.chkStatus.TabIndex = 14;
             this.chkStatus.Text = "Status";
             this.chkStatus.UseVisualStyleBackColor = true;
+            this.chkStatus.CheckedChanged += new System.EventHandler(this.chkStatus_CheckedChanged);
             // 
             // cbStatus
             // 
+            this.cbStatus.Enabled = false;
             this.cbStatus.FormattingEnabled = true;
+            this.cbStatus.Items.AddRange(new object[] {
+            "Not started",
+            "Started",
+            "Ended"});
             this.cbStatus.Location = new System.Drawing.Point(11, 294);
             this.cbStatus.Name = "cbStatus";
             this.cbStatus.Size = new System.Drawing.Size(217, 23);
@@ -120,6 +128,7 @@
             // 
             // dtpTestTo
             // 
+            this.dtpTestTo.Enabled = false;
             this.dtpTestTo.Location = new System.Drawing.Point(82, 237);
             this.dtpTestTo.Name = "dtpTestTo";
             this.dtpTestTo.Size = new System.Drawing.Size(200, 23);
@@ -136,6 +145,7 @@
             // 
             // dtpTestFrom
             // 
+            this.dtpTestFrom.Enabled = false;
             this.dtpTestFrom.Location = new System.Drawing.Point(82, 208);
             this.dtpTestFrom.Name = "dtpTestFrom";
             this.dtpTestFrom.Size = new System.Drawing.Size(200, 23);
@@ -159,10 +169,12 @@
             this.chkTest.TabIndex = 8;
             this.chkTest.Text = "Test date";
             this.chkTest.UseVisualStyleBackColor = true;
+            this.chkTest.CheckedChanged += new System.EventHandler(this.chkTest_CheckedChanged);
             // 
             // dtpCreateTo
             // 
-            this.dtpCreateTo.Location = new System.Drawing.Point(82, 144);
+            this.dtpCreateTo.Enabled = false;
+            this.dtpCreateTo.Location = new System.Drawing.Point(81, 145);
             this.dtpCreateTo.Name = "dtpCreateTo";
             this.dtpCreateTo.Size = new System.Drawing.Size(200, 23);
             this.dtpCreateTo.TabIndex = 7;
@@ -178,6 +190,7 @@
             // 
             // dtpCreateFrom
             // 
+            this.dtpCreateFrom.Enabled = false;
             this.dtpCreateFrom.Location = new System.Drawing.Point(82, 115);
             this.dtpCreateFrom.Name = "dtpCreateFrom";
             this.dtpCreateFrom.Size = new System.Drawing.Size(200, 23);
@@ -201,6 +214,7 @@
             this.chkCreate.TabIndex = 3;
             this.chkCreate.Text = "Create date";
             this.chkCreate.UseVisualStyleBackColor = true;
+            this.chkCreate.CheckedChanged += new System.EventHandler(this.chkCreate_CheckedChanged);
             // 
             // chkSubject
             // 
@@ -211,9 +225,11 @@
             this.chkSubject.TabIndex = 2;
             this.chkSubject.Text = "Subject";
             this.chkSubject.UseVisualStyleBackColor = true;
+            this.chkSubject.CheckedChanged += new System.EventHandler(this.chkSubject_CheckedChanged);
             // 
             // cbSubject
             // 
+            this.cbSubject.Enabled = false;
             this.cbSubject.FormattingEnabled = true;
             this.cbSubject.Location = new System.Drawing.Point(10, 52);
             this.cbSubject.Name = "cbSubject";
@@ -238,24 +254,29 @@
             this.dgvTest.RowTemplate.Height = 25;
             this.dgvTest.Size = new System.Drawing.Size(735, 348);
             this.dgvTest.TabIndex = 2;
+            this.dgvTest.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTest_CellClick);
             // 
             // btnFirstPage
             // 
+            this.btnFirstPage.Enabled = false;
             this.btnFirstPage.Location = new System.Drawing.Point(576, 450);
             this.btnFirstPage.Name = "btnFirstPage";
             this.btnFirstPage.Size = new System.Drawing.Size(45, 29);
             this.btnFirstPage.TabIndex = 3;
             this.btnFirstPage.Text = "First";
             this.btnFirstPage.UseVisualStyleBackColor = true;
+            this.btnFirstPage.Click += new System.EventHandler(this.btnFirstPage_Click);
             // 
             // btnPrevPage
             // 
+            this.btnPrevPage.Enabled = false;
             this.btnPrevPage.Location = new System.Drawing.Point(627, 449);
             this.btnPrevPage.Name = "btnPrevPage";
             this.btnPrevPage.Size = new System.Drawing.Size(45, 29);
             this.btnPrevPage.TabIndex = 4;
             this.btnPrevPage.Text = "Prev";
             this.btnPrevPage.UseVisualStyleBackColor = true;
+            this.btnPrevPage.Click += new System.EventHandler(this.btnPrevPage_Click);
             // 
             // txtPageIndex
             // 
@@ -263,6 +284,7 @@
             this.txtPageIndex.Name = "txtPageIndex";
             this.txtPageIndex.Size = new System.Drawing.Size(34, 23);
             this.txtPageIndex.TabIndex = 5;
+            this.txtPageIndex.TextChanged += new System.EventHandler(this.txtPageIndex_TextChanged);
             // 
             // lbTotalPage
             // 
@@ -275,21 +297,25 @@
             // 
             // btnLastPage
             // 
+            this.btnLastPage.Enabled = false;
             this.btnLastPage.Location = new System.Drawing.Point(833, 451);
             this.btnLastPage.Name = "btnLastPage";
             this.btnLastPage.Size = new System.Drawing.Size(45, 29);
             this.btnLastPage.TabIndex = 8;
             this.btnLastPage.Text = "Last";
             this.btnLastPage.UseVisualStyleBackColor = true;
+            this.btnLastPage.Click += new System.EventHandler(this.btnLastPage_Click);
             // 
             // btnNextPage
             // 
+            this.btnNextPage.Enabled = false;
             this.btnNextPage.Location = new System.Drawing.Point(782, 451);
             this.btnNextPage.Name = "btnNextPage";
             this.btnNextPage.Size = new System.Drawing.Size(45, 29);
             this.btnNextPage.TabIndex = 7;
             this.btnNextPage.Text = "Next";
             this.btnNextPage.UseVisualStyleBackColor = true;
+            this.btnNextPage.Click += new System.EventHandler(this.btnNextPage_Click);
             // 
             // frmManageTest
             // 

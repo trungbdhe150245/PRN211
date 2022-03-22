@@ -156,3 +156,5 @@ E:\FPTU\2022-1SP-Semester5\5-PRN211\SourceCode\GroupProject\PRN211\OTS\obj\Debug
 E:\FPTU\2022-1SP-Semester5\5-PRN211\SourceCode\GroupProject\PRN211\OTS\obj\Debug\net5.0-windows\ref\OTS.dll
 E:\FPTU\2022-1SP-Semester5\5-PRN211\SourceCode\GroupProject\PRN211\OTS\obj\Debug\net5.0-windows\OTS.pdb
 E:\FPTU\2022-1SP-Semester5\5-PRN211\SourceCode\GroupProject\PRN211\OTS\obj\Debug\net5.0-windows\OTS.genruntimeconfig.cache
+E:\FPTU\2022-1SP-Semester5\5-PRN211\SourceCode\GroupProject\PRN211\OTS\obj\Debug\net5.0-windows\OTS.EssayMark.FrmEssayDetail.resources
+E:\FPTU\2022-1SP-Semester5\5-PRN211\SourceCode\GroupProject\PRN211\OTS\obj\Debug\net5.0-windows\OTS.EssayMark.FrmEssayTestList.resources

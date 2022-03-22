@@ -218,34 +218,32 @@ namespace OTS.DAO
             string table_rowNum = @"SELECT ROW_NUMBER() OVER (ORDER BY [ID] ASC) as rownum, * 
                                     FROM [Test]
                                     WHERE 1=1 ";
-            
-            if (!subjectCode.Equals(""))
+            if (subjectCode != null && !subjectCode.Equals(""))
             {
                 table_rowNum += " AND [Test].[SubjectCode] = @subjectCode ";
             }
-            if (createFrom != null && createTo != null)
+            if (createFrom != new DateTime() && createTo != new DateTime())
             {
                 table_rowNum += " AND [Test].[CreateDate] between @createFrom and @createTo ";
             }
-            if (testFrom != null && testTo != null)
+            if (testFrom != new DateTime() && testTo != new DateTime())
             {
                 table_rowNum += " AND [Test].[TestDate] between @testFrom and @testTo ";
             }
 
-            if (status.Equals("Started"))
+            if (status != null && status.Equals("Started"))
             {
                 table_rowNum += @" AND (CAST(TestDate AS datetime) + CAST(StartTime AS datetime)) < GETDATE()
                                     AND (CAST(TestDate AS datetime) + CAST(EndTime AS datetime)) > GETDATE() ";
-            } 
-            else if (status.Equals("Ended"))
+            }
+            else if (status != null && status.Equals("Ended"))
             {
                 table_rowNum += @" AND (CAST(TestDate AS datetime) + CAST(EndTime AS datetime)) <= GETDATE() ";
             }
-            else if (status.Equals("Not Started"))
+            else if (status != null && status.Equals("Not Started"))
             {
                 table_rowNum += @" AND (CAST(TestDate AS datetime) + CAST(StartTime AS datetime)) >= GETDATE() ";
             }
-
 
             string sql_select_test = @$"SELECT [Id]
                                       ,[Code]
@@ -253,17 +251,33 @@ namespace OTS.DAO
                                       ,[EndTime]
                                       ,[TestDate]
                                       ,[Duration]
-                                      ,Test.[SubjectCode]
+                                      ,p.[SubjectCode]
 	                                  ,Subject.SubjectName
                                       ,[CreateDate]
                                       ,[Review]
                                   FROM ({table_rowNum}) as p INNER JOIN Subject
-			                                ON Subject.SubjectCode=Test.SubjectCode
-                                  WHERE 1=1";
+			                                ON Subject.SubjectCode=p.SubjectCode
+                                  WHERE p.rownum >= ({pageIndex} - 1)*{pageSize} + 1
+                                        AND p.rownum <= {pageIndex}*{pageSize} ";
             try
             {
                 connection = new SqlConnection(GetConnectionString());
                 command = new SqlCommand(sql_select_test, connection);
+                if (subjectCode != null && !subjectCode.Equals(""))
+                {
+                    command.Parameters.AddWithValue("@subjectCode", subjectCode);
+                }
+                if (createFrom != new DateTime() && createTo != new DateTime())
+                {
+                    command.Parameters.AddWithValue("@createFrom", createFrom);
+                    command.Parameters.AddWithValue("@createTo", createTo);
+                }
+                if (testFrom != new DateTime() && testTo != new DateTime())
+                {
+                    command.Parameters.AddWithValue("@testFrom", testFrom);
+                    command.Parameters.AddWithValue("@testTo", testTo);
+                }
+
                 connection.Open();
                 reader = command.ExecuteReader();
                 while (reader.Read())
@@ -294,6 +308,77 @@ namespace OTS.DAO
                 connection.Close();
             }
             return tests;
+        }
+
+        public int CountTests(string subjectCode, DateTime createFrom, DateTime createTo, 
+            DateTime testFrom, DateTime testTo, string status)
+        {
+            string table_rowNum = @"SELECT ROW_NUMBER() OVER (ORDER BY [ID] ASC) as rownum, * 
+                                    FROM [Test]
+                                    WHERE 1=1 ";
+            if (subjectCode != null && !subjectCode.Equals(""))
+            {
+                table_rowNum += " AND [Test].[SubjectCode] = @subjectCode ";
+            }
+            if (createFrom != new DateTime() && createTo != new DateTime())
+            {
+                table_rowNum += " AND [Test].[CreateDate] between @createFrom and @createTo ";
+            }
+            if (testFrom != new DateTime() && testTo != new DateTime())
+            {
+                table_rowNum += " AND [Test].[TestDate] between @testFrom and @testTo ";
+            }
+
+            if (status != null && status.Equals("Started"))
+            {
+                table_rowNum += @" AND (CAST(TestDate AS datetime) + CAST(StartTime AS datetime)) < GETDATE()
+                                    AND (CAST(TestDate AS datetime) + CAST(EndTime AS datetime)) > GETDATE() ";
+            }
+            else if (status != null && status.Equals("Ended"))
+            {
+                table_rowNum += @" AND (CAST(TestDate AS datetime) + CAST(EndTime AS datetime)) <= GETDATE() ";
+            }
+            else if (status != null && status.Equals("Not Started"))
+            {
+                table_rowNum += @" AND (CAST(TestDate AS datetime) + CAST(StartTime AS datetime)) >= GETDATE() ";
+            }
+
+            string sql_select_test = @$"SELECT COUNT(rownum) as total
+                                        FROM ({table_rowNum}) as p";
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(sql_select_test, connection);
+                if (subjectCode != null && !subjectCode.Equals(""))
+                {
+                    command.Parameters.AddWithValue("@subjectCode", subjectCode);
+                }
+                if (createFrom != new DateTime() && createTo != new DateTime())
+                {
+                    command.Parameters.AddWithValue("@createFrom", createFrom);
+                    command.Parameters.AddWithValue("@createTo", createTo);
+                }
+                if (testFrom != new DateTime() && testTo != new DateTime())
+                {
+                    command.Parameters.AddWithValue("@testFrom", testFrom);
+                    command.Parameters.AddWithValue("@testTo", testTo);
+                }
+                connection.Open();
+                reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    return reader.GetInt32("total");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return 0;
         }
 
 
