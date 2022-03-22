@@ -17,6 +17,5 @@ namespace OTS.Models
         public Subject Subject { get; set; }
         public DateTime CreateDate { get; set; }
         public bool IsReview { get; set; }
-        public TimeSpan EndTime { get; set; }
     }
 }

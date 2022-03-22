@@ -11,7 +11,7 @@ namespace OTS.DAO
 {
     public class TestDBContext : DBContext
     {
-        public Test GetTestByCode (string testCode)
+        public Test GetTestByCode(string testCode)
         {
 
             string sql_select_test = @"SELECT [Id]
@@ -168,7 +168,6 @@ namespace OTS.DAO
             string sql_select_test = @"SELECT [Id]
                                       ,[Code]
                                       ,[StartTime]
-                                      ,[EndTime]
                                       ,[TestDate]
                                       ,[Duration]
                                       ,[EndTime]
@@ -202,7 +201,6 @@ namespace OTS.DAO
                             SubjectCode = reader.GetString("SubjectCode"),
                             SubjectName = reader.GetString("SubjectName"),
                         },
-                        EndTime = (TimeSpan)reader["EndTime"],
                         IsReview = reader.GetBoolean("Review")
                     };
                 }
@@ -216,59 +214,6 @@ namespace OTS.DAO
                 connection.Close();
             }
             return null;
-        }
-
-        public List<Test> GetTests()
-        {
-            List<Test> tests = new List<Test>();
-            string sql_select_test = @"SELECT [Id]
-                                      ,[Code]
-                                      ,[StartTime]
-                                      ,[EndTime]
-                                      ,[TestDate]
-                                      ,[Duration]
-                                      ,Test.[SubjectCode]
-	                                  ,Subject.SubjectName
-                                      ,[CreateDate]
-                                      ,[Review]
-                                  FROM [Test] INNER JOIN Subject
-			                                ON Subject.SubjectCode=Test.SubjectCode
-                                  WHERE 1=1";
-            try
-            {
-                connection = new SqlConnection(GetConnectionString());
-                command = new SqlCommand(sql_select_test, connection);
-                connection.Open();
-                reader = command.ExecuteReader();
-                while (reader.Read())
-                {
-                    tests.Add(new Test()
-                    {
-                        Id = reader.GetInt32("ID"),
-                        Code = reader.GetString("Code"),
-                        CreateDate = reader.GetDateTime("CreateDate"),
-                        TestDate = reader.GetDateTime("TestDate"),
-                        StartTime = (TimeSpan)reader["StartTime"],
-                        EndTime = (TimeSpan)reader["EndTime"],
-                        Duration = (TimeSpan)reader["Duration"],
-                        Subject = new Subject()
-                        {
-                            SubjectCode = reader.GetString("SubjectCode"),
-                            SubjectName = reader.GetString("SubjectName"),
-                        },
-                        IsReview = reader.GetBoolean("Review")
-                    });
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            finally
-            {
-                connection.Close();
-            }
-            return tests;
         }
 
         public List<Test> GetTests(int pageIndex, int pageSize, string subjectCode
@@ -372,7 +317,7 @@ namespace OTS.DAO
             return tests;
         }
 
-        public int CountTests(string subjectCode, DateTime createFrom, DateTime createTo, 
+        public int CountTests(string subjectCode, DateTime createFrom, DateTime createTo,
             DateTime testFrom, DateTime testTo, string status)
         {
             string table_rowNum = @"SELECT ROW_NUMBER() OVER (ORDER BY [ID] ASC) as rownum, * 
@@ -436,7 +381,7 @@ namespace OTS.DAO
             {
                 throw new Exception(ex.Message);
             }
-            } finally
+            finally
             {
                 connection.Close();
             }
@@ -464,7 +409,7 @@ namespace OTS.DAO
                 reader = command.ExecuteReader(CommandBehavior.CloseConnection);
                 if (reader.HasRows)
                 {
-                    while(reader.Read())
+                    while (reader.Read())
                     {
                         Subject subject = new Subject()
                         {
@@ -519,16 +464,17 @@ namespace OTS.DAO
                 connection.Open();
                 rowAffects = command.ExecuteNonQuery();
             }
-            catch (Exception ex) 
-            { 
-                throw new Exception(ex.Message); 
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
-            finally { 
-                connection.Close(); 
+            finally
+            {
+                connection.Close();
             }
             return rowAffects;
         }
-            
+
         public int InsertTest(Test test)
         {
             int row = 0;
@@ -562,14 +508,15 @@ namespace OTS.DAO
                 connection.Open();
                 row = command.ExecuteNonQuery();
             }
-            catch (Exception ex) 
-            { 
-                throw new Exception(ex.Message); 
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
-            finally { 
-                connection.Close(); 
+            finally
+            {
+                connection.Close();
             }
-            return rowAffects;
+            return row;
         }
     }
 }
