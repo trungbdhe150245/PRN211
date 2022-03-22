@@ -77,7 +77,7 @@
             this.groupBox1.Controls.Add(this.cbSubject);
             this.groupBox1.Location = new System.Drawing.Point(26, 84);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(295, 392);
+            this.groupBox1.Size = new System.Drawing.Size(246, 392);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filter";
@@ -129,9 +129,10 @@
             // dtpTestTo
             // 
             this.dtpTestTo.Enabled = false;
+            this.dtpTestTo.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpTestTo.Location = new System.Drawing.Point(82, 237);
             this.dtpTestTo.Name = "dtpTestTo";
-            this.dtpTestTo.Size = new System.Drawing.Size(200, 23);
+            this.dtpTestTo.Size = new System.Drawing.Size(146, 23);
             this.dtpTestTo.TabIndex = 12;
             // 
             // label4
@@ -146,9 +147,10 @@
             // dtpTestFrom
             // 
             this.dtpTestFrom.Enabled = false;
+            this.dtpTestFrom.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpTestFrom.Location = new System.Drawing.Point(82, 208);
             this.dtpTestFrom.Name = "dtpTestFrom";
-            this.dtpTestFrom.Size = new System.Drawing.Size(200, 23);
+            this.dtpTestFrom.Size = new System.Drawing.Size(146, 23);
             this.dtpTestFrom.TabIndex = 10;
             // 
             // label5
@@ -174,9 +176,10 @@
             // dtpCreateTo
             // 
             this.dtpCreateTo.Enabled = false;
+            this.dtpCreateTo.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpCreateTo.Location = new System.Drawing.Point(81, 145);
             this.dtpCreateTo.Name = "dtpCreateTo";
-            this.dtpCreateTo.Size = new System.Drawing.Size(200, 23);
+            this.dtpCreateTo.Size = new System.Drawing.Size(146, 23);
             this.dtpCreateTo.TabIndex = 7;
             // 
             // label3
@@ -191,9 +194,10 @@
             // dtpCreateFrom
             // 
             this.dtpCreateFrom.Enabled = false;
+            this.dtpCreateFrom.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpCreateFrom.Location = new System.Drawing.Point(82, 115);
             this.dtpCreateFrom.Name = "dtpCreateFrom";
-            this.dtpCreateFrom.Size = new System.Drawing.Size(200, 23);
+            this.dtpCreateFrom.Size = new System.Drawing.Size(146, 23);
             this.dtpCreateFrom.TabIndex = 5;
             // 
             // label2
@@ -240,7 +244,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(477, 18);
+            this.label1.Location = new System.Drawing.Point(419, 14);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(195, 37);
             this.label1.TabIndex = 1;
@@ -249,7 +253,7 @@
             // dgvTest
             // 
             this.dgvTest.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvTest.Location = new System.Drawing.Point(350, 92);
+            this.dgvTest.Location = new System.Drawing.Point(292, 88);
             this.dgvTest.Name = "dgvTest";
             this.dgvTest.RowTemplate.Height = 25;
             this.dgvTest.Size = new System.Drawing.Size(735, 348);
@@ -259,7 +263,7 @@
             // btnFirstPage
             // 
             this.btnFirstPage.Enabled = false;
-            this.btnFirstPage.Location = new System.Drawing.Point(576, 450);
+            this.btnFirstPage.Location = new System.Drawing.Point(518, 446);
             this.btnFirstPage.Name = "btnFirstPage";
             this.btnFirstPage.Size = new System.Drawing.Size(45, 29);
             this.btnFirstPage.TabIndex = 3;
@@ -270,7 +274,7 @@
             // btnPrevPage
             // 
             this.btnPrevPage.Enabled = false;
-            this.btnPrevPage.Location = new System.Drawing.Point(627, 449);
+            this.btnPrevPage.Location = new System.Drawing.Point(569, 445);
             this.btnPrevPage.Name = "btnPrevPage";
             this.btnPrevPage.Size = new System.Drawing.Size(45, 29);
             this.btnPrevPage.TabIndex = 4;
@@ -280,7 +284,7 @@
             // 
             // txtPageIndex
             // 
-            this.txtPageIndex.Location = new System.Drawing.Point(695, 453);
+            this.txtPageIndex.Location = new System.Drawing.Point(637, 449);
             this.txtPageIndex.Name = "txtPageIndex";
             this.txtPageIndex.Size = new System.Drawing.Size(34, 23);
             this.txtPageIndex.TabIndex = 5;
@@ -289,7 +293,7 @@
             // lbTotalPage
             // 
             this.lbTotalPage.AutoSize = true;
-            this.lbTotalPage.Location = new System.Drawing.Point(735, 458);
+            this.lbTotalPage.Location = new System.Drawing.Point(677, 454);
             this.lbTotalPage.Name = "lbTotalPage";
             this.lbTotalPage.Size = new System.Drawing.Size(30, 15);
             this.lbTotalPage.TabIndex = 6;
@@ -298,7 +302,7 @@
             // btnLastPage
             // 
             this.btnLastPage.Enabled = false;
-            this.btnLastPage.Location = new System.Drawing.Point(833, 451);
+            this.btnLastPage.Location = new System.Drawing.Point(775, 447);
             this.btnLastPage.Name = "btnLastPage";
             this.btnLastPage.Size = new System.Drawing.Size(45, 29);
             this.btnLastPage.TabIndex = 8;
@@ -309,7 +313,7 @@
             // btnNextPage
             // 
             this.btnNextPage.Enabled = false;
-            this.btnNextPage.Location = new System.Drawing.Point(782, 451);
+            this.btnNextPage.Location = new System.Drawing.Point(724, 447);
             this.btnNextPage.Name = "btnNextPage";
             this.btnNextPage.Size = new System.Drawing.Size(45, 29);
             this.btnNextPage.TabIndex = 7;
@@ -321,7 +325,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1103, 503);
+            this.ClientSize = new System.Drawing.Size(1044, 503);
             this.Controls.Add(this.btnLastPage);
             this.Controls.Add(this.btnNextPage);
             this.Controls.Add(this.lbTotalPage);
@@ -334,6 +338,7 @@
             this.Name = "frmManageTest";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmManageTest";
+            this.Activated += new System.EventHandler(this.frmManageTest_Activated);
             this.Load += new System.EventHandler(this.frmManageTest_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

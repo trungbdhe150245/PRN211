@@ -288,6 +288,7 @@ namespace OTS.DAO
                         Code = reader.GetString("Code"),
                         CreateDate = reader.GetDateTime("CreateDate"),
                         TestDate = reader.GetDateTime("TestDate"),
+                        EndTime = (TimeSpan)reader["EndTime"],
                         StartTime = (TimeSpan)reader["StartTime"],
                         Duration = (TimeSpan)reader["Duration"],
                         Subject = new Subject()
@@ -386,14 +387,17 @@ namespace OTS.DAO
         {
             int rowAffects = 0;
             string sql_update_test = @"UPDATE [Test]
-                               SET [StartTime] = GETDATE()
-                                  ,[StartTime] = @endTime
+                               SET [TestDate] = @testDate
+                                  ,[StartTime] = @startTime
+                                  ,[EndTime] = @endTime
                              WHERE Test.Id=@testId";
             try
             {
                 connection = new SqlConnection(GetConnectionString());
                 command = new SqlCommand(sql_update_test, connection);
                 command.Parameters.AddWithValue("@testId", test.Id);
+                command.Parameters.AddWithValue("@testDate", test.TestDate);
+                command.Parameters.AddWithValue("@startTime", test.StartTime);
                 command.Parameters.AddWithValue("@endTime", test.EndTime);
                 connection.Open();
                 rowAffects = command.ExecuteNonQuery();

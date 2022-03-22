@@ -1,4 +1,5 @@
 ﻿using OTS.DAO;
+using OTS.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -177,6 +178,7 @@ namespace OTS.ManageTest
             //gets the data using corressponding filter data
             var tests = testDB.GetTests(pageIndex, pageSize, subjectCode
                 , createFrom, createTo, testFrom, testTo, status);
+
             //set data to DGV
             dgvTest.DataSource = tests;
             for (int i = 0; i < tests.Count; i++)
@@ -410,7 +412,21 @@ namespace OTS.ManageTest
 
         private void btnStart_Click(int testID)
         {
-            throw new NotImplementedException();
+            Test test = testDB.GetTest(testID);
+            frmStartTest frmStart = new frmStartTest(test, this);
+            frmStart.Show();
+        }
+
+        private void frmManageTest_Activated(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadTest();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
