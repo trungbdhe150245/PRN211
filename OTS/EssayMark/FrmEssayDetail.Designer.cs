@@ -39,6 +39,7 @@
             this.dtpDuration = new System.Windows.Forms.DateTimePicker();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtSolution
@@ -53,7 +54,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(404, 32);
+            this.label1.Location = new System.Drawing.Point(404, 28);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(24, 20);
             this.label1.TabIndex = 1;
@@ -61,7 +62,7 @@
             // 
             // txtId
             // 
-            this.txtId.Location = new System.Drawing.Point(434, 29);
+            this.txtId.Location = new System.Drawing.Point(434, 25);
             this.txtId.Name = "txtId";
             this.txtId.ReadOnly = true;
             this.txtId.Size = new System.Drawing.Size(172, 27);
@@ -139,11 +140,22 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 22F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label2.Location = new System.Drawing.Point(26, 25);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(248, 50);
+            this.label2.TabIndex = 21;
+            this.label2.Text = "Essay Review";
+            // 
             // FrmEssayDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(987, 789);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dtpDuration);
@@ -157,7 +169,7 @@
             this.Controls.Add(this.txtSolution);
             this.MaximizeBox = false;
             this.Name = "FrmEssayDetail";
-            this.Text = "FrmEssayMark";
+            this.Text = "Essay Mark";
             this.Load += new System.EventHandler(this.FrmEssayMark_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -177,5 +189,6 @@
         private System.Windows.Forms.DateTimePicker dtpDuration;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label2;
     }
 }

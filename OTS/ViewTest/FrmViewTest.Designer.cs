@@ -46,6 +46,8 @@
             this.label9 = new System.Windows.Forms.Label();
             this.txtTotalQuestion = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.dtpEndTime = new System.Windows.Forms.DateTimePicker();
             this.lbClasses = new System.Windows.Forms.ListBox();
             this.btnRemoveClass = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
@@ -118,7 +120,7 @@
             this.dtpCreateDate.Location = new System.Drawing.Point(671, 161);
             this.dtpCreateDate.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dtpCreateDate.Name = "dtpCreateDate";
-            this.dtpCreateDate.Size = new System.Drawing.Size(230, 27);
+            this.dtpCreateDate.Size = new System.Drawing.Size(254, 27);
             this.dtpCreateDate.TabIndex = 5;
             // 
             // label4
@@ -146,7 +148,7 @@
             this.dtpStartTime.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dtpStartTime.Name = "dtpStartTime";
             this.dtpStartTime.ShowUpDown = true;
-            this.dtpStartTime.Size = new System.Drawing.Size(71, 27);
+            this.dtpStartTime.Size = new System.Drawing.Size(95, 27);
             this.dtpStartTime.TabIndex = 7;
             this.dtpStartTime.Value = new System.DateTime(2022, 3, 18, 0, 0, 0, 0);
             // 
@@ -161,7 +163,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(557, 168);
+            this.label6.Location = new System.Drawing.Point(557, 207);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(67, 20);
             this.label6.TabIndex = 10;
@@ -170,7 +172,7 @@
             // dtpDuration
             // 
             this.dtpDuration.CustomFormat = "";
-            this.dtpDuration.Location = new System.Drawing.Point(630, 164);
+            this.dtpDuration.Location = new System.Drawing.Point(630, 203);
             this.dtpDuration.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dtpDuration.Name = "dtpDuration";
             this.dtpDuration.ShowUpDown = true;
@@ -199,7 +201,7 @@
             // cbReview
             // 
             this.cbReview.AutoSize = true;
-            this.cbReview.Location = new System.Drawing.Point(802, 275);
+            this.cbReview.Location = new System.Drawing.Point(777, 203);
             this.cbReview.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cbReview.Name = "cbReview";
             this.cbReview.Size = new System.Drawing.Size(107, 24);
@@ -228,8 +230,11 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label12);
+            this.groupBox1.Controls.Add(this.dtpEndTime);
             this.groupBox1.Controls.Add(this.lbClasses);
             this.groupBox1.Controls.Add(this.btnRemoveClass);
+            this.groupBox1.Controls.Add(this.cbReview);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.txtAddClassCode);
@@ -251,6 +256,26 @@
             this.groupBox1.Size = new System.Drawing.Size(1021, 413);
             this.groupBox1.TabIndex = 19;
             this.groupBox1.TabStop = false;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(557, 166);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(67, 20);
+            this.label12.TabIndex = 29;
+            this.label12.Text = "EndTime";
+            // 
+            // dtpEndTime
+            // 
+            this.dtpEndTime.CustomFormat = "";
+            this.dtpEndTime.Location = new System.Drawing.Point(630, 162);
+            this.dtpEndTime.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dtpEndTime.Name = "dtpEndTime";
+            this.dtpEndTime.ShowUpDown = true;
+            this.dtpEndTime.Size = new System.Drawing.Size(102, 27);
+            this.dtpEndTime.TabIndex = 30;
+            this.dtpEndTime.Value = new System.DateTime(2022, 3, 18, 0, 0, 0, 0);
             // 
             // lbClasses
             // 
@@ -429,7 +454,6 @@
             this.ClientSize = new System.Drawing.Size(1103, 1025);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.dgvQuestion);
-            this.Controls.Add(this.cbReview);
             this.Controls.Add(this.txtSubject);
             this.Controls.Add(this.dtpStartTime);
             this.Controls.Add(this.dtpCreateDate);
@@ -488,5 +512,7 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txtAddClassCode;
         private System.Windows.Forms.ListBox lbClasses;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.DateTimePicker dtpEndTime;
     }
 }
