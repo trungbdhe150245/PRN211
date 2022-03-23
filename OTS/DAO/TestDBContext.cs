@@ -399,6 +399,7 @@ namespace OTS.DAO
                                   ,s.[SubjectCode]
 	                              ,s.[SubjectName]
                                   ,[CreateDate]
+                                  ,[EndTime]
                                   ,[Review]
                               FROM [Test] t INNER JOIN [Subject] s ON t.[SubjectCode] = s.[SubjectCode]";
             try
@@ -411,22 +412,22 @@ namespace OTS.DAO
                 {
                     while (reader.Read())
                     {
-                        Subject subject = new Subject()
-                        {
-                            SubjectCode = reader.GetString(6),
-                            SubjectName = reader.GetString(7)
-                        };
 
                         Test test = new Test()
                         {
-                            Id = reader.GetInt32(1),
-                            Code = reader.GetString(2),
-                            StartTime = reader.GetTimeSpan(3),
-                            TestDate = reader.GetDateTime(4),
-                            Duration = reader.GetTimeSpan(5),
-                            Subject = subject,
-                            CreateDate = reader.GetDateTime(8),
-                            IsReview = reader.GetBoolean(9)
+                            Id = reader.GetInt32("Id"),
+                            Code = reader.GetString("Code"),
+                            StartTime = (TimeSpan)reader["StartTime"],
+                            TestDate = reader.GetDateTime("TestDate"),
+                            Duration = (TimeSpan)reader["Duration"],
+                            Subject = new Subject()
+                            {
+                                SubjectCode = reader.GetString("SubjectCode"),
+                                SubjectName = reader.GetString("SubjectName")
+                            },
+                            CreateDate = reader.GetDateTime("CreateDate"),
+                            EndTime = (TimeSpan)reader["EndTime"],
+                            IsReview = reader.GetBoolean("Review")
                         };
                         tests.Add(test);
                     }
