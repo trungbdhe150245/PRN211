@@ -288,5 +288,72 @@ namespace OTS.DAO
             }
             return ListQues;
         }
+
+        public List<Question> GetRandomQuestions(int top, int type, int level, string code)
+        {
+            List<Question> questions = new List<Question>();
+            string sql = @"SELECT TOP @top  q.[Id]
+                                          ,[Content]
+                                          ,[Image]
+                                          ,l.[Id] AS LevelId, l.[Name] AS LevelName
+                                          ,s.[SubjectCode], s.[SubjectName]
+                                          ,t.[Id] AS TypeId, t.[Name] AS TypeName
+                          FROM [Question] q JOIN [Type] t ON q.[Type] = t.[Id]
+		                                    JOIN [Level] l ON q.[Level] = l.[Id]
+		                                    JOIN [Subject] s ON q.[SubjectCode] = s.[SubjectCode]
+                          WHERE q.[Type] = @type
+	                        AND q.[Level] = @level
+	                        AND q.[SubjectCode] = @code
+                          ORDER BY NEWID()";
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(sql, connection);
+                command.Parameters.AddWithValue("@top", top);
+                command.Parameters.AddWithValue("@type", type);
+                command.Parameters.AddWithValue("@level", level);
+                command.Parameters.AddWithValue("@code", code);
+                connection.Open();
+                reader = command.ExecuteReader();
+                if(reader.HasRows)
+                {
+                    while(reader.Read())
+                    {
+                        Question q = new()
+                        {
+                            Id = reader.GetInt32("Id"),
+                            Content = reader.GetString("Content"),
+                            Image = reader.GetString("Image"),
+                            Level = new()
+                            {
+                                Id = (short)reader.GetInt32("LevelId"),
+                                Name = reader.GetString("LevelName"),
+                            },
+                            Subject = new()
+                            {
+                                SubjectCode = reader.GetString("SubjectCode"),
+                                SubjectName = reader.GetString("SubjectName"),
+                            },
+                            Type = new()
+                            {
+                                Id = (short)reader.GetInt32("TypeId"),
+                                Name = reader.GetString("TypeName"),
+                            }
+                        };
+                        questions.Add(q);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return questions;
+        }
     }
 }

@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.nudQuestions = new System.Windows.Forms.NumericUpDown();
             this.nudEasy = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.nudMedium = new System.Windows.Forms.NumericUpDown();
@@ -38,6 +36,9 @@
             this.nudHard = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbType = new System.Windows.Forms.ComboBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.txtTotalQuest = new System.Windows.Forms.TextBox();
             this.dtpEndTime = new System.Windows.Forms.DateTimePicker();
             this.label12 = new System.Windows.Forms.Label();
             this.txtTestCode = new System.Windows.Forms.TextBox();
@@ -48,6 +49,7 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.dtpDuration = new System.Windows.Forms.DateTimePicker();
+            this.label2 = new System.Windows.Forms.Label();
             this.cbSubject = new System.Windows.Forms.ComboBox();
             this.dtpTestDate = new System.Windows.Forms.DateTimePicker();
             this.label9 = new System.Windows.Forms.Label();
@@ -55,7 +57,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.dgvTest = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.nudQuestions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudEasy)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMedium)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHard)).BeginInit();
@@ -73,35 +74,19 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "CREATE A TEST";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(542, 39);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(151, 20);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Number of questions:";
-            // 
-            // nudQuestions
-            // 
-            this.nudQuestions.Location = new System.Drawing.Point(751, 37);
-            this.nudQuestions.Name = "nudQuestions";
-            this.nudQuestions.Size = new System.Drawing.Size(120, 27);
-            this.nudQuestions.TabIndex = 2;
-            // 
             // nudEasy
             // 
-            this.nudEasy.Location = new System.Drawing.Point(751, 87);
+            this.nudEasy.Location = new System.Drawing.Point(727, 87);
             this.nudEasy.Name = "nudEasy";
-            this.nudEasy.Size = new System.Drawing.Size(120, 27);
+            this.nudEasy.Size = new System.Drawing.Size(208, 27);
             this.nudEasy.TabIndex = 4;
+            this.nudEasy.ValueChanged += new System.EventHandler(this.nudEasy_ValueChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(542, 89);
+            this.label3.Location = new System.Drawing.Point(545, 89);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(41, 20);
             this.label3.TabIndex = 3;
@@ -109,16 +94,17 @@
             // 
             // nudMedium
             // 
-            this.nudMedium.Location = new System.Drawing.Point(751, 137);
+            this.nudMedium.Location = new System.Drawing.Point(727, 137);
             this.nudMedium.Name = "nudMedium";
-            this.nudMedium.Size = new System.Drawing.Size(120, 27);
+            this.nudMedium.Size = new System.Drawing.Size(208, 27);
             this.nudMedium.TabIndex = 6;
+            this.nudMedium.ValueChanged += new System.EventHandler(this.nudMedium_ValueChanged);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(542, 139);
+            this.label4.Location = new System.Drawing.Point(541, 139);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(67, 20);
             this.label4.TabIndex = 5;
@@ -126,16 +112,17 @@
             // 
             // nudHard
             // 
-            this.nudHard.Location = new System.Drawing.Point(751, 183);
+            this.nudHard.Location = new System.Drawing.Point(727, 183);
             this.nudHard.Name = "nudHard";
-            this.nudHard.Size = new System.Drawing.Size(120, 27);
+            this.nudHard.Size = new System.Drawing.Size(208, 27);
             this.nudHard.TabIndex = 8;
+            this.nudHard.ValueChanged += new System.EventHandler(this.nudHard_ValueChanged);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(542, 185);
+            this.label5.Location = new System.Drawing.Point(541, 185);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(45, 20);
             this.label5.TabIndex = 7;
@@ -143,36 +130,63 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cbType);
+            this.groupBox1.Controls.Add(this.label13);
+            this.groupBox1.Controls.Add(this.txtTotalQuest);
             this.groupBox1.Controls.Add(this.dtpEndTime);
             this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.txtTestCode);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.nudHard);
             this.groupBox1.Controls.Add(this.dtpStartTime);
+            this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label11);
+            this.groupBox1.Controls.Add(this.nudMedium);
             this.groupBox1.Controls.Add(this.checkReview);
+            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.btnCancel);
-            this.groupBox1.Controls.Add(this.nudQuestions);
+            this.groupBox1.Controls.Add(this.nudEasy);
             this.groupBox1.Controls.Add(this.btnSave);
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.dtpDuration);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.cbSubject);
-            this.groupBox1.Controls.Add(this.nudEasy);
             this.groupBox1.Controls.Add(this.dtpTestDate);
-            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Controls.Add(this.nudMedium);
             this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.nudHard);
             this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Location = new System.Drawing.Point(24, 89);
+            this.groupBox1.Location = new System.Drawing.Point(24, 80);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(986, 365);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Set up test";
+            // 
+            // cbType
+            // 
+            this.cbType.FormattingEnabled = true;
+            this.cbType.Location = new System.Drawing.Point(727, 36);
+            this.cbType.Name = "cbType";
+            this.cbType.Size = new System.Drawing.Size(208, 28);
+            this.cbType.TabIndex = 29;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(545, 39);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(43, 20);
+            this.label13.TabIndex = 28;
+            this.label13.Text = "Type:";
+            // 
+            // txtTotalQuest
+            // 
+            this.txtTotalQuest.Enabled = false;
+            this.txtTotalQuest.Location = new System.Drawing.Point(727, 232);
+            this.txtTotalQuest.Name = "txtTotalQuest";
+            this.txtTotalQuest.Size = new System.Drawing.Size(208, 27);
+            this.txtTotalQuest.TabIndex = 27;
             // 
             // dtpEndTime
             // 
@@ -220,7 +234,7 @@
             // checkReview
             // 
             this.checkReview.AutoSize = true;
-            this.checkReview.Location = new System.Drawing.Point(751, 233);
+            this.checkReview.Location = new System.Drawing.Point(727, 283);
             this.checkReview.Name = "checkReview";
             this.checkReview.Size = new System.Drawing.Size(15, 14);
             this.checkReview.TabIndex = 21;
@@ -228,7 +242,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(751, 295);
+            this.btnCancel.Location = new System.Drawing.Point(883, 327);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 32);
             this.btnCancel.TabIndex = 19;
@@ -237,7 +251,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(618, 295);
+            this.btnSave.Location = new System.Drawing.Point(750, 327);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 32);
             this.btnSave.TabIndex = 18;
@@ -248,7 +262,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(542, 229);
+            this.label10.Location = new System.Drawing.Point(541, 279);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(59, 20);
             this.label10.TabIndex = 20;
@@ -263,6 +277,16 @@
             this.dtpDuration.Name = "dtpDuration";
             this.dtpDuration.Size = new System.Drawing.Size(229, 27);
             this.dtpDuration.TabIndex = 17;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label2.Location = new System.Drawing.Point(541, 235);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(151, 20);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Number of questions:";
             // 
             // cbSubject
             // 
@@ -346,7 +370,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmCreateTest";
             this.Load += new System.EventHandler(this.FrmCreateTest_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.nudQuestions)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudEasy)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMedium)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHard)).EndInit();
@@ -361,8 +384,6 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.NumericUpDown nudQuestions;
         private System.Windows.Forms.NumericUpDown nudEasy;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown nudMedium;
@@ -387,5 +408,9 @@
         private System.Windows.Forms.TextBox txtTestCode;
         private System.Windows.Forms.DateTimePicker dtpEndTime;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtTotalQuest;
+        private System.Windows.Forms.ComboBox cbType;
+        private System.Windows.Forms.Label label13;
     }
 }

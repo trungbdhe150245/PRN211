@@ -19,57 +19,52 @@ namespace OTS.ViewTest
             InitializeComponent();
             //InitCustomStyle();
         }
-
-        private void InitCustomStyle()
-        {
-            dtpStartTime.Format = DateTimePickerFormat.Custom;
-            dtpStartTime.CustomFormat = "HH:mm:ss";
-            dtpTestDate.Format = DateTimePickerFormat.Custom;
-            dtpTestDate.CustomFormat = "dd/MM/yyyy";
-            dtpDuration.Format = DateTimePickerFormat.Time;
-            dtpDuration.CustomFormat = "HH:mm:ss";
-            dtpStartTime.Format = DateTimePickerFormat.Time;
-            dtpStartTime.CustomFormat = "HH:mm:ss";
-        }
+        SubjectDBContext subjectDBContext = new SubjectDBContext();
+        TestDBContext testDBContext = new TestDBContext();
+        TypeDBContext typeDBContext = new TypeDBContext();
+        //private void InitCustomStyle()
+        //{
+        //    dtpStartTime.Format = DateTimePickerFormat.Custom;
+        //    dtpStartTime.CustomFormat = "HH:mm:ss";
+        //    dtpTestDate.Format = DateTimePickerFormat.Custom;
+        //    dtpTestDate.CustomFormat = "dd/MM/yyyy";
+        //    dtpDuration.Format = DateTimePickerFormat.Time;
+        //    dtpDuration.CustomFormat = "HH:mm:ss";
+        //    dtpStartTime.Format = DateTimePickerFormat.Time;
+        //    dtpStartTime.CustomFormat = "HH:mm:ss";
+        //}
 
         private void LoadSubject()
         {
-            SubjectDBContext subjectDBContext = new SubjectDBContext();
             List<Subject> subjects = subjectDBContext.Getsubjects();
-            
+            cbSubject.DataSource = subjects;
             cbSubject.ValueMember = "SubjectCode";
             cbSubject.DisplayMember = "SubjectName";
-            cbSubject.DataSource = subjects;
+            
         }
 
         private void LoadTest()
         {
-            TestDBContext testDBContext = new TestDBContext();
             List<Test> tests = testDBContext.GetTests();
-
-            //nudQuestions.DataBindings.Clear();
-            //nudEasy.DataBindings.Clear();
-            //nudMedium.DataBindings.Clear();
-            //nudHard.DataBindings.Clear();
-            //txtTestCode.DataBindings.Clear();
-            //dtpTestDate.DataBindings.Clear();
-            //cbSubject.DataBindings.Clear();
-            //dtpStartTime.DataBindings.Clear();
-            //checkReview.DataBindings.Clear();
-            //dtpDuration.DataBindings.Clear();
-
-
-
             dgvTest.DataSource = tests;
         }
 
+        private void LoadType()
+        {
+            List<Models.Type> types = typeDBContext.GetType();
+            cbType.DataSource = types;
+            cbType.ValueMember = "Id";
+            cbType.DisplayMember = "Name";
+
+        }
 
         private bool CheckInput()
         {
             string mess = "";
-            if (nudQuestions.Value == 0)
+            
+            if (txtTotalQuest.Text.Equals(""))
             {
-                mess = "Questions cannot empty";
+                mess = "You must select number of questions";
             }
             else if (txtTestCode.Text.Equals(""))
             {
@@ -95,6 +90,25 @@ namespace OTS.ViewTest
             }
         }
 
+        private void LoadTotal()
+        {
+            int total = GetTotal((int)nudEasy.Value, (int)nudMedium.Value, (int)nudHard.Value);
+            if (total > 0)
+            {
+                txtTotalQuest.Text = total.ToString();
+            }
+        }
+
+        private int GetTotal(int easy, int medium, int hard)
+        {
+            int total = 0;
+            if (easy + medium + hard > 0)
+            {
+                total = easy + medium + hard;
+            }
+            return total;
+        }
+
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (CheckInput())
@@ -105,16 +119,16 @@ namespace OTS.ViewTest
                     StartTime = TimeSpan.Parse(dtpStartTime.Text),
                     TestDate = DateTime.Parse(dtpTestDate.Text),
                     Duration = TimeSpan.Parse(dtpDuration.Text),
-                    CreateDate = DateTime.Now,
+                    CreateDate = DateTime.Now.Date,
                     EndTime = TimeSpan.Parse(dtpEndTime.Text),
                     IsReview = checkReview.Checked,
                 };
-                SubjectDBContext subjectDBContext = new SubjectDBContext();
                 Subject s = (Subject)cbSubject.SelectedItem;
                 Subject subject = subjectDBContext.GetSubject(s.SubjectCode.Trim());
                 test.Subject = subject;
+                
+                
 
-                TestDBContext testDBContext = new TestDBContext();
                 testDBContext.InsertTest(test);
                 MessageBox.Show("Create successful");
                 LoadTest();
@@ -127,6 +141,8 @@ namespace OTS.ViewTest
             {
                 LoadSubject();
                 LoadTest();
+                LoadType();
+                
             }
             catch (Exception ex)
             {
@@ -134,6 +150,21 @@ namespace OTS.ViewTest
                 throw new Exception(ex.Message);
             }
 
+        }
+
+        private void nudEasy_ValueChanged(object sender, EventArgs e)
+        {
+            LoadTotal();
+        }
+
+        private void nudMedium_ValueChanged(object sender, EventArgs e)
+        {
+            LoadTotal();
+        }
+
+        private void nudHard_ValueChanged(object sender, EventArgs e)
+        {
+            LoadTotal();
         }
     }
 }

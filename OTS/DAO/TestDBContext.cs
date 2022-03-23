@@ -486,14 +486,16 @@ namespace OTS.DAO
                                                    ,[Duration]
                                                    ,[SubjectCode]
                                                    ,[CreateDate]
+                                                   ,[EndTime]
                                                    ,[Review])
                                              VALUES
-                                                   (@code,
+                                                   (@code
                                                    ,@starttime
                                                    ,@testdate
                                                    ,@duration
                                                    ,@subjectcode
                                                    ,@createdate
+                                                   ,@endtime
                                                    ,@review)";
             try
             {
@@ -505,6 +507,7 @@ namespace OTS.DAO
                 command.Parameters.AddWithValue("@duration", test.Duration);
                 command.Parameters.AddWithValue("@subjectcode", test.Subject.SubjectCode);
                 command.Parameters.AddWithValue("@createdate", test.CreateDate);
+                command.Parameters.AddWithValue("@endtime", test.EndTime);
                 command.Parameters.AddWithValue("@review", test.IsReview);
                 connection.Open();
                 row = command.ExecuteNonQuery();
