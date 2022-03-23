@@ -226,14 +226,16 @@ namespace OTS.DAO
                                                    ,[Duration]
                                                    ,[SubjectCode]
                                                    ,[CreateDate]
+                                                   ,[EndTime]
                                                    ,[Review])
                                              VALUES
-                                                   (@code,
+                                                   (@code
                                                    ,@starttime
                                                    ,@testdate
                                                    ,@duration
                                                    ,@subjectcode
                                                    ,@createdate
+                                                   ,@endtime
                                                    ,@review)";
             try
             {
@@ -245,6 +247,7 @@ namespace OTS.DAO
                 command.Parameters.AddWithValue("@duration", test.Duration);
                 command.Parameters.AddWithValue("@subjectcode", test.Subject.SubjectCode);
                 command.Parameters.AddWithValue("@createdate", test.CreateDate);
+                command.Parameters.AddWithValue("@endtime", test.EndTime);
                 command.Parameters.AddWithValue("@review", test.IsReview);
                 connection.Open();
                 row = command.ExecuteNonQuery();
@@ -264,15 +267,16 @@ namespace OTS.DAO
         {
             List<Test> tests = new List<Test>();
             string sql = @"SELECT [Id]
-                                  ,[Code]
-                                  ,[StartTime]
-                                  ,[TestDate]
-                                  ,[Duration]
-                                  ,s.[SubjectCode]
-	                              ,s.[SubjectName]
-                                  ,[CreateDate]
-                                  ,[Review]
-                              FROM [Test] t INNER JOIN [Subject] s ON t.[SubjectCode] = s.[SubjectCode]";
+                              ,[Code]
+                              ,[StartTime]
+                              ,[TestDate]
+                              ,[Duration]
+                              ,s.[SubjectCode]
+	                          ,s.[SubjectName]
+                              ,[CreateDate]
+                              ,[EndTime]
+                              ,[Review]
+                          FROM [Test] t INNER JOIN [Subject] s ON t.[SubjectCode] = s.[SubjectCode]";
             try
             {
                 connection = new SqlConnection(GetConnectionString());
@@ -283,22 +287,22 @@ namespace OTS.DAO
                 {
                     while(reader.Read())
                     {
-                        Subject subject = new Subject()
+                        Subject subject = new Subject
                         {
-                            SubjectCode = reader.GetString(6),
-                            SubjectName = reader.GetString(7)
+                            SubjectCode = reader.GetString("SubjectCode"),
+                            SubjectName = reader.GetString("SubjectName"),
                         };
-
                         Test test = new Test()
                         {
-                            Id = reader.GetInt32(1),
-                            Code = reader.GetString(2),
-                            StartTime = reader.GetTimeSpan(3),
-                            TestDate = reader.GetDateTime(4),
-                            Duration = reader.GetTimeSpan(5),
+                            Id = reader.GetInt32("id"),
+                            Code = reader.GetString("code"),
+                            StartTime = (TimeSpan)reader["StartTime"],
+                            TestDate = reader.GetDateTime("TestDate").Date,
+                            Duration = (TimeSpan)reader["Duration"],
                             Subject = subject,
-                            CreateDate = reader.GetDateTime(8),
-                            IsReview = reader.GetBoolean(9)
+                            CreateDate = reader.GetDateTime("CreateDate"),
+                            EndTime = (TimeSpan)reader["EndTime"],
+                            IsReview = reader.GetBoolean("Review"),
                         };
                         tests.Add(test);
                     }
@@ -315,5 +319,36 @@ namespace OTS.DAO
             }
             return tests;
         }
+
+        //public int GetTotalQuestion(int testId)
+        //{
+        //    int totalQuestion = 0;
+        //    string sql = @"SELECT t.[Id], COUNT(QuestionId) as TotalQuest
+        //                    FROM Test t INNER JOIN [Question_Test] qt ON t.[Id] = qt.[TestId]
+			     //                       INNER JOIN Question q ON qt.[QuestionId] = q.[Id]
+			     //                       INNER JOIN [Level] l ON q.[Level] = l.[Id]
+        //                    GROUP BY t.[Id]
+        //                    HAVING t.[Id] = @testId";
+        //    try
+        //    {
+        //        connection = new SqlConnection(GetConnectionString());
+        //        command = new SqlCommand(sql, connection);
+        //        command.Parameters.AddWithValue("@testId", testId);
+        //        connection.Open();
+        //        reader = command.ExecuteReader();
+        //        if (reader.HasRows)
+        //        {
+        //            totalQuestion = reader.GetInt32("TotalQuest");
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        throw new Exception(ex.Message);
+        //    }
+        //    return totalQuestion;
+        //}
+
+
     }
 }

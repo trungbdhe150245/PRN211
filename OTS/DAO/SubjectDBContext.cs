@@ -40,7 +40,7 @@ namespace OTS.DAO
             return rowAffects;
         }
         //--------------------------------------------------------
-        public int UpdateSubject(String oldsubjectCode, String oldsubjectName,String newsubjectCode,String newsubjectName)
+        public int UpdateSubject(String oldsubjectCode, String oldsubjectName, String newsubjectCode, String newsubjectName)
         {
             int rowAffects = 0;
             string sql_insert_subject = @"UPDATE Subject
@@ -68,48 +68,49 @@ namespace OTS.DAO
             }
             return rowAffects;
         }
-        public int FindSubject(String option,String subjectCode,String subjectName,DataGridView gdvUpdateSubject)
+        public int FindSubject(String option, String subjectCode, String subjectName, DataGridView gdvUpdateSubject)
         {
             int rowAffects = 0;
             string sql_view_subject = "";
             if (option.Equals("FindBySubjectCode"))
             {
-                 sql_view_subject = @"Select [SubjectCode]
+                sql_view_subject = @"Select [SubjectCode]
                                         from Subject
                                         Where SubjectCode=@subjectCode;";
             }
-            else if(option=="FindBySubjectName")
+            else if (option == "FindBySubjectName")
             {
-                 sql_view_subject = @"Select [SubjectName]
+                sql_view_subject = @"Select [SubjectName]
                                         from Subject
                                         Where SubjectName=@subjectName;";
             }
-            else if(option == "FindBySubjectCodeAndName")
+            else if (option == "FindBySubjectCodeAndName")
             {
                 sql_view_subject = @"Select [SubjectCode],[SubjectName]
                                         from Subject
                                         Where SubjectCode=@subjectCode And SubjectName=@subjectName;";
             }
-            
+
             try
             {
                 connection = new SqlConnection(GetConnectionString());
                 command = new SqlCommand(@sql_view_subject, connection);
-                
-                
+
+
                 if (option == "FindBySubjectCode")
                 {
-                   command.Parameters.AddWithValue("@subjectCode", subjectCode);
+                    command.Parameters.AddWithValue("@subjectCode", subjectCode);
                 }
-                else if(option == "FindBySubjectName")
+                else if (option == "FindBySubjectName")
                 {
-                   command.Parameters.AddWithValue("@subjectName", subjectName);
-                }else if(option == "FindBySubjectCodeAndName")
+                    command.Parameters.AddWithValue("@subjectName", subjectName);
+                }
+                else if (option == "FindBySubjectCodeAndName")
                 {
                     command.Parameters.AddWithValue("@subjectCode", subjectCode);
                     command.Parameters.AddWithValue("@subjectName", subjectName);
                 }
-                
+
                 connection.Open();
                 rowAffects = command.ExecuteNonQuery();
             }
@@ -128,8 +129,11 @@ namespace OTS.DAO
         public List<Models.Subject> Getsubjects()
         {
             List<Models.Subject> subjects = new List<Models.Subject>();
+            string sql = @"SELECT [SubjectCode]
+                                  ,[SubjectName]
+                              FROM [Subject]";
             connection = new SqlConnection(GetConnectionString());
-            command = new SqlCommand();
+            command = new SqlCommand(sql, connection);
             try
             {
                 connection.Open();
@@ -141,12 +145,13 @@ namespace OTS.DAO
                         Models.Subject subject = new Models.Subject();
                         subject.SubjectCode = reader.GetString("SubjectCode");
                         subject.SubjectName = reader.GetString("SubjectName");
+                        subjects.Add(subject);
                     }
                 }
             }
             catch (Exception ex)
             {
-                
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -155,24 +160,25 @@ namespace OTS.DAO
             return subjects;
         }
 
-        public Subject GetSubject(string subjectCode)
+        public Subject GetSubject(string code)
         {
             string sql = @"SELECT [SubjectCode]
                                   ,[SubjectName]
                               FROM [Subject]
-                              WHERE [SubjectCode] = @subjectcode";
+                              WHERE [SubjectCode] = @code";
+
+            connection = new SqlConnection(GetConnectionString());
+            command = new SqlCommand(sql, connection);
+            command.Parameters.AddWithValue("@code", code);
             try
             {
-                connection = new SqlConnection(GetConnectionString());
-                command = new SqlCommand(sql, connection);
-                command.Parameters.AddWithValue("@subjectcode", subjectCode);
                 connection.Open();
-                reader = command.ExecuteReader(CommandBehavior.CloseConnection);
-                if (reader.HasRows)
+                reader = command.ExecuteReader();
+                if (reader.Read())
                 {
                     Subject subject = new Subject()
                     {
-                        SubjectCode = subjectCode,
+                        SubjectCode = reader.GetString("SubjectCode"),
                         SubjectName = reader.GetString("SubjectName")
                     };
                     return subject;
@@ -182,7 +188,8 @@ namespace OTS.DAO
             {
 
                 throw new Exception(ex.Message);
-            } finally
+            }
+            finally
             {
                 connection.Close();
             }
