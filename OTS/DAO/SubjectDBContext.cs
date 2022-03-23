@@ -151,6 +151,44 @@ namespace OTS.DAO
             }
             catch (Exception ex)
             {
+
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return subjects;
+        }
+
+        public List<Subject> GetSubjects()
+        {
+            List<Subject> subjects = new List<Subject>();
+            string sql = @"SELECT [SubjectCode]
+                                  ,[SubjectName]
+                              FROM [Subject]";
+            connection = new SqlConnection(GetConnectionString());
+            command = new SqlCommand(sql, connection);
+            try
+            {
+                connection.Open();
+                reader = command.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
+                if (reader.HasRows == true)
+                {
+                    while (reader.Read())
+                    {
+                        subjects.Add(new Subject
+                        {
+                            SubjectCode = reader.GetString("SubjectCode"),
+                            SubjectName = reader.GetString("SubjectName")
+                        });
+
+                    }
+        
+                }
+            }
+            catch (Exception ex)
+            {
                 throw new Exception(ex.Message);
             }
             finally
@@ -186,7 +224,6 @@ namespace OTS.DAO
             }
             catch (Exception ex)
             {
-
                 throw new Exception(ex.Message);
             }
             finally

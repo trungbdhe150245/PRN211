@@ -122,7 +122,7 @@ namespace OTS.DAO
             return null;
         }
 
-        public Question GetRandomQuestionWithLevel(int levelId, string subjectCode)
+        public Question GetRandomQuestionWithLevel(int levelId, string subjectCode, int type)
         {
             string select_random_question = @"SELECT TOP 1 Question.[Id]
                                               ,[Content]
@@ -133,7 +133,7 @@ namespace OTS.DAO
                                           FROM [Question] JOIN Type ON Question.Type=Type.Id
 		                                        JOIN Level ON Question.Level=Level.Id
 		                                        JOIN Subject ON Question.SubjectCode=Subject.SubjectCode
-                                          WHERE Question.Level=@Level AND Question.SubjectCode=@Subject
+                                          WHERE Question.Level=@Level AND Question.SubjectCode=@Subject AND Question.Type=@Type
                                           ORDER BY NEWID()";
             try
             {
@@ -141,6 +141,7 @@ namespace OTS.DAO
                 command = new SqlCommand(select_random_question, connection);
                 command.Parameters.AddWithValue("@Level", levelId);
                 command.Parameters.AddWithValue("@Subject", subjectCode);
+                command.Parameters.AddWithValue("@Type", type);
                 connection.Open();
                 reader = command.ExecuteReader();
                 if (reader.Read())
