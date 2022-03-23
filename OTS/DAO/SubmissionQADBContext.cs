@@ -53,7 +53,7 @@ namespace OTS.DAO
                             },
                             Answer = new Answer
                             {
-                                Id = reader.GetInt32("AnswerID"),
+                                Id = reader.GetInt32("AswerID"),
                                 Content = reader.GetString("Answer"),
                                 IsCorrect = reader.GetBoolean("isCorrect")
                             }

@@ -16,10 +16,29 @@ namespace OTS.DAO
             List<Essay> essays = new List<Essay>();
             try
             {
-                string sql_select_essay = @"SELECT Essay.[Id]
-                                      ,Question.[Content]
-                                  FROM [Essay] JOIN Question ON Essay.QuestionId=Question.Id		
-                                  WHERE TestId=@testId AND StudentId=@StudentId";
+                string sql_select_essay = @"SELECT e.[Id]
+                                                  ,[TestId]
+                                                  ,[StudentId]
+                                                  ,[QuestionId]
+                                                  ,[SubmitDate]
+	                                              ,t.Code
+	                                              ,t.TestDate
+	                                              ,t.Review
+	                                              ,sj.SubjectCode
+	                                              ,sj.SubjectName
+	                                              ,s.StudentCode
+	                                              ,s.FullName
+	                                              ,s.ClassCode
+                                                  ,e.[Content] as EssayContent
+	                                              ,q.Content as Question
+	                                              ,q.[Type]
+	                                              ,q.[Image]
+                                              FROM [Essay] e
+                                              JOIN [Test] t ON e.TestId = t.Id
+                                              JOIN [Subject] sj ON t.SubjectCode = sj.SubjectCode
+                                              JOIN [Student] s ON e.StudentId = s.Id
+                                              JOIN [Question] q ON e.QuestionId = q.Id		
+                                              WHERE TestId=@testId AND StudentId=@StudentId";
                 connection = new SqlConnection(GetConnectionString());
                 command = new SqlCommand(sql_select_essay, connection);
                 command.Parameters.AddWithValue("@testId", testId);
@@ -31,11 +50,39 @@ namespace OTS.DAO
                     essays.Add(new Essay()
                     {
                         Id = reader.GetInt32("Id"),
+                        SubmitDate = reader.GetDateTime("SubmitDate"),
                         Question = new Question()
                         {
-                            Content = reader.GetString("Content"),
+                            Id = reader.GetInt32("QuestionID"),
+                            Content = reader.GetString("Question"),
+                            Type = new Models.Type
+                            {
+                                Id = reader.GetInt16("Type")
+                            }
                         },
-                        
+                        Test = new Test
+                        {
+                            Id=reader.GetInt32("TestID"),
+                            Code = reader.GetString("Code"),
+                            TestDate = reader.GetDateTime("TestDate"),
+                            IsReview = reader.GetBoolean("Review"),
+                            Subject = new Subject
+                            {
+                                SubjectCode = reader.GetString("SubjectCode"),
+                                SubjectName = reader.GetString("SubjectName")
+                            }
+                        },
+                        Student = new Student
+                        {
+                            Id = reader.GetInt32("StudentID"),
+                            StudentCode = reader.GetString("StudentCode"),
+                            FullName = reader.GetString("FullName"),
+                            Class = new Class
+                            {
+                                ClassCode = reader.GetString("ClassCode")
+                            }
+                        },
+                        Content = reader.GetString("EssayContent")
                     });
                 }
             }catch (Exception ex) { throw new Exception(ex.Message); }

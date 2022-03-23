@@ -30,23 +30,23 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.lbClass = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.lbStudentName = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.lbStudentCode = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
+            this.lbMark = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
+            this.lbTestDate = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.lbSubmitTime = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.lbSubject = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.lbTestCode = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -63,11 +63,11 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.lbClass);
             this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.lbStudentName);
             this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.lbStudentCode);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Location = new System.Drawing.Point(61, 81);
             this.groupBox1.Name = "groupBox1";
@@ -76,50 +76,14 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Student information";
             // 
-            // label2
+            // lbClass
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(15, 28);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(82, 15);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Student Code:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(100, 28);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(58, 15);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "HE153283";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(100, 53);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(108, 15);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Nguyễn Mạnh Quý";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(15, 53);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(64, 15);
-            this.label5.TabIndex = 2;
-            this.label5.Text = "Full Name:";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(100, 79);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(43, 15);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "SE1517";
+            this.lbClass.AutoSize = true;
+            this.lbClass.Location = new System.Drawing.Point(100, 79);
+            this.lbClass.Name = "lbClass";
+            this.lbClass.Size = new System.Drawing.Size(12, 15);
+            this.lbClass.TabIndex = 5;
+            this.lbClass.Text = "-";
             // 
             // label7
             // 
@@ -130,17 +94,53 @@
             this.label7.TabIndex = 4;
             this.label7.Text = "Class:";
             // 
+            // lbStudentName
+            // 
+            this.lbStudentName.AutoSize = true;
+            this.lbStudentName.Location = new System.Drawing.Point(100, 53);
+            this.lbStudentName.Name = "lbStudentName";
+            this.lbStudentName.Size = new System.Drawing.Size(12, 15);
+            this.lbStudentName.TabIndex = 3;
+            this.lbStudentName.Text = "-";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(15, 53);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(64, 15);
+            this.label5.TabIndex = 2;
+            this.label5.Text = "Full Name:";
+            // 
+            // lbStudentCode
+            // 
+            this.lbStudentCode.AutoSize = true;
+            this.lbStudentCode.Location = new System.Drawing.Point(100, 28);
+            this.lbStudentCode.Name = "lbStudentCode";
+            this.lbStudentCode.Size = new System.Drawing.Size(12, 15);
+            this.lbStudentCode.TabIndex = 1;
+            this.lbStudentCode.Text = "-";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(15, 28);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(82, 15);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Student Code:";
+            // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.label16);
+            this.groupBox2.Controls.Add(this.lbMark);
             this.groupBox2.Controls.Add(this.label17);
-            this.groupBox2.Controls.Add(this.label14);
+            this.groupBox2.Controls.Add(this.lbTestDate);
             this.groupBox2.Controls.Add(this.label15);
-            this.groupBox2.Controls.Add(this.label8);
+            this.groupBox2.Controls.Add(this.lbSubmitTime);
             this.groupBox2.Controls.Add(this.label9);
-            this.groupBox2.Controls.Add(this.label10);
+            this.groupBox2.Controls.Add(this.lbSubject);
             this.groupBox2.Controls.Add(this.label11);
-            this.groupBox2.Controls.Add(this.label12);
+            this.groupBox2.Controls.Add(this.lbTestCode);
             this.groupBox2.Controls.Add(this.label13);
             this.groupBox2.Location = new System.Drawing.Point(372, 81);
             this.groupBox2.Name = "groupBox2";
@@ -149,68 +149,35 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Submission information";
             // 
-            // label8
+            // lbMark
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(100, 79);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(110, 15);
-            this.label8.TabIndex = 5;
-            this.label8.Text = "2022-03-21 08:30:59";
+            this.lbMark.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbMark.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lbMark.ForeColor = System.Drawing.Color.Red;
+            this.lbMark.Location = new System.Drawing.Point(360, 53);
+            this.lbMark.Name = "lbMark";
+            this.lbMark.Size = new System.Drawing.Size(50, 35);
+            this.lbMark.TabIndex = 9;
+            this.lbMark.Text = "-";
+            this.lbMark.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label9
+            // label17
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(15, 79);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(77, 15);
-            this.label9.TabIndex = 4;
-            this.label9.Text = "Submit Time:";
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(301, 53);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(37, 15);
+            this.label17.TabIndex = 8;
+            this.label17.Text = "Mark:";
             // 
-            // label10
+            // lbTestDate
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(100, 53);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(128, 15);
-            this.label10.TabIndex = 3;
-            this.label10.Text = "PRN211 - Basic C#.NET";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(15, 53);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(49, 15);
-            this.label11.TabIndex = 2;
-            this.label11.Text = "Subject:";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(100, 28);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(79, 15);
-            this.label12.TabIndex = 1;
-            this.label12.Text = "PRN211_Test1";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(15, 28);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(61, 15);
-            this.label13.TabIndex = 0;
-            this.label13.Text = "Test Code:";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(360, 28);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(65, 15);
-            this.label14.TabIndex = 7;
-            this.label14.Text = "2022-03-21";
+            this.lbTestDate.AutoSize = true;
+            this.lbTestDate.Location = new System.Drawing.Point(360, 28);
+            this.lbTestDate.Name = "lbTestDate";
+            this.lbTestDate.Size = new System.Drawing.Size(12, 15);
+            this.lbTestDate.TabIndex = 7;
+            this.lbTestDate.Text = "-";
             // 
             // label15
             // 
@@ -221,26 +188,59 @@
             this.label15.TabIndex = 6;
             this.label15.Text = "Test date:";
             // 
-            // label16
+            // lbSubmitTime
             // 
-            this.label16.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label16.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label16.ForeColor = System.Drawing.Color.Red;
-            this.label16.Location = new System.Drawing.Point(360, 53);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(50, 35);
-            this.label16.TabIndex = 9;
-            this.label16.Text = "9";
-            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbSubmitTime.AutoSize = true;
+            this.lbSubmitTime.Location = new System.Drawing.Point(100, 79);
+            this.lbSubmitTime.Name = "lbSubmitTime";
+            this.lbSubmitTime.Size = new System.Drawing.Size(12, 15);
+            this.lbSubmitTime.TabIndex = 5;
+            this.lbSubmitTime.Text = "-";
             // 
-            // label17
+            // label9
             // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(301, 53);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(37, 15);
-            this.label17.TabIndex = 8;
-            this.label17.Text = "Mark:";
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(15, 79);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(77, 15);
+            this.label9.TabIndex = 4;
+            this.label9.Text = "Submit Time:";
+            // 
+            // lbSubject
+            // 
+            this.lbSubject.AutoSize = true;
+            this.lbSubject.Location = new System.Drawing.Point(100, 53);
+            this.lbSubject.Name = "lbSubject";
+            this.lbSubject.Size = new System.Drawing.Size(12, 15);
+            this.lbSubject.TabIndex = 3;
+            this.lbSubject.Text = "-";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(15, 53);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(49, 15);
+            this.label11.TabIndex = 2;
+            this.label11.Text = "Subject:";
+            // 
+            // lbTestCode
+            // 
+            this.lbTestCode.AutoSize = true;
+            this.lbTestCode.Location = new System.Drawing.Point(100, 28);
+            this.lbTestCode.Name = "lbTestCode";
+            this.lbTestCode.Size = new System.Drawing.Size(12, 15);
+            this.lbTestCode.TabIndex = 1;
+            this.lbTestCode.Text = "-";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(15, 28);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(61, 15);
+            this.label13.TabIndex = 0;
+            this.label13.Text = "Test Code:";
             // 
             // FrmReviewSubmission
             // 
@@ -253,6 +253,7 @@
             this.MaximizeBox = false;
             this.Name = "FrmReviewSubmission";
             this.Text = "FrmReviewSubmission";
+            this.Load += new System.EventHandler(this.FrmReviewSubmission_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -266,22 +267,22 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lbClass;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lbStudentName;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lbStudentCode;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label lbMark;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label lbTestDate;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lbSubmitTime;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label lbSubject;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label lbTestCode;
         private System.Windows.Forms.Label label13;
     }
 }
