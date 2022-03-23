@@ -22,6 +22,7 @@ namespace OTS.ViewTest
         SubjectDBContext subjectDBContext = new SubjectDBContext();
         TestDBContext testDBContext = new TestDBContext();
         TypeDBContext typeDBContext = new TypeDBContext();
+        QuestionDBContext questionDBContext = new QuestionDBContext();
         //private void InitCustomStyle()
         //{
         //    dtpStartTime.Format = DateTimePickerFormat.Custom;
@@ -90,6 +91,7 @@ namespace OTS.ViewTest
             }
         }
 
+
         private void LoadTotal()
         {
             int total = GetTotal((int)nudEasy.Value, (int)nudMedium.Value, (int)nudHard.Value);
@@ -126,12 +128,13 @@ namespace OTS.ViewTest
                 Subject s = (Subject)cbSubject.SelectedItem;
                 Subject subject = subjectDBContext.GetSubject(s.SubjectCode.Trim());
                 test.Subject = subject;
-                
-                
-
-                testDBContext.InsertTest(test);
-                MessageBox.Show("Create successful");
+                int row =  testDBContext.InsertTest(test);
                 LoadTest();
+                if (row > 0)
+                {
+                    MessageBox.Show("Create successful");
+                }
+                
             }
         }
 

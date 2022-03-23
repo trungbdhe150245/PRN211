@@ -10,7 +10,7 @@ using Type = OTS.Models.Type;
 
 namespace OTS.DAO
 {
-    public class QuestionDBContext : DBContext 
+    public class QuestionDBContext : DBContext
     {
         public string Content { get; private set; }
 
@@ -61,9 +61,12 @@ namespace OTS.DAO
                     command.Parameters.AddWithValue("@testId", testId);
                     rowAffects += command.ExecuteNonQuery();
                 }
-                
-            } catch (Exception ex) {
-                throw new Exception(ex.Message); }
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
             finally { connection.Close(); }
             return rowAffects;
         }
@@ -112,10 +115,12 @@ namespace OTS.DAO
                     };
                 }
 
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
-            } finally
+            }
+            finally
             {
                 connection.Close();
             }
@@ -150,11 +155,13 @@ namespace OTS.DAO
                     {
                         Id = reader.GetInt32("Id"),
                         Content = reader.GetString("Content"),
-                        Level = new Level() {
+                        Level = new Level()
+                        {
                             Id = reader.GetInt16("Level"),
                             Name = reader.GetString("LevelName"),
                         },
-                        Type = new Type() {
+                        Type = new Type()
+                        {
                             Name = reader.GetString("TypeName"),
                             Id = reader.GetInt16("Type"),
                         },
@@ -193,7 +200,7 @@ namespace OTS.DAO
                 Test test = null;
                 while (reader.Read())
                 {
-                    if(test == null)
+                    if (test == null)
                     {
                         test = new Test()
                         {
@@ -224,7 +231,7 @@ namespace OTS.DAO
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
             finally { connection.Close(); }
-                   
+
             return result;
         }
 
@@ -263,7 +270,7 @@ namespace OTS.DAO
                     {
                         Id = reader.GetInt32("")
                     };
-                    if(!listType.Contains(t))
+                    if (!listType.Contains(t))
                     {
                         listType.Add(t);
                     }
@@ -289,12 +296,11 @@ namespace OTS.DAO
             return ListQues;
         }
 
-        public List<Question> GetRandomQuestions(int top, int type, int level, string code)
+        public Question GetRandomQuestion(int type, int level, string code)
         {
-            List<Question> questions = new List<Question>();
-            string sql = @"SELECT TOP @top  q.[Id]
+            string sql = @"SELECT TOP 1 q.[Id]
                                           ,[Content]
-                                          ,[Image]
+                                          
                                           ,l.[Id] AS LevelId, l.[Name] AS LevelName
                                           ,s.[SubjectCode], s.[SubjectName]
                                           ,t.[Id] AS TypeId, t.[Name] AS TypeName
@@ -309,39 +315,35 @@ namespace OTS.DAO
             {
                 connection = new SqlConnection(GetConnectionString());
                 command = new SqlCommand(sql, connection);
-                command.Parameters.AddWithValue("@top", top);
                 command.Parameters.AddWithValue("@type", type);
                 command.Parameters.AddWithValue("@level", level);
                 command.Parameters.AddWithValue("@code", code);
                 connection.Open();
                 reader = command.ExecuteReader();
-                if(reader.HasRows)
+
+                if (reader.Read())
                 {
-                    while(reader.Read())
+                    Question q = new()
                     {
-                        Question q = new()
+                        Id = reader.GetInt32("Id"),
+                        Content = reader.GetString("Content"),
+                        Level = new()
                         {
-                            Id = reader.GetInt32("Id"),
-                            Content = reader.GetString("Content"),
-                            Image = reader.GetString("Image"),
-                            Level = new()
-                            {
-                                Id = (short)reader.GetInt32("LevelId"),
-                                Name = reader.GetString("LevelName"),
-                            },
-                            Subject = new()
-                            {
-                                SubjectCode = reader.GetString("SubjectCode"),
-                                SubjectName = reader.GetString("SubjectName"),
-                            },
-                            Type = new()
-                            {
-                                Id = (short)reader.GetInt32("TypeId"),
-                                Name = reader.GetString("TypeName"),
-                            }
-                        };
-                        questions.Add(q);
-                    }
+                            Id = reader.GetInt16("LevelId"),
+                            Name = reader.GetString("LevelName"),
+                        },
+                        Subject = new()
+                        {
+                            SubjectCode = reader.GetString("SubjectCode"),
+                            SubjectName = reader.GetString("SubjectName"),
+                        },
+                        Type = new()
+                        {
+                            Id = reader.GetInt16("TypeId"),
+                            Name = reader.GetString("TypeName"),
+                        }
+                    };
+                    return q;
                 }
             }
             catch (Exception ex)
@@ -353,7 +355,36 @@ namespace OTS.DAO
             {
                 connection.Close();
             }
-            return questions;
+            return null;
+        }
+
+        public int InsertQuestion_Test(int quest, int test)
+        {
+            int row = 0;
+            string sql = @"INSERT INTO [Question_Test]
+                                       ([QuestionId]
+                                       ,[TestId])
+                                 VALUES
+                                       (@quest
+                                       ,@test)";
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(sql, connection);
+                command.Parameters.AddWithValue("@quest", quest);
+                command.Parameters.AddWithValue("@test", test);
+                connection.Open();
+                row = command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return row;
         }
     }
 }
