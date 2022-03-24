@@ -107,6 +107,7 @@ namespace OTS.ManageQuestion
             this.editQues.TabIndex = 6;
             this.editQues.Text = "Edit";
             this.editQues.UseVisualStyleBackColor = true;
+            this.editQues.Click += new System.EventHandler(this.editQues_Click);
             // 
             // delQues
             // 
@@ -116,6 +117,7 @@ namespace OTS.ManageQuestion
             this.delQues.TabIndex = 7;
             this.delQues.Text = "Delete";
             this.delQues.UseVisualStyleBackColor = true;
+            this.delQues.Click += new System.EventHandler(this.delQues_Click);
             // 
             // dataQuestion
             // 

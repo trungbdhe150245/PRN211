@@ -176,5 +176,57 @@ namespace OTS.ManageQuestion
 
             loadQues();
         }
+
+        private void editQues_Click(object sender, EventArgs e)
+        {
+            QuestionDBContext qDb = new QuestionDBContext();
+            AnswerDBContext aDB = new AnswerDBContext();
+            if(dataQuestion.SelectedRows.Count > 0)
+            {
+                int id = (int)dataQuestion.SelectedRows[0].Cells["Id"].Value;
+                string content = dataQuestion.SelectedRows[0].Cells["Content"].Value.ToString();
+                string levelName = dataQuestion.SelectedRows[0].Cells["Level"].Value.ToString();
+                string subCode = dataQuestion.SelectedRows[0].Cells["SubCode"].Value.ToString();
+                string typeName = dataQuestion.SelectedRows[0].Cells["Type"].Value.ToString();
+                Question q = qDb.getQues(id);
+                q.Answers = aDB.getByQues(q);
+                EditQuestion eq = new EditQuestion(this, q);
+                eq.Show();
+            }
+
+        }
+
+        private void delQues_Click(object sender, EventArgs e)
+        {
+            QuestionDBContext qDb = new QuestionDBContext();
+            AnswerDBContext aDB = new AnswerDBContext();
+            if (dataQuestion.SelectedRows.Count > 0)
+            {
+                int id = (int)dataQuestion.SelectedRows[0].Cells["Id"].Value;
+                string content = dataQuestion.SelectedRows[0].Cells["Content"].Value.ToString();
+                string levelName = dataQuestion.SelectedRows[0].Cells["Level"].Value.ToString();
+                string subCode = dataQuestion.SelectedRows[0].Cells["SubCode"].Value.ToString();
+                string typeName = dataQuestion.SelectedRows[0].Cells["Type"].Value.ToString();
+                Question q = qDb.getQues(id);
+                q.Answers = aDB.getByQues(q);
+                try
+                {
+                    foreach (var item in q.Answers)
+                    {
+                        int delAns = aDB.DeleteAns(item);
+                    }
+                    int result = qDb.DeleteQues(q);
+                    if (result > 0)
+                    {
+                        MessageBox.Show($"Delete Successful!");
+                        loadQues();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error");
+                }
+            }
+        }
     }
 }

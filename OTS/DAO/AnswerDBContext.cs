@@ -74,7 +74,104 @@ namespace OTS.DAO
             return rowAffects;
         }
 
+        public List<Answer> getByQues(Question q)
+        {
+            List<Question> ListQues = new List<Question>();
+            List<Models.Type> listType = new List<Models.Type>();
+            string getallAns = @$"SELECT [Id]
+      ,[Content]
+      ,[QuestionId]
+      ,[isCorrect]
+  FROM [dbo].[Answer] Where QuestionId = {q.Id}";
+            TypeDBContext tDB = new TypeDBContext();
+            SubjectDBContext sDB = new SubjectDBContext();
+            LevelDBContext lDB = new LevelDBContext();
+            AnswerDBContext aDB = new AnswerDBContext();
+            try
+            {
 
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(getallAns, connection);
+                connection.Open();
+                reader = command.ExecuteReader();
+                List<Answer> l = new List<Answer>();
+                while (reader.Read())
+                {
+                    Answer a = new Answer()
+                    {
+                        Id = reader.GetInt32(0),
+                        Content = reader.GetString(1),
+                        IsCorrect = reader.GetBoolean(3),
+                        Question = q
+                        //Answers = aDB.getAnswerByCID(reader.GetInt32(0))
+                    };
+                    //ques.Answers = answers;
+                    l.Add(a);
+                }
+                return l;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        public int UpdateAns(Answer targetAns)
+        {
+            int rowAffects = 0;
+            string sql_update_ans = @"UPDATE [dbo].[Answer]
+   SET [Content] = @Content
+      ,[isCorrect] = @isCorrect
+ WHERE Id = @Id";
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(sql_update_ans, connection);
+                command.Parameters.AddWithValue("@Content", targetAns.Content);
+                command.Parameters.AddWithValue("@isCorrect", targetAns.IsCorrect);
+                command.Parameters.AddWithValue("@Id", targetAns.Id);
+                connection.Open();
+                rowAffects = command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return rowAffects;
+        }
+
+
+        public int DeleteAns(Answer a)
+        {
+            int rowAffects = 0;
+
+
+            string sql_delete_classes = @$"DELETE FROM [dbo].[Answer]
+      WHERE Id = @Id";
+
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(sql_delete_classes, connection);
+                command.Parameters.AddWithValue("@Id", a.Id);
+                connection.Open();
+                rowAffects = command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally { connection.Close(); }
+            return rowAffects;
+        }
         //public Answer getCorrect(int id)
         //{
         //    List<Answer> list = getAnswerByCID(id);

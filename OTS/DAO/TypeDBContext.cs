@@ -12,7 +12,7 @@ namespace OTS.DAO
     public class TypeDBContext : DBContext
     {
 
-        public Models.Type GetTypeById(short id)
+        public Models.Type GetTypeById(int id)
         {
             List<Models.Type> types = GetTypes();
             foreach (var t in types)

@@ -47,8 +47,8 @@ namespace OTS.ManageQuestion
         private void button1_Click(object sender, EventArgs e)
         {
             TextBox t = new TextBox();
-            t.Size = new System.Drawing.Size(314, 27);
             CheckBox c = new CheckBox();
+            t.Size = new System.Drawing.Size(314, 27);
             c.Size = new System.Drawing.Size(23, 27);
             flowLayoutPanel1.Controls.Add(t);
             flowLayoutPanel1.Controls.Add(c);
