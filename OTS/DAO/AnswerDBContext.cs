@@ -49,6 +49,32 @@ namespace OTS.DAO
             return list;
         }
 
+        public int AddQues(Question q, Answer a)
+        {
+            int rowAffects = 0;
+            string sql_inser_ans = "@INSERT INTO [dbo].[Answer] ([Content],[QuestionId],[isCorrect]) VALUES(@Content,@QuestionId,@QuestionId)";
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(sql_inser_ans, connection);
+                command.Parameters.AddWithValue("@Content", a.Content);
+                command.Parameters.AddWithValue("@QuestionId", q.Id);
+                command.Parameters.AddWithValue("@QuestionId", a.IsCorrect);
+                connection.Open();
+                rowAffects = command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return rowAffects;
+        }
+
+
         //public Answer getCorrect(int id)
         //{
         //    List<Answer> list = getAnswerByCID(id);
@@ -62,4 +88,6 @@ namespace OTS.DAO
         //    return null;
         //}
     }
+
+
 }

@@ -77,6 +77,7 @@ namespace OTS.ManageQuestion
             this.searchQues.TabIndex = 2;
             this.searchQues.Text = "Search";
             this.searchQues.UseVisualStyleBackColor = true;
+            this.searchQues.Click += new System.EventHandler(this.searchQues_Click);
             // 
             // label2
             // 
@@ -96,6 +97,7 @@ namespace OTS.ManageQuestion
             this.addQues.TabIndex = 5;
             this.addQues.Text = "New Question";
             this.addQues.UseVisualStyleBackColor = true;
+            this.addQues.Click += new System.EventHandler(this.addQues_Click);
             // 
             // editQues
             // 
@@ -127,6 +129,7 @@ namespace OTS.ManageQuestion
             // 
             // checkType
             // 
+            this.checkType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.checkType.FormattingEnabled = true;
             this.checkType.Items.AddRange(new object[] {
             "Multiple-choice",

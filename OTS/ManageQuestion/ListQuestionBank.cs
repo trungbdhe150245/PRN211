@@ -15,6 +15,7 @@ namespace OTS.ManageQuestion
 {
     public partial class ListQuestionBank : Form
     {
+        private string searchKey = "";
         public ListQuestionBank()
         {
             InitializeComponent();
@@ -78,7 +79,7 @@ namespace OTS.ManageQuestion
                 QuestionDBContext qDB = new QuestionDBContext();
                 AnswerDBContext aDB = new AnswerDBContext();
                 TypeDBContext tDB = new TypeDBContext();
-                List<Question> questions = qDB.getQues();
+                List<Question> questions = qDB.getQues(searchKey,"content");
                 List<Answer> answers = aDB.getAnswer();
                 var types = tDB.GetTypes();
                 checkType.DataSource = types;
@@ -127,7 +128,7 @@ namespace OTS.ManageQuestion
             AnswerDBContext aDB = new AnswerDBContext();
             QuestionDBContext qDB = new QuestionDBContext();
             TypeDBContext tDB = new TypeDBContext();
-            List<Question> questions = qDB.getQues();
+            List<Question> questions = qDB.getQues(searchKey,"content");
             List<Answer> answers = aDB.getAnswer();
             foreach (var item in questions)
             {
@@ -161,6 +162,19 @@ namespace OTS.ManageQuestion
                 }).ToList();
                 dataQuestion.DataSource = listQues;
             }
+        }
+
+        private void addQues_Click(object sender, EventArgs e)
+        {
+            AddQuestion aq = new AddQuestion(this);
+            aq.Show();
+        }
+
+        private void searchQues_Click(object sender, EventArgs e)
+        {
+            searchKey = textBox1.Text;
+
+            loadQues();
         }
     }
 }
