@@ -18,6 +18,7 @@ namespace OTS.ManageMark
         MarkDBContext markDB = new MarkDBContext();
         ClassDBContext classDB = new ClassDBContext();
         SubmissionDBContext submissionDB = new SubmissionDBContext();
+        EssayDBContext essayDB = new EssayDBContext();
         public FrmManageMark()
         {
             InitializeComponent();
@@ -144,10 +145,23 @@ namespace OTS.ManageMark
             dgvMark.DataSource = marks;
             for (int i = 0; i < marks.Count; i++)
             {
+                //get submission
                 Submission submission = submissionDB.GetSubmission(marks[i].Test.Id, marks[i].Student.Id);
+                //get essay
+                Essay essay = essayDB.GetEssay(marks[i].Test.Id, marks[i].Student.Id);
+
                 dgvMark.Rows[i].Cells["colTestCode"].Value = marks[i].Test.Code;
                 dgvMark.Rows[i].Cells["colStudentCode"].Value = marks[i].Student.StudentCode;
                 dgvMark.Rows[i].Cells["colClassName"].Value = marks[i].Student.Class.ClassName;
+                //a test can only be submission (multiple choice) or essay => one != null when another is null
+                //if(submission != null)
+                //{
+                //    dgvMark.Rows[i].Cells["colSubmitDate"].Value = submission.SubmitDate.Date;
+                //}
+                //if (essay != null)
+                //{
+                //    dgvMark.Rows[i].Cells["colSubmitDate"].Value = essay.SubmitDate.Date;
+                //}
                 dgvMark.Rows[i].Cells["colSubmitDate"].Value = submission.SubmitDate.Date;
             }
             //set data for paging text
@@ -348,9 +362,164 @@ namespace OTS.ManageMark
         }
 
 
+        public void LoadAllMark()
+        {
+            string testCode = null;
+            string studentCode = null;
+            string classCode = null;
+            DateTime from = new DateTime();
+            DateTime to = new DateTime();
+            int pageIndex;
+
+            //get filter value when corresponding checkbox is checked
+            if (chkTestCode.Checked)
+            {
+                testCode = txtTestCode.Text.Trim();
+            }
+            if (chkStudentCode.Checked)
+            {
+                studentCode = txtStudentCode.Text.Trim();
+            }
+            if (chkSubmitDate.Checked)
+            {
+                from = dtpFrom.Value.Date;
+                to = dtpTo.Value.Date;
+            }
+            if (chkClass.Checked)
+            {
+                classCode = cbClass.SelectedValue.ToString();
+            }
+
+            int totalRecords = markDB.CountMarks(testCode, studentCode, classCode, from, to);
+            //set sz = total to get all record
+            int pageSize = totalRecords;
+
+            int totalPages = totalRecords % pageSize == 0 ? totalRecords / pageSize : (totalRecords / pageSize) + 1;
+
+            //set the page index
+            if (txtPageIndex.Text.Trim().Equals(""))
+            {
+                pageIndex = 1;
+            }
+            else
+            {
+                try
+                {
+                    pageIndex = int.Parse(txtPageIndex.Text);
+                    //if page index over the total of pages then redirect to end page
+                    if (pageIndex > totalPages)
+                    {
+                        pageIndex = totalPages;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    //if user enter a non-numeric to page index then redirect to first page
+                    pageIndex = 1;
+                }
+            }
+            //enable the appropriate pagging button
+            EnablePageButton(pageIndex, totalPages);
+
+            //gets the data using corressponding filter data
+            var marks = markDB.GetMarks(pageIndex, pageSize, testCode, studentCode, classCode, from, to);
+
+            //set data to DGV
+            dgvMark.DataSource = marks;
+            for (int i = 0; i < marks.Count; i++)
+            {
+                //get submission
+                Submission submission = submissionDB.GetSubmission(marks[i].Test.Id, marks[i].Student.Id);
+                //get essay
+                Essay essay = essayDB.GetEssay(marks[i].Test.Id, marks[i].Student.Id);
+
+                dgvMark.Rows[i].Cells["colTestCode"].Value = marks[i].Test.Code;
+                dgvMark.Rows[i].Cells["colStudentCode"].Value = marks[i].Student.StudentCode;
+                dgvMark.Rows[i].Cells["colClassName"].Value = marks[i].Student.Class.ClassName;
+                //a test can only be submission (multiple choice) or essay => one != null when another is null
+                //if(submission != null)
+                //{
+                //    dgvMark.Rows[i].Cells["colSubmitDate"].Value = submission.SubmitDate.Date;
+                //}
+                //if (essay != null)
+                //{
+                //    dgvMark.Rows[i].Cells["colSubmitDate"].Value = essay.SubmitDate.Date;
+                //}
+                dgvMark.Rows[i].Cells["colSubmitDate"].Value = submission.SubmitDate.Date;
+            }
+            //set data for paging text
+            txtPageIndex.Text = pageIndex.ToString();
+            lbTotalPage.Text = $"/{totalPages}";
+        }
+
         private void btnExport_Click(object sender, EventArgs e)
         {
+            //Load all to dgv
+            try
+            {
+                LoadAllMark();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            // creating Excel Application  
+            Microsoft.Office.Interop.Excel._Application app = new Microsoft.Office.Interop.Excel.Application();
+            // creating new WorkBook within Excel application  
+            Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add(System.Type.Missing);
+            // creating new Excelsheet in workbook  
+            Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
+            // see the excel sheet behind the program  
+            app.Visible = true;
+            // get the reference of first sheet. By default its name is Sheet1.  
+            // store its reference to worksheet  
+            worksheet = workbook.Sheets["Sheet1"];
+            worksheet = workbook.ActiveSheet;
+            // changing the name of active sheet  
+            worksheet.Name = "Mark Reported";
+            // storing header part in Excel  
+            for (int i = 1; i < dgvMark.Columns.Count + 1; i++)
+            {
+                worksheet.Cells[1, i] = dgvMark.Columns[i - 1].HeaderText;
+            }
+            // storing Each row and column value to excel sheet  
+            for (int i = 0; i < dgvMark.Rows.Count - 1; i++)
+            {
+                for (int j = 0; j < dgvMark.Columns.Count; j++)
+                {
+                    worksheet.Cells[i + 2, j + 1] = dgvMark.Rows[i].Cells[j].Value.ToString();
+                }
+            }
+            // save the application  
+            try
+            {
+                //workbook.SaveAs(@"C:\Users\mark_report.xlsx");
+                workbook.SaveAs(@"F:\mark_report.xlsx");
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
+                //Exception happen when file cannot save in this location or choose dont replace old file
+                //===> Do nothing and leave it to execute finally (close app) then the excel will automatically ask to save
+            }
+            finally
+            {
+                // Exit from the application
+                workbook.Close();
+                app.Quit();
+
+            }
+
+            //reload data to dgv paging
+            try
+            {
+                LoadMark();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
     }

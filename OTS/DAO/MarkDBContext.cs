@@ -87,7 +87,7 @@ namespace OTS.DAO
 
         internal int CountMarks(string testCode, string studentCode, string classCode, DateTime from, DateTime to)
         {
-            string table_rowNum = @"SELECT ROW_NUMBER() OVER (ORDER BY m.[TestId] ASC) as rownum
+            string table_rowNum_submission = @"SELECT ROW_NUMBER() OVER (ORDER BY m.[TestId] ASC) as rownum
 	                                      ,m.[TestId]
                                           ,m.[StudentId]
                                           ,[Mark]
@@ -106,27 +106,62 @@ namespace OTS.DAO
                                       WHERE 1=1 ";
             if (testCode != null && !testCode.Equals(""))
             {
-                table_rowNum += $" AND t.[Code] = '{testCode}' ";
+                table_rowNum_submission += $" AND t.[Code] like '%{testCode}%' ";
             }
             if (studentCode != null && !studentCode.Equals(""))
             {
-                table_rowNum += $" AND s.[StudentCode] = '{studentCode}' ";
+                table_rowNum_submission += $" AND s.[StudentCode] like '%{studentCode}%' ";
             }
             if (classCode != null && !classCode.Equals(""))
             {
-                table_rowNum += $" AND c.[ClassCode] = '{classCode}' ";
+                table_rowNum_submission += $" AND c.[ClassCode] = '{classCode}' ";
             }
             if (from != new DateTime() && to != new DateTime())
             {
-                table_rowNum += $" AND CAST(sm.SubmitDate AS date) between CAST('{from}' AS date) and CAST('{to}' AS date) ";
+                table_rowNum_submission += $" AND CAST(sm.SubmitDate AS date) between CAST('{from}' AS date) and CAST('{to}' AS date) ";
             }
 
-            string sql_select_test = @$"SELECT COUNT(rownum) as total
-                                        FROM ({table_rowNum}) as p ";
+
+            string table_rowNum_essay = @"SELECT ROW_NUMBER() OVER (ORDER BY m.[TestId] ASC) as rownum
+	                                      ,m.[TestId]
+                                          ,m.[StudentId]
+                                          ,[Mark]
+                                          ,[Note]
+	                                      ,t.[Code]
+	                                      ,s.StudentCode
+	                                      ,s.FullName
+	                                      ,c.ClassCode
+	                                      ,c.ClassName
+	                                      ,e.SubmitDate
+                                      FROM [Mark]m
+                                      JOIN [Test] t ON m.TestId = t.Id
+                                      JOIN [Student] s ON m.StudentId = s.Id
+                                      JOIN [Class] c ON s.ClassCode = c.ClassCode
+                                      JOIN [Essay] e ON (m.TestId = e.TestId AND m.StudentId = e.StudentId)
+                                      WHERE 1=1 ";
+            if (testCode != null && !testCode.Equals(""))
+            {
+                table_rowNum_essay += $" AND t.[Code] like '%{testCode}%' ";
+            }
+            if (studentCode != null && !studentCode.Equals(""))
+            {
+                table_rowNum_essay += $" AND s.[StudentCode] like '%{studentCode}%' ";
+            }
+            if (classCode != null && !classCode.Equals(""))
+            {
+                table_rowNum_essay += $" AND c.[ClassCode] = '{classCode}' ";
+            }
+            if (from != new DateTime() && to != new DateTime())
+            {
+                table_rowNum_essay += $" AND CAST(e.SubmitDate AS date) between CAST('{from}' AS date) and CAST('{to}' AS date) ";
+            }
+
+            string sql_select = @$"SELECT COUNT(rownum) as total
+                                        FROM ({table_rowNum_submission} UNION {table_rowNum_essay}) as p ";
             try
             {
                 connection = new SqlConnection(GetConnectionString());
-                command = new SqlCommand(sql_select_test, connection);
+                command = new SqlCommand(sql_select, connection);
                 connection.Open();
                 reader = command.ExecuteReader();
                 if (reader.Read())
@@ -150,8 +185,7 @@ namespace OTS.DAO
         {
             List<Mark> marks = new List<Mark>();
 
-            string table_rowNum = @"SELECT ROW_NUMBER() OVER (ORDER BY m.[TestId] ASC) as rownum
-	                                      ,m.[TestId]
+            string table_rowNum_submission = @"SELECT m.[TestId]
                                           ,m.[StudentId]
                                           ,[Mark]
                                           ,[Note]
@@ -169,29 +203,65 @@ namespace OTS.DAO
                                       WHERE 1=1 ";
             if (testCode != null && !testCode.Equals(""))
             {
-                table_rowNum += $" AND t.[Code] = '{testCode}' ";
+                table_rowNum_submission += $" AND t.[Code] like '%{testCode}%' ";
             }
             if (studentCode != null && !studentCode.Equals(""))
             {
-                table_rowNum += $" AND s.[StudentCode] = '{studentCode}' ";
+                table_rowNum_submission += $" AND s.[StudentCode] like '%{studentCode}%' ";
             }
             if (classCode != null && !classCode.Equals(""))
             {
-                table_rowNum += $" AND c.[ClassCode] = '{classCode}' ";
+                table_rowNum_submission += $" AND c.[ClassCode] = '{classCode}' ";
             }
             if (from != new DateTime() && to != new DateTime())
             {
-                table_rowNum += $" AND CAST(sm.SubmitDate AS date) between CAST('{from}' AS date) and CAST('{to}' AS date) ";
+                table_rowNum_submission += $" AND CAST(sm.SubmitDate AS date) between CAST('{from}' AS date) and CAST('{to}' AS date) ";
             }
 
-            string sql_select_test = @$"SELECT *
+            string table_rowNum_essay = @"SELECT m.[TestId]
+                                          ,m.[StudentId]
+                                          ,[Mark]
+                                          ,[Note]
+	                                      ,t.[Code]
+	                                      ,s.StudentCode
+	                                      ,s.FullName
+	                                      ,c.ClassCode
+	                                      ,c.ClassName
+	                                      ,e.SubmitDate
+                                      FROM [Mark]m
+                                      JOIN [Test] t ON m.TestId = t.Id
+                                      JOIN [Student] s ON m.StudentId = s.Id
+                                      JOIN [Class] c ON s.ClassCode = c.ClassCode
+                                      JOIN [Essay] e ON (m.TestId = e.TestId AND m.StudentId = e.StudentId)
+                                      WHERE 1=1 ";
+            if (testCode != null && !testCode.Equals(""))
+            {
+                table_rowNum_essay += $" AND t.[Code] like '%{testCode}%' ";
+            }
+            if (studentCode != null && !studentCode.Equals(""))
+            {
+                table_rowNum_essay += $" AND s.[StudentCode] like '%{studentCode}%' ";
+            }
+            if (classCode != null && !classCode.Equals(""))
+            {
+                table_rowNum_essay += $" AND c.[ClassCode] = '{classCode}' ";
+            }
+            if (from != new DateTime() && to != new DateTime())
+            {
+                table_rowNum_essay += $" AND CAST(e.SubmitDate AS date) between CAST('{from}' AS date) and CAST('{to}' AS date) ";
+            }
+
+            string table_rowNum = $@"SELECT ROW_NUMBER() OVER (ORDER BY tb.[TestId] ASC) as rownum, *
+                                        FROM ({table_rowNum_submission} UNION ALL {table_rowNum_essay}) as tb";
+
+            string sql_select = @$"SELECT *
                                   FROM ({table_rowNum}) as p 
                                   WHERE p.rownum >= ({pageIndex} - 1)*{pageSize} + 1
                                         AND p.rownum <= {pageIndex}*{pageSize} ";
             try
             {
                 connection = new SqlConnection(GetConnectionString());
-                command = new SqlCommand(sql_select_test, connection);
+                command = new SqlCommand(sql_select, connection);
                 connection.Open();
                 reader = command.ExecuteReader();
                 while (reader.Read())

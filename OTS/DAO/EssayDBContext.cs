@@ -159,5 +159,51 @@ namespace OTS.DAO
             finally { connection.Close(); }
             return result;
         }
+
+        public Essay GetEssay(int testId, int studentId)
+        {
+            string sql_select_essayId = @$"SELECT Essay.[Id]
+                              ,[TestId],Test.Code
+                              ,[QuestionId], Question.Content AS QuestionContent
+                              ,Level.Name AS LevelName
+                              ,[SubmitDate]
+                              ,Essay.[Duration]
+                              ,Essay.[Content]
+                          FROM [Essay]  JOIN Test ON Essay.TestId=Test.Id
+		                        JOIN Question ON Essay.QuestionId = Question.Id
+                                JOIN Level ON Question.Level = Level.Id
+                            WHERE Essay.TestId = {testId} AND Essay.StudentId = {studentId}";
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(sql_select_essayId, connection);
+                connection.Open();
+                reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+
+                    return new Essay()
+                    {
+                        Content = reader.GetString("Content"),
+                        Question = new Question()
+                        {
+                            Content = reader.GetString("QuestionContent"),
+                            Id = reader.GetInt32("QuestionId"),
+                            Level = new Level()
+                            {
+                                Name = reader.GetString("LevelName"),
+                            }
+                        },
+                        Id = reader.GetInt32("Id"),
+                        Duration = (TimeSpan)reader["Duration"],
+                        SubmitDate = reader.GetDateTime("SubmitDate"),
+                    };
+                }
+
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+            finally { connection.Close(); }
+            return null;
+        }
     }
 }
