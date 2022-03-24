@@ -122,9 +122,14 @@ namespace OTS.DAO
             return null;
         }
 
-        public Question GetRandomQuestionWithLevel(int levelId, string subjectCode, int type)
+        public Question GetRandomQuestionWithLevel(int levelId, string subjectCode, int type, List<int> exceptIds)
         {
-            string select_random_question = @"SELECT TOP 1 Question.[Id]
+            List<string> exceptIdsParameters = new List<string>();
+            for(int i = 0; i<exceptIds.Count; i++)
+            {
+                exceptIdsParameters.Add("@ExceptId" + i);
+            }
+            string select_random_question = @$"SELECT TOP 1 Question.[Id]
                                               ,[Content]
                                               ,[Image]
                                               ,[Level], Level.Name AS LevelName
@@ -134,7 +139,9 @@ namespace OTS.DAO
 		                                        JOIN Level ON Question.Level=Level.Id
 		                                        JOIN Subject ON Question.SubjectCode=Subject.SubjectCode
                                           WHERE Question.Level=@Level AND Question.SubjectCode=@Subject AND Question.Type=@Type
+                                                    AND Question.id NOT IN ({String.Join(", ", exceptIdsParameters)})
                                           ORDER BY NEWID()";
+
             try
             {
                 connection = new SqlConnection(GetConnectionString());
@@ -142,6 +149,11 @@ namespace OTS.DAO
                 command.Parameters.AddWithValue("@Level", levelId);
                 command.Parameters.AddWithValue("@Subject", subjectCode);
                 command.Parameters.AddWithValue("@Type", type);
+                for (int i = 0; i < exceptIds.Count; i++)
+                {
+                    command.Parameters.AddWithValue("@ExceptId" + i, exceptIds[i]);
+                }
+
                 connection.Open();
                 reader = command.ExecuteReader();
                 if (reader.Read())
