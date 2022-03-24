@@ -113,14 +113,10 @@ namespace OTS.ViewTest
             LoadTestInformation();
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Do you want to cancel!\nAll change will be canceled", "Warning", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            if (MessageBox.Show("Do you want to cancel!\nAll change will be ignored", "Warning",
+                MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
                 this.Close();
         }
 
@@ -138,25 +134,21 @@ namespace OTS.ViewTest
                     Question selectedQuestion = questionDBC.GetQuestion(selectedQuestionId);
                     if (selectedQuestion != null)
                     {
-
-                        Question newQuestion = null;
-                        bool isFindAnother = false;
-                        //do
-                        //{
-                        newQuestion = questionDBC.GetRandomQuestionWithLevel(selectedQuestion.Level.Id, selectedQuestion.Subject.SubjectCode, selectedQuestion.Type.Id);
+                        List<int> existQuestionId = new List<int>();
                         foreach (DataGridViewRow row in dgvQuestion.Rows)
                         {
-                            if (
-                            Int32.Parse(row.Cells[0].Value.ToString()) == newQuestion.Id)
-                            {
-                                isFindAnother = true;
-                                break;
-                            };
+                            existQuestionId.Add(Int32.Parse(row.Cells[0].Value.ToString()));
                         }
-                        //} while (isFindAnother);
-                        if (newQuestion != null && !isFindAnother)
+                        Question newQuestion = null;
+                        newQuestion = questionDBC.GetRandomQuestionWithLevel(
+                            selectedQuestion.Level.Id, selectedQuestion.Subject.SubjectCode, selectedQuestion.Type.Id, existQuestionId
+                            );
+                        if (newQuestion != null)
                         {
                             dataGridViewQuestion.Rows[e.RowIndex].SetValues(newQuestion.Id, newQuestion.Content, newQuestion.Type.Name, newQuestion.Level.Name, "View", "Change");
+                        } else
+                        {
+                            MessageBox.Show("Latest question\nEnd of questions in Question Bank.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                     else
@@ -170,11 +162,6 @@ namespace OTS.ViewTest
             {
                 // thực hiện hành động khi chọn view trên dgvQuestions
             }
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
         }
 
         private Test GetTestInfo()

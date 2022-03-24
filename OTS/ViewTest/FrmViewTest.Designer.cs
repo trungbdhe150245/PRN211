@@ -208,7 +208,6 @@
             this.cbReview.TabIndex = 15;
             this.cbReview.Text = "Can Reivew";
             this.cbReview.UseVisualStyleBackColor = true;
-            this.cbReview.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // label9
             // 
