@@ -15,6 +15,8 @@ namespace OTS.ManageMark
     public partial class FrmManageMark : Form
     {
         Test currentTest = null;
+        Student currentStudent = null;
+        Class currentClass = null;
         MarkDBContext markDB = new MarkDBContext();
         ClassDBContext classDB = new ClassDBContext();
         SubmissionDBContext submissionDB = new SubmissionDBContext();
@@ -27,6 +29,18 @@ namespace OTS.ManageMark
         public FrmManageMark(Test test)
         {
             currentTest = test;
+            InitializeComponent();
+        }
+
+        public FrmManageMark(Student student)
+        {
+            currentStudent = student;
+            InitializeComponent();
+        }
+
+        public FrmManageMark(Class classObj)
+        {
+            currentClass = classObj;
             InitializeComponent();
         }
 
@@ -154,15 +168,15 @@ namespace OTS.ManageMark
                 dgvMark.Rows[i].Cells["colStudentCode"].Value = marks[i].Student.StudentCode;
                 dgvMark.Rows[i].Cells["colClassName"].Value = marks[i].Student.Class.ClassName;
                 //a test can only be submission (multiple choice) or essay => one != null when another is null
-                //if(submission != null)
-                //{
-                //    dgvMark.Rows[i].Cells["colSubmitDate"].Value = submission.SubmitDate.Date;
-                //}
-                //if (essay != null)
-                //{
-                //    dgvMark.Rows[i].Cells["colSubmitDate"].Value = essay.SubmitDate.Date;
-                //}
-                dgvMark.Rows[i].Cells["colSubmitDate"].Value = submission.SubmitDate.Date;
+                if (submission != null)
+                {
+                    dgvMark.Rows[i].Cells["colSubmitDate"].Value = submission.SubmitDate.Date;
+                }
+                if (essay != null)
+                {
+                    dgvMark.Rows[i].Cells["colSubmitDate"].Value = essay.SubmitDate.Date;
+                }
+
             }
             //set data for paging text
             txtPageIndex.Text = pageIndex.ToString();
@@ -200,6 +214,21 @@ namespace OTS.ManageMark
             {
                 buildDGV();
                 LoadClass();
+                if (currentTest != null)
+                {
+                    chkTestCode.Checked = true;
+                    txtTestCode.Text = currentTest.Code;
+                }
+                if (currentStudent != null)
+                {
+                    chkStudentCode.Checked = true;
+                    txtStudentCode.Text = currentStudent.StudentCode;
+                }
+                if (currentClass != null)
+                {
+                    chkClass.Checked = true;
+                    cbClass.SelectedValue = currentClass.ClassCode;
+                }
                 LoadMark();
             }
             catch (Exception ex)

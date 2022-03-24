@@ -1,4 +1,5 @@
 ﻿using OTS.DAO;
+using OTS.ManageMark;
 using OTS.Models;
 using OTS.ViewTest;
 using System;
@@ -58,6 +59,7 @@ namespace OTS.ManageTest
 
             DataGridViewTextBoxColumn status = new DataGridViewTextBoxColumn();
             status.HeaderText = "Status";
+            status.Width = 70;
             dgvTest.Columns.Add(status);
 
             DataGridViewButtonColumn buttonCol1 = new DataGridViewButtonColumn();
@@ -72,7 +74,12 @@ namespace OTS.ManageTest
 
             DataGridViewButtonColumn buttonCol3 = new DataGridViewButtonColumn();
             buttonCol3.Text = "View detail";
+            buttonCol3.Width = 70;
             dgvTest.Columns.Add(buttonCol3);
+
+            DataGridViewButtonColumn buttonCol4 = new DataGridViewButtonColumn();
+            buttonCol4.Text = "View grades";
+            dgvTest.Columns.Add(buttonCol4);
 
         }
 
@@ -205,6 +212,7 @@ namespace OTS.ManageTest
                 dgvTest.Rows[i].Cells[6].Value = "Start";
                 dgvTest.Rows[i].Cells[7].Value = "End";
                 dgvTest.Rows[i].Cells[8].Value = "View detail";
+                dgvTest.Rows[i].Cells[9].Value = "View grades";
             }
             //set data for paging text
             txtPageIndex.Text = pageIndex.ToString();
@@ -401,6 +409,19 @@ namespace OTS.ManageTest
             {
                 btnDetail_Click(testID);
             }
+            else if (e.ColumnIndex == 9)
+            {
+                btnGrade_Click(testID);
+            }
+        }
+
+        private void btnGrade_Click(int testID)
+        {
+            //hide current form and show again when close view detail test form
+            this.Hide();
+            FrmManageMark frmManageMark = new FrmManageMark(testDB.GetTest(testID));
+            frmManageMark.FormClosed += (s, args) => this.Show();
+            frmManageMark.Show();
         }
 
         private void btnDetail_Click(int testID)

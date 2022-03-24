@@ -256,7 +256,7 @@
             this.dgvTest.Location = new System.Drawing.Point(292, 88);
             this.dgvTest.Name = "dgvTest";
             this.dgvTest.RowTemplate.Height = 25;
-            this.dgvTest.Size = new System.Drawing.Size(735, 348);
+            this.dgvTest.Size = new System.Drawing.Size(776, 348);
             this.dgvTest.TabIndex = 2;
             this.dgvTest.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTest_CellClick);
             // 
@@ -325,7 +325,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1044, 503);
+            this.ClientSize = new System.Drawing.Size(1098, 503);
             this.Controls.Add(this.btnLastPage);
             this.Controls.Add(this.btnNextPage);
             this.Controls.Add(this.lbTotalPage);
