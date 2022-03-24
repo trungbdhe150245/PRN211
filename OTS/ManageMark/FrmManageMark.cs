@@ -193,5 +193,165 @@ namespace OTS.ManageMark
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void chkTestCode_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkTestCode.Checked)
+            {
+                txtTestCode.Enabled = true;
+            }
+            else
+            {
+                txtTestCode.Enabled = false;
+            }
+        }
+
+        private void chkStudentCode_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkStudentCode.Checked)
+            {
+                txtStudentCode.Enabled = true;
+            }
+            else
+            {
+                txtStudentCode.Enabled = false;
+            }
+        }
+
+        private void chkClass_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkClass.Checked)
+            {
+                cbClass.Enabled = true;
+            }
+            else
+            {
+                cbClass.Enabled = false;
+            }
+        }
+
+        private void chkSubmitDate_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkSubmitDate.Checked)
+            {
+                dtpFrom.Enabled = true;
+                dtpTo.Enabled = true;
+            }
+            else
+            {
+                dtpFrom.Enabled = false;
+                dtpTo.Enabled = false;
+            }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                txtPageIndex.Text = "1";
+                LoadMark();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public void ClearCheckBox()
+        {
+            chkTestCode.Checked = false;
+            chkStudentCode.Checked = false;
+            chkClass.Checked = false;
+            chkSubmitDate.Checked = false;
+        }
+
+        private void btnClearSearch_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                txtPageIndex.Text = "1";
+                ClearCheckBox();
+                LoadMark();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnFirstPage_Click(object sender, EventArgs e)
+        {
+            txtPageIndex.Text = "1";
+            try
+            {
+                LoadMark();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnPrevPage_Click(object sender, EventArgs e)
+        {
+            int currentIndex = int.Parse(txtPageIndex.Text);
+            txtPageIndex.Text = $"{--currentIndex}";
+            try
+            {
+                LoadMark();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnNextPage_Click(object sender, EventArgs e)
+        {
+            int currentIndex = int.Parse(txtPageIndex.Text);
+            txtPageIndex.Text = $"{++currentIndex}";
+            try
+            {
+                LoadMark();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnLastPage_Click(object sender, EventArgs e)
+        {
+            //Eg: lbTotalPage.Text = "/10" => substring from 1
+            int totalPage = int.Parse(lbTotalPage.Text.Substring(1));
+            txtPageIndex.Text = $"{totalPage}";
+            try
+            {
+                LoadMark();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void txtPageIndex_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadMark();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

@@ -106,19 +106,19 @@ namespace OTS.DAO
                                       WHERE 1=1 ";
             if (testCode != null && !testCode.Equals(""))
             {
-                table_rowNum += $" AND t.[Code] = {testCode} ";
+                table_rowNum += $" AND t.[Code] = '{testCode}' ";
             }
             if (studentCode != null && !studentCode.Equals(""))
             {
-                table_rowNum += $" AND s.[StudentCode] = {studentCode} ";
+                table_rowNum += $" AND s.[StudentCode] = '{studentCode}' ";
             }
             if (classCode != null && !classCode.Equals(""))
             {
-                table_rowNum += $" AND c.[ClassCode] = {classCode} ";
+                table_rowNum += $" AND c.[ClassCode] = '{classCode}' ";
             }
             if (from != new DateTime() && to != new DateTime())
             {
-                table_rowNum += $" AND CAST(sm.SubmitDate AS datetime) between {from} and {to} ";
+                table_rowNum += $" AND CAST(sm.SubmitDate AS date) between CAST('{from}' AS date) and CAST('{to}' AS date) ";
             }
 
             string sql_select_test = @$"SELECT COUNT(rownum) as total
@@ -169,19 +169,19 @@ namespace OTS.DAO
                                       WHERE 1=1 ";
             if (testCode != null && !testCode.Equals(""))
             {
-                table_rowNum += $" AND t.[Code] = {testCode} ";
+                table_rowNum += $" AND t.[Code] = '{testCode}' ";
             }
             if (studentCode != null && !studentCode.Equals(""))
             {
-                table_rowNum += $" AND s.[StudentCode] = {studentCode} ";
+                table_rowNum += $" AND s.[StudentCode] = '{studentCode}' ";
             }
             if (classCode != null && !classCode.Equals(""))
             {
-                table_rowNum += $" AND c.[ClassCode] = {classCode} ";
+                table_rowNum += $" AND c.[ClassCode] = '{classCode}' ";
             }
             if (from != new DateTime() && to != new DateTime())
             {
-                table_rowNum += $" AND CAST(sm.SubmitDate AS datetime) between {from} and {to} ";
+                table_rowNum += $" AND CAST(sm.SubmitDate AS date) between CAST('{from}' AS date) and CAST('{to}' AS date) ";
             }
 
             string sql_select_test = @$"SELECT *

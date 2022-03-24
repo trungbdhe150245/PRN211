@@ -98,6 +98,7 @@
             // 
             // txtStudentCode
             // 
+            this.txtStudentCode.Enabled = false;
             this.txtStudentCode.Location = new System.Drawing.Point(11, 115);
             this.txtStudentCode.Name = "txtStudentCode";
             this.txtStudentCode.Size = new System.Drawing.Size(216, 23);
@@ -105,6 +106,7 @@
             // 
             // txtTestCode
             // 
+            this.txtTestCode.Enabled = false;
             this.txtTestCode.Location = new System.Drawing.Point(11, 54);
             this.txtTestCode.Name = "txtTestCode";
             this.txtTestCode.Size = new System.Drawing.Size(216, 23);
@@ -118,6 +120,7 @@
             this.btnClearSearch.TabIndex = 16;
             this.btnClearSearch.Text = "View all";
             this.btnClearSearch.UseVisualStyleBackColor = true;
+            this.btnClearSearch.Click += new System.EventHandler(this.btnClearSearch_Click);
             // 
             // btnSearch
             // 
@@ -127,6 +130,7 @@
             this.btnSearch.TabIndex = 15;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // chkClass
             // 
@@ -137,6 +141,7 @@
             this.chkClass.TabIndex = 14;
             this.chkClass.Text = "Class";
             this.chkClass.UseVisualStyleBackColor = true;
+            this.chkClass.CheckedChanged += new System.EventHandler(this.chkClass_CheckedChanged);
             // 
             // cbClass
             // 
@@ -196,6 +201,7 @@
             this.chkSubmitDate.TabIndex = 8;
             this.chkSubmitDate.Text = "Submit Date";
             this.chkSubmitDate.UseVisualStyleBackColor = true;
+            this.chkSubmitDate.CheckedChanged += new System.EventHandler(this.chkSubmitDate_CheckedChanged);
             // 
             // chkStudentCode
             // 
@@ -206,6 +212,7 @@
             this.chkStudentCode.TabIndex = 3;
             this.chkStudentCode.Text = "Student Code";
             this.chkStudentCode.UseVisualStyleBackColor = true;
+            this.chkStudentCode.CheckedChanged += new System.EventHandler(this.chkStudentCode_CheckedChanged);
             // 
             // chkTestCode
             // 
@@ -216,6 +223,7 @@
             this.chkTestCode.TabIndex = 2;
             this.chkTestCode.Text = "Test Code";
             this.chkTestCode.UseVisualStyleBackColor = true;
+            this.chkTestCode.CheckedChanged += new System.EventHandler(this.chkTestCode_CheckedChanged);
             // 
             // btnLastPage
             // 
@@ -226,6 +234,7 @@
             this.btnLastPage.TabIndex = 14;
             this.btnLastPage.Text = "Last";
             this.btnLastPage.UseVisualStyleBackColor = true;
+            this.btnLastPage.Click += new System.EventHandler(this.btnLastPage_Click);
             // 
             // btnNextPage
             // 
@@ -236,6 +245,7 @@
             this.btnNextPage.TabIndex = 13;
             this.btnNextPage.Text = "Next";
             this.btnNextPage.UseVisualStyleBackColor = true;
+            this.btnNextPage.Click += new System.EventHandler(this.btnNextPage_Click);
             // 
             // lbTotalPage
             // 
@@ -252,6 +262,7 @@
             this.txtPageIndex.Name = "txtPageIndex";
             this.txtPageIndex.Size = new System.Drawing.Size(34, 23);
             this.txtPageIndex.TabIndex = 11;
+            this.txtPageIndex.TextChanged += new System.EventHandler(this.txtPageIndex_TextChanged);
             // 
             // btnPrevPage
             // 
@@ -262,6 +273,7 @@
             this.btnPrevPage.TabIndex = 10;
             this.btnPrevPage.Text = "Prev";
             this.btnPrevPage.UseVisualStyleBackColor = true;
+            this.btnPrevPage.Click += new System.EventHandler(this.btnPrevPage_Click);
             // 
             // btnFirstPage
             // 
@@ -272,6 +284,7 @@
             this.btnFirstPage.TabIndex = 9;
             this.btnFirstPage.Text = "First";
             this.btnFirstPage.UseVisualStyleBackColor = true;
+            this.btnFirstPage.Click += new System.EventHandler(this.btnFirstPage_Click);
             // 
             // btnExport
             // 
@@ -281,6 +294,7 @@
             this.btnExport.TabIndex = 15;
             this.btnExport.Text = "Export file";
             this.btnExport.UseVisualStyleBackColor = true;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // FrmManageMark
             // 
