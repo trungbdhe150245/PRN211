@@ -33,8 +33,7 @@ namespace OTS
             //Application.Run(new FrmReviewSubmission(34,8));
             Application.Run(new FrmManageSubmission());
 
-            //SubmissionDBContext dBContext = new();
-            //List<Submission> s = dBContext.GetManageSubmissions("PRN211_Test1", "", "")
         }
     }
+
 }
