@@ -47,6 +47,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.lbTestCode = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
+            this.lbTitle = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -242,17 +243,30 @@
             this.label13.TabIndex = 0;
             this.label13.Text = "Test Code:";
             // 
+            // lbTitle
+            // 
+            this.lbTitle.AutoSize = true;
+            this.lbTitle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lbTitle.Location = new System.Drawing.Point(62, 216);
+            this.lbTitle.Name = "lbTitle";
+            this.lbTitle.Size = new System.Drawing.Size(12, 15);
+            this.lbTitle.TabIndex = 8;
+            this.lbTitle.Text = "-";
+            // 
             // FrmReviewSubmission
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(869, 450);
+            this.AutoScroll = true;
+            this.ClientSize = new System.Drawing.Size(890, 668);
+            this.Controls.Add(this.lbTitle);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
             this.MaximizeBox = false;
             this.Name = "FrmReviewSubmission";
-            this.Text = "FrmReviewSubmission";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Review Submission";
             this.Load += new System.EventHandler(this.FrmReviewSubmission_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -284,5 +298,6 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label lbTestCode;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label lbTitle;
     }
 }
