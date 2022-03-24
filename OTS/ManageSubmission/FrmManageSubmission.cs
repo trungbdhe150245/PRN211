@@ -123,5 +123,16 @@ namespace OTS.ManageSubmission
         {
             this.Close();
         }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var senderGrid = (DataGridView)sender;
+
+            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
+                e.RowIndex >= 0)
+            {
+                //Transfer to other form and close this form
+            }
+        }
     }
 }
