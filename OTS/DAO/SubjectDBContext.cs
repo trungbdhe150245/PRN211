@@ -129,8 +129,11 @@ namespace OTS.DAO
         public List<Models.Subject> Getsubjects()
         {
             List<Models.Subject> subjects = new List<Models.Subject>();
+            string sql = @"SELECT [SubjectCode]
+                                  ,[SubjectName]
+                              FROM [Subject]";
             connection = new SqlConnection(GetConnectionString());
-            command = new SqlCommand();
+            command = new SqlCommand(sql, connection);
             try
             {
                 connection.Open();
@@ -142,11 +145,13 @@ namespace OTS.DAO
                         Models.Subject subject = new Models.Subject();
                         subject.SubjectCode = reader.GetString("SubjectCode");
                         subject.SubjectName = reader.GetString("SubjectName");
+                        subjects.Add(subject);
                     }
                 }
             }
             catch (Exception ex)
             {
+
 
             }
             finally
@@ -193,24 +198,25 @@ namespace OTS.DAO
             return subjects;
         }
 
-        public Subject GetSubject(string subjectCode)
+        public Subject GetSubject(string code)
         {
             string sql = @"SELECT [SubjectCode]
                                   ,[SubjectName]
                               FROM [Subject]
-                              WHERE [SubjectCode] = @subjectcode";
+                              WHERE [SubjectCode] = @code";
+
+            connection = new SqlConnection(GetConnectionString());
+            command = new SqlCommand(sql, connection);
+            command.Parameters.AddWithValue("@code", code);
             try
             {
-                connection = new SqlConnection(GetConnectionString());
-                command = new SqlCommand(sql, connection);
-                command.Parameters.AddWithValue("@subjectcode", subjectCode);
                 connection.Open();
-                reader = command.ExecuteReader(CommandBehavior.CloseConnection);
-                if (reader.HasRows)
+                reader = command.ExecuteReader();
+                if (reader.Read())
                 {
                     Subject subject = new Subject()
                     {
-                        SubjectCode = subjectCode,
+                        SubjectCode = reader.GetString("SubjectCode"),
                         SubjectName = reader.GetString("SubjectName")
                     };
                     return subject;
@@ -219,7 +225,8 @@ namespace OTS.DAO
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
-            } finally
+            }
+            finally
             {
                 connection.Close();
             }
