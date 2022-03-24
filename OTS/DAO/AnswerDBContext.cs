@@ -49,17 +49,17 @@ namespace OTS.DAO
             return list;
         }
 
-        public int AddQues(Question q, Answer a)
+        public int AddAns(Answer a)
         {
             int rowAffects = 0;
-            string sql_inser_ans = "@INSERT INTO [dbo].[Answer] ([Content],[QuestionId],[isCorrect]) VALUES(@Content,@QuestionId,@QuestionId)";
+            string sql_inser_ans = @"INSERT INTO [dbo].[Answer] ([Content],[QuestionId],[isCorrect]) VALUES(@Content,@QuestionId,@isCorrect)";
             try
             {
                 connection = new SqlConnection(GetConnectionString());
                 command = new SqlCommand(sql_inser_ans, connection);
                 command.Parameters.AddWithValue("@Content", a.Content);
-                command.Parameters.AddWithValue("@QuestionId", q.Id);
-                command.Parameters.AddWithValue("@QuestionId", a.IsCorrect);
+                command.Parameters.AddWithValue("@QuestionId", a.Question.Id);
+                command.Parameters.AddWithValue("@isCorrect", a.IsCorrect);
                 connection.Open();
                 rowAffects = command.ExecuteNonQuery();
             }

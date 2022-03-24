@@ -84,7 +84,7 @@ namespace OTS.DAO
         {
             List<Question> ListQues = new List<Question>();
             List<Models.Type> listType = new List<Models.Type>();
-            string getallQuestion = @$"SELECT Question.Id,Question.Content,Level.[Name],Question.SubjectCode,Type.[Name],Question.Content,Level.Id,Question.[Type] FROM Question JOIN [Type] ON Question.[Type] = Type.Id  JOIN [Level] ON Level.Id = Question.[Level] WHERE {whereQuery}";
+            string getallQuestion = @$"SELECT Question.Id,Question.Content,Level.[Name],Question.SubjectCode,Type.[Name],Question.Content,Level.Id,Question.[Type] FROM Question JOIN [Type] ON Question.[Type] = Type.Id  JOIN [Level] ON Level.Id = Question.[Level]";
             TypeDBContext tDB = new TypeDBContext();
             SubjectDBContext sDB = new SubjectDBContext();
             LevelDBContext lDB = new LevelDBContext();
@@ -139,7 +139,7 @@ namespace OTS.DAO
            (@Content
            ,@Level
            ,@SubjectCode
-           ,@Type)";
+           ,@Type);SELECT SCOPE_IDENTITY();";
             try
             {
                 connection = new SqlConnection(GetConnectionString());
@@ -149,7 +149,8 @@ namespace OTS.DAO
                 command.Parameters.AddWithValue("@SubjectCode", q.Subject.SubjectCode);
                 command.Parameters.AddWithValue("@Type", q.Type.Id);
                 connection.Open();
-                rowAffects = command.ExecuteNonQuery();
+                rowAffects =Convert.ToInt32(command.ExecuteScalar());
+
             }
             catch (Exception ex)
             {
@@ -161,6 +162,11 @@ namespace OTS.DAO
             }
             return rowAffects;
         }
+
+        //public int getId()
+        //{
+
+        //}
 
         //public Question findQuesID(int id)
         //{

@@ -16,6 +16,7 @@ namespace OTS.ManageQuestion
     {
         public Dictionary<TextBox, CheckBox> list = new Dictionary<TextBox, CheckBox>();
         private ListQuestionBank lq;
+        private List<Answer> answers;
         public AddQuestion(ListQuestionBank listquest)
         {
             lq = listquest;
@@ -90,13 +91,36 @@ namespace OTS.ManageQuestion
                 try
                 {
                     QuestionDBContext qDb = new QuestionDBContext();
-
-                    if (qDb.AddQues(new Question() { Level = level, Content = content, Type = type, Subject = subject }) > 0)
+                    AnswerDBContext aDb = new AnswerDBContext();
+                    Question q = new Question() { Level = level, Content = content, Type = type, Subject = subject };
+                    answers = new List<Answer>();
+                    int id = qDb.AddQues(q);
+                    if (id > 0)
                     {
+                        foreach (var item in list)
+                        {
+                            Answer a = new Answer();
+                            q.Id = id;
+                            a.Question = q;
+                            a.Content = item.Key.Text;
+                            a.IsCorrect = item.Value.Checked;
+                            aDb.AddAns(a);
+                            answers.Add(a);
+                        }
+                        q.Answers = answers;
                         MessageBox.Show("Added Question Succesful!");
                         this.Close();
                         lq.loadQues();
                     }
+                    //foreach (var item in list)
+                    //{
+                    //    Answer a = new Answer();
+                    //    a.Question = q;
+                    //    a.Content = item.Key.Text;
+                    //    a.IsCorrect = item.Value.Checked;
+                    //    aDb.AddAns(a);
+                    //    answers.Add(a);
+                    //}
 
                 }
                 catch (Exception ex)
