@@ -41,7 +41,7 @@ namespace OTS.ViewTest
             cbSubject.DataSource = subjects;
             cbSubject.ValueMember = "SubjectCode";
             cbSubject.DisplayMember = "SubjectName";
-            
+
         }
 
         private void LoadTest()
@@ -62,7 +62,7 @@ namespace OTS.ViewTest
         private bool CheckInput()
         {
             string mess = "";
-            
+
             if (txtTotalQuest.Text.Equals(""))
             {
                 mess = "You must select number of questions";
@@ -111,6 +111,66 @@ namespace OTS.ViewTest
             return total;
         }
 
+        private int GenEasyQuest(short type, string code, int test)
+        {
+            int level = 1;
+            int row = 0;
+            List<Question> questions = questionDBContext.GetRandomQuestions(type, level, code);
+            if(nudEasy.Value <= questions.Count)
+            {
+                questions.ToArray();
+                for (int i = 0; i < int.Parse(nudEasy.Value.ToString()); i++)
+                {
+                    row = questionDBContext.InsertQuestion_Test(questions[i].Id, test);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Ran out of Easy question for this Subject");
+            }
+            return row;
+        }
+
+        private int GenMedQuest(short type, string code, int test)
+        {
+            int level = 2;
+            int row = 0;
+            List<Question> questions = questionDBContext.GetRandomQuestions(type, level, code);
+            if (nudMedium.Value <= questions.Count)
+            {
+                questions.ToArray();
+                for (int i = 0; i < int.Parse(nudMedium.Value.ToString()); i++)
+                {
+                    row = questionDBContext.InsertQuestion_Test(questions[i].Id, test);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Ran out of Medium question for this Subject");
+            }
+            return row;
+        }
+
+        private int GenHardQuest(short type, string code, int test)
+        {
+            int level = 3;
+            int row = 0;
+            List<Question> questions = questionDBContext.GetRandomQuestions(type, level, code);
+            if (nudHard.Value <= questions.Count)
+            {
+                questions.ToArray();
+                for (int i = 0; i < int.Parse(nudHard.Value.ToString()); i++)
+                {
+                    row = questionDBContext.InsertQuestion_Test(questions[i].Id, test);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Ran out of Hard question for this Subject");
+            }
+            return row;
+        }
+
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (CheckInput())
@@ -128,13 +188,33 @@ namespace OTS.ViewTest
                 Subject s = (Subject)cbSubject.SelectedItem;
                 Subject subject = subjectDBContext.GetSubject(s.SubjectCode.Trim());
                 test.Subject = subject;
-                int row =  testDBContext.InsertTest(test);
-                LoadTest();
-                if (row > 0)
+                int row = testDBContext.InsertTest(test);
+
+                int testId = testDBContext.GetLatestTestId();
+
+                int easy = GenEasyQuest((Int16)cbType.SelectedValue, cbSubject.SelectedValue.ToString(), testId);
+                int med = GenMedQuest((Int16)cbType.SelectedValue, cbSubject.SelectedValue.ToString(), testId);
+                int hard = GenHardQuest((Int16)cbType.SelectedValue, cbSubject.SelectedValue.ToString(), testId);
+                if (!(row > 0 && easy > 0 && med > 0 && hard > 0))
+                {
+                    testDBContext.DeleteTest(testId);
+                    MessageBox.Show("Create failed", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    LoadTest();
+                }
+                else
                 {
                     MessageBox.Show("Create successful");
+                    LoadTest();
+                    txtTestCode.Text = "";
+                    dtpTestDate.Value = DateTime.Now;
+                    cbSubject.SelectedIndex = 0;
+                    cbType.SelectedIndex = 0;
+                    nudEasy.Value = 0;
+                    nudMedium.Value = 0;
+                    nudHard.Value = 0;
+                    checkReview.Checked = false;
                 }
-                
+
             }
         }
 
@@ -145,7 +225,7 @@ namespace OTS.ViewTest
                 LoadSubject();
                 LoadTest();
                 LoadType();
-                
+
             }
             catch (Exception ex)
             {
@@ -168,6 +248,15 @@ namespace OTS.ViewTest
         private void nudHard_ValueChanged(object sender, EventArgs e)
         {
             LoadTotal();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Do you want to cancel!\nAll change will be canceled", "Warning", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                this.Close();
+            }
+                
         }
     }
 }

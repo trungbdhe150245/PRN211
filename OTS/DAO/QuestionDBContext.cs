@@ -296,11 +296,12 @@ namespace OTS.DAO
             return ListQues;
         }
 
-        public Question GetRandomQuestion(int type, int level, string code)
+        public List<Question> GetRandomQuestions(int type, int level, string code)
         {
-            string sql = @"SELECT TOP 1 q.[Id]
+            List<Question> questions = new List<Question>();
+            string sql = @"SELECT        q.[Id]
                                           ,[Content]
-                                          
+                                          ,[Image]
                                           ,l.[Id] AS LevelId, l.[Name] AS LevelName
                                           ,s.[SubjectCode], s.[SubjectName]
                                           ,t.[Id] AS TypeId, t.[Name] AS TypeName
@@ -321,12 +322,13 @@ namespace OTS.DAO
                 connection.Open();
                 reader = command.ExecuteReader();
 
-                if (reader.Read())
+                while (reader.Read())
                 {
                     Question q = new()
                     {
                         Id = reader.GetInt32("Id"),
                         Content = reader.GetString("Content"),
+                        //Image = reader.GetString("image"),
                         Level = new()
                         {
                             Id = reader.GetInt16("LevelId"),
@@ -343,7 +345,7 @@ namespace OTS.DAO
                             Name = reader.GetString("TypeName"),
                         }
                     };
-                    return q;
+                    questions.Add(q);
                 }
             }
             catch (Exception ex)
@@ -355,7 +357,7 @@ namespace OTS.DAO
             {
                 connection.Close();
             }
-            return null;
+            return questions;
         }
 
         public int InsertQuestion_Test(int quest, int test)
@@ -385,6 +387,35 @@ namespace OTS.DAO
                 connection.Close();
             }
             return row;
+        }
+
+        public bool CheckQuest_Test(int id)
+        {
+            string sql = @"SELECT [QuestionId]
+                                  ,[TestId]
+                              FROM [Question_Test]
+                             WHERE [TestId] = @id";
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(sql, connection);
+                command.Parameters.AddWithValue("@id", id);
+                connection.Open();
+                reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return false;
         }
     }
 }

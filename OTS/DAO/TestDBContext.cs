@@ -522,5 +522,31 @@ namespace OTS.DAO
             }
             return row;
         }
+
+        public int GetLatestTestId()
+        {
+            string sql = @"SELECT TOP 1 [Id]
+                                  FROM [Test]
+                                  ORDER BY [Id] desc";
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(sql, connection);
+                connection.Open();
+                reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    return reader.GetInt32("Id");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally { 
+                connection.Close(); 
+            }
+            return 0;
+        }
     }
 }
