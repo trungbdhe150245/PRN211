@@ -84,5 +84,150 @@ namespace OTS.DAO
             finally { connection.Close(); }
             return rowAffects;
         }
+
+        internal int CountMarks(string testCode, string studentCode, string classCode, DateTime from, DateTime to)
+        {
+            string table_rowNum = @"SELECT ROW_NUMBER() OVER (ORDER BY m.[TestId] ASC) as rownum
+	                                      ,m.[TestId]
+                                          ,m.[StudentId]
+                                          ,[Mark]
+                                          ,[Note]
+	                                      ,t.[Code]
+	                                      ,s.StudentCode
+	                                      ,s.FullName
+	                                      ,c.ClassCode
+	                                      ,c.ClassName
+	                                      ,sm.SubmitDate
+                                      FROM [Mark]m
+                                      JOIN [Test] t ON m.TestId = t.Id
+                                      JOIN [Student] s ON m.StudentId = s.Id
+                                      JOIN [Class] c ON s.ClassCode = c.ClassCode
+                                      JOIN [Submission] sm ON (m.TestId = sm.TestId AND m.StudentId = sm.StudentId)
+                                      WHERE 1=1 ";
+            if (testCode != null && !testCode.Equals(""))
+            {
+                table_rowNum += $" AND t.[Code] = {testCode} ";
+            }
+            if (studentCode != null && !studentCode.Equals(""))
+            {
+                table_rowNum += $" AND s.[StudentCode] = {studentCode} ";
+            }
+            if (classCode != null && !classCode.Equals(""))
+            {
+                table_rowNum += $" AND c.[ClassCode] = {classCode} ";
+            }
+            if (from != new DateTime() && to != new DateTime())
+            {
+                table_rowNum += $" AND CAST(sm.SubmitDate AS datetime) between {from} and {to} ";
+            }
+
+            string sql_select_test = @$"SELECT COUNT(rownum) as total
+                                        FROM ({table_rowNum}) as p ";
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(sql_select_test, connection);
+                connection.Open();
+                reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    return reader.GetInt32("total");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return 0;
+        }
+
+        public List<Mark> GetMarks(int pageIndex, int pageSize, string testCode, string studentCode
+            , string classCode, DateTime from, DateTime to)
+        {
+            List<Mark> marks = new List<Mark>();
+
+            string table_rowNum = @"SELECT ROW_NUMBER() OVER (ORDER BY m.[TestId] ASC) as rownum
+	                                      ,m.[TestId]
+                                          ,m.[StudentId]
+                                          ,[Mark]
+                                          ,[Note]
+	                                      ,t.[Code]
+	                                      ,s.StudentCode
+	                                      ,s.FullName
+	                                      ,c.ClassCode
+	                                      ,c.ClassName
+	                                      ,sm.SubmitDate
+                                      FROM [Mark]m
+                                      JOIN [Test] t ON m.TestId = t.Id
+                                      JOIN [Student] s ON m.StudentId = s.Id
+                                      JOIN [Class] c ON s.ClassCode = c.ClassCode
+                                      JOIN [Submission] sm ON (m.TestId = sm.TestId AND m.StudentId = sm.StudentId)
+                                      WHERE 1=1 ";
+            if (testCode != null && !testCode.Equals(""))
+            {
+                table_rowNum += $" AND t.[Code] = {testCode} ";
+            }
+            if (studentCode != null && !studentCode.Equals(""))
+            {
+                table_rowNum += $" AND s.[StudentCode] = {studentCode} ";
+            }
+            if (classCode != null && !classCode.Equals(""))
+            {
+                table_rowNum += $" AND c.[ClassCode] = {classCode} ";
+            }
+            if (from != new DateTime() && to != new DateTime())
+            {
+                table_rowNum += $" AND CAST(sm.SubmitDate AS datetime) between {from} and {to} ";
+            }
+
+            string sql_select_test = @$"SELECT *
+                                  FROM ({table_rowNum}) as p 
+                                  WHERE p.rownum >= ({pageIndex} - 1)*{pageSize} + 1
+                                        AND p.rownum <= {pageIndex}*{pageSize} ";
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(sql_select_test, connection);
+                connection.Open();
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    marks.Add(new Mark()
+                    {
+                        Test = new Test
+                        {
+                            Id = reader.GetInt32("TestId"),
+                            Code = reader.GetString("Code")
+                        },
+                        Student = new Student
+                        {
+                            Id = reader.GetInt32("StudentId"),
+                            StudentCode = reader.GetString("StudentCode"),
+                            FullName = reader.GetString("FullName"),
+                            Class = new Class
+                            {
+                                ClassCode = reader.GetString("ClassCode"),
+                                ClassName = reader.GetString("ClassName")
+                            }
+                        },
+                        Grade = reader.GetFloat("Mark"),
+                        Note = reader.GetString("Note")
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return marks;
+        }
     }
 }
