@@ -84,5 +84,45 @@ namespace OTS.DAO
             finally { connection.Close(); }
             return rowAffects;
         }
+
+        public Mark GetMarkSubmission(int id, string testCode, string stuCode)
+        {
+            string sql = @"SELECT sub.[Id]
+	                              ,sub.[TestId]
+	                              ,sub.[StudentId]
+                                  ,[Mark]
+                              FROM [Mark] m INNER JOIN [Test] t ON m.[TestId] = t.[Id]
+				                            INNER JOIN [Student] stu ON m.[StudentId] = stu.[Id]
+				                            INNER JOIN [Submission] sub ON stu.[Id] = sub.[StudentId]
+                            WHERE sub.[Id] = @id AND t.[Code] = @testcode AND stu.[StudentCode] = @stucode";
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(sql, connection);
+                command.Parameters.AddWithValue("@id", id);
+                command.Parameters.AddWithValue("@testcode", testCode);
+                command.Parameters.AddWithValue("@stucode", stuCode);
+                connection.Open();
+                reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    Mark mark = new()
+                    {
+                        Grade = (float)reader["Mark"],
+                    };
+                    return mark;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return null;
+        }
     }
 }
