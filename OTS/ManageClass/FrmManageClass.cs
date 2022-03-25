@@ -34,7 +34,7 @@ namespace OTS
 
         public void LoadClassData()
         {
-
+            dgvClasses.Rows.Clear();
             txtClassSearch.Text = querySearch;
             try
             {

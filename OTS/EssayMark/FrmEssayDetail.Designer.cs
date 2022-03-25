@@ -182,6 +182,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtId);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "FrmEssayDetail";
             this.Text = "Essay Mark";
