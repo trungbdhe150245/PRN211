@@ -1,4 +1,5 @@
 ﻿using OTS.DAO;
+using OTS.Login;
 using OTS.Models;
 using System;
 using System.Collections.Generic;
@@ -102,6 +103,16 @@ namespace OTS.StudenDashBoard
         {
 
             LoadData();
+        }
+
+
+        private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //redirect to login page
+            FrmLoginStudent frmLoginStudent = new FrmLoginStudent();
+            frmLoginStudent.Closed += (s, args) => this.Close();
+            this.Hide();
+            frmLoginStudent.Show();
         }
     }
 

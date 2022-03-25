@@ -32,7 +32,7 @@ namespace OTS
             //Application.Run(new ManageSubject.InsertSubject());
             //Application.Run(new ManageSubject.UpdateSubject());
             //Application.Run(new ManageTest.frmManageTest());
-            Application.Run(new FrmManageClass());
+            //Application.Run(new FrmManageClass());
             //Application.Run(new FrmViewTest(3));
             //Application.Run(new FrmReviewSubmission(34, 8));
             Application.Run(new FrmManageMark());
