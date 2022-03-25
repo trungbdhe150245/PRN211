@@ -85,7 +85,13 @@ namespace OTS.ManageTest
         private void TakeTest_Load(object sender, EventArgs e)
         {
             Test t = new TestDBContext().GetTest("ENW392_PT3");
-            InitLabel(t);
+            Student s = new StudentDBContext().getStudent(1);
+
+
+
+
+            
+            Deploy(t, s);
             //this.TopMost = true;
             //this.FormBorderStyle = FormBorderStyle.None;
             //this.WindowState = FormWindowState.Maximized;
@@ -106,6 +112,14 @@ namespace OTS.ManageTest
             //this.label_duration.Text = duration;
 
 
+
+        }
+
+
+        private void Deploy(Test t, Student s)
+        {
+            InitLabel(t, s);
+
             // Tinh thoi gian chenh lech
             int timeDiff = (int)Math.Round(t.EndTime.TotalMinutes - DateTime.Now.TimeOfDay.TotalMinutes);
 
@@ -122,7 +136,7 @@ namespace OTS.ManageTest
 
             System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
             DateTime closeDownAt = DateTime.Now.AddMinutes(timeDiff);
-            //timer.Interval = 30000;   //30 seconds in milliseconds // day la cai gi ay quen rui
+            timer.Interval = 30000;   //30 seconds in milliseconds 
             //timer.Tick += new EventHandler(Tick_Tack);
 
             timer.Tick += new EventHandler(delegate (object sender, EventArgs e) {
@@ -257,7 +271,6 @@ namespace OTS.ManageTest
 
                 this.page_question1.SelectedIndexChanged += new EventHandler(delegate (object sender, EventArgs e) { this.label_index.Text = $"{this.page_question1.SelectedIndex + 1}"; });
             }
-
         }
 
 
@@ -301,7 +314,7 @@ namespace OTS.ManageTest
 
 
         // Init
-        private void InitLabel(Test t)
+        private void InitLabel(Test t, Student s)
         {
             //Test t = new TestDBContext().GetTest("PRO192_PT2");
             this.label_index.Text = "1";
@@ -321,7 +334,7 @@ namespace OTS.ManageTest
             this.label_subject.Text = t.Subject.SubjectCode;
             this.label_totalmark.Text = "10";
             this.label_mark.Text = Math.Round(10.0 / t.QuestionTests.Count, 1).ToString();
-            this.label_studentcode.Text = "HE150245"; /*query statement*/
+            this.label_studentcode.Text = s.StudentCode; /*query statement*/
             this.label_duration.Text = $"{duration} minutes"; /*((int)Math.Round(t.EndTime.TotalMinutes - DateTime.Now.TimeOfDay.TotalMinutes)).ToString();*/
         }
 
@@ -439,12 +452,12 @@ namespace OTS.ManageTest
             if (this.page_question1.SelectedIndex == this.page_question1.TabPages.Count - 1)
             {
                 this.page_question1.SelectedIndex = 0;
-                this.label_index.Text = this.page_question1.SelectedIndex.ToString();
+                this.label_index.Text = (this.page_question1.SelectedIndex + 1).ToString();
             }
             else if (this.page_question1.SelectedIndex < this.page_question1.TabPages.Count - 1)
             {
                 this.page_question1.SelectedIndex += 1;
-                this.label_index.Text = this.page_question1.SelectedIndex.ToString();
+                this.label_index.Text = (this.page_question1.SelectedIndex + 1).ToString();
             }
         }
 
