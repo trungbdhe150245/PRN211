@@ -61,7 +61,7 @@
             this.dgvManageSubject.RowTemplate.Height = 25;
             this.dgvManageSubject.Size = new System.Drawing.Size(538, 182);
             this.dgvManageSubject.TabIndex = 0;
-            this.dgvManageSubject.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvManageSubject_CellContentClick);
+            this.dgvManageSubject.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvManageSubject_CellClick);
             // 
             // Column1
             // 
@@ -148,6 +148,7 @@
             this.btnDelete.TabIndex = 40;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnInsert
             // 

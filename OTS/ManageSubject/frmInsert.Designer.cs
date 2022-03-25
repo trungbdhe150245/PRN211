@@ -113,6 +113,7 @@
             this.Controls.Add(this.label1);
             this.Name = "frmInsert";
             this.Text = "Insert";
+            this.Load += new System.EventHandler(this.frmInsert_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -86,6 +86,10 @@ C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS
 C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.ManageClass.FrmEditClass.resources
 C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.FrmManageClass.resources
 C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.ManageQuestion.ListQuestionBank.resources
+C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.ManageStudent.frmManageStudent.resources
+C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.ManageSubject.frmInsert.resources
+C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.ManageSubject.frmManagerSubject.resources
+C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.ManageSubject.frmUpdate.resources
 C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.ViewTest.FrmViewTest.resources
 C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.csproj.GenerateResource.cache
 C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.GeneratedMSBuildEditorConfig.editorconfig
@@ -97,7 +101,3 @@ C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS
 C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\ref\OTS.dll
 C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.pdb
 C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.genruntimeconfig.cache
-C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.csproj.AssemblyReference.cache
-C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.ManageSubject.frmInsert.resources
-C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.ManageSubject.frmManagerSubject.resources
-C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.ManageSubject.frmUpdate.resources

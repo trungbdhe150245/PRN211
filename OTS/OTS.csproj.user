@@ -16,6 +16,9 @@
     <Compile Update="ManageQuestion\ListQuestionBank.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="ManageStudent\frmManageStudent.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="ManageSubject\frmUpdate.cs">
       <SubType>Form</SubType>
     </Compile>

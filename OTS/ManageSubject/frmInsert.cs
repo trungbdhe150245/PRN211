@@ -16,6 +16,7 @@ namespace OTS.ManageSubject
     {
         String subjectCode = "";
         String subjectName = "";
+        
         String rgxsubjectCode = "^[a-zA-Z0-9]{2,50}$";
         String rgxsubjectName = "^[a-zA-Z0-9 .-]{2,255}$";
         SubjectDBContext subjectDBContext = new SubjectDBContext();
@@ -36,7 +37,13 @@ namespace OTS.ManageSubject
             {
                 subjectCode = txtSubjectCodeInput.Text.Trim();
                 subjectName = txtSubjectNameInput.Text.Trim();
-                
+                var subjectss = new DAO.SubjectDBContext().FindSubject("FindBySubjectCodeAndName", subjectCode, subjectName).ToList();
+                foreach (var s  in subjectss)
+                {
+                    subjectCode=s.SubjectCode;
+                    subjectName=s.SubjectName;
+                    throw new Exception();
+                }
                 if (!String.IsNullOrEmpty(subjectCode))
                 {
                     if (!String.IsNullOrEmpty(subjectName))
@@ -80,9 +87,14 @@ namespace OTS.ManageSubject
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message,"warring",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show($"Your Subject Code containt in data: {subjectCode}-{subjectName} ","warring",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
             
+        }
+
+        private void frmInsert_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

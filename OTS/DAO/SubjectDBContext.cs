@@ -44,24 +44,25 @@ namespace OTS.DAO
         {
             int rowAffects = 0;
             string sql_update_subject = "";
-            if (option.Equals("FindBySubjectCode"))
+            if (option.Equals("UpdateCode"))
             {
                 sql_update_subject = @"UPDATE Subject
-                                       SET SubjectCode = @newsubjectCode, SubjectName = @newsubjectName
+                                       SET SubjectCode = @newCode
+                                       WHERE SubjectCode = @oldCode;";
+            }
+            else if (option.Equals("UpdateName"))
+            {
+                sql_update_subject = @"UPDATE Subject
+                                       SET  SubjectName = @newName
+                                       WHERE SubjectCode = @oldCode;";
+            }
+            else if (option.Equals("UpdateCodeAndName"))
+            {
+                sql_update_subject = @"UPDATE Subject
+                                       SET  SubjectCode = @newCode, SubjectName = @newName
                                        WHERE SubjectCode = @oldsubjectCode;";
             }
-            else if (option == "FindBySubjectName")
-            {
-                sql_update_subject = @"UPDATE Subject
-                                       SET SubjectCode = @newsubjectCode, SubjectName = @newsubjectName
-                                       WHERE SubjectName like '%' + @oldsubjectName + '%';";
-            }
-            else if (option == "FindBySubjectCodeAndName")
-            {
-                sql_update_subject = @"UPDATE Subject
-                                       SET SubjectCode = @newsubjectCode, SubjectName = @newsubjectName
-                                       WHERE SubjectCode = @oldsubjectCode and SubjectName like '%' + @SubjectName + '%';";
-            }
+
 
             try
             {
@@ -69,25 +70,22 @@ namespace OTS.DAO
                 command = new SqlCommand(sql_update_subject, connection);
 
 
-                if (option == "FindBySubjectCode")
+                if (option.Equals("UpdateCode"))
                 {
-                    command.Parameters.AddWithValue("@newsubjectCode", newsubjectCode);
-                    command.Parameters.AddWithValue("@newsubjectName", newsubjectName);
-                    command.Parameters.AddWithValue("@oldsubjectCode", oldsubjectCode);
+                    command.Parameters.AddWithValue("@newCode", newsubjectCode);
+                    command.Parameters.AddWithValue("@oldCode", oldsubjectCode);
 
                 }
-                else if (option == "FindBySubjectName")
+                else if (option.Equals("UpdateName"))
                 {
-                    command.Parameters.AddWithValue("@newsubjectCode", newsubjectCode);
-                    command.Parameters.AddWithValue("@newsubjectName", newsubjectName);
-                    command.Parameters.AddWithValue("@oldsubjectName", oldsubjectName);
+                    command.Parameters.AddWithValue("@newName", newsubjectName);
+                    command.Parameters.AddWithValue("@oldCode", oldsubjectCode);
                 }
-                else if (option == "FindBySubjectCodeAndName")
+                else if (option.Equals("UpdateCodeAndName"))
                 {
-                    command.Parameters.AddWithValue("@newsubjectCode", newsubjectCode);
-                    command.Parameters.AddWithValue("@newsubjectName", newsubjectName);
-                    command.Parameters.AddWithValue("@oldsubjectCode", oldsubjectCode);
-                    command.Parameters.AddWithValue("@oldsubjectName", oldsubjectName);
+                    command.Parameters.AddWithValue("@newCode", newsubjectCode);
+                    command.Parameters.AddWithValue("@newName", newsubjectName);
+                    command.Parameters.AddWithValue("@oldCode", oldsubjectCode);
                 }
 
 
@@ -107,6 +105,38 @@ namespace OTS.DAO
             return rowAffects;
         }
         //--------------------------------------------------------
+        public int DeleteSubject(String oldsubjectCode)
+        {
+            int rowAffects = 0;
+            string sql_update_subject = "";
+
+            sql_update_subject = @"DELETE FROM Subject  WHERE SubjectCode = @oldCode ;";
+
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(sql_update_subject, connection);
+                command.Parameters.AddWithValue("@oldCode", oldsubjectCode);
+
+                connection.Open();
+                rowAffects = command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString(), "Warnning",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return rowAffects;
+        }
+
+
+
+
+
         public List<Models.Subject> FindSubject(String option, String subjectCode, String subjectName)
         {
             int rowAffects = 0;
@@ -217,7 +247,7 @@ namespace OTS.DAO
                                         from Subject
                                         Where SubjectCode=@subjectCode And SubjectName like '%' + @SubjectName + '%' ";
             }
-            
+
 
 
             try
@@ -252,7 +282,7 @@ namespace OTS.DAO
                             Models.Subject subject = new Models.Subject();
                             subject.SubjectCode = reader.GetString("SubjectCode");
                             subject.SubjectName = reader.GetString("SubjectName");
-                            sub=subject;
+                            sub = subject;
                         }
 
                     }
