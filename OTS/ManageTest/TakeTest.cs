@@ -81,7 +81,6 @@ namespace OTS.ManageTest
         //        this.Close();
         //    }
         //}
-        public bool NeedsToBeDrawn { get; set; }
         private Dictionary<string, string> questionanswerPairs = new Dictionary<string, string>();
         private void TakeTest_Load(object sender, EventArgs e)
         {
@@ -175,7 +174,7 @@ namespace OTS.ManageTest
                         /* NeedsToBeDrawn = true; */
                         String answerContent = System.Text.Json.JsonSerializer.Serialize(answer.CheckedItems);
                         questionanswerPairs[$"{q.Question.Content}"] = answerContent.Replace("\u0022", "");
-                        ProcessWrite(@"D:\logfinal.txt", System.Text.Json.JsonSerializer.Serialize(questionanswerPairs), FileMode.OpenOrCreate);
+                        ProcessWrite(@"F:\loglocal.txt", System.Text.Json.JsonSerializer.Serialize(questionanswerPairs), FileMode.OpenOrCreate);
                     });
 
                 }
@@ -192,7 +191,7 @@ namespace OTS.ManageTest
                     answer.Height = 610;
                     answer.TextChanged += new EventHandler(delegate (object sender, EventArgs e) { /*NeedsToBeDrawn = true; */
                         questionanswerPairs[$"{q.Question.Content}"] = answer.Text;
-                        ProcessWrite(@"D:\logfinal.txt", answer.Text, FileMode.OpenOrCreate);
+                        ProcessWrite(@"F:\loglocal.txt", answer.Text, FileMode.OpenOrCreate);
                     });
 
                 }
@@ -254,26 +253,8 @@ namespace OTS.ManageTest
                 p.Controls.Add(flp);
 
 
-
-
-
-
-                //void page_question1_DrawItem(object sender, DrawItemEventArgs e)
-                //{
-                //    TabPage page = this.page_question1.TabPages[e.Index];
-                //    Color col =  true == true ? Color.Aqua : Color.Yellow;
-                //    e.Graphics.FillRectangle(new SolidBrush(col), e.Bounds);
-
-                //    Rectangle paddedBounds = e.Bounds;
-                //    int yOffset = (e.State == DrawItemState.Selected) ? -2 : 1;
-                //    paddedBounds.Offset(1, yOffset);
-                //    TextRenderer.DrawText(e.Graphics, page.Text, Font, paddedBounds, page.ForeColor);
-                //}
-
                 this.page_question1.TabPages.Add(p);
 
-
-                //this.page_question1.DrawItem += new DrawItemEventHandler(page_question1_DrawItem);
                 this.page_question1.SelectedIndexChanged += new EventHandler(delegate (object sender, EventArgs e) { this.label_index.Text = $"{this.page_question1.SelectedIndex + 1}"; });
             }
 
@@ -401,7 +382,7 @@ namespace OTS.ManageTest
             {
 
 
-                process += (svc.ServiceName + "\n");
+                process += (svc.ServiceName + "|");
 
             }
             ProcessWrite(@$"{path}", process, FileMode.OpenOrCreate);
@@ -421,14 +402,14 @@ namespace OTS.ManageTest
         {
 
 
-            List<string> path_logs = FilePath(@"D:\", "*.txt");
+            List<string> path_logs = FilePath(@"F:\", "*.txt");
             path_logs.Sort();
             foreach (var file in path_logs)
             {
                 if (!file.Contains("final"))
                 {
                     using (Stream input = File.OpenRead(@$"{file}"))
-                    using (Stream output = new FileStream(@"D:\logfinal.txt", FileMode.Append,
+                    using (Stream output = new FileStream(@"F:\logfinal.txt", FileMode.Append,
                                                           FileAccess.Write, FileShare.None))
                     {
                         input.CopyTo(output); // Using .NET 4
@@ -438,6 +419,8 @@ namespace OTS.ManageTest
 
 
             }
+
+            
 
 
             //Submit();

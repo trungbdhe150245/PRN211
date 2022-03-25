@@ -37,8 +37,9 @@ namespace OTS
             //Application.Run(new FrmReviewSubmission(34, 8));
             //Application.Run(new FrmManageMark());
             //Application.Run(new FrmLoginStudent());
-            Application.Run(new FrmEssayTestList(10, 1));
+            //Application.Run(new FrmEssayTestList(10, 1));
             //Application.Run(new TakeTest());
+            Application.Run(new FrmViewSubmission());
         }
 	}
 }
