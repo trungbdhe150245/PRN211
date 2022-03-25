@@ -78,7 +78,7 @@
             this.dgvSolution.ReadOnly = true;
             this.dgvSolution.RowHeadersWidth = 51;
             this.dgvSolution.RowTemplate.Height = 29;
-            this.dgvSolution.Size = new System.Drawing.Size(679, 176);
+            this.dgvSolution.Size = new System.Drawing.Size(956, 278);
             this.dgvSolution.TabIndex = 0;
             this.dgvSolution.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSolution_CellContentClick);
             // 
@@ -110,8 +110,7 @@
             // 
             // txtTestId
             // 
-            this.txtTestId.Location = new System.Drawing.Point(320, 98);
-            this.txtTestId.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtTestId.Location = new System.Drawing.Point(542, 121);
             this.txtTestId.Name = "txtTestId";
             this.txtTestId.ReadOnly = true;
             this.txtTestId.Size = new System.Drawing.Size(97, 23);
@@ -120,7 +119,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(262, 101);
+            this.label1.Location = new System.Drawing.Point(476, 125);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(37, 15);
             this.label1.TabIndex = 2;
@@ -129,7 +128,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(262, 65);
+            this.label2.Location = new System.Drawing.Point(476, 77);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(46, 15);
             this.label2.TabIndex = 4;
@@ -137,8 +136,7 @@
             // 
             // txtSubject
             // 
-            this.txtSubject.Location = new System.Drawing.Point(320, 63);
-            this.txtSubject.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtSubject.Location = new System.Drawing.Point(542, 74);
             this.txtSubject.Name = "txtSubject";
             this.txtSubject.ReadOnly = true;
             this.txtSubject.Size = new System.Drawing.Size(186, 23);
@@ -147,7 +145,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(509, 166);
+            this.label3.Location = new System.Drawing.Point(758, 211);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(33, 15);
             this.label3.TabIndex = 6;
@@ -161,8 +159,7 @@
             0,
             0,
             65536});
-            this.nudMark.Location = new System.Drawing.Point(623, 195);
-            this.nudMark.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.nudMark.Location = new System.Drawing.Point(888, 250);
             this.nudMark.Maximum = new decimal(new int[] {
             10,
             0,
@@ -176,7 +173,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(574, 197);
+            this.label4.Location = new System.Drawing.Point(832, 253);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(36, 15);
             this.label4.TabIndex = 8;
@@ -184,8 +181,7 @@
             // 
             // btnTestDetail
             // 
-            this.btnTestDetail.Location = new System.Drawing.Point(428, 97);
-            this.btnTestDetail.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnTestDetail.Location = new System.Drawing.Point(665, 119);
             this.btnTestDetail.Name = "btnTestDetail";
             this.btnTestDetail.Size = new System.Drawing.Size(78, 22);
             this.btnTestDetail.TabIndex = 9;
@@ -195,8 +191,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(612, 418);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnSave.Location = new System.Drawing.Point(879, 603);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(78, 22);
             this.btnSave.TabIndex = 10;
@@ -206,8 +201,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(509, 418);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnCancel.Location = new System.Drawing.Point(761, 603);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(78, 22);
             this.btnCancel.TabIndex = 11;
@@ -238,8 +232,7 @@
             // richtxtNote
             // 
             this.richtxtNote.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.richtxtNote.Location = new System.Drawing.Point(551, 36);
-            this.richtxtNote.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.richtxtNote.Location = new System.Drawing.Point(806, 38);
             this.richtxtNote.Name = "richtxtNote";
             this.richtxtNote.Size = new System.Drawing.Size(142, 146);
             this.richtxtNote.TabIndex = 24;
@@ -354,8 +347,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(702, 453);
             this.Controls.Add(this.menuStrip1);
+            this.ClientSize = new System.Drawing.Size(982, 659);
             this.Controls.Add(this.richtxtNote);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -372,6 +365,7 @@
             this.Controls.Add(this.dgvSolution);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MaximizeBox = false;
             this.Name = "FrmEssayTestList";
             this.Text = "Essay Mark";
             this.Load += new System.EventHandler(this.FrmEssayTestList_Load);

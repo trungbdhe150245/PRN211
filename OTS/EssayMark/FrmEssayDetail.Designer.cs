@@ -35,7 +35,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.dtpSubmitTime = new System.Windows.Forms.DateTimePicker();
             this.dtpDuration = new System.Windows.Forms.DateTimePicker();
-            this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.nudFontSize = new System.Windows.Forms.NumericUpDown();
@@ -305,7 +304,6 @@
             this.Controls.Add(this.nudFontSize);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.dtpDuration);
             this.Controls.Add(this.dtpSubmitTime);
             this.Controls.Add(this.label4);
@@ -314,6 +312,7 @@
             this.Controls.Add(this.txtId);
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "FrmEssayDetail";
             this.Text = "Essay Mark";
@@ -334,7 +333,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DateTimePicker dtpSubmitTime;
         private System.Windows.Forms.DateTimePicker dtpDuration;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown nudFontSize;

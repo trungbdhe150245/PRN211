@@ -40,8 +40,8 @@ namespace OTS.ManageClass
                         }) > 0)
                         {
                             MessageBox.Show("Update Successful");
-                            this.Close();
                             parentFormMangageClass.LoadClassData();
+                            this.Close();
                         }
                     }
                     else
