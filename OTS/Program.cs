@@ -3,6 +3,7 @@ using OTS.Login;
 using OTS.ManageMark;
 using OTS.ManageQuestion;
 using OTS.ManageSubmission;
+using OTS.ManageTest;
 using OTS.Models;
 using OTS.ReviewSubmission;
 using OTS.ViewTest;
@@ -34,7 +35,8 @@ namespace OTS
             //Application.Run(new FrmViewTest(3));
             //Application.Run(new FrmReviewSubmission(34, 8));
             //Application.Run(new FrmManageMark());
-            Application.Run(new FrmLoginStudent());
+            //Application.Run(new FrmLoginStudent());
+            Application.Run(new TakeTest());
 		}
 	}
 }
