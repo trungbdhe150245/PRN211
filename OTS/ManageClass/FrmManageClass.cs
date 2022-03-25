@@ -1,5 +1,6 @@
 ﻿using OTS.DAO;
 using OTS.ManageClass;
+using OTS.ManageMark;
 using OTS.Models;
 using System;
 using System.Collections.Generic;
@@ -38,7 +39,11 @@ namespace OTS
             try
             {
                 ClassDBContext classDBContext = new ClassDBContext();
-                dgvClasses.DataSource = classDBContext.getClasses(querySearch, queryType);
+                List<Class> classes = classDBContext.getClasses(querySearch, queryType);
+                foreach (Class c in classes)
+                {
+                    dgvClasses.Rows.Add(c.ClassCode,c.ClassName, "Mark Report");
+                }
             }
             catch (Exception ex)
             {
@@ -107,6 +112,23 @@ namespace OTS
         private void cbSearchOption_SelectedIndexChanged(object sender, EventArgs e)
         {
             queryType = cbSearchOption.SelectedValue.ToString();
+        }
+
+        private void dgvClasses_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridView dgv = (DataGridView)sender;
+            if(e.ColumnIndex == 2)
+            {
+                string classCode = dgv.Rows[e.RowIndex].Cells[0].Value.ToString();
+                string className = dgv.Rows[e.RowIndex].Cells[1].Value.ToString();
+                FrmManageMark frmManageMark = new FrmManageMark(
+                    new Class() { ClassCode = classCode, ClassName = className }
+                    );
+                frmManageMark.FormClosed += (s, args) => this.Show();
+                this.Hide();
+                frmManageMark.Show();
+                //MessageBox.Show("EEe" + e.RowIndex);
+            }
         }
     }
 }
