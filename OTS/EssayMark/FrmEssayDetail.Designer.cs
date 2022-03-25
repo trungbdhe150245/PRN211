@@ -48,7 +48,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(404, 28);
+            this.label1.Location = new System.Drawing.Point(404, 52);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(24, 20);
             this.label1.TabIndex = 1;
@@ -56,7 +56,7 @@
             // 
             // txtId
             // 
-            this.txtId.Location = new System.Drawing.Point(434, 25);
+            this.txtId.Location = new System.Drawing.Point(434, 49);
             this.txtId.Name = "txtId";
             this.txtId.ReadOnly = true;
             this.txtId.Size = new System.Drawing.Size(172, 27);
@@ -66,7 +66,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(12, 337);
+            this.label3.Location = new System.Drawing.Point(12, 361);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(86, 28);
             this.label3.TabIndex = 6;
@@ -75,7 +75,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(653, 30);
+            this.label5.Location = new System.Drawing.Point(653, 54);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(88, 20);
             this.label5.TabIndex = 8;
@@ -84,7 +84,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(674, 71);
+            this.label4.Location = new System.Drawing.Point(674, 95);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(67, 20);
             this.label4.TabIndex = 10;
@@ -93,7 +93,7 @@
             // dtpSubmitTime
             // 
             this.dtpSubmitTime.Enabled = false;
-            this.dtpSubmitTime.Location = new System.Drawing.Point(759, 25);
+            this.dtpSubmitTime.Location = new System.Drawing.Point(759, 49);
             this.dtpSubmitTime.Name = "dtpSubmitTime";
             this.dtpSubmitTime.Size = new System.Drawing.Size(185, 27);
             this.dtpSubmitTime.TabIndex = 17;
@@ -101,14 +101,14 @@
             // dtpDuration
             // 
             this.dtpDuration.Enabled = false;
-            this.dtpDuration.Location = new System.Drawing.Point(759, 71);
+            this.dtpDuration.Location = new System.Drawing.Point(759, 95);
             this.dtpDuration.Name = "dtpDuration";
             this.dtpDuration.Size = new System.Drawing.Size(124, 27);
             this.dtpDuration.TabIndex = 18;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 133);
+            this.button1.Location = new System.Drawing.Point(12, 157);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(94, 29);
             this.button1.TabIndex = 19;
@@ -117,7 +117,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(881, 748);
+            this.button2.Location = new System.Drawing.Point(881, 772);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(94, 29);
             this.button2.TabIndex = 20;
@@ -129,7 +129,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 22F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(26, 25);
+            this.label2.Location = new System.Drawing.Point(26, 49);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(248, 50);
             this.label2.TabIndex = 21;
@@ -138,7 +138,7 @@
             // nudFontSize
             // 
             this.nudFontSize.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.nudFontSize.Location = new System.Drawing.Point(923, 138);
+            this.nudFontSize.Location = new System.Drawing.Point(923, 162);
             this.nudFontSize.Maximum = new decimal(new int[] {
             50,
             0,
@@ -152,7 +152,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(881, 142);
+            this.label6.Location = new System.Drawing.Point(881, 166);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(36, 20);
             this.label6.TabIndex = 23;
@@ -160,7 +160,7 @@
             // 
             // richtxtSolution
             // 
-            this.richtxtSolution.Location = new System.Drawing.Point(12, 382);
+            this.richtxtSolution.Location = new System.Drawing.Point(12, 406);
             this.richtxtSolution.Name = "richtxtSolution";
             this.richtxtSolution.Size = new System.Drawing.Size(963, 349);
             this.richtxtSolution.TabIndex = 24;
@@ -168,7 +168,7 @@
             // 
             // richtxtQuestion
             // 
-            this.richtxtQuestion.Location = new System.Drawing.Point(12, 177);
+            this.richtxtQuestion.Location = new System.Drawing.Point(12, 201);
             this.richtxtQuestion.Name = "richtxtQuestion";
             this.richtxtQuestion.Size = new System.Drawing.Size(963, 148);
             this.richtxtQuestion.TabIndex = 25;
@@ -178,7 +178,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(987, 789);
+            this.ClientSize = new System.Drawing.Size(987, 821);
             this.Controls.Add(this.richtxtQuestion);
             this.Controls.Add(this.richtxtSolution);
             this.Controls.Add(this.label6);
