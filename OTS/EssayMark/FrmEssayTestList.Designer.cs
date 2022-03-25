@@ -37,7 +37,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtSubject = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtNote = new System.Windows.Forms.TextBox();
             this.nudMark = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.btnTestDetail = new System.Windows.Forms.Button();
@@ -45,6 +44,7 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.richtxtNote = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSolution)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMark)).BeginInit();
             this.SuspendLayout();
@@ -136,14 +136,6 @@
             this.label3.TabIndex = 6;
             this.label3.Text = "Note";
             // 
-            // txtNote
-            // 
-            this.txtNote.Location = new System.Drawing.Point(628, 12);
-            this.txtNote.Multiline = true;
-            this.txtNote.Name = "txtNote";
-            this.txtNote.Size = new System.Drawing.Size(160, 193);
-            this.txtNote.TabIndex = 5;
-            // 
             // nudMark
             // 
             this.nudMark.DecimalPlaces = 2;
@@ -153,6 +145,11 @@
             0,
             65536});
             this.nudMark.Location = new System.Drawing.Point(711, 224);
+            this.nudMark.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
             this.nudMark.Name = "nudMark";
             this.nudMark.Size = new System.Drawing.Size(77, 27);
             this.nudMark.TabIndex = 7;
@@ -160,9 +157,10 @@
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label4.Location = new System.Drawing.Point(655, 226);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(42, 20);
+            this.label4.Size = new System.Drawing.Size(45, 20);
             this.label4.TabIndex = 8;
             this.label4.Text = "Mark";
             // 
@@ -216,11 +214,21 @@
             this.label6.TabIndex = 23;
             this.label6.Text = "Mark";
             // 
+            // richtxtNote
+            // 
+            this.richtxtNote.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.richtxtNote.Location = new System.Drawing.Point(628, 12);
+            this.richtxtNote.Name = "richtxtNote";
+            this.richtxtNote.Size = new System.Drawing.Size(162, 193);
+            this.richtxtNote.TabIndex = 24;
+            this.richtxtNote.Text = "";
+            // 
             // FrmEssayTestList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(802, 562);
+            this.Controls.Add(this.richtxtNote);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.btnCancel);
@@ -229,7 +237,6 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.nudMark);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.txtNote);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtSubject);
             this.Controls.Add(this.label1);
@@ -256,7 +263,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtSubject;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtNote;
         private System.Windows.Forms.NumericUpDown nudMark;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnTestDetail;
@@ -264,5 +270,6 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.RichTextBox richtxtNote;
     }
 }
