@@ -114,6 +114,11 @@ namespace OTS.StudenDashBoard
             this.Hide();
             frmLoginStudent.Show();
         }
+
+        private void homeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadData();
+        }
     }
 
     public class DataGridViewDisableButtonColumn : DataGridViewButtonColumn
