@@ -49,6 +49,9 @@
     <Compile Update="ManageSubject\UpdateSubject.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="ManageSubmission\FrmManageSubmission.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="ManageTest\frmManageTest.cs">
       <SubType>Form</SubType>
     </Compile>
