@@ -63,7 +63,7 @@
             this.dgvSolution.ReadOnly = true;
             this.dgvSolution.RowHeadersWidth = 51;
             this.dgvSolution.RowTemplate.Height = 29;
-            this.dgvSolution.Size = new System.Drawing.Size(776, 235);
+            this.dgvSolution.Size = new System.Drawing.Size(956, 278);
             this.dgvSolution.TabIndex = 0;
             this.dgvSolution.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSolution_CellContentClick);
             // 
@@ -95,7 +95,7 @@
             // 
             // txtTestId
             // 
-            this.txtTestId.Location = new System.Drawing.Point(366, 131);
+            this.txtTestId.Location = new System.Drawing.Point(542, 121);
             this.txtTestId.Name = "txtTestId";
             this.txtTestId.ReadOnly = true;
             this.txtTestId.Size = new System.Drawing.Size(110, 27);
@@ -104,7 +104,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(300, 135);
+            this.label1.Location = new System.Drawing.Point(476, 125);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(48, 20);
             this.label1.TabIndex = 2;
@@ -113,7 +113,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(300, 87);
+            this.label2.Location = new System.Drawing.Point(476, 77);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(58, 20);
             this.label2.TabIndex = 4;
@@ -121,7 +121,7 @@
             // 
             // txtSubject
             // 
-            this.txtSubject.Location = new System.Drawing.Point(366, 84);
+            this.txtSubject.Location = new System.Drawing.Point(542, 74);
             this.txtSubject.Name = "txtSubject";
             this.txtSubject.ReadOnly = true;
             this.txtSubject.Size = new System.Drawing.Size(212, 27);
@@ -130,7 +130,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(582, 221);
+            this.label3.Location = new System.Drawing.Point(758, 211);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(42, 20);
             this.label3.TabIndex = 6;
@@ -144,7 +144,7 @@
             0,
             0,
             65536});
-            this.nudMark.Location = new System.Drawing.Point(712, 260);
+            this.nudMark.Location = new System.Drawing.Point(888, 250);
             this.nudMark.Maximum = new decimal(new int[] {
             10,
             0,
@@ -158,7 +158,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(656, 263);
+            this.label4.Location = new System.Drawing.Point(832, 253);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(45, 20);
             this.label4.TabIndex = 8;
@@ -166,7 +166,7 @@
             // 
             // btnTestDetail
             // 
-            this.btnTestDetail.Location = new System.Drawing.Point(489, 129);
+            this.btnTestDetail.Location = new System.Drawing.Point(665, 119);
             this.btnTestDetail.Name = "btnTestDetail";
             this.btnTestDetail.Size = new System.Drawing.Size(89, 29);
             this.btnTestDetail.TabIndex = 9;
@@ -176,7 +176,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(700, 557);
+            this.btnSave.Location = new System.Drawing.Point(879, 603);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(89, 29);
             this.btnSave.TabIndex = 10;
@@ -186,7 +186,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(582, 557);
+            this.btnCancel.Location = new System.Drawing.Point(761, 603);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(89, 29);
             this.btnCancel.TabIndex = 11;
@@ -217,7 +217,7 @@
             // richtxtNote
             // 
             this.richtxtNote.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.richtxtNote.Location = new System.Drawing.Point(630, 48);
+            this.richtxtNote.Location = new System.Drawing.Point(806, 38);
             this.richtxtNote.Name = "richtxtNote";
             this.richtxtNote.Size = new System.Drawing.Size(162, 193);
             this.richtxtNote.TabIndex = 24;
@@ -227,7 +227,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(802, 604);
+            this.ClientSize = new System.Drawing.Size(982, 659);
             this.Controls.Add(this.richtxtNote);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -243,6 +243,7 @@
             this.Controls.Add(this.txtTestId);
             this.Controls.Add(this.dgvSolution);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "FrmEssayTestList";
             this.Text = "Essay Mark";
             this.Load += new System.EventHandler(this.FrmEssayTestList_Load);
