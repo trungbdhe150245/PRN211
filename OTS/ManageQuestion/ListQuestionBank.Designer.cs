@@ -37,14 +37,11 @@ namespace OTS.ManageQuestion
             this.addQues = new System.Windows.Forms.Button();
             this.editQues = new System.Windows.Forms.Button();
             this.delQues = new System.Windows.Forms.Button();
-            this.advancedDataGridView1 = new ADGV.AdvancedDataGridView();
-            this.Idd = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Content = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Level = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Answer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataQuestion = new System.Windows.Forms.DataGridView();
+            this.checkType = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataQuestion)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -52,14 +49,14 @@ namespace OTS.ManageQuestion
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(776, 73);
+            this.panel1.Size = new System.Drawing.Size(869, 72);
             this.panel1.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI Black", 22.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(171, 10);
+            this.label1.Location = new System.Drawing.Point(198, 10);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(444, 50);
             this.label1.TabIndex = 0;
@@ -80,12 +77,13 @@ namespace OTS.ManageQuestion
             this.searchQues.TabIndex = 2;
             this.searchQues.Text = "Search";
             this.searchQues.UseVisualStyleBackColor = true;
+            this.searchQues.Click += new System.EventHandler(this.searchQues_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(252, 152);
+            this.label2.Location = new System.Drawing.Point(279, 143);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(309, 45);
             this.label2.TabIndex = 4;
@@ -99,6 +97,7 @@ namespace OTS.ManageQuestion
             this.addQues.TabIndex = 5;
             this.addQues.Text = "New Question";
             this.addQues.UseVisualStyleBackColor = true;
+            this.addQues.Click += new System.EventHandler(this.addQues_Click);
             // 
             // editQues
             // 
@@ -108,6 +107,7 @@ namespace OTS.ManageQuestion
             this.editQues.TabIndex = 6;
             this.editQues.Text = "Edit";
             this.editQues.UseVisualStyleBackColor = true;
+            this.editQues.Click += new System.EventHandler(this.editQues_Click);
             // 
             // delQues
             // 
@@ -117,72 +117,49 @@ namespace OTS.ManageQuestion
             this.delQues.TabIndex = 7;
             this.delQues.Text = "Delete";
             this.delQues.UseVisualStyleBackColor = true;
+            this.delQues.Click += new System.EventHandler(this.delQues_Click);
             // 
-            // advancedDataGridView1
+            // dataQuestion
             // 
-            this.advancedDataGridView1.AutoGenerateContextFilters = true;
-            this.advancedDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.advancedDataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Idd,
-            this.Content,
-            this.Level,
-            this.Type,
-            this.Answer});
-            this.advancedDataGridView1.DateWithTime = false;
-            this.advancedDataGridView1.Location = new System.Drawing.Point(12, 200);
-            this.advancedDataGridView1.Name = "advancedDataGridView1";
-            this.advancedDataGridView1.RowHeadersWidth = 51;
-            this.advancedDataGridView1.RowTemplate.Height = 29;
-            this.advancedDataGridView1.Size = new System.Drawing.Size(869, 188);
-            this.advancedDataGridView1.TabIndex = 8;
-            this.advancedDataGridView1.TimeFilter = false;
+            this.dataQuestion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataQuestion.Location = new System.Drawing.Point(12, 200);
+            this.dataQuestion.Name = "dataQuestion";
+            this.dataQuestion.RowHeadersWidth = 51;
+            this.dataQuestion.RowTemplate.Height = 29;
+            this.dataQuestion.Size = new System.Drawing.Size(869, 188);
+            this.dataQuestion.TabIndex = 9;
             // 
-            // Idd
+            // checkType
             // 
-            this.Idd.HeaderText = "No.";
-            this.Idd.MinimumWidth = 22;
-            this.Idd.Name = "Idd";
-            this.Idd.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.Idd.Width = 125;
+            this.checkType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.checkType.FormattingEnabled = true;
+            this.checkType.Items.AddRange(new object[] {
+            "Multiple-choice",
+            "Essay"});
+            this.checkType.Location = new System.Drawing.Point(683, 143);
+            this.checkType.Name = "checkType";
+            this.checkType.Size = new System.Drawing.Size(162, 28);
+            this.checkType.TabIndex = 10;
+            this.checkType.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
-            // Content
+            // label3
             // 
-            this.Content.HeaderText = "Content";
-            this.Content.MinimumWidth = 22;
-            this.Content.Name = "Content";
-            this.Content.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.Content.Width = 125;
-            // 
-            // Level
-            // 
-            this.Level.HeaderText = "Level";
-            this.Level.MinimumWidth = 22;
-            this.Level.Name = "Level";
-            this.Level.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.Level.Width = 125;
-            // 
-            // Type
-            // 
-            this.Type.HeaderText = "Type";
-            this.Type.MinimumWidth = 22;
-            this.Type.Name = "Type";
-            this.Type.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.Type.Width = 125;
-            // 
-            // Answer
-            // 
-            this.Answer.HeaderText = "Answer";
-            this.Answer.MinimumWidth = 22;
-            this.Answer.Name = "Answer";
-            this.Answer.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.Answer.Width = 125;
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 10.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.label3.Location = new System.Drawing.Point(692, 113);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(141, 23);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "Type of question";
             // 
             // ListQuestionBank
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(893, 760);
-            this.Controls.Add(this.advancedDataGridView1);
+            this.ClientSize = new System.Drawing.Size(892, 760);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.checkType);
+            this.Controls.Add(this.dataQuestion);
             this.Controls.Add(this.delQues);
             this.Controls.Add(this.editQues);
             this.Controls.Add(this.addQues);
@@ -192,9 +169,10 @@ namespace OTS.ManageQuestion
             this.Controls.Add(this.panel1);
             this.Name = "ListQuestionBank";
             this.Text = "ListQuestionBank";
+            this.Load += new System.EventHandler(this.ListQuestionBank_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataQuestion)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -210,11 +188,8 @@ namespace OTS.ManageQuestion
         private System.Windows.Forms.Button addQues;
         private System.Windows.Forms.Button editQues;
         private System.Windows.Forms.Button delQues;
-        private ADGV.AdvancedDataGridView advancedDataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Idd;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Content;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Level;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Type;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Answer;
+        private System.Windows.Forms.DataGridView dataQuestion;
+        private System.Windows.Forms.ComboBox checkType;
+        private System.Windows.Forms.Label label3;
     }
 }

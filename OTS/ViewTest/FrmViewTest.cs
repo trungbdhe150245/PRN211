@@ -14,6 +14,7 @@ namespace OTS.ViewTest
 {
     public partial class FrmViewTest : Form
     {
+        private Test old;
         private int testID;
         public FrmViewTest(int testID)
         {
@@ -33,6 +34,8 @@ namespace OTS.ViewTest
             dtpStartDate.CustomFormat = "dd/MM/yyyy";
             dtpDuration.Format = DateTimePickerFormat.Time;
             dtpDuration.CustomFormat = "HH:mm:ss";
+            dtpEndTime.Format = DateTimePickerFormat.Time;
+            dtpEndTime.CustomFormat = "HH:mm:ss";
         }
         public void LoadQuestionsList()
         {
@@ -83,6 +86,7 @@ namespace OTS.ViewTest
                 Test test = testDBC.GetTest(testID);
                 if (test != null)
                 {
+                    old = test;
                     txtTestID.Text = test.Id.ToString();
                     txtTestCode.Text = test.Code;
                     txtSubject.Text = test.Subject.SubjectCode
@@ -92,6 +96,7 @@ namespace OTS.ViewTest
                     DateTime dt = new DateTime(2022, 12, 31);
                     dtpStartTime.Value = dt.Add(test.StartTime);
                     dtpDuration.Value = dt.Add(test.Duration);
+                    dtpEndTime.Value = dt.Add(test.EndTime);
                     cbReview.Checked = test.IsReview;
                     LoadQuestionsList();
                     LoadClassList();
@@ -108,14 +113,10 @@ namespace OTS.ViewTest
             LoadTestInformation();
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Do you want to cancel!\nAll change will be canceled", "Warning", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            if (MessageBox.Show("Do you want to cancel!\nAll change will be ignored", "Warning",
+                MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
                 this.Close();
         }
 
@@ -133,25 +134,21 @@ namespace OTS.ViewTest
                     Question selectedQuestion = questionDBC.GetQuestion(selectedQuestionId);
                     if (selectedQuestion != null)
                     {
-
-                        Question newQuestion = null;
-                        bool isFindAnother = false;
-                        //do
-                        //{
-                        newQuestion = questionDBC.GetRandomQuestionWithLevel(selectedQuestion.Level.Id, selectedQuestion.Subject.SubjectCode);
+                        List<int> existQuestionId = new List<int>();
                         foreach (DataGridViewRow row in dgvQuestion.Rows)
                         {
-                            if (
-                            Int32.Parse(row.Cells["QuestionID"].Value.ToString()) == newQuestion.Id)
-                            {
-                                isFindAnother = true;
-                            };
+                            existQuestionId.Add(Int32.Parse(row.Cells[0].Value.ToString()));
                         }
-                        //} while (isFindAnother);
+                        Question newQuestion = null;
+                        newQuestion = questionDBC.GetRandomQuestionWithLevel(
+                            selectedQuestion.Level.Id, selectedQuestion.Subject.SubjectCode, selectedQuestion.Type.Id, existQuestionId
+                            );
                         if (newQuestion != null)
                         {
-
                             dataGridViewQuestion.Rows[e.RowIndex].SetValues(newQuestion.Id, newQuestion.Content, newQuestion.Type.Name, newQuestion.Level.Name, "View", "Change");
+                        } else
+                        {
+                            MessageBox.Show("Latest question\nEnd of questions in Question Bank.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                     else
@@ -161,11 +158,10 @@ namespace OTS.ViewTest
                 }
                 catch (Exception ex) { MessageBox.Show(ex.Message, "Error"); }
             }
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
+            if (e.ColumnIndex == 4 && e.RowIndex != -1)
+            {
+                // thực hiện hành động khi chọn view trên dgvQuestions
+            }
         }
 
         private Test GetTestInfo()
@@ -177,6 +173,7 @@ namespace OTS.ViewTest
                 Duration = dtpDuration.Value.TimeOfDay,
                 StartTime = dtpStartTime.Value.TimeOfDay,
                 TestDate = dtpStartDate.Value.Date,
+                EndTime = dtpEndTime.Value.TimeOfDay,
                 IsReview = cbReview.Checked,
                 Subject = new Subject()
                 {
@@ -196,34 +193,41 @@ namespace OTS.ViewTest
                 {
                     TestDBContext testDBC = new TestDBContext();
                     QuestionDBContext questionDBC = new QuestionDBContext();
-                    List<int> questionIds = new List<int>();
-                    foreach (DataGridViewRow row in dgvQuestion.Rows)
-                    {
-                        questionIds.Add(
-                        Int32.Parse(row.Cells["QuestionId"].Value.ToString())
-                        );
-                    }
-                    List<string> classCodes = new List<string>();
-                    for (int i = 0; i < lbClasses.Items.Count; i++)
-                    {
-                        string classText = lbClasses.Items[i].ToString();
-                        classCodes.Add(classText.Split(" - ")[0].Trim());
-                    }
+                    Test testByCode = testDBC.GetTestByCode(test.Code);
 
-                    if (testDBC.UpdateTest(test) > 0
-                        && questionDBC.UpdateTestQuestion(test.Id, questionIds) > 0
-                        && testDBC.UpdateClassesTest(testID, classCodes) > 0)
+                    if (testByCode == null || old.Code.Equals(testByCode.Code))
                     {
+
+                        testDBC.UpdateTest(test);
+
+                        List<int> questionIds = new List<int>();
+                        foreach (DataGridViewRow row in dgvQuestion.Rows)
+                        {
+                            questionIds.Add(
+                            Int32.Parse(row.Cells["QuestionId"].Value.ToString())
+                            );
+                        }
+                        List<string> classCodes = new List<string>();
+                        for (int i = 0; i < lbClasses.Items.Count; i++)
+                        {
+                            string classText = lbClasses.Items[i].ToString();
+                            classCodes.Add(classText.Split(" - ")[0].Trim());
+                        }
+                        questionDBC.UpdateTestQuestion(test.Id, questionIds);
+                        testDBC.UpdateClassesTest(testID, classCodes);
                         MessageBox.Show("Update succesful");
+
                     }
                     else
                     {
-                        MessageBox.Show("Update Fail");
+                        MessageBox.Show($"Duplicate Test Code {txtTestCode.Text}\nUpdate Fail");
                     }
-                }
+
+                    }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Error");
+                    MessageBox.Show("Update Fail");
                 }
             }
             else
