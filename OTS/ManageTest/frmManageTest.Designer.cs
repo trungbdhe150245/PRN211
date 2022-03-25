@@ -60,12 +60,12 @@
             this.subjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.classToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewTestListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createATestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.questionBankToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.submissionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.classToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.logoutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewTestListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.createATestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTest)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -398,6 +398,21 @@
             this.testToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.testToolStripMenuItem.Text = "Test";
             // 
+            // viewTestListToolStripMenuItem
+            // 
+            this.viewTestListToolStripMenuItem.Checked = true;
+            this.viewTestListToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.viewTestListToolStripMenuItem.Name = "viewTestListToolStripMenuItem";
+            this.viewTestListToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.viewTestListToolStripMenuItem.Text = "View test list";
+            // 
+            // createATestToolStripMenuItem
+            // 
+            this.createATestToolStripMenuItem.Name = "createATestToolStripMenuItem";
+            this.createATestToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.createATestToolStripMenuItem.Text = "Create a test";
+            this.createATestToolStripMenuItem.Click += new System.EventHandler(this.createATestToolStripMenuItem_Click);
+            // 
             // questionBankToolStripMenuItem
             // 
             this.questionBankToolStripMenuItem.Name = "questionBankToolStripMenuItem";
@@ -417,7 +432,7 @@
             this.classToolStripMenuItem1.Name = "classToolStripMenuItem1";
             this.classToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.classToolStripMenuItem1.Text = "Mark";
-            this.classToolStripMenuItem1.Click += new System.EventHandler(this.classToolStripMenuItem1_Click);
+            this.classToolStripMenuItem1.Click += new System.EventHandler(this.markToolStripMenuItem1_Click);
             // 
             // logoutToolStripMenuItem1
             // 
@@ -425,21 +440,6 @@
             this.logoutToolStripMenuItem1.Size = new System.Drawing.Size(57, 20);
             this.logoutToolStripMenuItem1.Text = "Logout";
             this.logoutToolStripMenuItem1.Click += new System.EventHandler(this.logoutToolStripMenuItem1_Click);
-            // 
-            // viewTestListToolStripMenuItem
-            // 
-            this.viewTestListToolStripMenuItem.Checked = true;
-            this.viewTestListToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.viewTestListToolStripMenuItem.Name = "viewTestListToolStripMenuItem";
-            this.viewTestListToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.viewTestListToolStripMenuItem.Text = "View test list";
-            // 
-            // createATestToolStripMenuItem
-            // 
-            this.createATestToolStripMenuItem.Name = "createATestToolStripMenuItem";
-            this.createATestToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.createATestToolStripMenuItem.Text = "Create a test";
-            this.createATestToolStripMenuItem.Click += new System.EventHandler(this.createATestToolStripMenuItem_Click);
             // 
             // frmManageTest
             // 

@@ -1,9 +1,6 @@
 ﻿using OTS.DAO;
 using OTS.Dashboard;
-<<<<<<< Updated upstream
 using OTS.Models;
-=======
->>>>>>> Stashed changes
 using OTS.StudenDashBoard;
 using System;
 using System.Collections.Generic;
@@ -24,54 +21,45 @@ namespace OTS.Login
         {
             InitializeComponent();
         }
-        StudentDBContext dbStudent = new StudentDBContext();
-
         private bool ValidateLogin()
         {
             string regex = "^[A-Za-z0-9]+$";
             string mess = "";
-            if (txtUsername.Text.Equals(""))
+            if(txtUsername.Text.Equals(""))
             {
                 mess = "Username cannot empty";
-            }
-            else if (txtPassword.Text.Equals(""))
+            } else if (txtPassword.Text.Equals(""))
             {
                 mess = "Password cannot empty";
             }
             else if (!Regex.IsMatch(txtUsername.Text.Trim(), regex))
             {
                 mess = "Username invalid format";
-            }
-            else if (!Regex.IsMatch(txtPassword.Text.Trim(), regex))
+            } else if (!Regex.IsMatch(txtPassword.Text.Trim(), regex))
             {
                 mess = "Password invalid format";
             }
 
-            if (mess.Equals(""))
+                if (mess.Equals(""))
             {
                 return true;
-            }
-            else
+            } else
             {
                 MessageBox.Show(mess, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
         }
-
         private void btnLogin_Click(object sender, EventArgs e)
         {
             if (ValidateLogin())
             {
-                Student student = dbStudent.GetStudent(txtUsername.Text, txtPassword.Text);
-                if (student != null)
+                StudentDBContext dbStudent = new StudentDBContext();
+                if (dbStudent.GetStudent(txtUsername.Text, txtPassword.Text) != null)
                 {
-<<<<<<< Updated upstream
-                    StudentDashBoard studentDashboard = new(student.Id);
-                    studentDashboard.Show();
-=======
+
                     StudentDashBoard frmStudentDashboard = new StudentDashBoard(dbStudent.GetStudent(txtUsername.Text, txtPassword.Text).Id);
+                    frmStudentDashboard.FormClosed += (s, args) => this.Close();
                     frmStudentDashboard.Show();
->>>>>>> Stashed changes
                     this.Hide();
                 }
                 else
