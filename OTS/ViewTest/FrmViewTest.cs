@@ -334,7 +334,10 @@ namespace OTS.ViewTest
 
         private void homeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //redirect to mod dashboard
+            FrmModDashboard frmModDashboard = new FrmModDashboard();
+            frmModDashboard.Closed += (s, args) => this.Close();
+            this.Hide();
+            frmModDashboard.Show();
         }
 
         private void studentToolStripMenuItem_Click(object sender, EventArgs e)

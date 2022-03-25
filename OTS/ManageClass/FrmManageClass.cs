@@ -1,4 +1,5 @@
 ﻿using OTS.DAO;
+using OTS.Dashboard;
 using OTS.Login;
 using OTS.ManageClass;
 using OTS.ManageMark;
@@ -145,7 +146,10 @@ namespace OTS
 
         private void homeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //redirect to mod dashboard
+            FrmModDashboard frmModDashboard = new FrmModDashboard();
+            frmModDashboard.Closed += (s, args) => this.Close();
+            this.Hide();
+            frmModDashboard.Show();
         }
 
         private void studentToolStripMenuItem_Click(object sender, EventArgs e)
