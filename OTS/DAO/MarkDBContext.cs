@@ -33,7 +33,7 @@ namespace OTS.DAO
                     return new Mark()
                     {
                         Grade = reader.GetFloat("Mark"),
-                        Note = reader.GetString("Note"),
+                        //Note = reader.GetString("Note"),
                     };
                 }
             }catch(Exception ex) { throw new Exception(ex.Message); }
