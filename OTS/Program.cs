@@ -27,7 +27,7 @@ namespace OTS
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new FrmManageClass());
-            //Application.Run(new FrmViewTest());
+            //Application.Run(new FrmViewTest(10));
             //Application.Run(new ManageSubject.InsertSubject());
             //Application.Run(new ManageSubject.UpdateSubject());
             //Application.Run(new ManageTest.frmManageTest());
@@ -35,7 +35,8 @@ namespace OTS
             //Application.Run(new FrmViewTest(3));
             //Application.Run(new FrmReviewSubmission(34, 8));
             //Application.Run(new FrmManageMark());
-            Application.Run(new FrmLoginStudent());
-		}
-	}
+            //Application.Run(new FrmLoginStudent());
+            Application.Run(new ListQuestionBank());
+        }
+    }
 }

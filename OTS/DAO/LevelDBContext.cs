@@ -92,20 +92,6 @@ namespace OTS.DAO
                 connection.Close();
             }
 
-            return levels;
-        }
-
-        public Level GetLevelById(short id)
-        {
-            List<Level> levels = GetLevels();
-            foreach (var t in levels)
-            {
-                if (t.Id == id)
-                {
-                    return t;
-                }
-            }
-
             return null;
         }
     }

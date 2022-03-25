@@ -249,6 +249,7 @@ JOIN Subject ON Subject.SubjectCode = Test.SubjectCode JOIN Class ON Class.Class
             {
                 connection.Close();
             }
+            return null;
         }
 
         public List<SubmissionQA> getSubByTest(int testId, int stuID)

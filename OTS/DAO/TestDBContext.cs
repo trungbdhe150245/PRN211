@@ -12,7 +12,7 @@ namespace OTS.DAO
     public class TestDBContext : DBContext
     {
 
-        public Test GetTest(int stuId)
+        public Test GetTestByStudentId(int stuId)
         {
             string sql_select_test = @$"SELECT Test.Id,Code,StartTime,Test.Duration,SubjectCode,CreateDate,Review,EndTime 
             FROM Test JOIN Submission ON Test.Id = Submission.TestId WHERE StudentId = {stuId}";

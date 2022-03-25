@@ -28,7 +28,7 @@ namespace OTS.StudenDashBoard
             QuestionDBContext qDB = new QuestionDBContext();
             AnswerDBContext aDB = new AnswerDBContext();
             TestDBContext tDB = new TestDBContext();
-            List<Answer> answers = aDB.getQuesByTest(tDB.GetTest(targetStu.Id).Id);
+            List<Answer> answers = aDB.getQuesByTest(tDB.GetTestByStudentId(targetStu.Id).Id);
 
 
         }

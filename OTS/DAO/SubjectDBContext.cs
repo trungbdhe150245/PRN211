@@ -172,7 +172,7 @@ namespace OTS.DAO
             try
             {
                 connection = new SqlConnection(GetConnectionString());
-                command = new SqlCommand(getSub, connection);
+                command = new SqlCommand(sql, connection);
                 connection.Open();
                 reader = command.ExecuteReader();
                 if (reader.HasRows)

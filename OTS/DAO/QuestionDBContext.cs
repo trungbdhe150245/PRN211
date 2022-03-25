@@ -446,8 +446,6 @@ namespace OTS.DAO
         public int DeleteQues(Question q)
         {
             int rowAffects = 0;
-
-
             string sql_delete_classes = @$"DELETE FROM [dbo].[Question]
       WHERE Id = @Id";
 
