@@ -29,13 +29,6 @@ namespace OTS.DAO
                                   WHERE Test.Code = @testCode";
             try
             {
-                string sql_select_test = "Select t.Id as 'TestId', t.Code as 'TestCode', s.SubjectCode as 'Subject', " +
-                                        "t.StartTime, t.TestDate, t.Duration, t.CreateDate, t.EndTime, q.Id as 'QuestionId', q.Content as 'QuestionContent', " +
-                                        "tp.Name as 'Type', tp.Id as 'TypeId' from Test t " +
-                                        "inner join Question_Test qt on t.Id = qt.TestId " +
-                                        "inner join Question q on qt.QuestionId = q.Id " +
-                                        "inner join Type tp on tp.Id = q.Type " +
-                                        "inner join Subject s on t.SubjectCode = s.SubjectCode where t.Code = @code";
                 connection = new SqlConnection(GetConnectionString());
                 command = new SqlCommand(sql_select_test, connection);
                 command.Parameters.AddWithValue("@testCode", testCode);
@@ -192,26 +185,9 @@ namespace OTS.DAO
                 command.Parameters.AddWithValue("@testId", testId);
                 connection.Open();
                 reader = command.ExecuteReader();
-
-
-                Test t = null;
-                Subject s = null;
-
-
-                while (reader.Read())
+                if (reader.Read())
                 {
-
-                    if (t == null)
-                    {
-                        t = new Test();
-                        //t.Id = testId;
-                        t.Code = testcode;
-                        t.Duration = reader.GetTimeSpan(5);
-                        t.StartTime = reader.GetTimeSpan(3);
-                        t.EndTime = reader.GetTimeSpan(7);
-                    }
-
-                    if (s == null)
+                    return new Test()
                     {
                         Id = testId,
                         Code = reader.GetString("Code"),
@@ -237,7 +213,7 @@ namespace OTS.DAO
             {
                 connection.Close();
             }
-            return answers;
+            return null;
         }
 
         public List<Test> GetTests(int pageIndex, int pageSize, string subjectCode
