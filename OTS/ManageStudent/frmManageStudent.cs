@@ -20,6 +20,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using OTS.Models;
 using System;
+using OTS.Dashboard;
 
 namespace OTS.ManageStudent
 {
@@ -205,7 +206,10 @@ namespace OTS.ManageStudent
 
         private void homeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //redirect to mod dashboard
+            FrmModDashboard frmModDashboard = new FrmModDashboard();
+            frmModDashboard.Closed += (s, args) => this.Close();
+            this.Hide();
+            frmModDashboard.Show();
         }
 
         private void subjectToolStripMenuItem_Click(object sender, EventArgs e)
