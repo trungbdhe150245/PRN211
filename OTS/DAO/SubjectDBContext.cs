@@ -37,6 +37,7 @@ namespace OTS.DAO
             {
                 connection.Close();
             }
+
             return rowAffects;
         }
         //--------------------------------------------------------
@@ -104,6 +105,7 @@ namespace OTS.DAO
             }
             return rowAffects;
         }
+
         //public int UpdateSubject(String oldsubjectCode, String oldsubjectName, String newsubjectCode, String newsubjectName)
         //{
         //    int rowAffects = 0;
@@ -311,6 +313,41 @@ namespace OTS.DAO
         //    {
         //        connection = new SqlConnection(GetConnectionString());
         //        command = new SqlCommand(@sql_view_subject, connection);
+        public List<Subject> subjects()
+        {
+            List<Subject> subjects = new List<Subject>();
+            string getSub = "SELECT [SubjectCode], [SubjectName] FROM [Subject]";
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(getSub, connection);
+                connection.Open();
+                reader = command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Subject subject = new Subject()
+                        {
+                            SubjectCode = reader.GetString("SubjectCode"),
+                            SubjectName = reader.GetString("SubjectName")
+                        };
+                        //subject.SubjectCode = reader.GetString("SubjectCode");
+                        //subject.SubjectName = reader.GetString("SubjectName");
+                        subjects.Add(subject);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return subjects;
+        }
 
 
         //        if (option == "FindBySubjectCode")
@@ -393,6 +430,10 @@ namespace OTS.DAO
 
 
                 if (option == "FindBySubjectCode")
+                command = new SqlCommand(sql_view_subject, connection);
+                connection.Open();
+                reader = command.ExecuteReader();
+                if (reader.HasRows)
                 {
                     command.Parameters.AddWithValue("@subjectCode", subjectCode);
                 }
@@ -435,6 +476,7 @@ namespace OTS.DAO
             {
                 MessageBox.Show(ex.Message.ToString(), "Warnning",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -540,6 +582,19 @@ namespace OTS.DAO
 
         //<<<<<<< HEAD
         //=======
+
+        public Subject getSubbyId(string code)
+        {
+            List<Subject> subs = subjects();
+            foreach (var s in subs)
+            {
+                if (s.SubjectCode.Equals(code))
+                {
+                    return s;
+                }
+            }
+            return null;
+        }
 
         public Subject GetSubject(string code)
         {
