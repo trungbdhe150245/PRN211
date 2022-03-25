@@ -16,8 +16,10 @@ namespace OTS.StudenDashBoard
     {
         private Student targetStu;
         private Dictionary<Submission, Mark> targetSub;
-        public formReviewDetail(Student s, Dictionary<Submission, Mark> sub)
+        private string testCode;
+        public formReviewDetail(Student s, Dictionary<Submission, Mark> sub,string testId)
         {
+            testCode = testId;
             targetStu = s;
             targetSub = sub;
             InitializeComponent();
@@ -28,8 +30,24 @@ namespace OTS.StudenDashBoard
             QuestionDBContext qDB = new QuestionDBContext();
             AnswerDBContext aDB = new AnswerDBContext();
             TestDBContext tDB = new TestDBContext();
-            List<Answer> answers = aDB.getQuesByTest(tDB.GetTestByStudentId(targetStu.Id).Id);
+            SubmissionDBContext sDB = new SubmissionDBContext();
+            Test t = new Test();
+            foreach (var item in targetSub.Keys)
+            {
+                if(testCode.Equals(item.Test.Code))
+                {
+                    t = item.Test;
+                }
+            }
+            List<Answer> answers = aDB.getQuesByTest(t.Id);
+            List<SubmissionQA> subQAs = sDB.getSubByTest(t.Id, targetStu.Id);
+            Dictionary<SubmissionQA,Answer > list = new Dictionary<SubmissionQA, Answer>();
 
+            foreach (var item in subQAs)
+            {
+                int i = 0;
+                //list.;
+            }
 
         }
     }
