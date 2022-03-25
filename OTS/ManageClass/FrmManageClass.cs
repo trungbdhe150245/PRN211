@@ -1,5 +1,6 @@
 ﻿using OTS.DAO;
 using OTS.ManageClass;
+using OTS.ManageMark;
 using OTS.Models;
 using System;
 using System.Collections.Generic;
@@ -33,12 +34,16 @@ namespace OTS
 
         public void LoadClassData()
         {
-  
+
             txtClassSearch.Text = querySearch;
             try
             {
                 ClassDBContext classDBContext = new ClassDBContext();
-                dgvClasses.DataSource = classDBContext.getClasses(querySearch, queryType);
+                List<Class> classes = classDBContext.getClasses(querySearch, queryType);
+                foreach (Class c in classes)
+                {
+                    dgvClasses.Rows.Add(c.ClassCode, c.ClassName, "Mark Report");
+                }
             }
             catch (Exception ex)
             {
@@ -75,26 +80,31 @@ namespace OTS
 
         private void btnDeleteClass_Click(object sender, EventArgs e)
         {
-            List<Class> classes = new List<Class>();
-           foreach (DataGridViewRow row in dgvClasses.SelectedRows)
+            if (dgvClasses.SelectedRows.Count > 0)
             {
-                Class eachSelectedClass = new Class();
-                string selectCode = row.Cells["ClassCode"].Value.ToString();
-                eachSelectedClass.ClassCode = selectCode;
-                classes.Add(eachSelectedClass);
-            }
-           try
-            {
-                ClassDBContext classDBC = new ClassDBContext();
-                int recordWasDelete = classDBC.DeleteClass(classes);
-                if (recordWasDelete > 0)
+                List<Class> classes = new List<Class>();
+                foreach (DataGridViewRow row in dgvClasses.SelectedRows)
                 {
-                    MessageBox.Show($"Delete {recordWasDelete} Successful!");
-                    LoadClassData();
+                    Class eachSelectedClass = new Class();
+                    string selectCode = row.Cells["ClassCode"].Value.ToString();
+                    eachSelectedClass.ClassCode = selectCode;
+                    classes.Add(eachSelectedClass);
                 }
-            } catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error");
+                try
+                {
+                    ClassDBContext classDBC = new ClassDBContext();
+                    int recordWasDelete = classDBC.DeleteClass(classes);
+                    if (recordWasDelete > 0)
+                    {
+                        MessageBox.Show($"Delete {recordWasDelete} Successful!");
+                        LoadClassData();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("This class still has a record in use\nCannot be deleted", "Error");
+                    MessageBox.Show(ex.Message, "Error");
+                }
             }
         }
 
@@ -107,6 +117,23 @@ namespace OTS
         private void cbSearchOption_SelectedIndexChanged(object sender, EventArgs e)
         {
             queryType = cbSearchOption.SelectedValue.ToString();
+        }
+
+        private void dgvClasses_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridView dgv = (DataGridView)sender;
+            if (e.ColumnIndex == 2)
+            {
+                string classCode = dgv.Rows[e.RowIndex].Cells[0].Value.ToString();
+                string className = dgv.Rows[e.RowIndex].Cells[1].Value.ToString();
+                FrmManageMark frmManageMark = new FrmManageMark(
+                    new Class() { ClassCode = classCode, ClassName = className }
+                    );
+                frmManageMark.FormClosed += (s, args) => this.Show();
+                this.Hide();
+                frmManageMark.Show();
+                //MessageBox.Show("EEe" + e.RowIndex);
+            }
         }
     }
 }

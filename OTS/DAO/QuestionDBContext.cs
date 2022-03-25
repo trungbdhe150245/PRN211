@@ -515,10 +515,10 @@ WHERE Test.Id = {testId} AND Answer.isCorrect = 1";
             return list;
         }
 
-        public List<Question> GetRandomQuestions(int type, int level, string code)
+        public List<Question> GetRandomQuestions(int top, int type, int level, string code)
         {
             List<Question> questions = new List<Question>();
-            string sql = @"SELECT        q.[Id]
+            string sql = @$"SELECT TOP {top} q.[Id]
                                           ,[Content]
                                           ,[Image]
                                           ,l.[Id] AS LevelId, l.[Name] AS LevelName

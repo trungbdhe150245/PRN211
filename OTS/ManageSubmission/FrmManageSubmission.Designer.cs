@@ -163,51 +163,61 @@
             this.dgvSubmission.RowTemplate.Height = 25;
             this.dgvSubmission.Size = new System.Drawing.Size(943, 318);
             this.dgvSubmission.TabIndex = 9;
+            this.dgvSubmission.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSubmission_CellContentClick);
             // 
             // id
             // 
             this.id.HeaderText = "ID";
             this.id.Name = "id";
+            this.id.ReadOnly = true;
             // 
             // testCode
             // 
             this.testCode.HeaderText = "TestCode";
             this.testCode.Name = "testCode";
+            this.testCode.ReadOnly = true;
             // 
             // classCode
             // 
             this.classCode.HeaderText = "ClassCode";
             this.classCode.Name = "classCode";
+            this.classCode.ReadOnly = true;
             // 
             // subjectCode
             // 
             this.subjectCode.HeaderText = "SubjectCode";
             this.subjectCode.Name = "subjectCode";
+            this.subjectCode.ReadOnly = true;
             // 
             // studentId
             // 
             this.studentId.HeaderText = "StudentCode";
             this.studentId.Name = "studentId";
+            this.studentId.ReadOnly = true;
             // 
             // fullName
             // 
             this.fullName.HeaderText = "FullName";
             this.fullName.Name = "fullName";
+            this.fullName.ReadOnly = true;
             // 
             // submitDate
             // 
             this.submitDate.HeaderText = "SubmitDate";
             this.submitDate.Name = "submitDate";
+            this.submitDate.ReadOnly = true;
             // 
             // mark
             // 
             this.mark.HeaderText = "Mark";
             this.mark.Name = "mark";
+            this.mark.ReadOnly = true;
             // 
             // review
             // 
             this.review.HeaderText = "Review";
             this.review.Name = "review";
+            this.review.ReadOnly = true;
             // 
             // FrmManageSubmission
             // 
