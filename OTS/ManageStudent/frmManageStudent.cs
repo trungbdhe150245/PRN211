@@ -1,4 +1,5 @@
 ﻿using OTS.DAO;
+using OTS.ManageStudent;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -45,6 +46,12 @@ namespace OTS.ManageStudent
             {
                 dgvStudent.Rows.Add(s.Id,s.FullName,s.Password,s.DateOfBirth,s.StudentCode,s.Class.ClassCode);
             }
+        }
+
+        private void btnInsert_Click(object sender, EventArgs e)
+        {
+            frmInsertStudent frmInsertStudent = new frmInsertStudent();
+            frmInsertStudent.Show();
         }
     }
 }

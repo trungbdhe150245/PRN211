@@ -86,6 +86,7 @@ C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS
 C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.ManageClass.FrmEditClass.resources
 C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.FrmManageClass.resources
 C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.ManageQuestion.ListQuestionBank.resources
+C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.ManageStudent.frmInsertStudent.resources
 C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.ManageStudent.frmManageStudent.resources
 C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.ManageSubject.frmInsert.resources
 C:\Users\fifak\OneDrive\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.ManageSubject.frmManagerSubject.resources

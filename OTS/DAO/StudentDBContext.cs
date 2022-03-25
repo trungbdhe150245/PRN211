@@ -9,19 +9,29 @@ using System.Windows.Forms;
 using OTS.Models;
 namespace OTS.DAO
 {
-    public class StudentDBContext : DBContext 
+    public class StudentDBContext : DBContext
     {
-        public int InsertSubject(String subjectCode, String subjectName)
+        public int InsertStudent(String FullName, String Password, DateTime Dob, String StudentCode, String ClassCode)
         {
             int rowAffects = 0;
-            string sql_insert_subject = @"INSERT INTO Subject (SubjectCode, SubjectName)
-                                        VALUES (@subjectCode,@subjectName);";
+            string sql_insert_subject = @"INSERT INTO [OTS].[dbo].[Student] (
+                                                               [FullName]
+                                                              ,[Password]
+                                                              ,[Dob]
+                                                              ,[StudentCode]
+                                                              ,[ClassCode])
+                                        VALUES (@name,@password,@dob,@stuCode,@classCode);";
             try
             {
                 connection = new SqlConnection(GetConnectionString());
                 command = new SqlCommand(@sql_insert_subject, connection);
-                command.Parameters.AddWithValue("@subjectCode", subjectCode);
-                command.Parameters.AddWithValue("@subjectName", subjectName);
+
+                command.Parameters.AddWithValue("@name", FullName);
+                command.Parameters.AddWithValue("@password", Password);
+                command.Parameters.AddWithValue("@dob", Dob);
+                command.Parameters.AddWithValue("@stuCode", StudentCode);
+                command.Parameters.AddWithValue("@classCode", ClassCode);
+
                 connection.Open();
                 rowAffects = command.ExecuteNonQuery();
             }
@@ -130,7 +140,7 @@ namespace OTS.DAO
             return rowAffects;
         }
 
-     
+
 
         public List<Models.Student> FindStudent(String option, String classCode, String StudentCode)
         {
@@ -156,7 +166,9 @@ namespace OTS.DAO
                                             ,[StudentCode]
                                             ,[ClassCode]
                                             FROM [Student] Where [StudentCode]=@studentCode;";
-            }else if (option == "getAll") {
+            }
+            else if (option == "getAll")
+            {
                 sql_view_student = @"SELECT  [Id]
                                             ,[FullName]
                                             ,[Password]
@@ -165,7 +177,7 @@ namespace OTS.DAO
                                             ,[ClassCode]
                                             FROM [Student] ";
             }
-            
+
 
 
             try
@@ -182,7 +194,7 @@ namespace OTS.DAO
                 {
                     command.Parameters.AddWithValue("@studentCode", StudentCode);
                 }
-                
+
 
 
                 try
@@ -201,7 +213,9 @@ namespace OTS.DAO
                             students.StudentCode = reader.GetString("StudentCode");
                             try
                             {
-                                students.Class.ClassCode = reader.GetString("ClassCode");
+                                Class c = new Class();
+                                c.ClassCode = reader.GetString("ClassCode");
+                                students.Class = c;
 
                             }
                             catch (Exception e) { }
@@ -231,81 +245,46 @@ namespace OTS.DAO
             return stu;
         }
         //--------------------------------------------------------
-        public Student getStudent(String option, String classCode, String studentCode)
+        public List<Class> getClassCode()
         {
-            int rowAffects = 0;
-            string sql_view_student = "";
-            Student stu = new Student();
-            if (option.Equals("FindByClassCode"))
-            {
-                sql_view_student = @"SELECT TOP (1000) [Id]
-                                            ,[FullName]
-                                            ,[Password]
-                                            ,[Dob]
-                                            ,[StudentCode]
-                                            ,[ClassCode]
-                                            FROM [OTS].[dbo].[Student] Where [ClassCode]=@classCode;";
-            }
-            else if (option == "FindByStudentCode")
-            {
-                sql_view_student = @"SELECT TOP (1000) [Id]
-                                            ,[FullName]
-                                            ,[Password]
-                                            ,[Dob]
-                                            ,[StudentCode]
-                                            ,[ClassCode]
-                                            FROM [OTS].[dbo].[Student] Where [StudentCode]=@studentCode;";
-            }
-           
+            
+            string sql_view_class = "";
+            List<Class> cls = new List<Class>();
+
+            sql_view_class = @"SELECT  [ClassCode]
+                                            FROM [Class] ";
 
 
 
             try
             {
                 connection = new SqlConnection(GetConnectionString());
-                command = new SqlCommand(sql_view_student, connection);
-
-
-                if (option == "FindByClassCode")
-                {
-                    command.Parameters.AddWithValue("@classCode", classCode);
-                }
-                else if (option == "FindByStudentCode")
-                {
-                    command.Parameters.AddWithValue("@studentCode", studentCode);
-                }
-                
-                
-
+                command = new SqlCommand(sql_view_class, connection);
 
                 try
                 {
                     connection.Open();
-                    reader = command.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
+                    reader = command.ExecuteReader();
                     if (reader.HasRows == true)
                     {
                         while (reader.Read())
                         {
-                            Models.Student students = new Models.Student();
-                            students.Id = Int32.Parse(reader.GetString("Id"));
-                            students.FullName = reader.GetString("FullName");
-                            students.Password = reader.GetString("Password");
-                            students.DateOfBirth = reader.GetDateTime("Dob");
-                            students.StudentCode = reader.GetString("StudentCode");
-                            students.Class.ClassCode = reader.GetString("ClassCode");
+                            Models.Class classsss = new Models.Class();
+                            classsss.ClassCode = reader.GetString("ClassCode");
+                            cls.Add(classsss);
 
-                            stu=students;
+
                         }
 
                     }
-                    connection.Close();
+                    
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Error");
                 }
-                connection.Open();
-                rowAffects = command.ExecuteNonQuery();
+                
+                
             }
             catch (Exception ex)
             {
@@ -316,7 +295,7 @@ namespace OTS.DAO
             {
                 connection.Close();
             }
-            return stu;
+            return cls;
         }
     }
 }
