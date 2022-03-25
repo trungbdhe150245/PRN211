@@ -233,6 +233,42 @@ namespace OTS.DAO
             return null;
         }
 
+        public Subject GetSubjectBySubmission(int id)
+        {
+            string sql = @"SELECT s.[SubjectCode],
+                                s.[SubjectName]
+                          FROM [Subject] s INNER JOIN [Test] t ON s.[SubjectCode] = t.[SubjectCode]
+					                        INNER JOIN [Submission] sub ON sub.[TestId] = t.[Id]
+                          WHERE sub.[Id] = @id";
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(sql, connection);
+                command.Parameters.AddWithValue("@id", id);
+                connection.Open();
+                reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    Subject subject = new()
+                    {
+                        SubjectCode = reader.GetString("SubjectCode"),
+                        SubjectName = reader.GetString("SubjectName"),
+                    };
+                    return subject;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return null;
+        }
+
     }
 }
 

@@ -31,6 +31,9 @@
     <Compile Update="ManageClass\FrmManageClass.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="ManageMark\FrmManageMark.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="ManageQuestion\ListQuestionBank.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -44,6 +47,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="ManageSubject\UpdateSubject.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ManageSubmission\FrmManageSubmission.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="ManageTest\frmManageTest.cs">
