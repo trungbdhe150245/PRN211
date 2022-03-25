@@ -37,7 +37,7 @@ namespace OTS.ViewTest
 
         private void LoadSubject()
         {
-            List<Subject> subjects = subjectDBContext.Getsubjects();
+            List<Subject> subjects = subjectDBContext.GetSubjects();
             cbSubject.DataSource = subjects;
             cbSubject.ValueMember = "SubjectCode";
             cbSubject.DisplayMember = "SubjectName";
