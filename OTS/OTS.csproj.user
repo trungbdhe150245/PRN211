@@ -34,19 +34,31 @@
     <Compile Update="ManageMark\FrmManageMark.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="ManageQuestion\AddQuestion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ManageQuestion\EditQuestion.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="ManageQuestion\ListQuestionBank.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="ManageSubject\DeleteSubject.cs">
+    <Compile Update="ManageStudent\frmInsertStudent.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="ManageSubject\InsertSubject.cs">
+    <Compile Update="ManageStudent\frmManageStudent.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="ManageSubject\ManagerSubject.cs">
+    <Compile Update="ManageStudent\frmUpdate.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="ManageSubject\UpdateSubject.cs">
+    <Compile Update="ManageSubject\frmUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ManageSubject\frmInsert.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ManageSubject\frmManagerSubject.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="ManageSubmission\FrmManageSubmission.cs">
@@ -58,7 +70,16 @@
     <Compile Update="ManageTest\frmStartTest.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="ManageTest\TakeTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="ReviewSubmission\FrmReviewSubmission.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="StudenDashBoard\formReviewDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="StudenDashBoard\StudentDashBoard.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="ViewTest\FrmCreateTest.cs">

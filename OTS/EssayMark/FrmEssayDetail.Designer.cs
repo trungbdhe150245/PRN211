@@ -28,10 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtSolution = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtId = new System.Windows.Forms.TextBox();
-            this.txtQuestion = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -40,16 +38,12 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.nudFontSize = new System.Windows.Forms.NumericUpDown();
+            this.label6 = new System.Windows.Forms.Label();
+            this.richtxtSolution = new System.Windows.Forms.RichTextBox();
+            this.richtxtQuestion = new System.Windows.Forms.RichTextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFontSize)).BeginInit();
             this.SuspendLayout();
-            // 
-            // txtSolution
-            // 
-            this.txtSolution.Location = new System.Drawing.Point(12, 382);
-            this.txtSolution.Multiline = true;
-            this.txtSolution.Name = "txtSolution";
-            this.txtSolution.ReadOnly = true;
-            this.txtSolution.Size = new System.Drawing.Size(963, 347);
-            this.txtSolution.TabIndex = 0;
             // 
             // label1
             // 
@@ -67,15 +61,6 @@
             this.txtId.ReadOnly = true;
             this.txtId.Size = new System.Drawing.Size(172, 27);
             this.txtId.TabIndex = 2;
-            // 
-            // txtQuestion
-            // 
-            this.txtQuestion.Location = new System.Drawing.Point(12, 177);
-            this.txtQuestion.Multiline = true;
-            this.txtQuestion.Name = "txtQuestion";
-            this.txtQuestion.ReadOnly = true;
-            this.txtQuestion.Size = new System.Drawing.Size(963, 148);
-            this.txtQuestion.TabIndex = 5;
             // 
             // label3
             // 
@@ -150,11 +135,54 @@
             this.label2.TabIndex = 21;
             this.label2.Text = "Essay Review";
             // 
+            // nudFontSize
+            // 
+            this.nudFontSize.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.nudFontSize.Location = new System.Drawing.Point(923, 138);
+            this.nudFontSize.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.nudFontSize.Name = "nudFontSize";
+            this.nudFontSize.Size = new System.Drawing.Size(47, 27);
+            this.nudFontSize.TabIndex = 22;
+            this.nudFontSize.ValueChanged += new System.EventHandler(this.nudFontSize_ValueChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(881, 142);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(36, 20);
+            this.label6.TabIndex = 23;
+            this.label6.Text = "Size";
+            // 
+            // richtxtSolution
+            // 
+            this.richtxtSolution.Location = new System.Drawing.Point(12, 382);
+            this.richtxtSolution.Name = "richtxtSolution";
+            this.richtxtSolution.Size = new System.Drawing.Size(963, 349);
+            this.richtxtSolution.TabIndex = 24;
+            this.richtxtSolution.Text = "";
+            // 
+            // richtxtQuestion
+            // 
+            this.richtxtQuestion.Location = new System.Drawing.Point(12, 177);
+            this.richtxtQuestion.Name = "richtxtQuestion";
+            this.richtxtQuestion.Size = new System.Drawing.Size(963, 148);
+            this.richtxtQuestion.TabIndex = 25;
+            this.richtxtQuestion.Text = "";
+            // 
             // FrmEssayDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(987, 789);
+            this.Controls.Add(this.richtxtQuestion);
+            this.Controls.Add(this.richtxtSolution);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.nudFontSize);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -163,25 +191,21 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.txtQuestion);
             this.Controls.Add(this.txtId);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtSolution);
             this.MaximizeBox = false;
             this.Name = "FrmEssayDetail";
             this.Text = "Essay Mark";
             this.Load += new System.EventHandler(this.FrmEssayMark_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.nudFontSize)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox txtSolution;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtId;
-        private System.Windows.Forms.TextBox txtQuestion;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
@@ -190,5 +214,9 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.NumericUpDown nudFontSize;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.RichTextBox richtxtSolution;
+        private System.Windows.Forms.RichTextBox richtxtQuestion;
     }
 }

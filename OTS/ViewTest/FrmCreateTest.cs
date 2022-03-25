@@ -37,7 +37,7 @@ namespace OTS.ViewTest
 
         private void LoadSubject()
         {
-            List<Subject> subjects = subjectDBContext.Getsubjects();
+            List<Subject> subjects = subjectDBContext.GetSubjects();
             cbSubject.DataSource = subjects;
             cbSubject.ValueMember = "SubjectCode";
             cbSubject.DisplayMember = "SubjectName";
@@ -111,62 +111,12 @@ namespace OTS.ViewTest
             return total;
         }
 
-        private int GenEasyQuest(short type, string code, int test)
+        private int GenQuest(List<Question> questions, int test)
         {
-            int level = 1;
             int row = 0;
-            List<Question> questions = questionDBContext.GetRandomQuestions(type, level, code);
-            if(nudEasy.Value <= questions.Count)
+            foreach(Question question in questions)
             {
-                questions.ToArray();
-                for (int i = 0; i < int.Parse(nudEasy.Value.ToString()); i++)
-                {
-                    row = questionDBContext.InsertQuestion_Test(questions[i].Id, test);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Ran out of Easy question for this Subject");
-            }
-            return row;
-        }
-
-        private int GenMedQuest(short type, string code, int test)
-        {
-            int level = 2;
-            int row = 0;
-            List<Question> questions = questionDBContext.GetRandomQuestions(type, level, code);
-            if (nudMedium.Value <= questions.Count)
-            {
-                questions.ToArray();
-                for (int i = 0; i < int.Parse(nudMedium.Value.ToString()); i++)
-                {
-                    row = questionDBContext.InsertQuestion_Test(questions[i].Id, test);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Ran out of Medium question for this Subject");
-            }
-            return row;
-        }
-
-        private int GenHardQuest(short type, string code, int test)
-        {
-            int level = 3;
-            int row = 0;
-            List<Question> questions = questionDBContext.GetRandomQuestions(type, level, code);
-            if (nudHard.Value <= questions.Count)
-            {
-                questions.ToArray();
-                for (int i = 0; i < int.Parse(nudHard.Value.ToString()); i++)
-                {
-                    row = questionDBContext.InsertQuestion_Test(questions[i].Id, test);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Ran out of Hard question for this Subject");
+                row = questionDBContext.InsertQuestion_Test(question.Id, test);
             }
             return row;
         }
@@ -175,46 +125,65 @@ namespace OTS.ViewTest
         {
             if (CheckInput())
             {
-                Test test = new Test()
+                List<Question> easyQuests = questionDBContext.GetRandomQuestions((int)nudEasy.Value, (Int16)cbType.SelectedValue, 1, cbSubject.SelectedValue.ToString());
+                List<Question> medQuests = questionDBContext.GetRandomQuestions((int)nudMedium.Value, (Int16)cbType.SelectedValue, 2, cbSubject.SelectedValue.ToString());
+                List<Question> hardQuests = questionDBContext.GetRandomQuestions((int)nudHard.Value, (Int16)cbType.SelectedValue, 3, cbSubject.SelectedValue.ToString());
+                if (nudEasy.Value > easyQuests.Count)
                 {
-                    Code = txtTestCode.Text,
-                    StartTime = TimeSpan.Parse(dtpStartTime.Text),
-                    TestDate = DateTime.Parse(dtpTestDate.Text),
-                    Duration = TimeSpan.Parse(dtpDuration.Text),
-                    CreateDate = DateTime.Now.Date,
-                    EndTime = TimeSpan.Parse(dtpEndTime.Text),
-                    IsReview = checkReview.Checked,
-                };
-                Subject s = (Subject)cbSubject.SelectedItem;
-                Subject subject = subjectDBContext.GetSubject(s.SubjectCode.Trim());
-                test.Subject = subject;
-                int row = testDBContext.InsertTest(test);
-
-                int testId = testDBContext.GetLatestTestId();
-
-                int easy = GenEasyQuest((Int16)cbType.SelectedValue, cbSubject.SelectedValue.ToString(), testId);
-                int med = GenMedQuest((Int16)cbType.SelectedValue, cbSubject.SelectedValue.ToString(), testId);
-                int hard = GenHardQuest((Int16)cbType.SelectedValue, cbSubject.SelectedValue.ToString(), testId);
-                if (!(row > 0 && easy > 0 && med > 0 && hard > 0))
+                    MessageBox.Show("Ran out of Easy question for this Subject");
+                }
+                else if (nudMedium.Value > medQuests.Count)
                 {
-                    testDBContext.DeleteTest(testId);
-                    MessageBox.Show("Create failed", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    LoadTest();
+                    MessageBox.Show("Ran out of Medium question for this Subject");
+                }
+                else if (nudHard.Value > hardQuests.Count)
+                {
+                    MessageBox.Show("Ran out of Hard question for this Subject");
                 }
                 else
                 {
-                    MessageBox.Show("Create successful");
-                    LoadTest();
-                    txtTestCode.Text = "";
-                    dtpTestDate.Value = DateTime.Now;
-                    cbSubject.SelectedIndex = 0;
-                    cbType.SelectedIndex = 0;
-                    nudEasy.Value = 0;
-                    nudMedium.Value = 0;
-                    nudHard.Value = 0;
-                    checkReview.Checked = false;
-                }
+                    Test test = new Test()
+                    {
+                        Code = txtTestCode.Text,
+                        StartTime = TimeSpan.Parse(dtpStartTime.Text),
+                        TestDate = DateTime.Parse(dtpTestDate.Text),
+                        Duration = TimeSpan.Parse(dtpDuration.Text),
+                        CreateDate = DateTime.Now.Date,
+                        EndTime = TimeSpan.Parse(dtpEndTime.Text),
+                        IsReview = checkReview.Checked,
+                    };
+                    Subject s = (Subject)cbSubject.SelectedItem;
+                    Subject subject = subjectDBContext.GetSubject(s.SubjectCode.Trim());
+                    test.Subject = subject;
+                    int row = testDBContext.InsertTest(test);
 
+                    int testId = testDBContext.GetLatestTestId();
+
+                    int easy = GenQuest(easyQuests, testId);
+                    int med = GenQuest(medQuests, testId);
+                    int hard = GenQuest(hardQuests, testId);
+
+
+                    if (!(row > 0 && easy > 0 && med > 0 && hard > 0))
+                    {
+                        testDBContext.DeleteTest(testId);
+                        MessageBox.Show("Create failed", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        LoadTest();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Create successful");
+                        LoadTest();
+                        txtTestCode.Text = "";
+                        dtpTestDate.Value = DateTime.Now;
+                        cbSubject.SelectedIndex = 0;
+                        cbType.SelectedIndex = 0;
+                        nudEasy.Value = 0;
+                        nudMedium.Value = 0;
+                        nudHard.Value = 0;
+                        checkReview.Checked = false;
+                    }
+                }
             }
         }
 

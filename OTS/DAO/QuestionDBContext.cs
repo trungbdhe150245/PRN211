@@ -1,4 +1,4 @@
-﻿using Microsoft.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using OTS.Models;
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,77 @@ namespace OTS.DAO
 {
     public class QuestionDBContext : DBContext
     {
-        public string Content { get; private set; }
+        //public string Content { get; private set; }
+
+        public List<Question> getQues(string searchKey, string option)
+        {
+            string whereQuery = "";
+            switch (option)
+            {
+                case "content":
+                    whereQuery = " [Content] Like '%' + @content + '%'";
+                    break;
+                case "code":
+                    whereQuery = " [SubjectCode] Like '%' +  @code + '%'";
+                    break;
+                default: whereQuery = " (1=1) "; break;
+            }
+            List<Question> ListQues = new List<Question>();
+            List<Models.Type> listType = new List<Models.Type>();
+            string getallQuestion = @$"SELECT Question.Id,Question.Content,Level.[Name],Question.SubjectCode
+                                    ,Type.[Name],Question.Content,Level.Id,Question.[Type] 
+                                    FROM Question JOIN [Type] ON Question.[Type] = Type.Id  
+                                    JOIN [Level] ON Level.Id = Question.[Level] WHERE {whereQuery}";
+            TypeDBContext tDB = new TypeDBContext();
+            SubjectDBContext sDB = new SubjectDBContext();
+            LevelDBContext lDB = new LevelDBContext();
+            AnswerDBContext aDB = new AnswerDBContext();
+            try
+            {
+
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(getallQuestion, connection);
+                switch (option)
+                {
+                    case "content":
+                        command.Parameters.AddWithValue("@content", searchKey);
+                        break;
+                    case "code":
+                        command.Parameters.AddWithValue("@code", searchKey);
+                        break;
+                }
+                connection.Open();
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+
+                    Models.Type t = tDB.GetTypeById(reader.GetInt16(7));
+                    Subject s = sDB.getSubbyId(reader.GetString(3));
+                    Level l = lDB.GetLevelById(reader.GetInt16(6));
+                    //List<Answer> answers = aDB.getAnswerByCID(reader.GetInt32(0));
+                    Question ques = new Question()
+                    {
+                        Content = reader.GetString(1),
+                        Type = t,
+                        Subject = s,
+                        Level = l,
+                        Id = reader.GetInt32(0),
+                        //Answers = aDB.getAnswerByCID(reader.GetInt32(0))
+                    };
+                    //ques.Answers = answers;
+                    ListQues.Add(ques);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return ListQues;
+        }
 
         public int DeleteQuestionTest(int testId)
         {
@@ -247,54 +317,50 @@ namespace OTS.DAO
             return result;
         }
 
-        public List<Question> getQuesCorrect()
+
+        public Question getQues(int id)
         {
             List<Question> ListQues = new List<Question>();
-            List<Type> listType = new List<Type>();
-            string getallQuestion = "SELECT A.Id,A.Content,D.[Name],A.SubjectCode,B.[Name],C.Content,isCorrect FROM Question AS A JOIN[Type] AS B ON A.[Type] = B.IdJOIN Answer AS C on C.QuestionId = A.Id JOIN[Level] AS D ON D.Id = A.[Level]WHERE C.isCorrect = 1";
+            List<Models.Type> listType = new List<Models.Type>();
+            string getallQuestion = @$"SELECT [Id]
+      ,[Content]
+      ,[Level]
+      ,[SubjectCode]
+      ,[Type]
+  FROM [dbo].[Question] WHERE Id = {id}";
+            TypeDBContext tDB = new TypeDBContext();
+            SubjectDBContext sDB = new SubjectDBContext();
+            LevelDBContext lDB = new LevelDBContext();
+            AnswerDBContext aDB = new AnswerDBContext();
             try
             {
+
                 connection = new SqlConnection(GetConnectionString());
                 command = new SqlCommand(getallQuestion, connection);
-
                 connection.Open();
-
                 reader = command.ExecuteReader();
-                while (reader.Read())
+
+                if (reader.Read())
                 {
-                    int typeId = reader.GetInt16("B.Id");
-                    Type t = new Type()
-                    {
-                        Id = reader.GetInt16("B.Id"),
-                        Name = reader.GetString("B.Name")
-                    };
-                    Subject s = new Subject()
-                    {
-                        SubjectCode = reader.GetString("S.SubjectCode"),
-                        SubjectName = reader.GetString("S.SubjectName")
-                    };
-                    Level l = new Level()
-                    {
-                        Id = reader.GetInt16("D.Id"),
-                        Name = reader.GetString("D.[Name]")
-                    };
-                    Answer a = new Answer()
-                    {
-                        Id = reader.GetInt32("")
-                    };
+                    Models.Type t = tDB.GetTypeById(reader.GetInt16(4));
+                    Subject s = sDB.getSubbyId(reader.GetString(3));
+                    Level l = lDB.GetLevelById(reader.GetInt16(2));
+                    //List<Answer> answers = aDB.getAnswerByCID(reader.GetInt32(0));
                     if (!listType.Contains(t))
                     {
                         listType.Add(t);
                     }
                     Question ques = new Question()
                     {
-                        Content = reader.GetString("Content"),
+                        Content = reader.GetString(1),
                         Type = t,
                         Subject = s,
                         Level = l,
-
+                        Id = id,
+                        //Answers = aDB.getAnswerByCID(reader.GetInt32(0))
                     };
-
+                    //ques.Answers = answers;
+                    return ques;
                 }
             }
             catch (Exception ex)
@@ -305,13 +371,154 @@ namespace OTS.DAO
             {
                 connection.Close();
             }
-            return ListQues;
+            
+            return null;
         }
 
-        public List<Question> GetRandomQuestions(int type, int level, string code)
+        public int AddQues(Question q)
+        {
+            int rowAffects = 0;
+            string sql_inser_ques = @"INSERT INTO [dbo].[Question]
+           ([Content]
+           ,[Level]
+           ,[SubjectCode]
+           ,[Type])
+            VALUES
+           (@Content
+           ,@Level
+           ,@SubjectCode
+           ,@Type);SELECT SCOPE_IDENTITY();";
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(sql_inser_ques, connection);
+                command.Parameters.AddWithValue("@Content", q.Content);
+                command.Parameters.AddWithValue("@Level", q.Level.Id);
+                command.Parameters.AddWithValue("@SubjectCode", q.Subject.SubjectCode);
+                command.Parameters.AddWithValue("@Type", q.Type.Id);
+                connection.Open();
+                rowAffects = Convert.ToInt32(command.ExecuteScalar());
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return rowAffects;
+        }
+
+        public int UpdateQues(Question targetQues)
+        {
+            int rowAffects = 0;
+            string sql_update_class = @"UPDATE [dbo].[Question]
+   SET [Content] = @Content
+      ,[Level] = @Level
+      ,[SubjectCode] = @Subject
+      ,[Type] = @Type
+ WHERE Id = @Id";
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(sql_update_class, connection);
+                command.Parameters.AddWithValue("@Content", targetQues.Content);
+                command.Parameters.AddWithValue("@Level", targetQues.Level.Id);
+                command.Parameters.AddWithValue("@Subject", targetQues.Subject.SubjectCode);
+                command.Parameters.AddWithValue("@Type", targetQues.Type.Id);
+                command.Parameters.AddWithValue("@Id", targetQues.Id);
+                connection.Open();
+                rowAffects = command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return rowAffects;
+        }
+
+        public int DeleteQues(Question q)
+        {
+            int rowAffects = 0;
+            string sql_delete_classes = @$"DELETE FROM [dbo].[Question]
+      WHERE Id = @Id";
+
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(sql_delete_classes, connection);
+                command.Parameters.AddWithValue("@Id", q.Id);
+                connection.Open();
+                rowAffects = command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally { connection.Close(); }
+            return rowAffects;
+        }
+
+        public List<Question> getQuesByTest(int testId)
+        {
+            List<Question> list = new List<Question>();
+            string sql_test_ques = @$"SELECT Question.Id,Question.Content,Answer.isCorrect,Answer.Content
+FROM Test JOIN Question_Test ON Test.Id = Question_Test.TestId JOIN Question ON Question.Id = Question_Test.QuestionId
+JOIN Answer ON Answer.QuestionId = Question.Id
+WHERE Test.Id = {testId} AND Answer.isCorrect = 1";
+            TypeDBContext tDB = new TypeDBContext();
+            SubjectDBContext sDB = new SubjectDBContext();
+            LevelDBContext lDB = new LevelDBContext();
+            AnswerDBContext aDB = new AnswerDBContext();
+            try
+            {
+
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(sql_test_ques, connection);
+                connection.Open();
+                reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+
+                    //List<Answer> answers = aDB.getAnswerByCID(reader.GetInt32(0));
+                    Question ques = new Question()
+                    {
+                        Content = reader.GetString(1),
+                        Id = reader.GetInt32(0),
+                        
+                    };
+                    Answer a = new Answer()
+                    {
+                        IsCorrect = reader.GetBoolean(2),
+                        Content = reader.GetString(3)
+                    };
+                    ques.Answers.Add(a);
+                    list.Add(ques);
+                }
+            }
+
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return list;
+        }
+
+        public List<Question> GetRandomQuestions(int top, int type, int level, string code)
         {
             List<Question> questions = new List<Question>();
-            string sql = @"SELECT        q.[Id]
+            string sql = @$"SELECT TOP {top} q.[Id]
                                           ,[Content]
                                           ,[Image]
                                           ,l.[Id] AS LevelId, l.[Name] AS LevelName

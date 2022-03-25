@@ -33,7 +33,7 @@ namespace OTS.EssayMark
                 List<Essay> essays = new EssayDBContext().GetEssays(testId, studentId);
                 txtTestId.Text = test.Id.ToString();
                 txtSubject.Text = test.Subject.ToString();
-                txtNote.Text = (mark == null)? "" : mark.Note;
+                richtxtNote.Text = (mark == null)? "" : mark.Note;
                 nudMark.Value = (mark == null)?  0 : (decimal)mark.Grade;
                 foreach (Essay essay in essays)
                 {
@@ -45,10 +45,11 @@ namespace OTS.EssayMark
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            
             try {
                 Mark mark = new Mark()
                 {
-                    Note = txtNote.Text,
+                    Note = richtxtNote.Text,
                     Grade = (float) nudMark.Value,
                     Student = new Student()
                     {
@@ -95,6 +96,14 @@ namespace OTS.EssayMark
         {
             FrmViewTest frmViewTest = new FrmViewTest(testId);
             frmViewTest.Show();
+        }
+
+        private void nudMark_ValueChanged(object sender, EventArgs e)
+        {
+            if (nudMark.Value > nudMark.Maximum)
+            {
+                MessageBox.Show($"Mark can not greater than {nudMark.Maximum}", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void FrmEssayTestList_Load(object sender, EventArgs e)
