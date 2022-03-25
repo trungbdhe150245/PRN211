@@ -1,4 +1,10 @@
+using OTS.DAO;
+using OTS.Login;
+using OTS.ManageMark;
 using OTS.ManageQuestion;
+using OTS.ManageSubmission;
+using OTS.Models;
+using OTS.ReviewSubmission;
 using OTS.ViewTest;
 using System;
 using System.Collections.Generic;
@@ -19,13 +25,16 @@ namespace OTS
 			Application.SetHighDpiMode(HighDpiMode.SystemAware);
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			//Application.Run(new FrmManageClass());
-			//Application.Run(new FrmViewTest());
-			//Application.Run(new ManageSubject.InsertSubject());
-			//Application.Run(new ManageSubject.UpdateSubject());
-			//Application.Run(new ManageSubject.frmManagerSubject());
-			Application.Run(new ManageStudent.frmManageStudent());
-
+            //Application.Run(new FrmManageClass());
+            //Application.Run(new FrmViewTest());
+            //Application.Run(new ManageSubject.InsertSubject());
+            //Application.Run(new ManageSubject.UpdateSubject());
+            //Application.Run(new ManageTest.frmManageTest());
+            //Application.Run(new FrmManageClass());
+            //Application.Run(new FrmViewTest(3));
+            //Application.Run(new FrmReviewSubmission(34, 8));
+            //Application.Run(new FrmManageMark());
+            Application.Run(new FrmLoginStudent());
 		}
 	}
 }
