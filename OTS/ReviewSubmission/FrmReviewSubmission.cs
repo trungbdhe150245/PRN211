@@ -267,5 +267,14 @@ namespace OTS.ReviewSubmission
             }
         }
 
+        private void homeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //redirect to student dashboard
+        }
+
+        private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //redirect to login page
+        }
     }
 }

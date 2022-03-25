@@ -1,4 +1,6 @@
 using OTS.DAO;
+using OTS.Login;
+using OTS.ManageMark;
 using OTS.ManageQuestion;
 using OTS.ManageSubmission;
 using OTS.Models;
@@ -30,10 +32,9 @@ namespace OTS
             //Application.Run(new ManageTest.frmManageTest());
             //Application.Run(new FrmManageClass());
             //Application.Run(new FrmViewTest(3));
-            //Application.Run(new FrmReviewSubmission(34,8));
-            Application.Run(new FrmManageSubmission());
-
-        }
-    }
-
+            //Application.Run(new FrmReviewSubmission(34, 8));
+            //Application.Run(new FrmManageMark());
+            Application.Run(new FrmLoginStudent());
+		}
+	}
 }
