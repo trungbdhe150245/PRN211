@@ -41,9 +41,9 @@
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnFind = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtSubjectName = new System.Windows.Forms.TextBox();
+            this.txtStudentCode = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtSubjectCode = new System.Windows.Forms.TextBox();
+            this.txtClassCode = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStudent)).BeginInit();
             this.SuspendLayout();
@@ -69,6 +69,7 @@
             this.dgvStudent.RowTemplate.Height = 25;
             this.dgvStudent.Size = new System.Drawing.Size(776, 228);
             this.dgvStudent.TabIndex = 43;
+            this.dgvStudent.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvStudent_CellClick);
             // 
             // Column1
             // 
@@ -141,6 +142,7 @@
             this.btnDelete.TabIndex = 51;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnUpdate
             // 
@@ -150,6 +152,7 @@
             this.btnUpdate.TabIndex = 50;
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // btnFind
             // 
@@ -159,6 +162,7 @@
             this.btnFind.TabIndex = 49;
             this.btnFind.Text = "Find";
             this.btnFind.UseVisualStyleBackColor = true;
+            this.btnFind.Click += new System.EventHandler(this.btnFind_Click);
             // 
             // label2
             // 
@@ -169,12 +173,12 @@
             this.label2.TabIndex = 48;
             this.label2.Text = "Student Code";
             // 
-            // txtSubjectName
+            // txtStudentCode
             // 
-            this.txtSubjectName.Location = new System.Drawing.Point(286, 109);
-            this.txtSubjectName.Name = "txtSubjectName";
-            this.txtSubjectName.Size = new System.Drawing.Size(195, 23);
-            this.txtSubjectName.TabIndex = 47;
+            this.txtStudentCode.Location = new System.Drawing.Point(286, 109);
+            this.txtStudentCode.Name = "txtStudentCode";
+            this.txtStudentCode.Size = new System.Drawing.Size(195, 23);
+            this.txtStudentCode.TabIndex = 47;
             // 
             // label3
             // 
@@ -185,12 +189,12 @@
             this.label3.TabIndex = 46;
             this.label3.Text = "Class Code";
             // 
-            // txtSubjectCode
+            // txtClassCode
             // 
-            this.txtSubjectCode.Location = new System.Drawing.Point(286, 71);
-            this.txtSubjectCode.Name = "txtSubjectCode";
-            this.txtSubjectCode.Size = new System.Drawing.Size(195, 23);
-            this.txtSubjectCode.TabIndex = 45;
+            this.txtClassCode.Location = new System.Drawing.Point(286, 71);
+            this.txtClassCode.Name = "txtClassCode";
+            this.txtClassCode.Size = new System.Drawing.Size(195, 23);
+            this.txtClassCode.TabIndex = 45;
             // 
             // label1
             // 
@@ -213,9 +217,9 @@
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.btnFind);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.txtSubjectName);
+            this.Controls.Add(this.txtStudentCode);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.txtSubjectCode);
+            this.Controls.Add(this.txtClassCode);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvStudent);
             this.Name = "frmManageStudent";
@@ -242,9 +246,9 @@
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Button btnFind;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtSubjectName;
+        private System.Windows.Forms.TextBox txtStudentCode;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtSubjectCode;
+        private System.Windows.Forms.TextBox txtClassCode;
         private System.Windows.Forms.Label label1;
     }
 }

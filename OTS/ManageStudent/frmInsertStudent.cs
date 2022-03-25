@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using OTS.DAO;
@@ -20,24 +21,19 @@ namespace OTS.ManageStudent
         DateTime Dob;
         String StudentCode = "";
         String ClassCode = "";
+        String regexName = "^( ?[a-zA-Z]+){1,}$";
+        String regexPassword = "^[a-zA-z0-9]+$";
+        String regexStudentCode = "^[a-zA-z0-9]+$";
         DAO.StudentDBContext student;
-        
-        
+
+
 
         public frmInsertStudent()
         {
             InitializeComponent();
 
         }
-        void fillClassCode (){
-            List<Models.Class> classDB = new List<Models.Class>();
-            classDB =student.getClassCode();
 
-            foreach (Class code in classDB)
-            {
-                comboxClassCode.Items.Add(code.ClassCode);
-            }
-         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
@@ -46,24 +42,82 @@ namespace OTS.ManageStudent
 
         private void btnInsert_Click(object sender, EventArgs e)
         {
-            StudentDBContext    studentDBContext=new StudentDBContext();
+            int rowefected = 0;
+            StudentDBContext studentDBContext = new StudentDBContext();
             try
             {
-                 
-                 FullName = txtFullName.Text.Trim();
-                 Password = txtPassword.Text.Trim();
-                 Dob=dtPDob.Value;
-                 StudentCode =txtStudentCode.Text.Trim();
-                //  ClassCode = txtClassCode.Text.Trim();
-                
 
-                studentDBContext.InsertStudent( FullName, Password, Dob, StudentCode, ClassCode);
+                FullName = txtFullName.Text.Trim();
+                if (Regex.IsMatch(FullName, regexName) && !String.IsNullOrEmpty(FullName))
+                {
+                    Password = txtPassword.Text.Trim();
+                    if (Regex.IsMatch(Password, regexPassword) && !String.IsNullOrEmpty(Password))
+                    {
+
+                        StudentCode = txtStudentCode.Text.Trim();
+                        if (Regex.IsMatch(StudentCode, regexStudentCode) && !String.IsNullOrEmpty(StudentCode))
+                        {
+                            ClassCode = txtClasscode.Text.Trim();
+
+                            if (Regex.IsMatch(ClassCode, regexStudentCode) && !String.IsNullOrEmpty(ClassCode))
+                            {
+                                Dob = dtPDob.Value;
+
+                                List<Class> classes = new List<Class>();
+                                classes = studentDBContext.getClassCode();
+                                foreach (Class c in classes)
+                                {
+                                    if (ClassCode.Equals(c.ClassCode))
+                                    {
+                                        rowefected = studentDBContext.InsertStudent(FullName, Password, Dob, StudentCode, ClassCode);
+                                        MessageBox.Show("Insert Sucessfull", "Notify", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                        break;
+
+                                    }
+
+
+                                }
+                                if (rowefected == 0)
+                                {
+                                    MessageBox.Show("Class Code doesn't exsit!!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                                }
+                            }
+                            else
+                            {
+                                throw new Exception();
+                            }
+
+                        }
+                        else
+                        {
+                            throw new Exception();
+                        }
+
+                    }
+                    else
+                    {
+                        throw new Exception();
+                    }
+
+
+
+                }
+                else
+                {
+                    throw new Exception();
+                }
+
+
+
+
 
 
             }
             catch (Exception ex)
             {
-
+                MessageBox.Show("Invalid value", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -72,9 +126,6 @@ namespace OTS.ManageStudent
 
         }
 
-        private void frmInsertStudent_Load(object sender, EventArgs e)
-        {
-            fillClassCode();
-        }
+
     }
 }

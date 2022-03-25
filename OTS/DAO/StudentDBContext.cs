@@ -112,18 +112,18 @@ namespace OTS.DAO
             return rowAffects;
         }
         //--------------------------------------------------------
-        public int DeleteSubject(String oldsubjectCode)
+        public int DeleteStudent(String Id)
         {
             int rowAffects = 0;
-            string sql_update_subject = "";
+            string sql_delete_student = "";
 
-            sql_update_subject = @"DELETE FROM Subject  WHERE SubjectCode = @oldCode ;";
+            sql_delete_student = @"DELETE FROM Student  WHERE Id = @Id ;";
 
             try
             {
                 connection = new SqlConnection(GetConnectionString());
-                command = new SqlCommand(sql_update_subject, connection);
-                command.Parameters.AddWithValue("@oldCode", oldsubjectCode);
+                command = new SqlCommand(sql_delete_student, connection);
+                command.Parameters.AddWithValue("@Id", Id);
 
                 connection.Open();
                 rowAffects = command.ExecuteNonQuery();
@@ -177,6 +177,16 @@ namespace OTS.DAO
                                             ,[ClassCode]
                                             FROM [Student] ";
             }
+            else if (option == "ClassCodeAndStudentCode")
+            {
+                sql_view_student = @"SELECT  [Id]
+                                            ,[FullName]
+                                            ,[Password]
+                                            ,[Dob]
+                                            ,[StudentCode]
+                                            ,[ClassCode]
+                                            FROM [Student] Where [ClassCode]=@classCode And [StudentCode]=@studentCode;";
+            }
 
 
 
@@ -186,13 +196,19 @@ namespace OTS.DAO
                 command = new SqlCommand(sql_view_student, connection);
 
 
-                if (option == "FindByclassCode")
+                if (option == "ClassCode")
                 {
                     command.Parameters.AddWithValue("@classCode", classCode);
                 }
-                else if (option == "FindByStudentCode")
+                else if (option == "StudentCode")
                 {
                     command.Parameters.AddWithValue("@studentCode", StudentCode);
+                }
+                else if (option == "ClassCodeAndStudentCode")
+                {
+                    command.Parameters.AddWithValue("@classCode", classCode);
+                    command.Parameters.AddWithValue("@studentCode", StudentCode);
+
                 }
 
 
@@ -245,9 +261,78 @@ namespace OTS.DAO
             return stu;
         }
         //--------------------------------------------------------
+        public Student GetStudent(int id)
+        {
+            int rowAffects = 0;
+            string sql_view_student = "";
+            Student stu = new Student();
+
+            sql_view_student = @"SELECT      [Id]
+                                            ,[FullName]
+                                            ,[Password]
+                                            ,[Dob]
+                                            ,[StudentCode]
+                                            ,[ClassCode]
+                                            FROM [Student] Where [Id]=@id;";
+
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(sql_view_student, connection);
+
+                command.Parameters.AddWithValue("@Id", id);
+
+                try
+                {
+                    connection.Open();
+                    reader = command.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
+                    if (reader.HasRows == true)
+                    {
+
+                        Models.Student students = new Models.Student();
+                        students.Id = reader.GetInt32("Id");
+                        students.FullName = reader.GetString("FullName");
+                        students.Password = reader.GetString("Password");
+                        students.DateOfBirth = reader.GetDateTime("Dob");
+                        students.StudentCode = reader.GetString("StudentCode");
+                        try
+                        {
+                            Class c = new Class();
+                            c.ClassCode = reader.GetString("ClassCode");
+                            students.Class = c;
+
+                        }
+                        catch (Exception e) { }
+
+                        stu = students;
+
+
+                    }
+                    connection.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error");
+                }
+                connection.Open();
+                rowAffects = command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString(), "Warnning",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return stu;
+        }
+
+        //--------------------------------------------------------
         public List<Class> getClassCode()
         {
-            
+
             string sql_view_class = "";
             List<Class> cls = new List<Class>();
 
@@ -277,14 +362,14 @@ namespace OTS.DAO
                         }
 
                     }
-                    
+
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Error");
                 }
-                
-                
+
+
             }
             catch (Exception ex)
             {

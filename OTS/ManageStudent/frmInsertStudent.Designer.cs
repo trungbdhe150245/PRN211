@@ -40,7 +40,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.dtPDob = new System.Windows.Forms.DateTimePicker();
-            this.comboxClassCode = new System.Windows.Forms.ComboBox();
+            this.txtClasscode = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnCancel
@@ -146,21 +146,19 @@
             this.dtPDob.Size = new System.Drawing.Size(200, 23);
             this.dtPDob.TabIndex = 61;
             // 
-            // comboxClassCode
+            // txtClasscode
             // 
-            this.comboxClassCode.FormattingEnabled = true;
-            this.comboxClassCode.Location = new System.Drawing.Point(145, 256);
-            this.comboxClassCode.Name = "comboxClassCode";
-            this.comboxClassCode.Size = new System.Drawing.Size(195, 23);
-            this.comboxClassCode.TabIndex = 62;
-            this.comboxClassCode.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.txtClasscode.Location = new System.Drawing.Point(145, 251);
+            this.txtClasscode.Name = "txtClasscode";
+            this.txtClasscode.Size = new System.Drawing.Size(195, 23);
+            this.txtClasscode.TabIndex = 62;
             // 
             // frmInsertStudent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(464, 399);
-            this.Controls.Add(this.comboxClassCode);
+            this.Controls.Add(this.txtClasscode);
             this.Controls.Add(this.dtPDob);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label7);
@@ -175,7 +173,6 @@
             this.Controls.Add(this.label1);
             this.Name = "frmInsertStudent";
             this.Text = "frmInsertStudent";
-            this.Load += new System.EventHandler(this.frmInsertStudent_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -195,6 +192,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.DateTimePicker dtPDob;
-        private System.Windows.Forms.ComboBox comboxClassCode;
+        private System.Windows.Forms.TextBox txtClasscode;
     }
 }
