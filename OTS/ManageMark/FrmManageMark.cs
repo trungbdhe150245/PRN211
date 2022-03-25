@@ -1,4 +1,5 @@
 ﻿using OTS.DAO;
+using OTS.ManageTest;
 using OTS.Models;
 using System;
 using System.Collections.Generic;
@@ -551,5 +552,55 @@ namespace OTS.ManageMark
             }
         }
 
+        private void homeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void studentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void subjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void classToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void testToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmManageTest frmManageTest = new frmManageTest();
+            frmManageTest.Closed += (s, args) => this.Close();
+            this.Hide();
+            frmManageTest.Show();
+        }
+
+        private void viewTestListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmManageTest frmManageTest = new frmManageTest();
+            frmManageTest.Closed += (s,args) => this.Close();
+            this.Hide();
+            frmManageTest.Show();
+        }
+
+        private void createATestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void questionBankToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void submissionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -504,5 +504,50 @@ namespace OTS.ManageTest
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void studentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void subjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void classToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void createATestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void questionBankToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void submissionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void classToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void homeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void logoutToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
