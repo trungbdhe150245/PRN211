@@ -34,6 +34,12 @@
     <Compile Update="ManageSubject\UpdateSubject.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="StudenDashBoard\formReviewDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="StudenDashBoard\StudentDashBoard.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="ViewTest\FrmViewTest.cs">
       <SubType>Form</SubType>
     </Compile>

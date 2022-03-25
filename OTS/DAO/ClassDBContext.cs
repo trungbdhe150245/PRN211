@@ -188,6 +188,19 @@ namespace OTS.DAO
             }
             return rowAffects;
         }
+
+        public Class getClassbyId(string code)
+        {
+            List<Class> list = getClasses("", "");
+            foreach (var item in list)
+            {
+                if(item.ClassCode.Equals(code))
+                {
+                    return item;
+                }
+            }
+            return null;
+        }
     }
 
 }

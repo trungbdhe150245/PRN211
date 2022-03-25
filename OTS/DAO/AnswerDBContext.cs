@@ -172,18 +172,57 @@ namespace OTS.DAO
             finally { connection.Close(); }
             return rowAffects;
         }
-        //public Answer getCorrect(int id)
-        //{
-        //    List<Answer> list = getAnswerByCID(id);
-        //    foreach (var item in list)
-        //    {
-        //        if(item.IsCorrect)
-        //        {
-        //            return item;
-        //        }
-        //    }
-        //    return null;
-        //}
+
+        public List<Answer> getQuesByTest(int testId)
+        {
+            List<Answer> list = new List<Answer>();
+            string sql_test_ques = @$"SELECT Question.Id,Question.Content,Answer.isCorrect,Answer.Content
+FROM Test JOIN Question_Test ON Test.Id = Question_Test.TestId JOIN Question ON Question.Id = Question_Test.QuestionId
+JOIN Answer ON Answer.QuestionId = Question.Id
+WHERE Test.Id = {testId} AND Answer.isCorrect = 1";
+            TypeDBContext tDB = new TypeDBContext();
+            SubjectDBContext sDB = new SubjectDBContext();
+            LevelDBContext lDB = new LevelDBContext();
+            AnswerDBContext aDB = new AnswerDBContext();
+            try
+            {
+
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(sql_test_ques, connection);
+                connection.Open();
+                reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+
+                    //List<Answer> answers = aDB.getAnswerByCID(reader.GetInt32(0));
+                    Question ques = new Question()
+                    {
+                        Content = reader.GetString(1),
+                        Id = reader.GetInt32(0),
+
+                    };
+                    Answer a = new Answer()
+                    {
+                        IsCorrect = reader.GetBoolean(2),
+                        Content = reader.GetString(3)
+                    };
+                    a.Question = ques;
+                    list.Add(a);
+                }
+            }
+
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return list;
+        }
+        
     }
 
 

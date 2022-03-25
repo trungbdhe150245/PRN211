@@ -203,7 +203,7 @@ namespace OTS.DAO
         public int DeleteQues(Question q)
         {
             int rowAffects = 0;
-            
+
 
             string sql_delete_classes = @$"DELETE FROM [dbo].[Question]
       WHERE Id = @Id";
@@ -224,16 +224,54 @@ namespace OTS.DAO
             return rowAffects;
         }
 
-        //public int getId()
-        //{
+        public List<Question> getQuesByTest(int testId)
+        {
+            List<Question> list = new List<Question>();
+            string sql_test_ques = @$"SELECT Question.Id,Question.Content,Answer.isCorrect,Answer.Content
+FROM Test JOIN Question_Test ON Test.Id = Question_Test.TestId JOIN Question ON Question.Id = Question_Test.QuestionId
+JOIN Answer ON Answer.QuestionId = Question.Id
+WHERE Test.Id = {testId} AND Answer.isCorrect = 1";
+            TypeDBContext tDB = new TypeDBContext();
+            SubjectDBContext sDB = new SubjectDBContext();
+            LevelDBContext lDB = new LevelDBContext();
+            AnswerDBContext aDB = new AnswerDBContext();
+            try
+            {
 
-        //}
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(sql_test_ques, connection);
+                connection.Open();
+                reader = command.ExecuteReader();
 
-        //public Question findQuesID(int id)
-        //{
-        //    List<Question> list = getQues();
-        //    Question q = getQues().FirstOrDefault(q => q.Id == id);
-        //    return q;
-        //}
+                while (reader.Read())
+                {
+
+                    //List<Answer> answers = aDB.getAnswerByCID(reader.GetInt32(0));
+                    Question ques = new Question()
+                    {
+                        Content = reader.GetString(1),
+                        Id = reader.GetInt32(0),
+                        
+                    };
+                    Answer a = new Answer()
+                    {
+                        IsCorrect = reader.GetBoolean(2),
+                        Content = reader.GetString(3)
+                    };
+                    ques.Answers.Add(a);
+                    list.Add(ques);
+                }
+            }
+
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return list;
+        }
     }
 }

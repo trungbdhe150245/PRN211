@@ -104,3 +104,5 @@ C:\Users\Admin\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.pdb
 C:\Users\Admin\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.genruntimeconfig.cache
 C:\Users\Admin\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.csproj.AssemblyReference.cache
 C:\Users\Admin\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.ManageQuestion.EditQuestion.resources
+C:\Users\Admin\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.StudenDashBoard.StudentDashBoard.resources
+C:\Users\Admin\Documents\GitHub\PRN211\OTS\obj\Debug\net5.0-windows\OTS.StudenDashBoard.formReviewDetail.resources

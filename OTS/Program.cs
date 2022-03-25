@@ -1,4 +1,5 @@
 using OTS.ManageQuestion;
+using OTS.StudenDashBoard;
 using OTS.ViewTest;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,9 @@ namespace OTS
 			Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new FrmManageClass());
             //Application.Run(new FrmViewTest(new Models.Test() { }));
-            Application.Run(new ListQuestionBank());
+            //Application.Run(new ListQuestionBank());
+            Application.Run(new StudentDashBoard());
+
         }
-	}
+    }
 }
