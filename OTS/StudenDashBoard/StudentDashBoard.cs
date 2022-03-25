@@ -1,4 +1,5 @@
 ﻿using OTS.DAO;
+using OTS.Login;
 using OTS.Models;
 using OTS.ReviewSubmission;
 using System;
@@ -118,6 +119,21 @@ namespace OTS.StudenDashBoard
         private void StudentDashBoard_Load(object sender, EventArgs e)
         {
 
+            LoadData();
+        }
+
+
+        private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //redirect to login page
+            FrmLoginStudent frmLoginStudent = new FrmLoginStudent();
+            frmLoginStudent.Closed += (s, args) => this.Close();
+            this.Hide();
+            frmLoginStudent.Show();
+        }
+
+        private void homeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             LoadData();
         }
     }
