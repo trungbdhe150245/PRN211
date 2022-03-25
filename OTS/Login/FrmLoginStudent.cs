@@ -1,6 +1,9 @@
 ﻿using OTS.DAO;
 using OTS.Dashboard;
+<<<<<<< Updated upstream
 using OTS.Models;
+=======
+>>>>>>> Stashed changes
 using OTS.StudenDashBoard;
 using System;
 using System.Collections.Generic;
@@ -62,8 +65,13 @@ namespace OTS.Login
                 Student student = dbStudent.GetStudent(txtUsername.Text, txtPassword.Text);
                 if (student != null)
                 {
+<<<<<<< Updated upstream
                     StudentDashBoard studentDashboard = new(student.Id);
                     studentDashboard.Show();
+=======
+                    StudentDashBoard frmStudentDashboard = new StudentDashBoard(dbStudent.GetStudent(txtUsername.Text, txtPassword.Text).Id);
+                    frmStudentDashboard.Show();
+>>>>>>> Stashed changes
                     this.Hide();
                 }
                 else
