@@ -48,6 +48,46 @@ namespace OTS.DAO
             }
             return list;
         }
+        public List<Answer> getAnswerByQues(int quesId)
+        {
+            List<Answer> list = new List<Answer>();
+            string getAnsByQues = @"SELECT A.Id,A.Content,A.QuestionId,A.isCorrect 
+                                    FROM Answer AS A 
+                                    INNER JOIN Question AS B 
+                                    ON A.QuestionId = B.Id 
+                                    WHERE B.Id = " + quesId;
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(getAnsByQues, connection);
+                connection.Open();
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    Question q = new Question();
+                    q.Id = reader.GetInt32("QuestionId");
+                    Answer a = new Answer()
+                    {
+                        Content = reader.GetString("Content"),
+                        Id = reader.GetInt32("Id"),
+                        Question = q,
+                        IsCorrect = reader.GetBoolean("isCorrect")
+                    };
+                    list.Add(a);
+                }
+                //Question q = qDb.findQuesID(id);
+                //q.Answers = list;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return list;
+        }
 
         public int AddAns(Answer a)
         {
@@ -79,10 +119,10 @@ namespace OTS.DAO
             List<Question> ListQues = new List<Question>();
             List<Models.Type> listType = new List<Models.Type>();
             string getallAns = @$"SELECT [Id]
-      ,[Content]
-      ,[QuestionId]
-      ,[isCorrect]
-  FROM [dbo].[Answer] Where QuestionId = {q.Id}";
+                                    ,[Content]
+                                    ,[QuestionId]
+                                    ,[isCorrect]
+                                FROM [dbo].[Answer] Where QuestionId = {q.Id}";
             TypeDBContext tDB = new TypeDBContext();
             SubjectDBContext sDB = new SubjectDBContext();
             LevelDBContext lDB = new LevelDBContext();

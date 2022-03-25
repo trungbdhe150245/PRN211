@@ -46,11 +46,23 @@
             this.label9 = new System.Windows.Forms.Label();
             this.txtTotalQuestion = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.dtpEndTime = new System.Windows.Forms.DateTimePicker();
+            this.lbClasses = new System.Windows.Forms.ListBox();
+            this.btnRemoveClass = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtAddClassCode = new System.Windows.Forms.TextBox();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.btnCopy = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.dgvQuestion = new System.Windows.Forms.DataGridView();
+            this.QuestionID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Content = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TypeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LevelName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.View = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Action = new System.Windows.Forms.DataGridViewButtonColumn();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuestion)).BeginInit();
@@ -108,13 +120,13 @@
             this.dtpCreateDate.Location = new System.Drawing.Point(671, 161);
             this.dtpCreateDate.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dtpCreateDate.Name = "dtpCreateDate";
-            this.dtpCreateDate.Size = new System.Drawing.Size(230, 27);
+            this.dtpCreateDate.Size = new System.Drawing.Size(254, 27);
             this.dtpCreateDate.TabIndex = 5;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(551, 119);
+            this.label4.Location = new System.Drawing.Point(547, 113);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(77, 20);
             this.label4.TabIndex = 6;
@@ -123,7 +135,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(542, 63);
+            this.label5.Location = new System.Drawing.Point(540, 57);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(88, 20);
             this.label5.TabIndex = 8;
@@ -136,13 +148,13 @@
             this.dtpStartTime.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dtpStartTime.Name = "dtpStartTime";
             this.dtpStartTime.ShowUpDown = true;
-            this.dtpStartTime.Size = new System.Drawing.Size(71, 27);
+            this.dtpStartTime.Size = new System.Drawing.Size(95, 27);
             this.dtpStartTime.TabIndex = 7;
             this.dtpStartTime.Value = new System.DateTime(2022, 3, 18, 0, 0, 0, 0);
             // 
             // dtpStartDate
             // 
-            this.dtpStartDate.Location = new System.Drawing.Point(671, 217);
+            this.dtpStartDate.Location = new System.Drawing.Point(630, 111);
             this.dtpStartDate.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dtpStartDate.Name = "dtpStartDate";
             this.dtpStartDate.Size = new System.Drawing.Size(151, 27);
@@ -151,7 +163,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(600, 280);
+            this.label6.Location = new System.Drawing.Point(557, 207);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(67, 20);
             this.label6.TabIndex = 10;
@@ -159,8 +171,8 @@
             // 
             // dtpDuration
             // 
-            this.dtpDuration.CustomFormat = "yyyy.MM.dd HH:mm";
-            this.dtpDuration.Location = new System.Drawing.Point(671, 272);
+            this.dtpDuration.CustomFormat = "";
+            this.dtpDuration.Location = new System.Drawing.Point(630, 203);
             this.dtpDuration.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dtpDuration.Name = "dtpDuration";
             this.dtpDuration.ShowUpDown = true;
@@ -171,7 +183,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(131, 225);
+            this.label7.Location = new System.Drawing.Point(89, 113);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(58, 20);
             this.label7.TabIndex = 12;
@@ -189,19 +201,18 @@
             // cbReview
             // 
             this.cbReview.AutoSize = true;
-            this.cbReview.Location = new System.Drawing.Point(802, 275);
+            this.cbReview.Location = new System.Drawing.Point(777, 203);
             this.cbReview.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cbReview.Name = "cbReview";
             this.cbReview.Size = new System.Drawing.Size(107, 24);
             this.cbReview.TabIndex = 15;
             this.cbReview.Text = "Can Reivew";
             this.cbReview.UseVisualStyleBackColor = true;
-            this.cbReview.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(301, 59);
+            this.label9.Location = new System.Drawing.Point(291, 57);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(105, 20);
             this.label9.TabIndex = 17;
@@ -209,7 +220,7 @@
             // 
             // txtTotalQuestion
             // 
-            this.txtTotalQuestion.Location = new System.Drawing.Point(412, 54);
+            this.txtTotalQuestion.Location = new System.Drawing.Point(402, 55);
             this.txtTotalQuestion.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtTotalQuestion.Name = "txtTotalQuestion";
             this.txtTotalQuestion.ReadOnly = true;
@@ -218,11 +229,22 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label12);
+            this.groupBox1.Controls.Add(this.dtpEndTime);
+            this.groupBox1.Controls.Add(this.lbClasses);
+            this.groupBox1.Controls.Add(this.btnRemoveClass);
+            this.groupBox1.Controls.Add(this.cbReview);
+            this.groupBox1.Controls.Add(this.label11);
+            this.groupBox1.Controls.Add(this.label10);
+            this.groupBox1.Controls.Add(this.txtAddClassCode);
             this.groupBox1.Controls.Add(this.btnDelete);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.btnCancel);
-            this.groupBox1.Controls.Add(this.btnCopy);
+            this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.btnSave);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.dtpDuration);
+            this.groupBox1.Controls.Add(this.dtpStartDate);
             this.groupBox1.Controls.Add(this.txtTotalQuestion);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label5);
@@ -230,67 +252,194 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox1.Size = new System.Drawing.Size(1021, 305);
+            this.groupBox1.Size = new System.Drawing.Size(1021, 413);
             this.groupBox1.TabIndex = 19;
             this.groupBox1.TabStop = false;
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(557, 166);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(67, 20);
+            this.label12.TabIndex = 29;
+            this.label12.Text = "EndTime";
+            // 
+            // dtpEndTime
+            // 
+            this.dtpEndTime.CustomFormat = "";
+            this.dtpEndTime.Location = new System.Drawing.Point(630, 162);
+            this.dtpEndTime.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dtpEndTime.Name = "dtpEndTime";
+            this.dtpEndTime.ShowUpDown = true;
+            this.dtpEndTime.Size = new System.Drawing.Size(102, 27);
+            this.dtpEndTime.TabIndex = 30;
+            this.dtpEndTime.Value = new System.DateTime(2022, 3, 18, 0, 0, 0, 0);
+            // 
+            // lbClasses
+            // 
+            this.lbClasses.FormattingEnabled = true;
+            this.lbClasses.ItemHeight = 20;
+            this.lbClasses.Location = new System.Drawing.Point(153, 261);
+            this.lbClasses.Name = "lbClasses";
+            this.lbClasses.Size = new System.Drawing.Size(300, 84);
+            this.lbClasses.Sorted = true;
+            this.lbClasses.TabIndex = 28;
+            // 
+            // btnRemoveClass
+            // 
+            this.btnRemoveClass.Location = new System.Drawing.Point(153, 356);
+            this.btnRemoveClass.Name = "btnRemoveClass";
+            this.btnRemoveClass.Size = new System.Drawing.Size(94, 29);
+            this.btnRemoveClass.TabIndex = 27;
+            this.btnRemoveClass.Text = "Remove";
+            this.btnRemoveClass.UseVisualStyleBackColor = true;
+            this.btnRemoveClass.Click += new System.EventHandler(this.btnRemoveClass_Click);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(89, 261);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(56, 20);
+            this.label11.TabIndex = 26;
+            this.label11.Text = "Classes";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(153, 231);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(109, 20);
+            this.label10.TabIndex = 25;
+            this.label10.Text = "Add ClassCode";
+            // 
+            // txtAddClassCode
+            // 
+            this.txtAddClassCode.Location = new System.Drawing.Point(284, 228);
+            this.txtAddClassCode.Name = "txtAddClassCode";
+            this.txtAddClassCode.Size = new System.Drawing.Size(169, 27);
+            this.txtAddClassCode.TabIndex = 24;
+            this.txtAddClassCode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtAddClassCode_KeyDown);
+            // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(648, 245);
+            this.btnDelete.Location = new System.Drawing.Point(789, 283);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(95, 39);
             this.btnDelete.TabIndex = 22;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(525, 245);
+            this.btnCancel.Location = new System.Drawing.Point(920, 283);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(95, 39);
             this.btnCancel.TabIndex = 21;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
-            // 
-            // btnCopy
-            // 
-            this.btnCopy.Location = new System.Drawing.Point(766, 245);
-            this.btnCopy.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnCopy.Name = "btnCopy";
-            this.btnCopy.Size = new System.Drawing.Size(95, 39);
-            this.btnCopy.TabIndex = 20;
-            this.btnCopy.Text = "Copy";
-            this.btnCopy.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(887, 245);
+            this.btnSave.Location = new System.Drawing.Point(660, 283);
             this.btnSave.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(95, 39);
             this.btnSave.TabIndex = 19;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // dgvQuestion
             // 
+            this.dgvQuestion.AllowUserToAddRows = false;
+            this.dgvQuestion.AllowUserToDeleteRows = false;
             this.dgvQuestion.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvQuestion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvQuestion.Location = new System.Drawing.Point(41, 475);
+            this.dgvQuestion.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.QuestionID,
+            this.Content,
+            this.TypeName,
+            this.LevelName,
+            this.View,
+            this.Action});
+            this.dgvQuestion.Location = new System.Drawing.Point(41, 597);
             this.dgvQuestion.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dgvQuestion.Name = "dgvQuestion";
+            this.dgvQuestion.ReadOnly = true;
             this.dgvQuestion.RowHeadersWidth = 51;
             this.dgvQuestion.RowTemplate.Height = 25;
-            this.dgvQuestion.Size = new System.Drawing.Size(1021, 353);
+            this.dgvQuestion.Size = new System.Drawing.Size(1021, 393);
             this.dgvQuestion.TabIndex = 20;
+            this.dgvQuestion.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvQuestion_CellContentClick);
+            // 
+            // QuestionID
+            // 
+            this.QuestionID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.QuestionID.HeaderText = "ID";
+            this.QuestionID.MinimumWidth = 6;
+            this.QuestionID.Name = "QuestionID";
+            this.QuestionID.ReadOnly = true;
+            this.QuestionID.Width = 53;
+            // 
+            // Content
+            // 
+            this.Content.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Content.HeaderText = "Content";
+            this.Content.MinimumWidth = 6;
+            this.Content.Name = "Content";
+            this.Content.ReadOnly = true;
+            // 
+            // TypeName
+            // 
+            this.TypeName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.TypeName.HeaderText = "Type";
+            this.TypeName.MinimumWidth = 6;
+            this.TypeName.Name = "TypeName";
+            this.TypeName.ReadOnly = true;
+            this.TypeName.Width = 69;
+            // 
+            // LevelName
+            // 
+            this.LevelName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.LevelName.HeaderText = "Level";
+            this.LevelName.MinimumWidth = 6;
+            this.LevelName.Name = "LevelName";
+            this.LevelName.ReadOnly = true;
+            this.LevelName.Width = 72;
+            // 
+            // View
+            // 
+            this.View.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.View.HeaderText = "View";
+            this.View.MinimumWidth = 6;
+            this.View.Name = "View";
+            this.View.ReadOnly = true;
+            this.View.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.View.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.View.Width = 70;
+            // 
+            // Action
+            // 
+            this.Action.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Action.HeaderText = "Action";
+            this.Action.MinimumWidth = 6;
+            this.Action.Name = "Action";
+            this.Action.ReadOnly = true;
+            this.Action.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Action.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Action.Width = 81;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label8.Location = new System.Drawing.Point(41, 437);
+            this.label8.Location = new System.Drawing.Point(50, 550);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(128, 32);
             this.label8.TabIndex = 21;
@@ -300,15 +449,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1103, 863);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(1103, 1025);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.dgvQuestion);
-            this.Controls.Add(this.cbReview);
             this.Controls.Add(this.txtSubject);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.dtpDuration);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.dtpStartDate);
             this.Controls.Add(this.dtpStartTime);
             this.Controls.Add(this.dtpCreateDate);
             this.Controls.Add(this.txtTestCode);
@@ -318,6 +463,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox1);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.MaximizeBox = false;
             this.Name = "FrmViewTest";
             this.Text = "FrmViewTest";
             this.Load += new System.EventHandler(this.FrmViewTest_Load);
@@ -351,9 +497,21 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView dgvQuestion;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnCopy;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn QuestionID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Content;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TypeName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LevelName;
+        private System.Windows.Forms.DataGridViewButtonColumn View;
+        private System.Windows.Forms.DataGridViewButtonColumn Action;
+        private System.Windows.Forms.Button btnRemoveClass;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox txtAddClassCode;
+        private System.Windows.Forms.ListBox lbClasses;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.DateTimePicker dtpEndTime;
     }
 }

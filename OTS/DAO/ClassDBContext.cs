@@ -1,4 +1,4 @@
-﻿using Microsoft.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using OTS.DAO;
 using OTS.Models;
 using System;
@@ -12,6 +12,73 @@ namespace OTS.DAO
 {
     internal class ClassDBContext : DBContext
     {
+        public Class GetClass(string classCode)
+        {
+            string sql_select_class = @"SELECT [ClassCode]
+                                      ,[ClassName]
+                                  FROM [Class]
+                                  WHERE ClassCode=@classCode";
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(sql_select_class, connection);
+                command.Parameters.AddWithValue("classCode", classCode);
+                connection.Open();
+                reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    return new Class()
+                    {
+                        ClassCode = reader.GetString("ClassCode"),
+                        ClassName = reader.GetString("ClassName"),
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return null;
+        }
+        public List<Class> GetClassByTest(int testId)
+        {
+            List<Class> classes = new List<Class>();
+            string sql_select_class_byTest = @"SELECT [TestId]
+                                  ,Test_Class.ClassCode,Class.ClassName
+                              FROM [Test_Class] INNER JOIN Class ON Test_Class.ClassCode = Class.ClassCode
+                              WHERE Test_Class.TestId=@testId";
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(sql_select_class_byTest, connection);
+                command.Parameters.AddWithValue("@testId", testId);
+                connection.Open();
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    classes.Add(new Class()
+                    {
+                        ClassCode = reader.GetString("ClassCode"),
+                        ClassName = reader.GetString("ClassName")
+                    });
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return classes;
+        }
         public int DeleteClass(List<Class> Classes)
         {
             int rowAffects = 0;
@@ -200,6 +267,39 @@ namespace OTS.DAO
                 }
             }
             return null;
+        }
+        
+        public List<Class> GetClasses()
+        {
+            List<Class> classes = new List<Class>();
+            string sql = @"SELECT [ClassCode]
+                              ,[ClassName]
+                          FROM [Class]";
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(sql, connection);
+
+                connection.Open();
+                reader = command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        classes.Add(new Class
+                        {
+                            ClassCode = reader.GetString(0),
+                            ClassName = reader.GetString(1)
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            return classes;
         }
     }
 

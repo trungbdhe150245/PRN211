@@ -10,5 +10,9 @@ namespace OTS.Models
     {
         public string ClassCode { get; set; }
         public string ClassName { get; set; }
+        public override string ToString()
+        {
+            return ClassCode + " - " + ClassName;
+        }
     }
 }
