@@ -23,25 +23,28 @@ namespace OTS.Login
         {
             string regex = "^[A-Za-z0-9]+$";
             string mess = "";
-            if(txtUsername.Text.Equals(""))
+            if (txtUsername.Text.Equals(""))
             {
                 mess = "Username cannot empty";
-            } else if (txtPassword.Text.Equals(""))
+            }
+            else if (txtPassword.Text.Equals(""))
             {
                 mess = "Password cannot empty";
             }
             else if (!Regex.IsMatch(txtUsername.Text.Trim(), regex))
             {
                 mess = "Username invalid format";
-            } else if (!Regex.IsMatch(txtPassword.Text.Trim(), regex))
+            }
+            else if (!Regex.IsMatch(txtPassword.Text.Trim(), regex))
             {
                 mess = "Password invalid format";
             }
 
-                if (mess.Equals(""))
+            if (mess.Equals(""))
             {
                 return true;
-            } else
+            }
+            else
             {
                 MessageBox.Show(mess, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
