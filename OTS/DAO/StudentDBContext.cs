@@ -23,7 +23,7 @@ namespace OTS.DAO
                                   , c.[ClassCode]
 	                              ,c.[ClassName]
                               FROM[Student] s INNER JOIN[Class] c ON s.ClassCode = c.ClassCode
-                              WHERE BINARY_CHECKSUM([FullName]) = BINARY_CHECKSUM(@username)
+                              WHERE BINARY_CHECKSUM([StudentCode]) = BINARY_CHECKSUM(@username)
                                 and BINARY_CHECKSUM([Password]) = BINARY_CHECKSUM(@password)";
                 connection = new SqlConnection(GetConnectionString());
                 command = new SqlCommand(sql, connection);
@@ -39,7 +39,8 @@ namespace OTS.DAO
                         Id = reader.GetInt32("Id"),
                         FullName = reader.GetString("FullName"),
                         Password = reader.GetString("Password"),
-                        DateOfBirth = reader.GetDateTime("Dob")
+                        DateOfBirth = reader.GetDateTime("Dob"),
+                        StudentCode = reader.GetString("StudentCode")
                     };
                     Class @class = new Class
                     {

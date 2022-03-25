@@ -1,4 +1,5 @@
 ﻿using OTS.DAO;
+using OTS.Login;
 using OTS.Models;
 using System;
 using System.Collections.Generic;
@@ -132,6 +133,9 @@ namespace OTS.ManageSubmission
                 e.RowIndex >= 0)
             {
                 //Transfer to other form and close this form
+                FrmLoginStudent frmLogin = new FrmLoginStudent();
+                frmLogin.Show();
+                Hide();
             }
         }
     }
