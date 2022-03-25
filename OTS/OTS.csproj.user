@@ -4,6 +4,9 @@
     <Compile Update="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Form2.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="ManageClass\FrmCreateClass.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -25,7 +28,7 @@
     <Compile Update="ManageSubject\UpdateSubject.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="ManageTest\TakeTest.cs">
+    <Compile Update="test\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="ViewTest\FrmViewTest.cs">

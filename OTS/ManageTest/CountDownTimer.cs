@@ -31,6 +31,9 @@ namespace OTS.ManageTest
 
         public string TimeLeftMsStr => TimeLeft.ToString(@"mm\:ss\.fff");
 
+        public string TimeLeftHrsStr => TimeLeft.ToString(@"hh\:mm\:ss");
+
+
         private void TimerTick(object sender, EventArgs e)
         {
             TimeChanged?.Invoke();
@@ -72,7 +75,9 @@ namespace OTS.ManageTest
             TimeChanged?.Invoke();
         }
 
-        public void SetTime(int min, int sec = 0) => SetTime(TimeSpan.FromSeconds(min * 60 + sec));
+        //public void SetTime(int min, int sec = 0) => SetTime(TimeSpan.FromSeconds(min * 60 + sec));
+
+        public void SetTime(int hour, int min, int sec = 0) => SetTime(TimeSpan.FromSeconds(hour * 3600 + min * 60 + sec));
 
         public void Start()
         {

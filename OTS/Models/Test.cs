@@ -15,6 +15,8 @@ namespace OTS.Models
         public TimeSpan Duration { get; set; }
         public Subject Subject { get; set; }
         public DateTime CreateDate { get; set; }
+        public TimeSpan EndTime { get; set; }
         public bool IsReview { get; set; }
+        public List<QuestionTest> QuestionTests = new List<QuestionTest>();
     }
 }

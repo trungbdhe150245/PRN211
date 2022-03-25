@@ -14,5 +14,6 @@ namespace OTS.Models
         public Level Level { get; set; }
         public Subject Subject { get; set; }
         public Type Type { get; set; }
+        public List<Answer> Answers { get; set; }
     }
 }
