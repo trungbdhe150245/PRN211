@@ -1,4 +1,4 @@
-﻿using Microsoft.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using OTS.DAO;
 using OTS.Models;
 using System;
@@ -256,6 +256,19 @@ namespace OTS.DAO
             return rowAffects;
         }
 
+        public Class getClassbyId(string code)
+        {
+            List<Class> list = getClasses("", "");
+            foreach (var item in list)
+            {
+                if(item.ClassCode.Equals(code))
+                {
+                    return item;
+                }
+            }
+            return null;
+        }
+        
         public List<Class> GetClasses()
         {
             List<Class> classes = new List<Class>();

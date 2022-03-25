@@ -1,4 +1,4 @@
-﻿using Microsoft.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using OTS.Models;
 using System;
@@ -37,9 +37,10 @@ namespace OTS.DAO
             {
                 connection.Close();
             }
+
             return rowAffects;
         }
-        //--------------------------------------------------------
+        
         public int UpdateSubject(String oldsubjectCode, String oldsubjectName, String newsubjectCode, String newsubjectName)
         {
             int rowAffects = 0;
@@ -110,7 +111,6 @@ namespace OTS.DAO
                     command.Parameters.AddWithValue("@subjectCode", subjectCode);
                     command.Parameters.AddWithValue("@subjectName", subjectName);
                 }
-
                 connection.Open();
                 rowAffects = command.ExecuteNonQuery();
             }
@@ -125,6 +125,41 @@ namespace OTS.DAO
             }
             return rowAffects;
         }
+        public List<Subject> subjects()
+        {
+            List<Subject> subjects = new List<Subject>();
+            string getSub = "SELECT [SubjectCode], [SubjectName] FROM [Subject]";
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(getSub, connection);
+                connection.Open();
+                reader = command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Subject subject = new Subject()
+                        {
+                            SubjectCode = reader.GetString("SubjectCode"),
+                            SubjectName = reader.GetString("SubjectName")
+                        };
+                        //subject.SubjectCode = reader.GetString("SubjectCode");
+                        //subject.SubjectName = reader.GetString("SubjectName");
+                        subjects.Add(subject);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return subjects;
+        }
 
         public List<Models.Subject> Getsubjects()
         {
@@ -136,9 +171,11 @@ namespace OTS.DAO
             command = new SqlCommand(sql, connection);
             try
             {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(sql, connection);
                 connection.Open();
-                reader = command.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
-                if (reader.HasRows == true)
+                reader = command.ExecuteReader();
+                if (reader.HasRows)
                 {
                     while (reader.Read())
                     {
@@ -151,8 +188,7 @@ namespace OTS.DAO
             }
             catch (Exception ex)
             {
-
-
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -196,6 +232,19 @@ namespace OTS.DAO
                 connection.Close();
             }
             return subjects;
+        }
+
+        public Subject getSubbyId(string code)
+        {
+            List<Subject> subs = subjects();
+            foreach (var s in subs)
+            {
+                if (s.SubjectCode.Equals(code))
+                {
+                    return s;
+                }
+            }
+            return null;
         }
 
         public Subject GetSubject(string code)
