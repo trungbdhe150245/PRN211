@@ -1,5 +1,7 @@
 ﻿using OTS.DAO;
 using OTS.Dashboard;
+using OTS.Models;
+using OTS.StudenDashBoard;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,6 +21,8 @@ namespace OTS.Login
         {
             InitializeComponent();
         }
+        StudentDBContext dbStudent = new StudentDBContext();
+
         private bool ValidateLogin()
         {
             string regex = "^[A-Za-z0-9]+$";
@@ -50,15 +54,16 @@ namespace OTS.Login
                 return false;
             }
         }
+
         private void btnLogin_Click(object sender, EventArgs e)
         {
             if (ValidateLogin())
             {
-                StudentDBContext dbStudent = new StudentDBContext();
-                if (dbStudent.GetStudent(txtUsername.Text, txtPassword.Text) != null)
+                Student student = dbStudent.GetStudent(txtUsername.Text, txtPassword.Text);
+                if (student != null)
                 {
-                    FrmStudentDashboard frmStudentDashboard = new FrmStudentDashboard();
-                    frmStudentDashboard.Show();
+                    StudentDashBoard studentDashboard = new(student.Id);
+                    studentDashboard.Show();
                     this.Hide();
                 }
                 else
