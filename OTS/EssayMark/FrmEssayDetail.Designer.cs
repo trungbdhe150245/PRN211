@@ -35,7 +35,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.dtpSubmitTime = new System.Windows.Forms.DateTimePicker();
             this.dtpDuration = new System.Windows.Forms.DateTimePicker();
-            this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.nudFontSize = new System.Windows.Forms.NumericUpDown();
@@ -105,15 +104,6 @@
             this.dtpDuration.Name = "dtpDuration";
             this.dtpDuration.Size = new System.Drawing.Size(124, 27);
             this.dtpDuration.TabIndex = 18;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(12, 157);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(94, 29);
-            this.button1.TabIndex = 19;
-            this.button1.Text = "Question";
-            this.button1.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
@@ -185,7 +175,6 @@
             this.Controls.Add(this.nudFontSize);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.dtpDuration);
             this.Controls.Add(this.dtpSubmitTime);
             this.Controls.Add(this.label4);
@@ -211,7 +200,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DateTimePicker dtpSubmitTime;
         private System.Windows.Forms.DateTimePicker dtpDuration;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown nudFontSize;
