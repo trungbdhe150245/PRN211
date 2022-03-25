@@ -175,7 +175,7 @@ namespace OTS.ManageTest
                         /* NeedsToBeDrawn = true; */
                         String answerContent = System.Text.Json.JsonSerializer.Serialize(answer.CheckedItems);
                         questionanswerPairs[$"{q.Question.Content}"] = answerContent.Replace("\u0022", "");
-                        ProcessWrite(@$"C:\Users\trung\Desktop\log\loglocal.txt", System.Text.Json.JsonSerializer.Serialize(questionanswerPairs), FileMode.OpenOrCreate);
+                        ProcessWrite(@"D:\logfinal.txt", System.Text.Json.JsonSerializer.Serialize(questionanswerPairs), FileMode.OpenOrCreate);
                     });
 
                 }
@@ -192,7 +192,7 @@ namespace OTS.ManageTest
                     answer.Height = 610;
                     answer.TextChanged += new EventHandler(delegate (object sender, EventArgs e) { /*NeedsToBeDrawn = true; */
                         questionanswerPairs[$"{q.Question.Content}"] = answer.Text;
-                        ProcessWrite(@$"C:\Users\trung\Desktop\log\loglocal.txt", answer.Text, FileMode.OpenOrCreate);
+                        ProcessWrite(@"D:\logfinal.txt", answer.Text, FileMode.OpenOrCreate);
                     });
 
                 }
@@ -421,19 +421,19 @@ namespace OTS.ManageTest
         {
 
 
-            List<string> path_logs = FilePath(@"C:\Users\trung\Desktop\log\", "*.txt");
+            List<string> path_logs = FilePath(@"D:\", "*.txt");
             path_logs.Sort();
             foreach (var file in path_logs)
             {
                 if (!file.Contains("final"))
                 {
                     using (Stream input = File.OpenRead(@$"{file}"))
-                    using (Stream output = new FileStream(@"C:\Users\trung\Desktop\log\logfinal.txt", FileMode.Append,
+                    using (Stream output = new FileStream(@"D:\logfinal.txt", FileMode.Append,
                                                           FileAccess.Write, FileShare.None))
                     {
                         input.CopyTo(output); // Using .NET 4
                     }
-                    File.Delete(@$"{file}");
+                    File.Delete(@$"{ file}");
                 }
 
 
