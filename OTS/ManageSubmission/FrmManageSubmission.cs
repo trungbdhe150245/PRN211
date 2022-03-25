@@ -125,7 +125,7 @@ namespace OTS.ManageSubmission
             this.Close();
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvSubmission_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             var senderGrid = (DataGridView)sender;
 
@@ -133,8 +133,8 @@ namespace OTS.ManageSubmission
                 e.RowIndex >= 0)
             {
                 //Transfer to other form and close this form
-                FrmLoginStudent frmLogin = new FrmLoginStudent();
-                frmLogin.Show();
+                //FrmLoginStudent frmLogin = new FrmLoginStudent();
+                //frmLogin.Show();
                 Hide();
             }
         }
