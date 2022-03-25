@@ -60,6 +60,7 @@ namespace OTS.Login
                 if (dbMod.GetModerator(txtUsername.Text, txtPassword.Text) != null)
                 {
                     FrmModDashboard frmModDashboard = new FrmModDashboard();
+                    frmModDashboard.FormClosed += (s, args) => this.Close();
                     frmModDashboard.Show();
                     this.Hide();
                 }
