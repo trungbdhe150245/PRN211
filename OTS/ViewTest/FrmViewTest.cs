@@ -7,6 +7,7 @@ using OTS.ManageSubject;
 using OTS.ManageSubmission;
 using OTS.ManageClass;
 using OTS.ManageTest;
+using OTS.ManageQuestion;
 using OTS.Models;
 using OTS.ViewTest;
 using System;
@@ -170,6 +171,17 @@ namespace OTS.ViewTest
             if (e.ColumnIndex == 4 && e.RowIndex != -1)
             {
                 // thực hiện hành động khi chọn view trên dgvQuestions
+                try
+                {
+                    QuestionDBContext questionDBC = new QuestionDBContext();
+                    AnswerDBContext answerDBC = new AnswerDBContext();
+                    int questionID = Int32.Parse(dataGridViewQuestion.Rows[e.RowIndex].Cells[0].Value.ToString());
+                    Question question = questionDBC.GetQuestion(questionID);
+                    EditQuestion editQuestion = new EditQuestion(question);
+                    question.Answers = answerDBC.getByQues(question);
+                    editQuestion.Show();
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message, "Error"); }
             }
         }
 
