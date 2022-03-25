@@ -33,13 +33,13 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtSubjectCode = new System.Windows.Forms.TextBox();
             this.lbEditClass = new System.Windows.Forms.Label();
-            this.btnInsert = new System.Windows.Forms.Button();
+            this.btnUpdate = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.gdvUpdateSubject = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
             this.txtNewSubjectName = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txtNewSubjectCode = new System.Windows.Forms.TextBox();
+            this.gdvUpdateSubject = new System.Windows.Forms.DataGridView();
             this.btnFind = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gdvUpdateSubject)).BeginInit();
             this.SuspendLayout();
@@ -86,15 +86,14 @@
             this.lbEditClass.TabIndex = 23;
             this.lbEditClass.Text = "Update Subject";
             // 
-            // btnInsert
+            // btnUpdate
             // 
-            this.btnInsert.Location = new System.Drawing.Point(239, 270);
-            this.btnInsert.Name = "btnInsert";
-            this.btnInsert.Size = new System.Drawing.Size(75, 28);
-            this.btnInsert.TabIndex = 22;
-            this.btnInsert.Text = "Update";
-            this.btnInsert.UseVisualStyleBackColor = true;
-            this.btnInsert.Click += new System.EventHandler(this.btnInsert_Click);
+            this.btnUpdate.Location = new System.Drawing.Point(239, 270);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(75, 28);
+            this.btnUpdate.TabIndex = 22;
+            this.btnUpdate.Text = "Update";
+            this.btnUpdate.UseVisualStyleBackColor = true;
             // 
             // btnCancel
             // 
@@ -105,15 +104,6 @@
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // gdvUpdateSubject
-            // 
-            this.gdvUpdateSubject.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gdvUpdateSubject.Location = new System.Drawing.Point(382, 15);
-            this.gdvUpdateSubject.Name = "gdvUpdateSubject";
-            this.gdvUpdateSubject.RowTemplate.Height = 25;
-            this.gdvUpdateSubject.Size = new System.Drawing.Size(301, 325);
-            this.gdvUpdateSubject.TabIndex = 28;
             // 
             // label2
             // 
@@ -147,6 +137,15 @@
             this.txtNewSubjectCode.Size = new System.Drawing.Size(195, 23);
             this.txtNewSubjectCode.TabIndex = 29;
             // 
+            // gdvUpdateSubject
+            // 
+            this.gdvUpdateSubject.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gdvUpdateSubject.Location = new System.Drawing.Point(382, 15);
+            this.gdvUpdateSubject.Name = "gdvUpdateSubject";
+            this.gdvUpdateSubject.RowTemplate.Height = 25;
+            this.gdvUpdateSubject.Size = new System.Drawing.Size(273, 325);
+            this.gdvUpdateSubject.TabIndex = 28;
+            // 
             // btnFind
             // 
             this.btnFind.Location = new System.Drawing.Point(190, 143);
@@ -155,12 +154,13 @@
             this.btnFind.TabIndex = 33;
             this.btnFind.Text = "Find";
             this.btnFind.UseVisualStyleBackColor = true;
+            this.btnFind.Click += new System.EventHandler(this.btnFind_Click);
             // 
             // UpdateSubject
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(695, 352);
+            this.ClientSize = new System.Drawing.Size(667, 352);
             this.Controls.Add(this.btnFind);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtNewSubjectName);
@@ -172,11 +172,10 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtSubjectCode);
             this.Controls.Add(this.lbEditClass);
-            this.Controls.Add(this.btnInsert);
+            this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.btnCancel);
             this.Name = "UpdateSubject";
-            this.Text = "Form1";
-            this.Load += new System.EventHandler(this.UpdateSubject_Load);
+            this.Text = " ";
             ((System.ComponentModel.ISupportInitialize)(this.gdvUpdateSubject)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -190,13 +189,13 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtSubjectCode;
         private System.Windows.Forms.Label lbEditClass;
-        private System.Windows.Forms.Button btnInsert;
+        private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.DataGridView gdvUpdateSubject;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtNewSubjectName;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtNewSubjectCode;
+        private System.Windows.Forms.DataGridView gdvUpdateSubject;
         private System.Windows.Forms.Button btnFind;
     }
 }

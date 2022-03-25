@@ -35,6 +35,7 @@
             this.btnAddClass = new System.Windows.Forms.Button();
             this.btnEditClass = new System.Windows.Forms.Button();
             this.btnDeleteClass = new System.Windows.Forms.Button();
+            this.cbSearchOption = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClasses)).BeginInit();
             this.SuspendLayout();
             // 
@@ -42,18 +43,19 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(308, 20);
+            this.label1.Location = new System.Drawing.Point(39, 41);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(192, 37);
+            this.label1.Size = new System.Drawing.Size(237, 46);
             this.label1.TabIndex = 0;
             this.label1.Text = "Manage Class";
             // 
             // txtClassSearch
             // 
             this.txtClassSearch.ForeColor = System.Drawing.Color.Gray;
-            this.txtClassSearch.Location = new System.Drawing.Point(244, 87);
+            this.txtClassSearch.Location = new System.Drawing.Point(519, 109);
+            this.txtClassSearch.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtClassSearch.Name = "txtClassSearch";
-            this.txtClassSearch.Size = new System.Drawing.Size(227, 23);
+            this.txtClassSearch.Size = new System.Drawing.Size(259, 27);
             this.txtClassSearch.TabIndex = 2;
             // 
             // dgvClasses
@@ -61,18 +63,21 @@
             this.dgvClasses.AllowUserToOrderColumns = true;
             this.dgvClasses.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvClasses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvClasses.Location = new System.Drawing.Point(34, 139);
+            this.dgvClasses.Location = new System.Drawing.Point(39, 174);
+            this.dgvClasses.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dgvClasses.Name = "dgvClasses";
+            this.dgvClasses.RowHeadersWidth = 51;
             this.dgvClasses.RowTemplate.Height = 25;
-            this.dgvClasses.Size = new System.Drawing.Size(728, 235);
+            this.dgvClasses.Size = new System.Drawing.Size(832, 324);
             this.dgvClasses.TabIndex = 3;
             // 
             // btnClassSearch
             // 
             this.btnClassSearch.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnClassSearch.Location = new System.Drawing.Point(477, 87);
+            this.btnClassSearch.Location = new System.Drawing.Point(785, 106);
+            this.btnClassSearch.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnClassSearch.Name = "btnClassSearch";
-            this.btnClassSearch.Size = new System.Drawing.Size(75, 23);
+            this.btnClassSearch.Size = new System.Drawing.Size(86, 31);
             this.btnClassSearch.TabIndex = 4;
             this.btnClassSearch.Text = "Search";
             this.btnClassSearch.UseVisualStyleBackColor = true;
@@ -81,9 +86,10 @@
             // btnAddClass
             // 
             this.btnAddClass.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnAddClass.Location = new System.Drawing.Point(228, 399);
+            this.btnAddClass.Location = new System.Drawing.Point(261, 532);
+            this.btnAddClass.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnAddClass.Name = "btnAddClass";
-            this.btnAddClass.Size = new System.Drawing.Size(104, 39);
+            this.btnAddClass.Size = new System.Drawing.Size(119, 52);
             this.btnAddClass.TabIndex = 5;
             this.btnAddClass.Text = "Add New";
             this.btnAddClass.UseVisualStyleBackColor = true;
@@ -92,9 +98,10 @@
             // btnEditClass
             // 
             this.btnEditClass.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnEditClass.Location = new System.Drawing.Point(338, 399);
+            this.btnEditClass.Location = new System.Drawing.Point(386, 532);
+            this.btnEditClass.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnEditClass.Name = "btnEditClass";
-            this.btnEditClass.Size = new System.Drawing.Size(104, 39);
+            this.btnEditClass.Size = new System.Drawing.Size(119, 52);
             this.btnEditClass.TabIndex = 6;
             this.btnEditClass.Text = "Edit";
             this.btnEditClass.UseVisualStyleBackColor = true;
@@ -103,19 +110,30 @@
             // btnDeleteClass
             // 
             this.btnDeleteClass.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnDeleteClass.Location = new System.Drawing.Point(448, 399);
+            this.btnDeleteClass.Location = new System.Drawing.Point(512, 532);
+            this.btnDeleteClass.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnDeleteClass.Name = "btnDeleteClass";
-            this.btnDeleteClass.Size = new System.Drawing.Size(104, 39);
+            this.btnDeleteClass.Size = new System.Drawing.Size(119, 52);
             this.btnDeleteClass.TabIndex = 7;
             this.btnDeleteClass.Text = "Delete";
             this.btnDeleteClass.UseVisualStyleBackColor = true;
             this.btnDeleteClass.Click += new System.EventHandler(this.btnDeleteClass_Click);
             // 
+            // cbSearchOption
+            // 
+            this.cbSearchOption.FormattingEnabled = true;
+            this.cbSearchOption.Location = new System.Drawing.Point(362, 108);
+            this.cbSearchOption.Name = "cbSearchOption";
+            this.cbSearchOption.Size = new System.Drawing.Size(151, 28);
+            this.cbSearchOption.TabIndex = 8;
+            this.cbSearchOption.SelectedIndexChanged += new System.EventHandler(this.cbSearchOption_SelectedIndexChanged);
+            // 
             // FrmManageClass
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(914, 600);
+            this.Controls.Add(this.cbSearchOption);
             this.Controls.Add(this.btnDeleteClass);
             this.Controls.Add(this.btnEditClass);
             this.Controls.Add(this.btnAddClass);
@@ -123,6 +141,7 @@
             this.Controls.Add(this.dgvClasses);
             this.Controls.Add(this.txtClassSearch);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FrmManageClass";
             this.Text = "Manage Class";
             this.Load += new System.EventHandler(this.FrmManageClass_Load);
@@ -141,5 +160,6 @@
         private System.Windows.Forms.Button btnAddClass;
         private System.Windows.Forms.Button btnEditClass;
         private System.Windows.Forms.Button btnDeleteClass;
+        private System.Windows.Forms.ComboBox cbSearchOption;
     }
 }
