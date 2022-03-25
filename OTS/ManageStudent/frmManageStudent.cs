@@ -77,29 +77,7 @@ namespace OTS.ManageStudent
             studentCode = txtStudentCode.Text.Trim().ToString();
             frmUpdate.Show();
 
-            //if (rowselected > 0)
-            //{
-            //    DialogResult result = MessageBox.Show($"Are you sure to delete Student: {classCode}-{studentCode}", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            //    switch (result)
-            //    {
-            //        case DialogResult.Yes:
-            //            StudentDBContext student = new StudentDBContext();
-
-
-
-
-            //            break;
-            //        case DialogResult.No:
-            //            break;
-            //    }
-
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Plss select 1 row for Delete", "warrning", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
-            //rowselected = 0;
-            //frmManageStudent_Load(sender, e);
+           
         }
         public String getoption(String classCode, String studentCode)
         {
@@ -154,7 +132,7 @@ namespace OTS.ManageStudent
                 {
                     txtClassCode.Text = target.Class.ClassCode.ToString();
                     txtStudentCode.Text = target.StudentCode.ToString();
-                    IDtoDeleteAndUpdate = Int32.Parse(Id);
+                    IDtoDeleteAndUpdate = target.Id;
                     rowselected++;
                 }
             }
