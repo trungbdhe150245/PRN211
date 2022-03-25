@@ -11,7 +11,6 @@ namespace OTS.Models
         public int Id { get; set; }
         public string Code { get; set; }
         public TimeSpan StartTime { get; set; }
-        public TimeSpan EndTime { get; set; }
         public DateTime TestDate { get; set; }
         public TimeSpan Duration { get; set; }
         public Subject Subject { get; set; }

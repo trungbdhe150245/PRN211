@@ -16,29 +16,18 @@ namespace OTS
     public partial class FrmManageClass : Form
     {
         private string querySearch = "";
-        private string queryType = "name";
         public FrmManageClass()
         {
             InitializeComponent();
-            BindingList<object> selectListQueryType = new BindingList<object>()
-            {
-                new {Code = "name", Name = "Class name"},
-                new {Code = "code", Name = "Class Code"},
-            };
-            cbSearchOption.ValueMember = "Code";
-            cbSearchOption.DisplayMember = "Name";
-            cbSearchOption.DataSource = selectListQueryType;
-            cbSearchOption.SelectedIndex = 0;
         }
 
         public void LoadClassData()
         {
-  
             txtClassSearch.Text = querySearch;
             try
             {
                 ClassDBContext classDBContext = new ClassDBContext();
-                dgvClasses.DataSource = classDBContext.getClasses(querySearch, queryType);
+                dgvClasses.DataSource = classDBContext.getClasses(querySearch, "name");
             }
             catch (Exception ex)
             {
@@ -102,11 +91,6 @@ namespace OTS
         {
             querySearch = txtClassSearch.Text;
             LoadClassData();
-        }
-
-        private void cbSearchOption_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            queryType = cbSearchOption.SelectedValue.ToString();
         }
     }
 }

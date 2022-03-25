@@ -10,9 +10,5 @@ namespace OTS.Models
     {
         public string SubjectCode { get; set; } 
         public string SubjectName { get; set; }
-        public override string ToString()
-        {
-            return SubjectCode + " - " + SubjectName;
-        }
     }
 }

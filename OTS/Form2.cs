@@ -8,13 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace OTS.Dashboard
+namespace OTS
 {
-    public partial class FrmModDashboard : Form
+    public partial class Form2 : Form
     {
-        public FrmModDashboard()
+        public Form2()
         {
             InitializeComponent();
+        }
+
+        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //this.checkedListBox1.CheckedItems
         }
     }
 }

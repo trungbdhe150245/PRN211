@@ -113,7 +113,7 @@
             this.Controls.Add(this.btnCancel);
             this.Name = "InsertSubject";
             this.Text = "InsertSubject";
-         //   this.Load += new System.EventHandler(this.InsertSubject_Load);
+            this.Load += new System.EventHandler(this.InsertSubject_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

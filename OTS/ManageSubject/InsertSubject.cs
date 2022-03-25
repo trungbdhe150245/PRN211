@@ -24,6 +24,12 @@ namespace OTS.ManageSubject
             InitializeComponent();
         }
 
+        private void InsertSubject_Load(object sender, EventArgs e)
+        {
+            
+        }
+
+       
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
@@ -33,7 +39,8 @@ namespace OTS.ManageSubject
         private void btnInsert_Click(object sender, EventArgs e)
         {
             SubjectDBContext subjectDBC = new SubjectDBContext();
-            
+            do
+            {
                 try
                 {
                     subjectCode = txtSubjectCode.Text;
@@ -42,7 +49,7 @@ namespace OTS.ManageSubject
                     {
                         if (Regex.IsMatch(subjectName, rgxsubjectName)&&!String.IsNullOrEmpty(subjectName))
                         {
-                        subjectDBC.InsertSubject(subjectCode, subjectName);
+                            break;
                         }
                     }
                     else
@@ -54,9 +61,20 @@ namespace OTS.ManageSubject
                 {
                     MessageBox.Show("Invalid Value", "Warnning",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
-                   
+                    break;
                 }
 
+            } while (true);
+            subjectDBC.InsertSubject(subjectCode,subjectName);
         }
     }
 }
+//try
+//{
+//    SubjectDBContext subjectDBContext = new SubjectDBContext();
+//    dgvClasses.DataSource = subjectDBContext.getClasses(querySearch, "name");
+//}
+//catch (Exception ex)
+//{
+//    MessageBox.Show(ex.Message);
+//}

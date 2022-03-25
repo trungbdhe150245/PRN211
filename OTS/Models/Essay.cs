@@ -9,7 +9,6 @@ namespace OTS.Models
     public class Essay
     {
         public int Id { get; set; }
-        public Test Test { get; set; }
         public Student Student { get; set; }
         public Question Question { get; set; }
         public string Content { get; set; }
