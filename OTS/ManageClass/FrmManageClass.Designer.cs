@@ -31,6 +31,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtClassSearch = new System.Windows.Forms.TextBox();
             this.dgvClasses = new System.Windows.Forms.DataGridView();
+            this.ClassCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClassName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.View = new System.Windows.Forms.DataGridViewButtonColumn();
             this.btnClassSearch = new System.Windows.Forms.Button();
             this.btnAddClass = new System.Windows.Forms.Button();
             this.btnEditClass = new System.Windows.Forms.Button();
@@ -51,8 +54,8 @@
             // 
             // txtClassSearch
             // 
-            this.txtClassSearch.ForeColor = System.Drawing.Color.Gray;
-            this.txtClassSearch.Location = new System.Drawing.Point(519, 109);
+            this.txtClassSearch.ForeColor = System.Drawing.Color.Black;
+            this.txtClassSearch.Location = new System.Drawing.Point(519, 108);
             this.txtClassSearch.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtClassSearch.Name = "txtClassSearch";
             this.txtClassSearch.Size = new System.Drawing.Size(259, 27);
@@ -60,16 +63,49 @@
             // 
             // dgvClasses
             // 
-            this.dgvClasses.AllowUserToOrderColumns = true;
+            this.dgvClasses.AllowUserToAddRows = false;
+            this.dgvClasses.AllowUserToDeleteRows = false;
             this.dgvClasses.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvClasses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvClasses.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ClassCode,
+            this.ClassName,
+            this.View});
             this.dgvClasses.Location = new System.Drawing.Point(39, 174);
             this.dgvClasses.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dgvClasses.Name = "dgvClasses";
+            this.dgvClasses.ReadOnly = true;
             this.dgvClasses.RowHeadersWidth = 51;
             this.dgvClasses.RowTemplate.Height = 25;
             this.dgvClasses.Size = new System.Drawing.Size(832, 324);
             this.dgvClasses.TabIndex = 3;
+            this.dgvClasses.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvClasses_CellContentClick);
+            // 
+            // ClassCode
+            // 
+            this.ClassCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ClassCode.HeaderText = "ClassCode";
+            this.ClassCode.MinimumWidth = 6;
+            this.ClassCode.Name = "ClassCode";
+            this.ClassCode.ReadOnly = true;
+            this.ClassCode.Width = 106;
+            // 
+            // ClassName
+            // 
+            this.ClassName.HeaderText = "ClassName";
+            this.ClassName.MinimumWidth = 6;
+            this.ClassName.Name = "ClassName";
+            this.ClassName.ReadOnly = true;
+            this.ClassName.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // View
+            // 
+            this.View.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.View.HeaderText = "View";
+            this.View.MinimumWidth = 6;
+            this.View.Name = "View";
+            this.View.ReadOnly = true;
+            this.View.Width = 47;
             // 
             // btnClassSearch
             // 
@@ -141,7 +177,9 @@
             this.Controls.Add(this.dgvClasses);
             this.Controls.Add(this.txtClassSearch);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.MaximizeBox = false;
             this.Name = "FrmManageClass";
             this.Text = "Manage Class";
             this.Load += new System.EventHandler(this.FrmManageClass_Load);
@@ -161,5 +199,8 @@
         private System.Windows.Forms.Button btnEditClass;
         private System.Windows.Forms.Button btnDeleteClass;
         private System.Windows.Forms.ComboBox cbSearchOption;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClassCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClassName;
+        private System.Windows.Forms.DataGridViewButtonColumn View;
     }
 }
