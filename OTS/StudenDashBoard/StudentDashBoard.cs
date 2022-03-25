@@ -1,5 +1,6 @@
 ﻿using OTS.DAO;
 using OTS.Models;
+using OTS.ReviewSubmission;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,8 +16,15 @@ namespace OTS.StudenDashBoard
 {
     public partial class StudentDashBoard : Form
     {
+        private int stuId;
         public StudentDashBoard()
         {
+            InitializeComponent();
+        }
+
+        public StudentDashBoard(int id)
+        {
+            stuId = id;
             InitializeComponent();
         }
 
@@ -24,8 +32,13 @@ namespace OTS.StudenDashBoard
         {
             StudentDBContext sDb = new StudentDBContext();
             SubmissionDBContext smDB = new SubmissionDBContext();
-            Dictionary<Submission, Mark> recentTest = smDB.viewListResult(4);
-            Student s = sDb.getStudent(4);
+            Dictionary<Submission, Mark> recentTest = smDB.viewListResult(stuId);
+            Student s = sDb.getStudent(stuId);
+            if(recentTest == null)
+            {
+                MessageBox.Show("No test");
+                return;
+            }
             var list = recentTest.Select(l => new
             {
                 Code = l.Key.Test.Code,
@@ -34,6 +47,7 @@ namespace OTS.StudenDashBoard
                 Class = l.Value.Student.Class.ClassName,
                 Mark = l.Value.Grade,
                 IsReview = l.Key.Test.IsReview,
+                SubId = l.Key.Id
             }).ToList();
             dataGridView1.DataSource = list.ToList();
             StuCode.Text = s.StudentCode;
@@ -54,6 +68,7 @@ namespace OTS.StudenDashBoard
                 dataGridView1.Rows[i].Cells["Review"].Value = "Review";
             }
             this.dataGridView1.Columns[5].Visible = false;
+            this.dataGridView1.Columns[7].Visible = false;
             for (int i = 0; i < dataGridView1.RowCount; i++)
             {
                 DataGridViewDisableButtonCell Review = (DataGridViewDisableButtonCell)dataGridView1.Rows[i].Cells["Review"];
@@ -91,7 +106,9 @@ namespace OTS.StudenDashBoard
                     SubmissionDBContext smDB = new SubmissionDBContext();
                     Dictionary<Submission, Mark> recentTest = smDB.viewListResult(4);
                     Student s = sDb.getStudent(4);
-                    formReviewDetail fRD = new formReviewDetail(s, recentTest);
+                    string testId = dataGridView1.Rows[e.RowIndex].Cells["Code"].Value.ToString();
+                    string subId = dataGridView1.Rows[e.RowIndex].Cells["SubId"].Value.ToString();
+                    FrmReviewSubmission fRD = new FrmReviewSubmission(Int32.Parse(subId));
                     fRD.Show();
                 }
             }

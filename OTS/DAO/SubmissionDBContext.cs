@@ -11,7 +11,7 @@ namespace OTS.DAO
 {
     public class SubmissionDBContext : DBContext
     {
-        public Dictionary<Submission,Mark> viewListResult(int id)
+        public Dictionary<Submission, Mark> viewListResult(int id)
         {
             string view = @$"SELECT Submission.Id,Submission.SubmitDate,Submission.Duration,Test.Code,Submission.SubmitDate,Mark.Mark,
 Test.Code,Test.CreateDate,Test.Duration,Test.EndTime,Test.Id,Test.Review,Test.StartTime,Test.SubjectCode,Test.TestDate,Subject.SubjectName,
@@ -34,6 +34,7 @@ JOIN Subject ON Subject.SubjectCode = Test.SubjectCode JOIN Class ON Class.Class
                         Submission s = new Submission();
                         //s.Duration = reader.GetTimeSpan(2);
                         s.SubmitDate = reader.GetDateTime(4);
+                        s.Id = reader.GetInt32(0);
                         s.Test = new Test()
                         {
                             Code = reader.GetString(6),
@@ -47,7 +48,7 @@ JOIN Subject ON Subject.SubjectCode = Test.SubjectCode JOIN Class ON Class.Class
                                 SubjectCode = reader.GetString(13),
                                 SubjectName = reader.GetString(15)
                             },
-                            
+
                             TestDate = reader.GetDateTime(14)
 
                         };
@@ -85,7 +86,7 @@ JOIN Subject ON Subject.SubjectCode = Test.SubjectCode JOIN Class ON Class.Class
             }
             return null;
         }
-        
+
         public bool CheckIsTested(int testId)
         {
             bool result = false;
@@ -115,8 +116,8 @@ JOIN Subject ON Subject.SubjectCode = Test.SubjectCode JOIN Class ON Class.Class
             finally { connection.Close(); }
             return result;
         }
-                    
-          
+
+
         public Submission GetSubmission(int submitID)
         {
             string sql_select_test = @"SELECT s.[Id]
@@ -254,7 +255,7 @@ JOIN Subject ON Subject.SubjectCode = Test.SubjectCode JOIN Class ON Class.Class
 
         public List<SubmissionQA> getSubByTest(int testId, int stuID)
         {
-            string sql_get = "";
+            string sql_get = @$"SELECT Question.Id,Question.Content,Answer.Id,Answer.Content,Answer.isCorrect FROM Submission_QA JOIN Answer ON Submission_QA.AswerId = Answer.Id  JOIN Submission ON Submission_QA.SubmissionId = Submission.Id JOIN Question ON Question.Id = Submission_QA.QuestionId JOIN Student ON Student.Id = Submission.StudentId WHERE Submission.TestId = {testId} AND Student.Id = {stuID}";
             try
             {
                 connection = new SqlConnection(GetConnectionString());
@@ -309,7 +310,7 @@ JOIN Subject ON Subject.SubjectCode = Test.SubjectCode JOIN Class ON Class.Class
             {
                 connection.Close();
             }
-            
+
             return null;
         }
 
@@ -360,7 +361,7 @@ JOIN Subject ON Subject.SubjectCode = Test.SubjectCode JOIN Class ON Class.Class
                 {
                     while (reader.Read())
                     {
-                        
+
                         Submission submission = new()
                         {
                             Id = reader.GetInt32("Id"),
