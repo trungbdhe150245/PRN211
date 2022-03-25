@@ -17,9 +17,9 @@ using System.Windows.Forms;
 namespace OTS.ManageTest
 {
 
-            // Shuffle
 
-
+    public partial class TakeTest : Form
+    {
         class ThreadSafeRandom
         {
             [ThreadStatic] private Random Local;
@@ -45,8 +45,8 @@ namespace OTS.ManageTest
                 }
             }
         }
-    public partial class TakeTest : Form
-    {
+
+        //Copy
         public void Shuffle<T>(IList<T> list)
         {
             RNGCryptoServiceProvider provider = new RNGCryptoServiceProvider();
@@ -66,8 +66,8 @@ namespace OTS.ManageTest
         public TakeTest()
         {
             InitializeComponent();
-            Random_Img();
-            Process_Load(@"C:\Users\trung\Desktop\log\logfinal.txt");
+            //Random_Img();
+            Process_Load(@"D:\logfinal.txt");
         }
 
         //private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -85,7 +85,7 @@ namespace OTS.ManageTest
         private Dictionary<string, string> questionanswerPairs = new Dictionary<string, string>();
         private void TakeTest_Load(object sender, EventArgs e)
         {
-            Test t = new TestDBContext().GetTest("PRO192_PT2");
+            Test t = new TestDBContext().GetTest("ENW392_PT3");
             InitLabel(t);
             //this.TopMost = true;
             //this.FormBorderStyle = FormBorderStyle.None;
@@ -114,7 +114,7 @@ namespace OTS.ManageTest
             int testTime = t.Duration.Hours * 60 + t.Duration.Minutes;
 
             // Goi timer va assign cron-job
-            CalculateTimer(testTime ,timeDiff);
+            CalculateTimer(testTime, timeDiff);
 
             // Set time kieu cron-job
             /*
@@ -168,7 +168,7 @@ namespace OTS.ManageTest
                     for (int i = 0; i < q.Question.Answers.Count; i++)
                     {
                         answer.Items.Add(alphabet[i].ToString(), CheckState.Unchecked);
-                        
+
                     }
 
                     answer.SelectedIndexChanged += new EventHandler(delegate (object sender, EventArgs e) {
@@ -177,12 +177,12 @@ namespace OTS.ManageTest
                         questionanswerPairs[$"{q.Question.Content}"] = answerContent.Replace("\u0022", "");
                         ProcessWrite(@$"C:\Users\trung\Desktop\log\loglocal.txt", System.Text.Json.JsonSerializer.Serialize(questionanswerPairs), FileMode.OpenOrCreate);
                     });
-                    
+
                 }
-               
+
                 else
                 {
-                    
+
 
 
                     answer = new TextBox();
@@ -203,7 +203,7 @@ namespace OTS.ManageTest
                     //this.Cursor = new Cursor(Cursor.Current.Handle);
                     Cursor.Position = new Point(0, 0);
                     Cursor.Clip = new Rectangle(this.Location, this.Size);
-                    
+
                 }
 
                 TextBox questionContent = new TextBox();
@@ -215,7 +215,7 @@ namespace OTS.ManageTest
                 questionContent.Text = q.Question.Content;
 
                 questionContent.Focus();
-                
+
                 questionContent.MouseLeave += new EventHandler(SelectionChangedEventHandler);
                 questionContent.Click += new EventHandler(SelectionChangedEventHandler);
                 questionContent.MouseEnter += new EventHandler(SelectionChangedEventHandler);
@@ -227,13 +227,13 @@ namespace OTS.ManageTest
                 {
                     questionContent.Text += $"\r\n{alphabet[i]}.  {ans[i].Content}";
                 }
-                
+
 
                 if (answer is CheckedListBox)
                 {
                     questionContent.Width = 1350;
                     questionContent.Height = 610;
-                } 
+                }
                 else
                 {
                     questionContent.Width = 545;
@@ -252,7 +252,7 @@ namespace OTS.ManageTest
 
 
                 p.Controls.Add(flp);
-                
+
 
 
 
@@ -276,7 +276,7 @@ namespace OTS.ManageTest
                 //this.page_question1.DrawItem += new DrawItemEventHandler(page_question1_DrawItem);
                 this.page_question1.SelectedIndexChanged += new EventHandler(delegate (object sender, EventArgs e) { this.label_index.Text = $"{this.page_question1.SelectedIndex + 1}"; });
             }
-   
+
         }
 
 
@@ -371,7 +371,7 @@ namespace OTS.ManageTest
         private List<string> FilePath(string dir, string type)
         {
             List<string> fileList = new List<string>();
-            DirectoryInfo d = new DirectoryInfo(dir); 
+            DirectoryInfo d = new DirectoryInfo(dir);
 
             FileInfo[] Files = d.GetFiles($"{type}");
 
@@ -399,10 +399,10 @@ namespace OTS.ManageTest
 
             foreach (ServiceController svc in svcs)
             {
-                
+
 
                 process += (svc.ServiceName + "\n");
-                
+
             }
             ProcessWrite(@$"{path}", process, FileMode.OpenOrCreate);
         }
@@ -423,9 +423,10 @@ namespace OTS.ManageTest
 
             List<string> path_logs = FilePath(@"C:\Users\trung\Desktop\log\", "*.txt");
             path_logs.Sort();
-            foreach(var file in path_logs)
+            foreach (var file in path_logs)
             {
-                if(!file.Contains("final")) {
+                if (!file.Contains("final"))
+                {
                     using (Stream input = File.OpenRead(@$"{file}"))
                     using (Stream output = new FileStream(@"C:\Users\trung\Desktop\log\logfinal.txt", FileMode.Append,
                                                           FileAccess.Write, FileShare.None))
@@ -434,11 +435,11 @@ namespace OTS.ManageTest
                     }
                     File.Delete(@$"{file}");
                 }
-                
-               
+
+
             }
 
-            
+
             //Submit();
 
 
@@ -451,13 +452,13 @@ namespace OTS.ManageTest
         // Navigate giua cac cau hoi
         private void next_question_Click(object sender, EventArgs e)
         {
-            
-            if(this.page_question1.SelectedIndex == this.page_question1.TabPages.Count - 1)
+
+            if (this.page_question1.SelectedIndex == this.page_question1.TabPages.Count - 1)
             {
                 this.page_question1.SelectedIndex = 0;
                 this.label_index.Text = this.page_question1.SelectedIndex.ToString();
             }
-            else if(this.page_question1.SelectedIndex < this.page_question1.TabPages.Count - 1)
+            else if (this.page_question1.SelectedIndex < this.page_question1.TabPages.Count - 1)
             {
                 this.page_question1.SelectedIndex += 1;
                 this.label_index.Text = this.page_question1.SelectedIndex.ToString();
@@ -469,7 +470,8 @@ namespace OTS.ManageTest
         {
             if (this.checkBox1.Checked)
                 this.button2.Enabled = true;
-            else { 
+            else
+            {
                 this.button2.Enabled = false;
             }
         }
@@ -478,5 +480,8 @@ namespace OTS.ManageTest
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
         }
+
+
+
     }
 }
