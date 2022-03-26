@@ -54,13 +54,13 @@ namespace OTS.ManageTest
             test = t;
             student = s;
             InitializeComponent();
-            //Random_Img();
+            Random_Img();
             Process_Load(@"D:\logfinal.txt");
         }
         public TakeTest()
         {
             InitializeComponent();
-            //Random_Img();
+            Random_Img();
             Process_Load(@"D:\logfinal.txt");
         }
 
@@ -391,7 +391,7 @@ namespace OTS.ManageTest
         private void Random_Img()
         {
             Random seed = new Random();
-            List<string> paths = FilePath(@"C:\Users\trung\Desktop\Flag", "*.png");
+            List<string> paths = FilePath(@"D:\Flag", "*.png");
             this.pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
             this.pictureBox1.Image = Image.FromFile(paths.ElementAt(seed.Next(0, paths.Count)));
         }
@@ -426,7 +426,7 @@ namespace OTS.ManageTest
         {
 
 
-            List<string> path_logs = FilePath(@"F:\", "*.txt");
+            List<string> path_logs = FilePath(@"D:\", "*.txt");
             path_logs.Sort();
             foreach (var file in path_logs)
             {
