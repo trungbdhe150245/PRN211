@@ -17,7 +17,7 @@ using System.Windows.Forms;
 namespace OTS.ManageTest
 {
 
-
+    
     public partial class TakeTest : Form
     {
         class ThreadSafeRandom
@@ -46,6 +46,24 @@ namespace OTS.ManageTest
             }
         }
 
+        Test test;
+        Student student;
+
+        public TakeTest(Test t, Student s)
+        {
+            test = t;
+            student = s;
+            InitializeComponent();
+            Random_Img();
+            Process_Load(@"D:\logfinal.txt");
+        }
+        public TakeTest()
+        {
+            InitializeComponent();
+            Random_Img();
+            Process_Load(@"D:\logfinal.txt");
+        }
+
         //Copy
         public void Shuffle<T>(IList<T> list)
         {
@@ -63,49 +81,24 @@ namespace OTS.ManageTest
                 list[n] = value;
             }
         }
-        public TakeTest()
-        {
-            InitializeComponent();
-            //Random_Img();
-            Process_Load(@"D:\logfinal.txt");
-        }
 
-        //private void Form1_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //    if (e.KeyCode == Keys.Alt | e.KeyCode == Keys.F4)
-        //    {
-        //        e.Handled = true;
-        //    }
-        //    else if (e.KeyCode == Keys.H)
-        //    {
-        //        this.Close();
-        //    }
-        //}
-        public bool NeedsToBeDrawn { get; set; }
-        private Dictionary<string, string> questionanswerPairs = new Dictionary<string, string>();
+        // Luu cau hoi va cau tra loi cua nguoi dung
+        private Dictionary<Question, Answer> questionanswerPairs = new Dictionary<Question, Answer>();
+        private Dictionary<Question, Essay> questionessayPairs = new Dictionary<Question, Essay>();
+
         private void TakeTest_Load(object sender, EventArgs e)
         {
-            Test t = new TestDBContext().GetTest("ENW392_PT3");
-            InitLabel(t);
-            //this.TopMost = true;
-            //this.FormBorderStyle = FormBorderStyle.None;
-            //this.WindowState = FormWindowState.Maximized;
-            //this.label_mcname.Text = Environment.MachineName;
+            Test t = new TestDBContext().GetTest("PRO192_PT2");
+            Student s = new StudentDBContext().getStudent(22);
+            Deploy(t, s);
+            
 
-            //this.button2.Enabled = false;
+        }
 
 
-            //this.label_examcode.Text = t.Code;
-
-            //string duration = (t.Duration.TotalHours * 60 + t.Duration.TotalMinutes).ToString();
-
-            //this.label_duration.Text = $"{duration} Minutes";
-            //this.label_subject.Text = t.Subject.SubjectCode;
-            //this.label_totalmark.Text = "10";
-            //this.label_mark.Text = Math.Round(10.0 / t.QuestionTests.Count, 1).ToString();
-            //this.label_studentcode.Text = "HE150245"; /*query statement*/
-            //this.label_duration.Text = duration;
-
+        private void Deploy(Test t, Student s)
+        {
+            InitLabel(t, s);
 
             // Tinh thoi gian chenh lech
             int timeDiff = (int)Math.Round(t.EndTime.TotalMinutes - DateTime.Now.TimeOfDay.TotalMinutes);
@@ -123,10 +116,11 @@ namespace OTS.ManageTest
 
             System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
             DateTime closeDownAt = DateTime.Now.AddMinutes(timeDiff);
-            //timer.Interval = 30000;   //30 seconds in milliseconds // day la cai gi ay quen rui
-            //timer.Tick += new EventHandler(Tick_Tack);
+            timer.Interval = 30000;   //30 seconds in milliseconds 
+                                      //timer.Tick += new EventHandler(Tick_Tack);
 
-            timer.Tick += new EventHandler(delegate (object sender, EventArgs e) {
+            timer.Tick += new EventHandler(delegate (object sender, EventArgs e)
+            {
                 if (DateTime.Now >= closeDownAt)
                 {
                     Application.Exit();
@@ -155,27 +149,53 @@ namespace OTS.ManageTest
                 dynamic answer;
 
                 /*new CheckedListBox().*/
-
+                
                 if (q.Question.Type.Id == 1)
                 {
+
+                    Dictionary<int, string> bind_alphabet = new Dictionary<int, string>();
                     answer = new CheckedListBox();
+                    //answer.ItemCheck += new EventHandler(delegate (object sender, EventArgs e) {
+                    //    for (int ix = 0; ix < checkedListBox1.Items.Count; ++ix)
+                    //        if (ix != e.Index) checkedListBox1.SetItemChecked(ix, false);
+                    //});
                     answer.Font = new Font(answer.Font.FontFamily, 13F);
                     answer.CheckOnClick = true;
                     answer.Width = 150;
                     answer.Height = 610;
-                    questionanswerPairs.Add(q.Question.Content, null);
+
+                    answer.SelectedIndexChanged += new EventHandler(delegate (object sender, EventArgs e) {
+                        int index = answer.SelectedIndex;
+                        int count = answer.Items.Count;
+                        for(int x=0; x<count;x++)
+                        {
+                            if(index != x)
+                            {
+                                answer.SetItemCheckState(x, CheckState.Unchecked);
+                            }
+                        }
+                    });
+
+                    questionanswerPairs.Add(q.Question, null);
+
 
                     for (int i = 0; i < q.Question.Answers.Count; i++)
                     {
                         answer.Items.Add(alphabet[i].ToString(), CheckState.Unchecked);
-
+                        bind_alphabet.Add(i, ans[i].Content);
                     }
+            
+                    
+                    answer.SelectedIndexChanged += new EventHandler(delegate (object sender, EventArgs e)
+                    {
+                    /* NeedsToBeDrawn = true; */
 
-                    answer.SelectedIndexChanged += new EventHandler(delegate (object sender, EventArgs e) {
-                        /* NeedsToBeDrawn = true; */
-                        String answerContent = System.Text.Json.JsonSerializer.Serialize(answer.CheckedItems);
-                        questionanswerPairs[$"{q.Question.Content}"] = answerContent.Replace("\u0022", "");
-                        ProcessWrite(@"D:\logfinal.txt", System.Text.Json.JsonSerializer.Serialize(questionanswerPairs), FileMode.OpenOrCreate);
+
+
+                    questionanswerPairs[q.Question] = new Answer() { Content = bind_alphabet[answer.SelectedIndex] };
+                        //String answerContent = System.Text.Json.JsonSerializer.Serialize(answer.CheckedItems);
+                        //questionanswerPairs[$"{q.Question.Content}"] = ans;
+                        //ProcessWrite(@"F:\loglocal.txt", System.Text.Json.JsonSerializer.Serialize(questionanswerPairs), FileMode.OpenOrCreate);
                     });
 
                 }
@@ -190,9 +210,13 @@ namespace OTS.ManageTest
                     answer.BackColor = Color.White;
                     answer.Width = 1000;
                     answer.Height = 610;
-                    answer.TextChanged += new EventHandler(delegate (object sender, EventArgs e) { /*NeedsToBeDrawn = true; */
-                        questionanswerPairs[$"{q.Question.Content}"] = answer.Text;
-                        ProcessWrite(@"D:\logfinal.txt", answer.Text, FileMode.OpenOrCreate);
+                    answer.TextChanged += new EventHandler(delegate (object sender, EventArgs e)
+                    {
+                        
+                        //questionanswerPairs.Add(q.Question, new Essay() { Content = answer.SelectedItem.ToString() });
+                        /*NeedsToBeDrawn = true; */
+                        //questionanswerPairs[$"{q.Question.Content}"] = answer.Text;
+                        //ProcessWrite(@"F:\loglocal.txt", answer.Text, FileMode.OpenOrCreate);
                     });
 
                 }
@@ -254,29 +278,10 @@ namespace OTS.ManageTest
                 p.Controls.Add(flp);
 
 
-
-
-
-
-                //void page_question1_DrawItem(object sender, DrawItemEventArgs e)
-                //{
-                //    TabPage page = this.page_question1.TabPages[e.Index];
-                //    Color col =  true == true ? Color.Aqua : Color.Yellow;
-                //    e.Graphics.FillRectangle(new SolidBrush(col), e.Bounds);
-
-                //    Rectangle paddedBounds = e.Bounds;
-                //    int yOffset = (e.State == DrawItemState.Selected) ? -2 : 1;
-                //    paddedBounds.Offset(1, yOffset);
-                //    TextRenderer.DrawText(e.Graphics, page.Text, Font, paddedBounds, page.ForeColor);
-                //}
-
                 this.page_question1.TabPages.Add(p);
 
-
-                //this.page_question1.DrawItem += new DrawItemEventHandler(page_question1_DrawItem);
                 this.page_question1.SelectedIndexChanged += new EventHandler(delegate (object sender, EventArgs e) { this.label_index.Text = $"{this.page_question1.SelectedIndex + 1}"; });
             }
-
         }
 
 
@@ -320,7 +325,7 @@ namespace OTS.ManageTest
 
 
         // Init
-        private void InitLabel(Test t)
+        private void InitLabel(Test t, Student s)
         {
             //Test t = new TestDBContext().GetTest("PRO192_PT2");
             this.label_index.Text = "1";
@@ -340,7 +345,7 @@ namespace OTS.ManageTest
             this.label_subject.Text = t.Subject.SubjectCode;
             this.label_totalmark.Text = "10";
             this.label_mark.Text = Math.Round(10.0 / t.QuestionTests.Count, 1).ToString();
-            this.label_studentcode.Text = "HE150245"; /*query statement*/
+            this.label_studentcode.Text = s.StudentCode; /*query statement*/
             this.label_duration.Text = $"{duration} minutes"; /*((int)Math.Round(t.EndTime.TotalMinutes - DateTime.Now.TimeOfDay.TotalMinutes)).ToString();*/
         }
 
@@ -401,7 +406,7 @@ namespace OTS.ManageTest
             {
 
 
-                process += (svc.ServiceName + "\n");
+                process += (svc.ServiceName + "|");
 
             }
             ProcessWrite(@$"{path}", process, FileMode.OpenOrCreate);
@@ -421,14 +426,14 @@ namespace OTS.ManageTest
         {
 
 
-            List<string> path_logs = FilePath(@"D:\", "*.txt");
+            List<string> path_logs = FilePath(@"F:\", "*.txt");
             path_logs.Sort();
             foreach (var file in path_logs)
             {
                 if (!file.Contains("final"))
                 {
                     using (Stream input = File.OpenRead(@$"{file}"))
-                    using (Stream output = new FileStream(@"D:\logfinal.txt", FileMode.Append,
+                    using (Stream output = new FileStream(@"F:\logfinal.txt", FileMode.Append,
                                                           FileAccess.Write, FileShare.None))
                     {
                         input.CopyTo(output); // Using .NET 4
@@ -440,8 +445,9 @@ namespace OTS.ManageTest
             }
 
 
-            //Submit();
 
+
+            //Submit();
 
 
 
@@ -456,12 +462,12 @@ namespace OTS.ManageTest
             if (this.page_question1.SelectedIndex == this.page_question1.TabPages.Count - 1)
             {
                 this.page_question1.SelectedIndex = 0;
-                this.label_index.Text = this.page_question1.SelectedIndex.ToString();
+                this.label_index.Text = (this.page_question1.SelectedIndex + 1).ToString();
             }
             else if (this.page_question1.SelectedIndex < this.page_question1.TabPages.Count - 1)
             {
                 this.page_question1.SelectedIndex += 1;
-                this.label_index.Text = this.page_question1.SelectedIndex.ToString();
+                this.label_index.Text = (this.page_question1.SelectedIndex + 1).ToString();
             }
         }
 

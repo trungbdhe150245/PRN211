@@ -33,14 +33,13 @@ namespace OTS
             //Application.Run(new ManageSubject.UpdateSubject());
             //Application.Run(new ManageTest.frmManageTest());
             //Application.Run(new FrmManageClass());
-            //Application.Run(new FrmViewTest(5));
-            //Application.Run(new ListQuestionBank());
+            //Application.Run(new FrmViewTest(3));
             //Application.Run(new FrmReviewSubmission(34, 8));
             //Application.Run(new FrmManageMark());
             //Application.Run(new FrmLoginStudent());
-            Application.Run(new FrmLoginModerator());
-            //Application.Run(new FrmEssayTestList(34, 7));
-            //Application.Run(new TakeTest());
+            //Application.Run(new FrmEssayTestList(10, 1));
+            Application.Run(new TakeTest());
+            //Application.Run(new FrmViewSubmission());
         }
 	}
 }
