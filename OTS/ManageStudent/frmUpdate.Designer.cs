@@ -31,8 +31,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtFullName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtStudentCode = new System.Windows.Forms.TextBox();
@@ -69,24 +69,25 @@
             this.label2.TabIndex = 64;
             this.label2.Text = "FullName";
             // 
-            // button1
+            // btnSave
             // 
-            this.button1.Location = new System.Drawing.Point(266, 368);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 30);
-            this.button1.TabIndex = 65;
-            this.button1.Text = "Save";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnSave.Location = new System.Drawing.Point(266, 368);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 30);
+            this.btnSave.TabIndex = 65;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // button2
+            // btnCancel
             // 
-            this.button2.Location = new System.Drawing.Point(154, 368);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 30);
-            this.button2.TabIndex = 66;
-            this.button2.Text = "Cancel";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnCancel.Location = new System.Drawing.Point(154, 368);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 30);
+            this.btnCancel.TabIndex = 66;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.button2_Click);
             // 
             // txtPassword
             // 
@@ -164,9 +165,9 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.txtStudentCode);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.label3);
@@ -183,8 +184,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtFullName;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtStudentCode;
