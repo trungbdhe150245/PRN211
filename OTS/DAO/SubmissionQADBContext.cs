@@ -73,6 +73,74 @@ namespace OTS.DAO
             return qAs;
         }
 
+        public int InsertSubmit(Submission submission)
+        {
+            int result = 0;
+            string sql_insert = @"INSERT INTO [dbo].[Submission]
+           ([TestId]
+           ,[StudentId]
+           ,[SubmitDate]
+           ,[Duration])
+     VALUES
+           (@TestId
+           ,@StudentId
+           ,getDate()
+           ,@Duration)";
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(sql_insert, connection);
+                command.Parameters.AddWithValue("@TestId", submission.Test.Id);
+                command.Parameters.AddWithValue("@StudentId", submission.Student.Id);
+                command.Parameters.AddWithValue("@Duration", submission.Duration);
+                connection.Open();
+                result = command.ExecuteNonQuery();
+                
+            }
+            catch (Exception ex)
+            {
 
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return result;
+        }
+
+        public int InsertSubmitQA(SubmissionQA s)
+        {
+            int result = 0;
+            string sql_insert = @"INSERT INTO [dbo].[Submission_QA]
+           ([SubmissionId]
+           ,[QuestionId]
+           ,[AswerId])
+     VALUES
+           (@SubId
+           ,@QuesID
+           ,@AnsId)";
+            try
+            {
+                connection = new SqlConnection(GetConnectionString());
+                command = new SqlCommand(sql_insert, connection);
+                command.Parameters.AddWithValue("@SubId", s.Submission.Id);
+                command.Parameters.AddWithValue("@QuesID", s.Question.Id);
+                command.Parameters.AddWithValue("@AnsId", s.Answer.Id);
+                connection.Open();
+                result = command.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return result;
+        }
     }
 }

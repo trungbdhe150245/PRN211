@@ -445,7 +445,6 @@ namespace OTS.DAO
                     command.Parameters.AddWithValue("@subjectName", subjectName);
                 }
 
-
                 try
                 {
                     connection.Open();
