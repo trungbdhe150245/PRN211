@@ -54,13 +54,13 @@ namespace OTS.ManageTest
             test = t;
             student = s;
             InitializeComponent();
-            Random_Img();
+            //Random_Img();
             Process_Load(@"D:\logfinal.txt");
         }
         public TakeTest()
         {
             InitializeComponent();
-            Random_Img();
+            //Random_Img();
             Process_Load(@"D:\logfinal.txt");
         }
 
@@ -88,9 +88,7 @@ namespace OTS.ManageTest
 
         private void TakeTest_Load(object sender, EventArgs e)
         {
-            Test t = new TestDBContext().GetTest("PRO192_PT2");
-            Student s = new StudentDBContext().getStudent(22);
-            Deploy(t, s);
+            Deploy(test, student);
             
 
         }
@@ -192,7 +190,9 @@ namespace OTS.ManageTest
 
 
 
-                    questionanswerPairs[q.Question] = new Answer() { Content = bind_alphabet[answer.SelectedIndex] };
+                    questionanswerPairs[q.Question] = new Answer() { Content = bind_alphabet[answer.SelectedIndex] 
+                        
+                    };
                         //String answerContent = System.Text.Json.JsonSerializer.Serialize(answer.CheckedItems);
                         //questionanswerPairs[$"{q.Question.Content}"] = ans;
                         //ProcessWrite(@"F:\loglocal.txt", System.Text.Json.JsonSerializer.Serialize(questionanswerPairs), FileMode.OpenOrCreate);
@@ -213,7 +213,7 @@ namespace OTS.ManageTest
                     answer.TextChanged += new EventHandler(delegate (object sender, EventArgs e)
                     {
                         
-                        //questionanswerPairs.Add(q.Question, new Essay() { Content = answer.SelectedItem.ToString() });
+                       questionessayPairs.Add(q.Question, new Essay() { Content = answer.SelectedItem.ToString() });
                         /*NeedsToBeDrawn = true; */
                         //questionanswerPairs[$"{q.Question.Content}"] = answer.Text;
                         //ProcessWrite(@"F:\loglocal.txt", answer.Text, FileMode.OpenOrCreate);

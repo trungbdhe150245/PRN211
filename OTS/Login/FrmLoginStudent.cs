@@ -1,5 +1,6 @@
 ﻿using OTS.DAO;
 using OTS.Dashboard;
+using OTS.Models;
 using OTS.StudenDashBoard;
 using System;
 using System.Collections.Generic;
@@ -55,6 +56,7 @@ namespace OTS.Login
                 StudentDBContext dbStudent = new StudentDBContext();
                 if (dbStudent.GetStudent(txtUsername.Text, txtPassword.Text) != null)
                 {
+
                     StudentDashBoard frmStudentDashboard = new StudentDashBoard(dbStudent.GetStudent(txtUsername.Text, txtPassword.Text).Id);
                     frmStudentDashboard.FormClosed += (s, args) => this.Close();
                     frmStudentDashboard.Show();
