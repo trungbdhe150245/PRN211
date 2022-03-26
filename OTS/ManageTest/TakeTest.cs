@@ -17,7 +17,7 @@ using System.Windows.Forms;
 namespace OTS.ManageTest
 {
 
-
+    
     public partial class TakeTest : Form
     {
         class ThreadSafeRandom
@@ -54,13 +54,13 @@ namespace OTS.ManageTest
             test = t;
             student = s;
             InitializeComponent();
-            //Random_Img();
+            Random_Img();
             Process_Load(@"D:\logfinal.txt");
         }
         public TakeTest()
         {
             InitializeComponent();
-            //Random_Img();
+            Random_Img();
             Process_Load(@"D:\logfinal.txt");
         }
 
@@ -88,10 +88,8 @@ namespace OTS.ManageTest
 
         private void TakeTest_Load(object sender, EventArgs e)
         {
-            test = new TestDBContext().GetTest("PRO192_PT2");
-            student = new StudentDBContext().GetStudent(1);
             Deploy(test, student);
-
+            
 
         }
 
@@ -149,7 +147,7 @@ namespace OTS.ManageTest
                 dynamic answer;
 
                 /*new CheckedListBox().*/
-
+                
                 if (q.Question.Type.Id == 1)
                 {
 
@@ -167,9 +165,9 @@ namespace OTS.ManageTest
                     answer.SelectedIndexChanged += new EventHandler(delegate (object sender, EventArgs e) {
                         int index = answer.SelectedIndex;
                         int count = answer.Items.Count;
-                        for (int x = 0; x < count; x++)
+                        for(int x=0; x<count;x++)
                         {
-                            if (index != x)
+                            if(index != x)
                             {
                                 answer.SetItemCheckState(x, CheckState.Unchecked);
                             }
@@ -184,19 +182,17 @@ namespace OTS.ManageTest
                         answer.Items.Add(alphabet[i].ToString(), CheckState.Unchecked);
                         bind_alphabet.Add(i, ans[i].Content);
                     }
-
-
+            
+                    
                     answer.SelectedIndexChanged += new EventHandler(delegate (object sender, EventArgs e)
                     {
-                        /* NeedsToBeDrawn = true; */
+                    /* NeedsToBeDrawn = true; */
 
 
 
-                        questionanswerPairs[q.Question] = new Answer()
-                        {
-                            Content = bind_alphabet[answer.SelectedIndex]
-
-                        };
+                    questionanswerPairs[q.Question] = new Answer() { Content = bind_alphabet[answer.SelectedIndex] 
+                        
+                    };
                         //String answerContent = System.Text.Json.JsonSerializer.Serialize(answer.CheckedItems);
                         //questionanswerPairs[$"{q.Question.Content}"] = ans;
                         //ProcessWrite(@"F:\loglocal.txt", System.Text.Json.JsonSerializer.Serialize(questionanswerPairs), FileMode.OpenOrCreate);
@@ -216,8 +212,8 @@ namespace OTS.ManageTest
                     answer.Height = 610;
                     answer.TextChanged += new EventHandler(delegate (object sender, EventArgs e)
                     {
-
-                        questionessayPairs.Add(q.Question, new Essay() { Content = answer.SelectedItem.ToString() });
+                        
+                       questionessayPairs.Add(q.Question, new Essay() { Content = answer.SelectedItem.ToString() });
                         /*NeedsToBeDrawn = true; */
                         //questionanswerPairs[$"{q.Question.Content}"] = answer.Text;
                         //ProcessWrite(@"F:\loglocal.txt", answer.Text, FileMode.OpenOrCreate);
