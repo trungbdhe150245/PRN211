@@ -41,6 +41,8 @@ namespace OTS.DAO
             return rowAffects;
         }
         //--------------------------------------------------------
+       
+        //--------------------------------------------------------
         public int UpdateSubject(String option, String oldsubjectCode, String oldsubjectName, String newsubjectCode, String newsubjectName)
         {
             int rowAffects = 0;
@@ -51,13 +53,13 @@ namespace OTS.DAO
                                        SET SubjectCode = @newCode
                                        WHERE SubjectCode = @oldCode;";
             }
-            else if (option.Equals("UpdateName"))
+            if (option.Equals("UpdateName"))
             {
                 sql_update_subject = @"UPDATE Subject
                                        SET  SubjectName = @newName
                                        WHERE SubjectCode = @oldCode;";
             }
-            else if (option.Equals("UpdateCodeAndName"))
+            if (option.Equals("UpdateCodeAndName"))
             {
                 sql_update_subject = @"UPDATE Subject
                                        SET  SubjectCode = @newCode, SubjectName = @newName

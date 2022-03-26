@@ -79,9 +79,6 @@
     <Compile Update="ReviewSubmission\FrmReviewSubmission.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="StudenDashBoard\formReviewDetail.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="StudenDashBoard\StudentDashBoard.cs">
       <SubType>Form</SubType>
     </Compile>

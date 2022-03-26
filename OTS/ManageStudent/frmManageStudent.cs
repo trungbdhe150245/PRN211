@@ -1,6 +1,14 @@
 ﻿using OTS.DAO;
+using OTS.Login;
+using OTS.ManageMark;
+using OTS.ManageQuestion;
 using OTS.ManageStudent;
-using System;
+using OTS.ManageSubject;
+using OTS.ManageSubmission;
+using OTS.ManageClass;
+using OTS.ManageTest;
+using OTS.Models;
+using OTS.ViewTest;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,6 +19,8 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using OTS.Models;
+using System;
+using OTS.Dashboard;
 
 namespace OTS.ManageStudent
 {
@@ -77,29 +87,7 @@ namespace OTS.ManageStudent
             studentCode = txtStudentCode.Text.Trim().ToString();
             frmUpdate.Show();
 
-            //if (rowselected > 0)
-            //{
-            //    DialogResult result = MessageBox.Show($"Are you sure to delete Student: {classCode}-{studentCode}", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            //    switch (result)
-            //    {
-            //        case DialogResult.Yes:
-            //            StudentDBContext student = new StudentDBContext();
-
-
-
-
-            //            break;
-            //        case DialogResult.No:
-            //            break;
-            //    }
-
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Plss select 1 row for Delete", "warrning", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
-            //rowselected = 0;
-            //frmManageStudent_Load(sender, e);
+           
         }
         public String getoption(String classCode, String studentCode)
         {
@@ -154,7 +142,7 @@ namespace OTS.ManageStudent
                 {
                     txtClassCode.Text = target.Class.ClassCode.ToString();
                     txtStudentCode.Text = target.StudentCode.ToString();
-                    IDtoDeleteAndUpdate = Int32.Parse(Id);
+                    IDtoDeleteAndUpdate = target.Id;
                     rowselected++;
                 }
             }
@@ -192,6 +180,86 @@ namespace OTS.ManageStudent
             }
             rowselected = 0;
             frmManageStudent_Load(sender, e);
+        }
+
+        private void homeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmModDashboard frmModDashboard = new FrmModDashboard();
+            frmModDashboard.Closed += (s, args) => this.Close();
+            this.Hide();
+            frmModDashboard.Show();
+        }
+
+        private void subjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmManagerSubject frmManagerSubject = new frmManagerSubject();
+            frmManagerSubject.Closed += (s, args) => this.Close();
+            this.Hide();
+            frmManagerSubject.Show();
+        }
+
+        private void classToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmManageClass frmManageClass = new FrmManageClass();
+            frmManageClass.Closed += (s, args) => this.Close();
+            this.Hide();
+            frmManageClass.Show();
+        }
+
+        private void testToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmManageTest frmManageTest = new frmManageTest();
+            frmManageTest.Closed += (s, args) => this.Close();
+            this.Hide();
+            frmManageTest.Show();
+        }
+
+        private void viewTestListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmManageTest frmManageTest = new frmManageTest();
+            frmManageTest.Closed += (s, args) => this.Close();
+            this.Hide();
+            frmManageTest.Show();
+        }
+
+        private void createATestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmCreateTest frmCreateTest = new FrmCreateTest();
+            frmCreateTest.Closed += (s, args) => this.Close();
+            this.Hide();
+            frmCreateTest.Show();
+        }
+
+        private void questionBankToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ListQuestionBank frmQuestionBank = new ListQuestionBank();
+            frmQuestionBank.Closed += (s, args) => this.Close();
+            this.Hide();
+            frmQuestionBank.Show();
+        }
+
+        private void submissionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmManageSubmission frmManageSubmission = new FrmManageSubmission();
+            frmManageSubmission.Closed += (s, args) => this.Close();
+            this.Hide();
+            frmManageSubmission.Show();
+        }
+
+        private void logoutToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            FrmLoginModerator frmLoginModerator = new FrmLoginModerator();
+            frmLoginModerator.Closed += (s, args) => this.Close();
+            this.Hide();
+            frmLoginModerator.Show();
+        }
+
+        private void markToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            FrmManageMark frmManageMark = new FrmManageMark();
+            frmManageMark.Closed += (s, args) => this.Close();
+            this.Hide();
+            frmManageMark.Show();
         }
     }
 }

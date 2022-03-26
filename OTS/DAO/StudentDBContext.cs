@@ -47,58 +47,28 @@ namespace OTS.DAO
             return rowAffects;
         }
         //--------------------------------------------------------
-        public int UpdateSubject(String option, String oldsubjectCode, String oldsubjectName, String newsubjectCode, String newsubjectName)
+        public int UpdateStudent(String Id, String FullName, String Password, DateTime Dob, String StudentCode, String ClassCode)
         {
             int rowAffects = 0;
-            string sql_update_subject = "";
-            if (option.Equals("UpdateCode"))
-            {
-                sql_update_subject = @"UPDATE Subject
-                                       SET SubjectCode = @newCode
-                                       WHERE SubjectCode = @oldCode;";
-            }
-            else if (option.Equals("UpdateName"))
-            {
-                sql_update_subject = @"UPDATE Subject
-                                       SET  SubjectName = @newName
-                                       WHERE SubjectCode = @oldCode;";
-            }
-            else if (option.Equals("UpdateCodeAndName"))
-            {
-                sql_update_subject = @"UPDATE Subject
-                                       SET  SubjectCode = @newCode, SubjectName = @newName
-                                       WHERE SubjectCode = @oldsubjectCode;";
-            }
+            String sql_update_student = "UPDATE [Student] SET [FullName]=@FullName, [Password]=@pass, [Dob]=@Dob, [StudentCode]=@stuCode, [ClassCode]=@classCode WHERE [Id]=@id;";
 
 
             try
             {
                 connection = new SqlConnection(GetConnectionString());
-                command = new SqlCommand(sql_update_subject, connection);
+                command = new SqlCommand(sql_update_student, connection);
 
 
-                if (option.Equals("UpdateCode"))
-                {
-                    command.Parameters.AddWithValue("@newCode", newsubjectCode);
-                    command.Parameters.AddWithValue("@oldCode", oldsubjectCode);
-
-                }
-                else if (option.Equals("UpdateName"))
-                {
-                    command.Parameters.AddWithValue("@newName", newsubjectName);
-                    command.Parameters.AddWithValue("@oldCode", oldsubjectCode);
-                }
-                else if (option.Equals("UpdateCodeAndName"))
-                {
-                    command.Parameters.AddWithValue("@newCode", newsubjectCode);
-                    command.Parameters.AddWithValue("@newName", newsubjectName);
-                    command.Parameters.AddWithValue("@oldCode", oldsubjectCode);
-                }
-
+                command.Parameters.AddWithValue("@FullName", FullName);
+                command.Parameters.AddWithValue("@pass", Password);
+                command.Parameters.AddWithValue("@Dob", Dob);
+                command.Parameters.AddWithValue("@stuCode", StudentCode);
+                command.Parameters.AddWithValue("@classCode", ClassCode);
+                command.Parameters.AddWithValue("@id", Id);
 
 
                 connection.Open();
-                rowAffects = command.ExecuteNonQuery();
+                rowAffects++;
             }
             catch (Exception ex)
             {
@@ -288,23 +258,26 @@ namespace OTS.DAO
                     reader = command.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
                     if (reader.HasRows == true)
                     {
-
-                        Models.Student students = new Models.Student();
-                        students.Id = reader.GetInt32("Id");
-                        students.FullName = reader.GetString("FullName");
-                        students.Password = reader.GetString("Password");
-                        students.DateOfBirth = reader.GetDateTime("Dob");
-                        students.StudentCode = reader.GetString("StudentCode");
-                        try
+                        while (reader.Read())
                         {
-                            Class c = new Class();
-                            c.ClassCode = reader.GetString("ClassCode");
-                            students.Class = c;
+                            Models.Student students = new Models.Student();
+                            students.Id = reader.GetInt32("Id");
+                            students.FullName = reader.GetString("FullName");
+                            students.Password = reader.GetString("Password");
+                            students.DateOfBirth = reader.GetDateTime("Dob");
+                            students.StudentCode = reader.GetString("StudentCode");
+                            try
+                            {
+                                Class c = new Class();
+                                c.ClassCode = reader.GetString("ClassCode");
+                                students.Class = c;
 
+                            }
+                            catch (Exception e) { }
+
+                            stu = students;
                         }
-                        catch (Exception e) { }
 
-                        stu = students;
 
 
                     }
@@ -438,7 +411,7 @@ namespace OTS.DAO
                                   , c.[ClassCode]
 	                              ,c.[ClassName]
                               FROM[Student] s INNER JOIN[Class] c ON s.ClassCode = c.ClassCode
-                              WHERE BINARY_CHECKSUM([FullName]) = BINARY_CHECKSUM(@username)
+                              WHERE BINARY_CHECKSUM([StudentCode]) = BINARY_CHECKSUM(@username)
                                 and BINARY_CHECKSUM([Password]) = BINARY_CHECKSUM(@password)";
                 connection = new SqlConnection(GetConnectionString());
                 command = new SqlCommand(sql, connection);
@@ -454,7 +427,8 @@ namespace OTS.DAO
                         Id = reader.GetInt32("Id"),
                         FullName = reader.GetString("FullName"),
                         Password = reader.GetString("Password"),
-                        DateOfBirth = reader.GetDateTime("Dob")
+                        DateOfBirth = reader.GetDateTime("Dob"),
+                        StudentCode = reader.GetString("StudentCode")
                     };
                     Class @class = new Class
                     {

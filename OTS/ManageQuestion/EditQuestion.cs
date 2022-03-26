@@ -17,6 +17,11 @@ namespace OTS.ManageQuestion
         public Dictionary<TextBox, CheckBox> list = new Dictionary<TextBox, CheckBox>();
         private ListQuestionBank lq;
         private Question editQues;
+        public EditQuestion(Question targerQues)
+        {
+            editQues = targerQues;
+            InitializeComponent();
+        }
         public EditQuestion(ListQuestionBank listquest, Question targerQues)
         {
             lq = listquest;
@@ -116,7 +121,8 @@ namespace OTS.ManageQuestion
                         }
                         MessageBox.Show("Update Successful");
                         this.Close();
-                        lq.loadQues();
+                        if (lq != null)
+                            lq.loadQues();
                     }
 
                 }

@@ -48,8 +48,22 @@
             this.submitDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mark = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.review = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.homeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.studentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.subjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.classToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewTestListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createATestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.questionBankToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.submissionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.classToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.logoutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.gbSearch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSubmission)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -163,57 +177,175 @@
             this.dgvSubmission.RowTemplate.Height = 25;
             this.dgvSubmission.Size = new System.Drawing.Size(943, 318);
             this.dgvSubmission.TabIndex = 9;
+            this.dgvSubmission.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSubmission_CellContentClick);
             // 
             // id
             // 
             this.id.HeaderText = "ID";
             this.id.Name = "id";
+            this.id.ReadOnly = true;
             // 
             // testCode
             // 
             this.testCode.HeaderText = "TestCode";
             this.testCode.Name = "testCode";
+            this.testCode.ReadOnly = true;
             // 
             // classCode
             // 
             this.classCode.HeaderText = "ClassCode";
             this.classCode.Name = "classCode";
+            this.classCode.ReadOnly = true;
             // 
             // subjectCode
             // 
             this.subjectCode.HeaderText = "SubjectCode";
             this.subjectCode.Name = "subjectCode";
+            this.subjectCode.ReadOnly = true;
             // 
             // studentId
             // 
             this.studentId.HeaderText = "StudentCode";
             this.studentId.Name = "studentId";
+            this.studentId.ReadOnly = true;
             // 
             // fullName
             // 
             this.fullName.HeaderText = "FullName";
             this.fullName.Name = "fullName";
+            this.fullName.ReadOnly = true;
             // 
             // submitDate
             // 
             this.submitDate.HeaderText = "SubmitDate";
             this.submitDate.Name = "submitDate";
+            this.submitDate.ReadOnly = true;
             // 
             // mark
             // 
             this.mark.HeaderText = "Mark";
             this.mark.Name = "mark";
+            this.mark.ReadOnly = true;
             // 
             // review
             // 
             this.review.HeaderText = "Review";
             this.review.Name = "review";
+            this.review.ReadOnly = true;
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.homeToolStripMenuItem,
+            this.logoutToolStripMenuItem,
+            this.logoutToolStripMenuItem1});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(967, 24);
+            this.menuStrip1.TabIndex = 17;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // homeToolStripMenuItem
+            // 
+            this.homeToolStripMenuItem.Name = "homeToolStripMenuItem";
+            this.homeToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.homeToolStripMenuItem.Text = "Home";
+            this.homeToolStripMenuItem.Click += new System.EventHandler(this.homeToolStripMenuItem_Click);
+            // 
+            // logoutToolStripMenuItem
+            // 
+            this.logoutToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.studentToolStripMenuItem,
+            this.subjectToolStripMenuItem,
+            this.classToolStripMenuItem,
+            this.testToolStripMenuItem,
+            this.questionBankToolStripMenuItem,
+            this.submissionToolStripMenuItem,
+            this.classToolStripMenuItem1});
+            this.logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
+            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
+            this.logoutToolStripMenuItem.Text = "Manage";
+            // 
+            // studentToolStripMenuItem
+            // 
+            this.studentToolStripMenuItem.Name = "studentToolStripMenuItem";
+            this.studentToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.studentToolStripMenuItem.Text = "Student";
+            this.studentToolStripMenuItem.Click += new System.EventHandler(this.studentToolStripMenuItem_Click);
+            // 
+            // subjectToolStripMenuItem
+            // 
+            this.subjectToolStripMenuItem.Name = "subjectToolStripMenuItem";
+            this.subjectToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.subjectToolStripMenuItem.Text = "Subject";
+            this.subjectToolStripMenuItem.Click += new System.EventHandler(this.subjectToolStripMenuItem_Click);
+            // 
+            // classToolStripMenuItem
+            // 
+            this.classToolStripMenuItem.Name = "classToolStripMenuItem";
+            this.classToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.classToolStripMenuItem.Text = "Class";
+            this.classToolStripMenuItem.Click += new System.EventHandler(this.classToolStripMenuItem_Click);
+            // 
+            // testToolStripMenuItem
+            // 
+            this.testToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.viewTestListToolStripMenuItem,
+            this.createATestToolStripMenuItem});
+            this.testToolStripMenuItem.Name = "testToolStripMenuItem";
+            this.testToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.testToolStripMenuItem.Text = "Test";
+            // 
+            // viewTestListToolStripMenuItem
+            // 
+            this.viewTestListToolStripMenuItem.Name = "viewTestListToolStripMenuItem";
+            this.viewTestListToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.viewTestListToolStripMenuItem.Text = "View test list";
+            this.viewTestListToolStripMenuItem.Click += new System.EventHandler(this.viewTestListToolStripMenuItem_Click);
+            // 
+            // createATestToolStripMenuItem
+            // 
+            this.createATestToolStripMenuItem.Name = "createATestToolStripMenuItem";
+            this.createATestToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.createATestToolStripMenuItem.Text = "Create a test";
+            this.createATestToolStripMenuItem.Click += new System.EventHandler(this.createATestToolStripMenuItem_Click);
+            // 
+            // questionBankToolStripMenuItem
+            // 
+            this.questionBankToolStripMenuItem.Name = "questionBankToolStripMenuItem";
+            this.questionBankToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.questionBankToolStripMenuItem.Text = "Question bank";
+            this.questionBankToolStripMenuItem.Click += new System.EventHandler(this.questionBankToolStripMenuItem_Click);
+            // 
+            // submissionToolStripMenuItem
+            // 
+            this.submissionToolStripMenuItem.Checked = true;
+            this.submissionToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.submissionToolStripMenuItem.Name = "submissionToolStripMenuItem";
+            this.submissionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.submissionToolStripMenuItem.Text = "Submission";
+            // 
+            // classToolStripMenuItem1
+            // 
+            this.classToolStripMenuItem1.Name = "classToolStripMenuItem1";
+            this.classToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.classToolStripMenuItem1.Text = "Mark";
+            this.classToolStripMenuItem1.Click += new System.EventHandler(this.markToolStripMenuItem1_Click);
+            // 
+            // logoutToolStripMenuItem1
+            // 
+            this.logoutToolStripMenuItem1.Name = "logoutToolStripMenuItem1";
+            this.logoutToolStripMenuItem1.Size = new System.Drawing.Size(57, 20);
+            this.logoutToolStripMenuItem1.Text = "Logout";
+            this.logoutToolStripMenuItem1.Click += new System.EventHandler(this.logoutToolStripMenuItem1_Click);
             // 
             // FrmManageSubmission
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(967, 544);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.dgvSubmission);
             this.Controls.Add(this.txtStudentCode);
             this.Controls.Add(this.label4);
@@ -221,7 +353,6 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtTestCode);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.gbSearch);
             this.Name = "FrmManageSubmission";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -229,6 +360,8 @@
             this.Load += new System.EventHandler(this.FrmManageSubmission_Load);
             this.gbSearch.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSubmission)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -256,5 +389,18 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn submitDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn mark;
         private System.Windows.Forms.DataGridViewButtonColumn review;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem homeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem logoutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem studentToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem subjectToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem classToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem viewTestListToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem createATestToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem questionBankToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem submissionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem classToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem logoutToolStripMenuItem1;
     }
 }
