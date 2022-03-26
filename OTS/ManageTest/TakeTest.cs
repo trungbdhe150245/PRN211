@@ -20,6 +20,16 @@ namespace OTS.ManageTest
 
     public partial class TakeTest : Form
     {
+        private Student s;
+        private Test t;
+        public TakeTest(Student targetStu,Test targetTest)
+        {
+            s = targetStu;
+            t = targetTest;
+            InitializeComponent();
+            Process_Load(@"D:\logfinal.txt");
+        }
+
         class ThreadSafeRandom
         {
             [ThreadStatic] private Random Local;
@@ -85,7 +95,7 @@ namespace OTS.ManageTest
         private Dictionary<string, string> questionanswerPairs = new Dictionary<string, string>();
         private void TakeTest_Load(object sender, EventArgs e)
         {
-            Test t = new TestDBContext().GetTest("ENW392_PT3");
+            //Test t = new TestDBContext().GetTest(t.Code);
             InitLabel(t);
             //this.TopMost = true;
             //this.FormBorderStyle = FormBorderStyle.None;
@@ -444,7 +454,7 @@ namespace OTS.ManageTest
 
 
 
-
+            MessageBox.Show("Finished Succesfully");
             Application.Exit();
         }
 

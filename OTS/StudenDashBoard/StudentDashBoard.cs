@@ -1,5 +1,6 @@
 ﻿using OTS.DAO;
 using OTS.Login;
+using OTS.ManageTest;
 using OTS.Models;
 using OTS.ReviewSubmission;
 using System;
@@ -18,6 +19,8 @@ namespace OTS.StudenDashBoard
     public partial class StudentDashBoard : Form
     {
         private int stuId;
+        TestDBContext tDB = new TestDBContext();
+        StudentDBContext sDB = new StudentDBContext();
         public StudentDashBoard()
         {
             InitializeComponent();
@@ -35,7 +38,7 @@ namespace OTS.StudenDashBoard
             SubmissionDBContext smDB = new SubmissionDBContext();
             Dictionary<Submission, Mark> recentTest = smDB.viewListResult(stuId);
             Student s = sDb.getStudent(stuId);
-            if(recentTest == null)
+            if (recentTest == null)
             {
                 MessageBox.Show("No test");
                 return;
@@ -82,7 +85,7 @@ namespace OTS.StudenDashBoard
                     Review.Enabled = true;
                 }
             }
-            
+
             dataGridView1.Invalidate();
         }
 
@@ -135,6 +138,58 @@ namespace OTS.StudenDashBoard
         private void homeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LoadData();
+        }
+
+        private void TakeExam_Click(object sender, EventArgs e)
+        {
+            //TestDBContext tDB = new TestDBContext();
+            //StudentDBContext sDB = new StudentDBContext();
+            string check = exCode.Text;
+            Student s = sDB.getStudent(stuId);
+            List<Test> allowTests = tDB.allowTest(stuId);
+            Test t = tDB.GetTest(check);
+            if (t != null)
+            {
+                DateTime dt = DateTime.Now;
+                var date = dt.Date;
+                int result = DateTime.Compare(date, t.TestDate.Date);
+                int result2 = TimeSpan.Compare(dt.TimeOfDay, t.StartTime);
+                int result3 = TimeSpan.Compare(dt.TimeOfDay, t.EndTime);
+
+                if (!tDB.GetTestsbyStu(stuId, t.Id))
+                {
+                    if (result == 0)
+                    {
+                        if (result2 > 0 && result3 < 0)
+                        {
+                            TakeTest test = new TakeTest(s,t);
+                            test.Show();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Exam time is not open yet");
+                        }
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Exam date not yet");
+                    }
+                } else
+                {
+                    MessageBox.Show("Exam exist in your exam !");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Exam Code not exist !");
+
+            }
+        }
+
+        private void exCode_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 

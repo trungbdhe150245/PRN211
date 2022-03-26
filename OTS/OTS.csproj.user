@@ -73,6 +73,9 @@
     <Compile Update="ManageTest\TakeTest.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="ManageTest\ViewResultFinish.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="ReviewSubmission\FrmReviewSubmission.cs">
       <SubType>Form</SubType>
     </Compile>
