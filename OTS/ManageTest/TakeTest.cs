@@ -88,9 +88,7 @@ namespace OTS.ManageTest
 
         private void TakeTest_Load(object sender, EventArgs e)
         {
-            Test t = new TestDBContext().GetTest("PRO192_PT2");
-            Student s = new StudentDBContext().getStudent(22);
-            Deploy(t, s);
+            Deploy(test, student);
             
 
         }
