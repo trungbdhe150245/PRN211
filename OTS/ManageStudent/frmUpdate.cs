@@ -87,7 +87,23 @@ namespace OTS.ManageStudent
                     {
                         if (Regex.IsMatch(newClassCode, rgxStudentCode))
                         {
-                             rowefect = studentDBContext.UpdateStudent(target.Id.ToString().Trim(), newFullName, newPassword, newDob, newStudentCode, newClassCode);
+                            List<Class> classes = new List<Class>();
+                            classes = studentDBContext.getClassCode();
+                            foreach (Class c in classes)
+                            {
+                                if(c.ClassCode == newClassCode)
+                                {
+                                    rowefect = studentDBContext.UpdateStudent(target.Id.ToString().Trim(), newFullName, newPassword, newDob, newStudentCode, newClassCode);
+                                    break;
+                                }
+                                
+
+                            }
+                            if (rowefect <= 0)
+                            {
+                                MessageBox.Show("ClassCode doesn't exist", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                            }
                         }
                         else
                         {
