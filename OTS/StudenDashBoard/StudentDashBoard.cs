@@ -162,7 +162,7 @@ namespace OTS.StudenDashBoard
                     {
                         if (result2 > 0 && result3 < 0)
                         {
-                            TakeTest test = new TakeTest(s,t);
+                            TakeTest test = new TakeTest(t,s);
                             test.Show();
                         }
                         else
