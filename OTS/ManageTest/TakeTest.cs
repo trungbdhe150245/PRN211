@@ -192,7 +192,9 @@ namespace OTS.ManageTest
 
 
 
-                    questionanswerPairs[q.Question] = new Answer() { Content = bind_alphabet[answer.SelectedIndex] };
+                    questionanswerPairs[q.Question] = new Answer() { Content = bind_alphabet[answer.SelectedIndex] 
+                        
+                    };
                         //String answerContent = System.Text.Json.JsonSerializer.Serialize(answer.CheckedItems);
                         //questionanswerPairs[$"{q.Question.Content}"] = ans;
                         //ProcessWrite(@"F:\loglocal.txt", System.Text.Json.JsonSerializer.Serialize(questionanswerPairs), FileMode.OpenOrCreate);
@@ -213,7 +215,7 @@ namespace OTS.ManageTest
                     answer.TextChanged += new EventHandler(delegate (object sender, EventArgs e)
                     {
                         
-                        //questionanswerPairs.Add(q.Question, new Essay() { Content = answer.SelectedItem.ToString() });
+                       questionessayPairs.Add(q.Question, new Essay() { Content = answer.SelectedItem.ToString() });
                         /*NeedsToBeDrawn = true; */
                         //questionanswerPairs[$"{q.Question.Content}"] = answer.Text;
                         //ProcessWrite(@"F:\loglocal.txt", answer.Text, FileMode.OpenOrCreate);
