@@ -1,5 +1,7 @@
 ﻿using OTS.DAO;
+using OTS.Login;
 using OTS.Models;
+using OTS.StudenDashBoard;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -270,11 +272,19 @@ namespace OTS.ReviewSubmission
         private void homeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //redirect to student dashboard
+            StudentDashBoard frmStudentDashBoard = new StudentDashBoard();
+            frmStudentDashBoard.Closed += (s, args) => this.Close();
+            this.Hide();
+            frmStudentDashBoard.Show();
         }
 
         private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //redirect to login page
+            FrmLoginStudent frmLoginStudent = new FrmLoginStudent();
+            frmLoginStudent.Closed += (s, args) => this.Close();
+            this.Hide();
+            frmLoginStudent.Show();
         }
     }
 }

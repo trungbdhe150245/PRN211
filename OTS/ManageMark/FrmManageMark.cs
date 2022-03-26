@@ -1,6 +1,13 @@
 ﻿using OTS.DAO;
+using OTS.Dashboard;
+using OTS.Login;
+using OTS.ManageQuestion;
+using OTS.ManageStudent;
+using OTS.ManageSubject;
+using OTS.ManageSubmission;
 using OTS.ManageTest;
 using OTS.Models;
+using OTS.ViewTest;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -524,7 +531,7 @@ namespace OTS.ManageMark
             try
             {
                 //workbook.SaveAs(@"C:\Users\mark_report.xlsx");
-                workbook.SaveAs(@"F:\mark_report.xlsx");
+                workbook.SaveAs(@"D:\mark_report.xlsx");
             }
             catch (Exception ex)
             {
@@ -554,22 +561,34 @@ namespace OTS.ManageMark
 
         private void homeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            FrmModDashboard frmModDashboard = new FrmModDashboard();
+            frmModDashboard.Closed += (s, args) => this.Close();
+            this.Hide();
+            frmModDashboard.Show();
         }
 
         private void studentToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            frmManageStudent frmManageStudent = new frmManageStudent();
+            frmManageStudent.Closed += (s, args) => this.Close();
+            this.Hide();
+            frmManageStudent.Show();
         }
 
         private void subjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            frmManagerSubject frmManagerSubject = new frmManagerSubject();
+            frmManagerSubject.Closed += (s, args) => this.Close();
+            this.Hide();
+            frmManagerSubject.Show();
         }
 
         private void classToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            FrmManageClass frmManageClass = new FrmManageClass();
+            frmManageClass.Closed += (s, args) => this.Close();
+            this.Hide();
+            frmManageClass.Show();
         }
 
         private void testToolStripMenuItem_Click(object sender, EventArgs e)
@@ -590,17 +609,34 @@ namespace OTS.ManageMark
 
         private void createATestToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            FrmCreateTest frmCreateTest = new FrmCreateTest();
+            frmCreateTest.Closed += (s, args) => this.Close();
+            this.Hide();
+            frmCreateTest.Show();
         }
 
         private void questionBankToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            ListQuestionBank frmQuestionBank = new ListQuestionBank();
+            frmQuestionBank.Closed += (s, args) => this.Close();
+            this.Hide();
+            frmQuestionBank.Show();
         }
 
         private void submissionToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            FrmManageSubmission frmManageSubmission = new FrmManageSubmission();
+            frmManageSubmission.Closed += (s, args) => this.Close();
+            this.Hide();
+            frmManageSubmission.Show();
+        }
 
+        private void logoutToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            FrmLoginModerator frmLoginModerator = new FrmLoginModerator();
+            frmLoginModerator.Closed += (s, args) => this.Close();
+            this.Hide();
+            frmLoginModerator.Show();
         }
     }
 }

@@ -39,9 +39,10 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(229, 179);
+            this.btnCancel.Location = new System.Drawing.Point(262, 239);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 28);
+            this.btnCancel.Size = new System.Drawing.Size(86, 37);
             this.btnCancel.TabIndex = 0;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -49,9 +50,10 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(322, 179);
+            this.btnSave.Location = new System.Drawing.Point(368, 239);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 28);
+            this.btnSave.Size = new System.Drawing.Size(86, 37);
             this.btnSave.TabIndex = 1;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -59,52 +61,54 @@
             // 
             // txtClassCode
             // 
-            this.txtClassCode.Location = new System.Drawing.Point(140, 71);
+            this.txtClassCode.Location = new System.Drawing.Point(160, 95);
+            this.txtClassCode.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtClassCode.Name = "txtClassCode";
             this.txtClassCode.ReadOnly = true;
-            this.txtClassCode.Size = new System.Drawing.Size(195, 23);
+            this.txtClassCode.Size = new System.Drawing.Size(222, 27);
             this.txtClassCode.TabIndex = 2;
             // 
             // lbEditClass
             // 
             this.lbEditClass.AutoSize = true;
             this.lbEditClass.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lbEditClass.Location = new System.Drawing.Point(180, 29);
+            this.lbEditClass.Location = new System.Drawing.Point(206, 39);
             this.lbEditClass.Name = "lbEditClass";
-            this.lbEditClass.Size = new System.Drawing.Size(75, 20);
+            this.lbEditClass.Size = new System.Drawing.Size(94, 25);
             this.lbEditClass.TabIndex = 3;
             this.lbEditClass.Text = "Edit Class";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(64, 74);
+            this.label2.Location = new System.Drawing.Point(73, 99);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(65, 15);
+            this.label2.Size = new System.Drawing.Size(81, 20);
             this.label2.TabIndex = 4;
             this.label2.Text = "Class Code";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(60, 115);
+            this.label3.Location = new System.Drawing.Point(69, 153);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(69, 15);
+            this.label3.Size = new System.Drawing.Size(86, 20);
             this.label3.TabIndex = 6;
             this.label3.Text = "Class Name";
             // 
             // txtClassName
             // 
-            this.txtClassName.Location = new System.Drawing.Point(140, 112);
+            this.txtClassName.Location = new System.Drawing.Point(160, 149);
+            this.txtClassName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtClassName.Name = "txtClassName";
-            this.txtClassName.Size = new System.Drawing.Size(195, 23);
+            this.txtClassName.Size = new System.Drawing.Size(222, 27);
             this.txtClassName.TabIndex = 5;
             // 
             // FrmEditClass
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(422, 219);
+            this.ClientSize = new System.Drawing.Size(482, 292);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtClassName);
             this.Controls.Add(this.label2);
@@ -112,6 +116,10 @@
             this.Controls.Add(this.txtClassCode);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnCancel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FrmEditClass";
             this.Text = "FrmEditClass";
             this.Load += new System.EventHandler(this.FrmEditClass_Load);

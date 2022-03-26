@@ -307,7 +307,7 @@ namespace OTS.DAO
                                 ,[Mark]
                             FROM [Mark] m INNER JOIN [Test] t ON m.[TestId] = t.[Id]
                                             INNER JOIN [Student] stu ON m.[StudentId] = stu.[Id]
-                                            INNER JOIN [Submission] sub ON stu.[Id] = sub.[StudentId]
+                                            INNER JOIN [Submission] sub ON (stu.[Id] = sub.[StudentId] AND sub.[TestId] = t.[Id])
                             WHERE sub.[Id] = @id AND t.[Code] = @testcode AND stu.[StudentCode] = @stucode";
             try
             {
@@ -316,11 +316,16 @@ namespace OTS.DAO
                 command.Parameters.AddWithValue("@id", id);
                 command.Parameters.AddWithValue("@testcode", testCode);
                 command.Parameters.AddWithValue("@stucode", stuCode);
+                connection.Open();
+                reader = command.ExecuteReader();
+                if (reader.Read())
+                {
                     Mark mark = new()
                     {
                         Grade = (float)reader["Mark"],
                     };
                     return mark;
+                }
             }
             catch (Exception ex)
             {

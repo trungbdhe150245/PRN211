@@ -346,21 +346,21 @@
             // studentToolStripMenuItem
             // 
             this.studentToolStripMenuItem.Name = "studentToolStripMenuItem";
-            this.studentToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.studentToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.studentToolStripMenuItem.Text = "Student";
             this.studentToolStripMenuItem.Click += new System.EventHandler(this.studentToolStripMenuItem_Click);
             // 
             // subjectToolStripMenuItem
             // 
             this.subjectToolStripMenuItem.Name = "subjectToolStripMenuItem";
-            this.subjectToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.subjectToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.subjectToolStripMenuItem.Text = "Subject";
             this.subjectToolStripMenuItem.Click += new System.EventHandler(this.subjectToolStripMenuItem_Click);
             // 
             // classToolStripMenuItem
             // 
             this.classToolStripMenuItem.Name = "classToolStripMenuItem";
-            this.classToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.classToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.classToolStripMenuItem.Text = "Class";
             this.classToolStripMenuItem.Click += new System.EventHandler(this.classToolStripMenuItem_Click);
             // 
@@ -370,35 +370,35 @@
             this.viewTestListToolStripMenuItem,
             this.createATestToolStripMenuItem});
             this.testToolStripMenuItem.Name = "testToolStripMenuItem";
-            this.testToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.testToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.testToolStripMenuItem.Text = "Test";
             this.testToolStripMenuItem.Click += new System.EventHandler(this.testToolStripMenuItem_Click);
             // 
             // viewTestListToolStripMenuItem
             // 
             this.viewTestListToolStripMenuItem.Name = "viewTestListToolStripMenuItem";
-            this.viewTestListToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.viewTestListToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.viewTestListToolStripMenuItem.Text = "View test list";
             this.viewTestListToolStripMenuItem.Click += new System.EventHandler(this.viewTestListToolStripMenuItem_Click);
             // 
             // createATestToolStripMenuItem
             // 
             this.createATestToolStripMenuItem.Name = "createATestToolStripMenuItem";
-            this.createATestToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.createATestToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.createATestToolStripMenuItem.Text = "Create a test";
             this.createATestToolStripMenuItem.Click += new System.EventHandler(this.createATestToolStripMenuItem_Click);
             // 
             // questionBankToolStripMenuItem
             // 
             this.questionBankToolStripMenuItem.Name = "questionBankToolStripMenuItem";
-            this.questionBankToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.questionBankToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.questionBankToolStripMenuItem.Text = "Question bank";
             this.questionBankToolStripMenuItem.Click += new System.EventHandler(this.questionBankToolStripMenuItem_Click);
             // 
             // submissionToolStripMenuItem
             // 
             this.submissionToolStripMenuItem.Name = "submissionToolStripMenuItem";
-            this.submissionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.submissionToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.submissionToolStripMenuItem.Text = "Submission";
             this.submissionToolStripMenuItem.Click += new System.EventHandler(this.submissionToolStripMenuItem_Click);
             // 
@@ -415,6 +415,7 @@
             this.logoutToolStripMenuItem1.Name = "logoutToolStripMenuItem1";
             this.logoutToolStripMenuItem1.Size = new System.Drawing.Size(57, 20);
             this.logoutToolStripMenuItem1.Text = "Logout";
+            this.logoutToolStripMenuItem1.Click += new System.EventHandler(this.logoutToolStripMenuItem1_Click);
             // 
             // FrmManageMark
             // 
