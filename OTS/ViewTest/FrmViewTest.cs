@@ -50,6 +50,7 @@ namespace OTS.ViewTest
         }
         public void LoadQuestionsList()
         {
+            dgvQuestion.Rows.Clear();
             try
             {
                 QuestionDBContext questionDBC = new QuestionDBContext();
@@ -181,6 +182,7 @@ namespace OTS.ViewTest
                     EditQuestion editQuestion = new EditQuestion(question);
                     question.Answers = answerDBC.getByQues(question);
                     editQuestion.Show();
+                    editQuestion.FormClosed += (s, args) => LoadQuestionsList();
                 }
                 catch (Exception ex) { MessageBox.Show(ex.Message, "Error"); }
             }

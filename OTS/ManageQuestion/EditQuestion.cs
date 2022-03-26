@@ -121,7 +121,8 @@ namespace OTS.ManageQuestion
                         }
                         MessageBox.Show("Update Successful");
                         this.Close();
-                        lq.loadQues();
+                        if (lq != null)
+                            lq.loadQues();
                     }
 
                 }
