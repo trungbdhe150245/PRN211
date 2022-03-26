@@ -19,6 +19,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using OTS.Dashboard;
 
 namespace OTS.ViewTest
 {
@@ -49,6 +50,7 @@ namespace OTS.ViewTest
         }
         public void LoadQuestionsList()
         {
+            dgvQuestion.Rows.Clear();
             try
             {
                 QuestionDBContext questionDBC = new QuestionDBContext();
@@ -180,6 +182,7 @@ namespace OTS.ViewTest
                     EditQuestion editQuestion = new EditQuestion(question);
                     question.Answers = answerDBC.getByQues(question);
                     editQuestion.Show();
+                    editQuestion.FormClosed += (s, args) => LoadQuestionsList();
                 }
                 catch (Exception ex) { MessageBox.Show(ex.Message, "Error"); }
             }
@@ -334,7 +337,10 @@ namespace OTS.ViewTest
 
         private void homeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //redirect to mod dashboard
+            FrmModDashboard frmModDashboard = new FrmModDashboard();
+            frmModDashboard.Closed += (s, args) => this.Close();
+            this.Hide();
+            frmModDashboard.Show();
         }
 
         private void studentToolStripMenuItem_Click(object sender, EventArgs e)

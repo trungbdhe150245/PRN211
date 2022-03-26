@@ -18,6 +18,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using OTS.Dashboard;
+using OTS.ReviewSubmission;
 
 namespace OTS.ManageSubmission
 {
@@ -140,16 +142,21 @@ namespace OTS.ManageSubmission
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
                 e.RowIndex >= 0)
             {
+                int sid = int.Parse(dgvSubmission.CurrentRow.Cells[0].Value.ToString());
                 //Transfer to other form and close this form
-                //FrmLoginStudent frmLogin = new FrmLoginStudent();
-                //frmLogin.Show();
-                Hide();
+                FrmReviewSubmission frmReviewSubmission = new FrmReviewSubmission(sid);
+                this.Hide();
+                frmReviewSubmission.FormClosed += (s, args) => this.Show();
+                frmReviewSubmission.Show();
             }
         }
 
         private void homeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //redirect to mod dashboard
+            FrmModDashboard frmModDashboard = new FrmModDashboard();
+            frmModDashboard.Closed += (s, args) => this.Close();
+            this.Hide();
+            frmModDashboard.Show();
         }
 
         private void studentToolStripMenuItem_Click(object sender, EventArgs e)

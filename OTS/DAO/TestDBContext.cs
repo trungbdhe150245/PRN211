@@ -100,7 +100,8 @@ namespace OTS.DAO
             {
                 string sql_select_test = "Select t.Id as 'TestId', t.Code as 'TestCode', s.SubjectCode as 'Subject', " +
                                         "t.StartTime, t.TestDate, t.Duration, t.CreateDate, t.EndTime, q.Id as 'QuestionId', q.Content as 'QuestionContent', " +
-                                        "tp.Name as 'Type', tp.Id as 'TypeId' from Test t " +
+                                        "tp.Name as 'Type', tp.Id as 'TypeId' " +
+                                        " from Test t " +
                                         "inner join Question_Test qt on t.Id = qt.TestId " +
                                         "inner join Question q on qt.QuestionId = q.Id " +
                                         "inner join Type tp on tp.Id = q.Type " +
@@ -198,7 +199,7 @@ namespace OTS.DAO
         public List<Answer> GetAnswers(Question question)
         {
             List<Answer> answers = new List<Answer>();
-            string sql_select_answer = "select a.Content from Question q inner join Answer a on q.Id = a.QuestionId where q.Id = @id"; ;
+            string sql_select_answer = "select a.Id, a.QuestionId, a.isCorrect, a.Content from Question q inner join Answer a on q.Id = a.QuestionId where q.Id = @id"; ;
             try
             {
                 connection = new SqlConnection(GetConnectionString());
@@ -209,7 +210,7 @@ namespace OTS.DAO
 
                 while (reader.Read())
                 {
-                    answers.Add(new Answer() { Content = reader.GetString("Content") });
+                    answers.Add(new Answer() {Id = reader.GetInt32("Id"), IsCorrect = reader.GetBoolean("isCorrect"), Content = reader.GetString("Content"), Question = new Question() { Id = reader.GetInt32("QuestionId")} });
                 }
             }
             catch (Exception ex)

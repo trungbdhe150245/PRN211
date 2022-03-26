@@ -19,6 +19,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using OTS.Dashboard;
 
 namespace OTS.ManageQuestion
 {
@@ -196,7 +197,10 @@ namespace OTS.ManageQuestion
 
         private void homeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //redirect to mod dashboard
+            FrmModDashboard frmModDashboard = new FrmModDashboard();
+            frmModDashboard.Closed += (s, args) => this.Close();
+            this.Hide();
+            frmModDashboard.Show();
         }
 
         private void studentToolStripMenuItem_Click(object sender, EventArgs e)
