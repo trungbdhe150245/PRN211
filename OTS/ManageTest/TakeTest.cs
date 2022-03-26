@@ -54,13 +54,13 @@ namespace OTS.ManageTest
             test = t;
             student = s;
             InitializeComponent();
-            Random_Img();
+            //Random_Img();
             Process_Load(@"D:\logfinal.txt");
         }
         public TakeTest()
         {
             InitializeComponent();
-            Random_Img();
+            //Random_Img();
             Process_Load(@"D:\logfinal.txt");
         }
 
