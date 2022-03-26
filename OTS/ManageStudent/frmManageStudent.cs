@@ -76,18 +76,28 @@ namespace OTS.ManageStudent
         {
             frmInsertStudent frmInsertStudent = new frmInsertStudent();
             frmInsertStudent.Show();
+            rowselected = 0;
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            ManageStudent.frmUpdate frmUpdate = new frmUpdate(IDtoDeleteAndUpdate);
-            int rowefect = 0;
+            if (rowselected > 0)
+            {
+                ManageStudent.frmUpdate frmUpdate = new frmUpdate(IDtoDeleteAndUpdate);
+                int rowefect = 0;
 
-            classCode = txtClassCode.Text.Trim().ToString();
-            studentCode = txtStudentCode.Text.Trim().ToString();
-            frmUpdate.Show();
+                classCode = txtClassCode.Text.Trim().ToString();
+                studentCode = txtStudentCode.Text.Trim().ToString();
+                frmUpdate.Show();
+            }
+            else
+            {
+                MessageBox.Show("Plss Select 1 row", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            rowselected = 0;
 
-           
+
+
         }
         public String getoption(String classCode, String studentCode)
         {
@@ -126,6 +136,7 @@ namespace OTS.ManageStudent
             {
                 MessageBox.Show(ex.Message);
             }
+            rowselected = 0;
         }
 
         private void dgvStudent_CellClick(object sender, DataGridViewCellEventArgs e)

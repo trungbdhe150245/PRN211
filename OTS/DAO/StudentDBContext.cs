@@ -68,7 +68,7 @@ namespace OTS.DAO
 
 
                 connection.Open();
-                rowAffects++;
+                rowAffects= command.ExecuteNonQuery();
             }
             catch (Exception ex)
             {

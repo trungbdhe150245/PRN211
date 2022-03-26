@@ -432,10 +432,6 @@ namespace OTS.DAO
 
 
                 if (option == "FindBySubjectCode")
-                command = new SqlCommand(sql_view_subject, connection);
-                connection.Open();
-                reader = command.ExecuteReader();
-                if (reader.HasRows)
                 {
                     command.Parameters.AddWithValue("@subjectCode", subjectCode);
                 }
@@ -453,7 +449,7 @@ namespace OTS.DAO
                 try
                 {
                     connection.Open();
-                    reader = command.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
+                    reader = command.ExecuteReader();
                     if (reader.HasRows == true)
                     {
                         while (reader.Read())
